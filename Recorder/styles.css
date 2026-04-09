@@ -766,38 +766,3 @@ body {
     box-shadow: 0 0 15px var(--accent-color);
 }
 
-/* Microphone selector */
-.mic-selector-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 400px;
-    margin: -30px auto 40px;
-    padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-}
-
-.mic-selector-box svg {
-    width: 16px;
-    height: 16px;
-    color: var(--text-secondary);
-    flex-shrink: 0;
-}
-
-#mic-select {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text-primary);
-    font-family: var(--font-family);
-    font-size: 0.9rem;
-    outline: none;
-    cursor: pointer;
-}
-
-#mic-select option {
-    background: #1a1a2e;
-    color: var(--text-primary);
-}
