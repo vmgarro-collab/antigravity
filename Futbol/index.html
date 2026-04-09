@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benjamines Madrid</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-content">
+        <i data-lucide="trophy" class="header-icon"></i>
+        <h1>Benjamines Madrid</h1>
+        <span class="season-badge">2024-2025</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="grupo-selector glass">
+        <label for="grupo-select">Grupo</label>
+        <select id="grupo-select" disabled>
+          <option>Cargando grupos...</option>
+        </select>
+      </div>
+
+      <div class="panels" id="panels" style="display:none">
+        <section class="panel glass" id="panel-clasificacion">
+          <h2><i data-lucide="list-ordered"></i> Clasificación</h2>
+          <div id="clasificacion-body"></div>
+        </section>
+
+        <section class="panel glass" id="panel-resultados">
+          <h2><i data-lucide="calendar-days"></i> Resultados</h2>
+          <div class="jornada-nav">
+            <button id="jornada-prev" class="btn-nav">&#8592;</button>
+            <span id="jornada-label">Jornada 1</span>
+            <button id="jornada-next" class="btn-nav">&#8594;</button>
+          </div>
+          <div id="resultados-body"></div>
+        </section>
+      </div>
+
+      <div id="loading" class="loading-msg" style="display:none">Cargando datos...</div>
+      <div id="error-msg" class="error-msg" style="display:none"></div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
