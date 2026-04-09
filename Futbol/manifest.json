@@ -1,0 +1,24 @@
+{
+  "name": "Deportivo Libertad — Grupo 12",
+  "short_name": "Libertad F7",
+  "description": "Preferente Benjamín F7 · Grupo 12 · RFFM",
+  "start_url": "/antigravity/Futbol/",
+  "scope": "/antigravity/Futbol/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "icons/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
