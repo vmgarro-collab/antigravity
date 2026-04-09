@@ -91,8 +91,17 @@ const micSelect = document.getElementById('mic-select');
 async function populateMicList() {
     if (!micSelect) return;
     try {
-        // Necesitamos permiso previo para obtener labels de los dispositivos
-        const devices = await navigator.mediaDevices.enumerateDevices();
+        let devices = await navigator.mediaDevices.enumerateDevices();
+        const hasLabels = devices.some(d => d.kind === 'audioinput' && d.label);
+
+        if (!hasLabels) {
+            // Sin permiso los labels vienen vacíos — pedimos permiso brevemente
+            // y soltamos el stream para que el usuario elija antes de grabar
+            const tempStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            tempStream.getTracks().forEach(t => t.stop());
+            devices = await navigator.mediaDevices.enumerateDevices();
+        }
+
         const mics = devices.filter(d => d.kind === 'audioinput');
         micSelect.innerHTML = '<option value="">Micrófono por defecto</option>';
         mics.forEach(mic => {
@@ -106,9 +115,9 @@ async function populateMicList() {
     }
 }
 
-// Poblar lista al cargar (puede tener labels vacíos hasta que el permiso se conceda)
+// Al cargar: pedir permiso si hace falta para obtener nombres reales de micrófonos
 populateMicList();
-// Re-poblar si cambian los dispositivos (USB mic conectado/desconectado)
+// Re-poblar si el usuario conecta/desconecta un micro USB
 navigator.mediaDevices.addEventListener('devicechange', populateMicList);
 
 // --- GLOBAL AI STATE ---
