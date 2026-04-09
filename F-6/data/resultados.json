@@ -1,0 +1,1658 @@
+[
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "FIFILLAS CF",
+    "golesLocal": 2,
+    "golesVisitante": 1,
+    "visitante": "GRAN AZUL FC"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "RAMON CANCERBERO FC",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "Tauson Villa",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "TRINIDAD"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "CHUGRUD",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "ONLY FANS"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "BAYERN DE LOS CAIDOS",
+    "golesLocal": 3,
+    "golesVisitante": 4,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "AD PREDATORI",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "BEBESIKTAS",
+    "golesLocal": 5,
+    "golesVisitante": 0,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "OS REIS DO BOTECO",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "Porra Eurocopa"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 2,
+    "golesVisitante": 0,
+    "visitante": "Buenarda CF"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "YIERBAFINAS FC",
+    "golesLocal": 3,
+    "golesVisitante": 6,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "FIRUTETAS FC",
+    "golesLocal": 2,
+    "golesVisitante": 4,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 1,
+    "fecha": "18/10/2025",
+    "local": "INTER DE JAGGER",
+    "golesLocal": 1,
+    "golesVisitante": 6,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 2,
+    "fecha": "19/10/2025",
+    "local": "TROPICAL",
+    "golesLocal": 3,
+    "golesVisitante": 6,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 2,
+    "fecha": "19/10/2025",
+    "local": "RAYO HUESCA",
+    "golesLocal": 0,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 2,
+    "fecha": "19/10/2025",
+    "local": "SACONIA 2.0",
+    "golesLocal": 8,
+    "golesVisitante": 11,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 2,
+    "fecha": "19/10/2025",
+    "local": "EL PARAGUAS",
+    "golesLocal": 4,
+    "golesVisitante": 7,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 2,
+    "fecha": "19/10/2025",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "FIFILLAS CF",
+    "golesLocal": 5,
+    "golesVisitante": 2,
+    "visitante": "TRINIDAD"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "GRAN AZUL FC",
+    "golesLocal": 0,
+    "golesVisitante": 1,
+    "visitante": "ONLY FANS"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "Tauson Villa",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "AD PREDATORI",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "BAYERN DE LOS CAIDOS",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "CHUGRUD",
+    "golesLocal": 6,
+    "golesVisitante": 4,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "Buenarda CF",
+    "golesLocal": 1,
+    "golesVisitante": 6,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "BEBESIKTAS",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "FIRUTETAS FC",
+    "golesLocal": 3,
+    "golesVisitante": 4,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "INTER DE JAGGER",
+    "golesLocal": 0,
+    "golesVisitante": 0,
+    "visitante": "Porra Eurocopa"
+  },
+  {
+    "jornada": 3,
+    "fecha": "25/10/2025",
+    "local": "YIERBAFINAS FC",
+    "golesLocal": 0,
+    "golesVisitante": 1,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 4,
+    "fecha": "26/10/2025",
+    "local": "RAYO PILAR",
+    "golesLocal": 5,
+    "golesVisitante": 7,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 4,
+    "fecha": "26/10/2025",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 11,
+    "golesVisitante": 0,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 4,
+    "fecha": "26/10/2025",
+    "local": "SACONIA 2.0",
+    "golesLocal": 2,
+    "golesVisitante": 6,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 4,
+    "fecha": "26/10/2025",
+    "local": "EL PARAGUAS",
+    "golesLocal": 3,
+    "golesVisitante": 12,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "AD PREDATORI",
+    "golesLocal": 4,
+    "golesVisitante": 3,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "GRAN AZUL FC",
+    "golesLocal": 1,
+    "golesVisitante": 5,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "TRINIDAD",
+    "golesLocal": 5,
+    "golesVisitante": 8,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "Tauson Villa",
+    "golesLocal": 3,
+    "golesVisitante": 0,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "CHUGRUD",
+    "golesLocal": 5,
+    "golesVisitante": 0,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "FIFILLAS CF",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "ONLY FANS"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "Buenarda CF",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "BEBESIKTAS",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "Porra Eurocopa"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "FIRUTETAS FC",
+    "golesLocal": 2,
+    "golesVisitante": 4,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "INTER DE JAGGER",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "YIERBAFINAS FC"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 5,
+    "fecha": "15/11/2025",
+    "local": "EL ROMPIDO",
+    "golesLocal": 1,
+    "golesVisitante": 5,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 6,
+    "fecha": "16/11/2025",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 6,
+    "fecha": "16/11/2025",
+    "local": "SACONIA 2.0",
+    "golesLocal": 3,
+    "golesVisitante": 7,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 6,
+    "fecha": "16/11/2025",
+    "local": "PREVISEGUR",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 6,
+    "fecha": "16/11/2025",
+    "local": "EL PARAGUAS",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "CHUGRUD",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "AD PREDATORI"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "FIFILLAS CF",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "Tauson Villa",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "TRINIDAD",
+    "golesLocal": 2,
+    "golesVisitante": 4,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "ONLY FANS",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "GRAN AZUL FC",
+    "golesLocal": 0,
+    "golesVisitante": 2,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "BEBESIKTAS",
+    "golesLocal": 2,
+    "golesVisitante": 0,
+    "visitante": "YIERBAFINAS FC"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "FIRUTETAS FC",
+    "golesLocal": 2,
+    "golesVisitante": 1,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "EL ROMPIDO",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "Porra Eurocopa"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "Yayant",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 7,
+    "fecha": "22/11/2025",
+    "local": "Buenarda CF",
+    "golesLocal": 1,
+    "golesVisitante": 3,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 8,
+    "fecha": "23/11/2025",
+    "local": "TROPICAL",
+    "golesLocal": 2,
+    "golesVisitante": 6,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 8,
+    "fecha": "23/11/2025",
+    "local": "CHAOX F.C",
+    "golesLocal": 6,
+    "golesVisitante": 3,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 8,
+    "fecha": "23/11/2025",
+    "local": "PREVISEGUR",
+    "golesLocal": 7,
+    "golesVisitante": 1,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 8,
+    "fecha": "23/11/2025",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 1,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 8,
+    "fecha": "23/11/2025",
+    "local": "SACONIA 2.0",
+    "golesLocal": 9,
+    "golesVisitante": 5,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "GRAN AZUL FC",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "AD PREDATORI"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "FIFILLAS CF",
+    "golesLocal": 2,
+    "golesVisitante": 0,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "MANTECOSA",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "ONLY FANS",
+    "golesLocal": 0,
+    "golesVisitante": 6,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "Tauson Villa",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "TRINIDAD",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "BEBESIKTAS",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "Yayant",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "EL ROMPIDO",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "YIERBAFINAS FC"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "Buenarda CF",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 9,
+    "fecha": "29/11/2025",
+    "local": "Porra Eurocopa",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 10,
+    "fecha": "30/11/2025",
+    "local": "EL PARAGUAS",
+    "golesLocal": 7,
+    "golesVisitante": 5,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 10,
+    "fecha": "30/11/2025",
+    "local": "CHAOX F.C",
+    "golesLocal": 7,
+    "golesVisitante": 4,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 10,
+    "fecha": "30/11/2025",
+    "local": "RAYO PILAR",
+    "golesLocal": 4,
+    "golesVisitante": 8,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 10,
+    "fecha": "30/11/2025",
+    "local": "PREVISEGUR",
+    "golesLocal": 9,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 10,
+    "fecha": "30/11/2025",
+    "local": "BOCA SENIOR",
+    "golesLocal": 6,
+    "golesVisitante": 0,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 11,
+    "fecha": "14/12/2025",
+    "local": "EL PARAGUAS",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 11,
+    "fecha": "14/12/2025",
+    "local": "BOCA SENIOR",
+    "golesLocal": 9,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 11,
+    "fecha": "14/12/2025",
+    "local": "SACONIA 2.0",
+    "golesLocal": 6,
+    "golesVisitante": 15,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 11,
+    "fecha": "14/12/2025",
+    "local": "RAYO HUESCA",
+    "golesLocal": 4,
+    "golesVisitante": 9,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 12,
+    "fecha": "21/12/2025",
+    "local": "PREVISEGUR",
+    "golesLocal": 9,
+    "golesVisitante": 6,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 13,
+    "fecha": "10/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 8,
+    "golesVisitante": 6,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 14,
+    "fecha": "11/01/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 9,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 14,
+    "fecha": "11/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 14,
+    "fecha": "11/01/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 14,
+    "fecha": "11/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 9,
+    "golesVisitante": 6,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 14,
+    "fecha": "11/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 15,
+    "fecha": "17/01/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "Porra Eurocopa"
+  },
+  {
+    "jornada": 15,
+    "fecha": "17/01/2026",
+    "local": "Buenarda CF",
+    "golesLocal": 3,
+    "golesVisitante": 4,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 16,
+    "fecha": "18/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 3,
+    "golesVisitante": 11,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 16,
+    "fecha": "18/01/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 1,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 16,
+    "fecha": "18/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 16,
+    "fecha": "18/01/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 16,
+    "fecha": "18/01/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 3,
+    "golesVisitante": 11,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 5,
+    "golesVisitante": 1,
+    "visitante": "FC Santus Olympiakos"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "GRAN AZUL FC",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "MANTECOSA",
+    "golesLocal": 4,
+    "golesVisitante": 1,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "TRINIDAD",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "FACHATINAIKOS",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "REAL MAHOUDRID",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 0,
+    "golesVisitante": 3,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "REAL MAHOUDRID",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "OS REIS DO BOTECO"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "Yayant",
+    "golesLocal": 5,
+    "golesVisitante": 1,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "REAL MASÓN FC",
+    "golesLocal": 4,
+    "golesVisitante": 1,
+    "visitante": "YIERBAFINAS FC"
+  },
+  {
+    "jornada": 17,
+    "fecha": "24/01/2026",
+    "local": "EL ROMPIDO",
+    "golesLocal": 2,
+    "golesVisitante": 6,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 18,
+    "fecha": "25/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 11,
+    "golesVisitante": 1,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 18,
+    "fecha": "25/01/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 8,
+    "golesVisitante": 7,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 18,
+    "fecha": "25/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 18,
+    "fecha": "25/01/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "FC Santus Olympiakos",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "MANTECOSA",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "TRINIDAD",
+    "golesLocal": 6,
+    "golesVisitante": 2,
+    "visitante": "GRAN AZUL FC"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "FACHATINAIKOS",
+    "golesLocal": 6,
+    "golesVisitante": 1,
+    "visitante": "AD PREDATORI"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "ONLY FANS",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "RAMON CANCERBERO FC"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "EL ROMPIDO",
+    "golesLocal": 1,
+    "golesVisitante": 6,
+    "visitante": "Buenarda CF"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "Porra Eurocopa",
+    "golesLocal": 3,
+    "golesVisitante": 0,
+    "visitante": "YIERBAFINAS FC"
+  },
+  {
+    "jornada": 19,
+    "fecha": "31/01/2026",
+    "local": "REAL MASÓN FC",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 20,
+    "fecha": "01/02/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 20,
+    "fecha": "01/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 3,
+    "golesVisitante": 8,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 20,
+    "fecha": "01/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 20,
+    "fecha": "01/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 12,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 20,
+    "fecha": "01/02/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 10,
+    "golesVisitante": 5,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "FC Santus Olympiakos",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "RAMON CANCERBERO FC",
+    "golesLocal": 6,
+    "golesVisitante": 3,
+    "visitante": "AD PREDATORI"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "FACHATINAIKOS",
+    "golesLocal": 2,
+    "golesVisitante": 2,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "MANTECOSA",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "GRAN AZUL FC"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "BAYERN DE LOS CAIDOS"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "REAL MASÓN FC",
+    "golesLocal": 9,
+    "golesVisitante": 2,
+    "visitante": "Buenarda CF"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "Porra Eurocopa",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "REAL MAHOUDRID",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "OS REIS DO BOTECO",
+    "golesLocal": 4,
+    "golesVisitante": 3,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 21,
+    "fecha": "07/02/2026",
+    "local": "Yayant",
+    "golesLocal": 4,
+    "golesVisitante": 6,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 22,
+    "fecha": "08/02/2026",
+    "local": "TROPICAL",
+    "golesLocal": 7,
+    "golesVisitante": 9,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 22,
+    "fecha": "08/02/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 7,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 22,
+    "fecha": "08/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 14,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 22,
+    "fecha": "08/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 9,
+    "golesVisitante": 8,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 22,
+    "fecha": "08/02/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 11,
+    "golesVisitante": 0,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "BAYERN DE LOS CAIDOS",
+    "golesLocal": 4,
+    "golesVisitante": 6,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "AD PREDATORI"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "RAMON CANCERBERO FC",
+    "golesLocal": 2,
+    "golesVisitante": 1,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "FACHATINAIKOS",
+    "golesLocal": 5,
+    "golesVisitante": 2,
+    "visitante": "TRINIDAD"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "FC Santus Olympiakos",
+    "golesLocal": 6,
+    "golesVisitante": 3,
+    "visitante": "GRAN AZUL FC"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "REAL MAHOUDRID",
+    "golesLocal": 1,
+    "golesVisitante": 0,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "OS REIS DO BOTECO",
+    "golesLocal": 4,
+    "golesVisitante": 3,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "REAL MASÓN FC",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 23,
+    "fecha": "14/02/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "INTER DE JAGGER"
+  },
+  {
+    "jornada": 24,
+    "fecha": "15/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 7,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 24,
+    "fecha": "15/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 4,
+    "golesVisitante": 15,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 24,
+    "fecha": "15/02/2026",
+    "local": "TROPICAL",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 24,
+    "fecha": "15/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 4,
+    "golesVisitante": 6,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 6,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "AD PREDATORI",
+    "golesLocal": 1,
+    "golesVisitante": 1,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "FC Santus Olympiakos",
+    "golesLocal": 3,
+    "golesVisitante": 2,
+    "visitante": "ONLY FANS"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 4,
+    "golesVisitante": 0,
+    "visitante": "CHUGRUD"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "RAMON CANCERBERO FC",
+    "golesLocal": 0,
+    "golesVisitante": 4,
+    "visitante": "TRINIDAD"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "REAL MAHOUDRID",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "OS REIS DO BOTECO",
+    "golesLocal": 1,
+    "golesVisitante": 2,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "Porra Eurocopa",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "INTER DE JAGGER",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 25,
+    "fecha": "21/02/2026",
+    "local": "YIERBAFINAS FC",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "Buenarda CF"
+  },
+  {
+    "jornada": 26,
+    "fecha": "22/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 1,
+    "golesVisitante": 12,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 26,
+    "fecha": "22/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 26,
+    "fecha": "22/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 4,
+    "golesVisitante": 12,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 26,
+    "fecha": "22/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 6,
+    "golesVisitante": 8,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 26,
+    "fecha": "22/02/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 4,
+    "golesVisitante": 11,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 27,
+    "fecha": "28/02/2026",
+    "local": "AD PREDATORI",
+    "golesLocal": 4,
+    "golesVisitante": 6,
+    "visitante": "TRINIDAD"
+  },
+  {
+    "jornada": 27,
+    "fecha": "28/02/2026",
+    "local": "FIFILLAS CF",
+    "golesLocal": 4,
+    "golesVisitante": 3,
+    "visitante": "Tauson Villa"
+  },
+  {
+    "jornada": 27,
+    "fecha": "28/02/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 2,
+    "golesVisitante": 1,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 27,
+    "fecha": "28/02/2026",
+    "local": "YIERBAFINAS FC",
+    "golesLocal": 3,
+    "golesVisitante": 4,
+    "visitante": "FIRUTETAS FC"
+  },
+  {
+    "jornada": 27,
+    "fecha": "28/02/2026",
+    "local": "Yayant",
+    "golesLocal": 2,
+    "golesVisitante": 3,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 28,
+    "fecha": "01/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 28,
+    "fecha": "01/03/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 6,
+    "golesVisitante": 6,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 28,
+    "fecha": "01/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "CHUGRUD",
+    "golesLocal": 3,
+    "golesVisitante": 0,
+    "visitante": "GRAN AZUL FC"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "FC Santus Olympiakos",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "FACHATINAIKOS"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "RAMON CANCERBERO FC",
+    "golesLocal": 0,
+    "golesVisitante": 2,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "VODKA JUNIORS",
+    "golesLocal": 2,
+    "golesVisitante": 4,
+    "visitante": "BEBESIKTAS"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "FIRUTETAS FC",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "Buenarda CF"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "INTER DE JAGGER",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "EL ROMPIDO"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "YIERBAFINAS FC",
+    "golesLocal": 1,
+    "golesVisitante": 8,
+    "visitante": "Yayant"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "OS REIS DO BOTECO",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "REAL MASÓN FC"
+  },
+  {
+    "jornada": 29,
+    "fecha": "07/03/2026",
+    "local": "Porra Eurocopa",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "REAL MAHOUDRID"
+  },
+  {
+    "jornada": 30,
+    "fecha": "08/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 30,
+    "fecha": "08/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 12,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 30,
+    "fecha": "08/03/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 30,
+    "fecha": "08/03/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 30,
+    "fecha": "08/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 31,
+    "fecha": "14/03/2026",
+    "local": "FACHATINAIKOS",
+    "golesLocal": 2,
+    "golesVisitante": 7,
+    "visitante": "MANTECOSA"
+  },
+  {
+    "jornada": 32,
+    "fecha": "15/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 13,
+    "golesVisitante": 4,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 32,
+    "fecha": "15/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 4,
+    "golesVisitante": 15,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 32,
+    "fecha": "15/03/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 32,
+    "fecha": "15/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 32,
+    "fecha": "15/03/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 8,
+    "golesVisitante": 8,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 33,
+    "fecha": "22/03/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 9,
+    "golesVisitante": 1,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 33,
+    "fecha": "22/03/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 33,
+    "fecha": "22/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 12,
+    "golesVisitante": 5,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 33,
+    "fecha": "22/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 8,
+    "golesVisitante": 11,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 33,
+    "fecha": "22/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "RAYO HUESCA"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "pos": 1,
+    "equipo": "BOCA SENIOR",
+    "pj": 0,
+    "g": 16,
+    "e": 11,
+    "p": 4,
+    "gf": 1,
+    "gc": 97,
+    "pts": 61
+  },
+  {
+    "pos": 2,
+    "equipo": "PREVISEGUR",
+    "pj": 0,
+    "g": 17,
+    "e": 10,
+    "p": 4,
+    "gf": 3,
+    "gc": 111,
+    "pts": 82
+  },
+  {
+    "pos": 3,
+    "equipo": "RCD CAMBADOS",
+    "pj": 0,
+    "g": 17,
+    "e": 9,
+    "p": 4,
+    "gf": 4,
+    "gc": 97,
+    "pts": 70
+  },
+  {
+    "pos": 4,
+    "equipo": "SPORTING SARRIA",
+    "pj": 0,
+    "g": 16,
+    "e": 8,
+    "p": 2,
+    "gf": 6,
+    "gc": 114,
+    "pts": 79
+  },
+  {
+    "pos": 5,
+    "equipo": "SACONIA 2.0",
+    "pj": 0,
+    "g": 17,
+    "e": 6,
+    "p": 2,
+    "gf": 9,
+    "gc": 99,
+    "pts": 107
+  },
+  {
+    "pos": 6,
+    "equipo": "TROPICAL",
+    "pj": 0,
+    "g": 17,
+    "e": 6,
+    "p": 1,
+    "gf": 10,
+    "gc": 89,
+    "pts": 96
+  },
+  {
+    "pos": 7,
+    "equipo": "EL PARAGUAS",
+    "pj": 0,
+    "g": 17,
+    "e": 2,
+    "p": 5,
+    "gf": 10,
+    "gc": 64,
+    "pts": 119
+  },
+  {
+    "pos": 8,
+    "equipo": "RAYO PILAR",
+    "pj": 0,
+    "g": 17,
+    "e": 3,
+    "p": 0,
+    "gf": 14,
+    "gc": 80,
+    "pts": 132
+  },
+  {
+    "pos": 9,
+    "equipo": "RAYO HUESCA",
+    "pj": 0,
+    "g": 17,
+    "e": 1,
+    "p": 2,
+    "gf": 14,
+    "gc": 61,
+    "pts": 144
+  }
+]
