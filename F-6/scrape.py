@@ -179,8 +179,16 @@ def scrape_jugadores():
                 if p["jugador"].lower() not in seen:
                     seen.add(p["jugador"].lower())
                     p["pos"] = len(players) + 1
+                    p["equipo"] = "EL PARAGUAS"
+                    p["paraguas"] = True
                     players.append(p)
                     added += 1
+                else:
+                    # Ensure equipo name is correct for already-added Paraguas players
+                    for mp in players:
+                        if mp["jugador"].lower() == p["jugador"].lower():
+                            mp["equipo"] = "EL PARAGUAS"
+                            mp["paraguas"] = True
             print(f"    Paraguas players added: {added}")
     except Exception as e:
         print(f"    Error: {e}")
