@@ -367,6 +367,16 @@ def main():
 
     print("Scraping partidos (matchHub)...")
     resultados, calendario = scrape_resultados_y_calendario()
+
+    # Filter to teams in clasificacion only (removes matches from other leagues)
+    equipos = {e["equipo"].upper() for e in json.loads(
+        open(os.path.join(OUT_DIR, "clasificacion.json"), encoding="utf-8").read()
+    )}
+    def en_liga(m):
+        return m["local"].upper() in equipos or m["visitante"].upper() in equipos
+    resultados = [m for m in resultados if en_liga(m)]
+    calendario = [m for m in calendario if en_liga(m)]
+
     save("resultados", resultados)
     save("calendario", calendario)
 

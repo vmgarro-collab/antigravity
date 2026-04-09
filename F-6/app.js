@@ -218,18 +218,26 @@ async function loadCalendario() {
     const data = await apiFetch('/api/calendario');
     const d = new Date();
     const today = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
-    panel.innerHTML = data.map(f => {
-      const isToday = f.fecha === today;
-      return `
+    // Group by fecha
+    const byFecha = [];
+    const fechaMap = {};
+    for (const f of data) {
+      if (!fechaMap[f.fecha]) { fechaMap[f.fecha] = []; byFecha.push(f.fecha); }
+      fechaMap[f.fecha].push(f);
+    }
+    const isToday = fecha => fecha === today;
+    panel.innerHTML = byFecha.map(fecha => {
+      const matches = fechaMap[fecha];
+      const todayBadge = isToday(fecha) ? '<span class="hoy-badge">HOY</span> ' : '';
+      const header = `<div class="jornada-header">${todayBadge}${escHtml(fecha)}</div>`;
+      const cards = matches.map(f => `
         <div class="fixture-card">
-          <div class="fixture-fecha">
-            ${isToday ? '<span class="hoy-badge">HOY</span> ' : ''}
-            ${escHtml(f.fecha)}${f.hora ? ' · <strong>' + escHtml(f.hora) + '</strong>' : ''}
-          </div>
+          ${f.hora ? `<div class="fixture-hora">${escHtml(f.hora)}</div>` : ''}
           <div class="fixture-local">${escHtml(f.local)}</div>
           <div class="fixture-vs">vs</div>
           <div class="fixture-visitante">${escHtml(f.visitante)}</div>
-        </div>`;
+        </div>`).join('');
+      return `<div class="fecha-group">${header}${cards}</div>`;
     }).join('') || '<div class="loading">No hay partidos próximos</div>';
   } catch (e) {
     const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
