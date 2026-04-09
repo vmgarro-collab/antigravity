@@ -13,46 +13,46 @@ def n(v):
     try: return int(v)
     except: return 0
 
+URL_STATS = "https://artificialfsala.leaguerepublic.com/playerStats/890842856.html"
+
 def scrape():
+    r = requests.get(URL_STATS, headers=HEADERS, timeout=20)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "lxml")
     result = []
-    page = 1
-    seen_names = set()
-    while True:
-        url = f"{BASE}/playerStats/890842856/{page}_950925790.html"
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=20)
-            if r.status_code != 200:
-                break
-        except Exception:
-            break
-        soup = BeautifulSoup(r.text, "lxml")
-        table = soup.find("table")
-        if not table:
-            break
-        rows = table.find_all("tr")
-        added_this_page = 0
-        for row in rows:
+    for table in soup.find_all("table"):
+        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+        if not headers:
+            continue
+        def col(keywords):
+            for kw in keywords:
+                for i, h in enumerate(headers):
+                    if kw in h:
+                        return i
+            return None
+        i_name   = col(["jugador", "player", "nombre"]) or 1
+        i_equipo = col(["equipo", "team", "club"]) or 2
+        i_goles  = col(["goles", "goals", "gol"]) or 3
+        i_part   = col(["partidos", "played", "pj", "nº"])
+        for row in table.find_all("tr"):
             if row.find("th"):
                 continue
             cols = [td.get_text(strip=True) for td in row.find_all("td")]
             if len(cols) < 3:
                 continue
-            jugador = cols[1] if len(cols) > 1 else cols[0]
-            if not jugador or jugador in seen_names:
+            jugador = cols[i_name] if i_name < len(cols) else ""
+            if not jugador:
                 continue
-            seen_names.add(jugador)
+            equipo = cols[i_equipo] if i_equipo < len(cols) else ""
             result.append({
                 "pos": len(result) + 1,
                 "jugador": jugador,
-                "equipo": cols[2] if len(cols) > 2 else "",
-                "goles": n(cols[3]) if len(cols) > 3 else 0,
-                "partidos": n(cols[6]) if len(cols) > 6 else None,
+                "equipo": equipo,
+                "goles": n(cols[i_goles]) if i_goles and i_goles < len(cols) else 0,
+                "partidos": n(cols[i_part]) if i_part and i_part < len(cols) else None,
+                "paraguas": "paraguas" in equipo.lower(),
             })
-            added_this_page += 1
-        if added_this_page == 0:
-            break
-        page += 1
-        if page > 20:
+        if result:
             break
     return result
 
