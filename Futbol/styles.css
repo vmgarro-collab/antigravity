@@ -167,7 +167,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 
 /* Messages */
 .loading-msg { text-align: center; padding: 48px 16px; color: var(--text-muted); }
-.error-msg { text-align: center; padding: 32px 16px; color: #ff6b6b; display: none; }
+.error-msg { text-align: center; padding: 32px 16px; color: #ff6b6b; }
 
 /* Spinner */
 .spinner {

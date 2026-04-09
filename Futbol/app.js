@@ -8,7 +8,7 @@ const LIBERTAD_ID     = '851121';
 const TEMPORADA       = '21';
 const TIPOJUEGO       = '2';
 
-const CORS_PROXY = 'https://corsproxy.io/?url=';
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 const RFFM       = 'https://www.rffm.es';
 const LOCAL      = ['localhost', '127.0.0.1'].includes(location.hostname);
 
@@ -229,7 +229,7 @@ function skeletonPartidos() {
 }
 
 function setLoading(on) { document.getElementById('loading').style.display = on ? '' : 'none'; }
-function showError(html) { const el = document.getElementById('error-msg'); el.innerHTML = html; el.style.display = ''; }
+function showError(html) { const el = document.getElementById('error-msg'); el.innerHTML = html; el.style.display = 'block'; }
 function hideError() { document.getElementById('error-msg').style.display = 'none'; }
 
 document.addEventListener('DOMContentLoaded', init);
