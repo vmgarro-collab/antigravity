@@ -280,3 +280,109 @@ function selectFlight(flightId) {
   document.getElementById('hotelsSection').style.display = '';
   lucide.createIcons();
 }
+
+// ── Búsqueda de hoteles ───────────────────────────────────
+async function handleHotelSearch() {
+  const cityCode = document.getElementById('hotelCityInput').value.trim().toUpperCase();
+  const checkIn = document.getElementById('hotelCheckIn').value;
+  const checkOut = document.getElementById('hotelCheckOut').value;
+  const adults = parseInt(document.getElementById('inputPassengers').value) || 1;
+
+  if (!cityCode || !checkIn || !checkOut) {
+    alert('Por favor completa ciudad, fecha de entrada y fecha de salida.');
+    return;
+  }
+  if (new Date(checkOut) <= new Date(checkIn)) {
+    alert('La fecha de salida debe ser posterior a la de entrada.');
+    return;
+  }
+
+  state.hotelQuery = { cityCode, checkIn, checkOut, adults };
+  state.error.hotels = null;
+  state.loading.hotels = true;
+
+  renderHotelsLoading();
+
+  try {
+    const client = getSearchClient();
+    const results = await client.searchHotels(state.hotelQuery);
+    state.hotelResults = results;
+    state.loading.hotels = false;
+    renderHotels(results);
+  } catch (err) {
+    state.loading.hotels = false;
+    state.error.hotels = err.message;
+    renderHotelsError();
+  }
+}
+
+// ── Renderizado de hoteles ────────────────────────────────
+function renderHotelsLoading() {
+  const container = document.getElementById('hotelsContainer');
+  container.innerHTML = [1,2,3].map(() => `
+    <div class="skeleton-card" style="margin-top:8px">
+      <div class="skeleton-line medium"></div>
+      <div class="skeleton-line short"></div>
+      <div class="skeleton-line" style="width:70%"></div>
+    </div>
+  `).join('');
+  document.getElementById('hotelsCount').style.display = 'none';
+}
+
+function renderHotelsError() {
+  const container = document.getElementById('hotelsContainer');
+  container.innerHTML = `
+    <div class="error-state">
+      <i data-lucide="alert-circle" style="width:36px;height:36px"></i>
+      <p>${state.error.hotels}</p>
+      <button class="btn-retry" onclick="handleHotelSearch()">Reintentar</button>
+    </div>
+  `;
+  lucide.createIcons();
+}
+
+function renderHotels(hotels) {
+  const container = document.getElementById('hotelsContainer');
+  const countEl = document.getElementById('hotelsCount');
+
+  if (hotels.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <i data-lucide="building-2" style="width:36px;height:36px"></i>
+        <p>No encontramos hoteles disponibles</p>
+        <span>Prueba con otras fechas o ciudad</span>
+      </div>
+    `;
+    countEl.style.display = 'none';
+    lucide.createIcons();
+    return;
+  }
+
+  countEl.textContent = `${hotels.length} hotel${hotels.length !== 1 ? 'es' : ''}`;
+  countEl.style.display = '';
+
+  const sorted = [...hotels].sort((a, b) => a.pricePerNight - b.pricePerNight);
+
+  container.innerHTML = sorted.map(h => {
+    const stars = '★'.repeat(h.stars) + '☆'.repeat(5 - h.stars);
+    const nights = Math.max(1, (new Date(h.checkOut) - new Date(h.checkIn)) / 86400000);
+    const checkInFmt = new Date(h.checkIn).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+    const checkOutFmt = new Date(h.checkOut).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+
+    return `
+      <div class="hotel-card">
+        <div>
+          <div class="hotel-name">${h.name}</div>
+          <div class="hotel-stars">${stars}</div>
+          <div class="hotel-dates">${checkInFmt} → ${checkOutFmt} · ${nights} noche${nights !== 1 ? 's' : ''}</div>
+        </div>
+        <div class="hotel-price">
+          <div class="hotel-price-night">${Math.round(h.pricePerNight)}€<span style="font-size:12px;font-weight:400">/noche</span></div>
+          <div class="hotel-price-total">Total: ${Math.round(h.totalPrice)}€</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  lucide.createIcons();
+}
