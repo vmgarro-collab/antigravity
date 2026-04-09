@@ -4,10 +4,16 @@ const AMADEUS_BASE = 'https://test.api.amadeus.com';
 
 let _token = null;
 let _tokenExpiry = 0;
+let _tokenPromise = null;
 
 async function getToken() {
   if (_token && Date.now() < _tokenExpiry) return _token;
+  if (_tokenPromise) return _tokenPromise;
+  _tokenPromise = _fetchToken().finally(() => { _tokenPromise = null; });
+  return _tokenPromise;
+}
 
+async function _fetchToken() {
   let apiKey, apiSecret;
   try {
     apiKey = localStorage.getItem('amadeus_api_key');
@@ -35,6 +41,7 @@ async function getToken() {
 function normalizeFlights(data) {
   if (!data.data) return [];
   return data.data.map((offer, i) => {
+    if (!offer?.itineraries?.[0]?.segments?.length) return null;
     const seg = offer.itineraries[0].segments[0];
     const lastSeg = offer.itineraries[0].segments[offer.itineraries[0].segments.length - 1];
     const stops = offer.itineraries[0].segments.length - 1;
@@ -54,16 +61,17 @@ function normalizeFlights(data) {
       cabin: offer.travelerPricings?.[0]?.fareDetailsBySegment?.[0]?.cabin || 'ECONOMY',
       baggageIncluded: offer.travelerPricings?.[0]?.fareDetailsBySegment?.[0]?.includedCheckedBags?.quantity > 0
     };
-  });
+  }).filter(Boolean);
 }
 
 function normalizeHotels(hotelIds, offersData, checkIn, checkOut) {
   if (!offersData.data) return [];
   const nights = Math.max(1, (new Date(checkOut) - new Date(checkIn)) / 86400000);
-  return offersData.data.flatMap(hotel =>
-    (hotel.offers || []).slice(0, 1).map(offer => ({
+  return offersData.data.flatMap(hotel => {
+    if (!hotel?.hotel?.hotelId || !hotel?.offers?.length) return [];
+    return hotel.offers.slice(0, 1).map(offer => ({
       id: hotel.hotel.hotelId,
-      name: hotel.hotel.name,
+      name: hotel.hotel.name || 'Hotel sin nombre',
       stars: hotel.hotel.rating ? parseInt(hotel.hotel.rating) : 3,
       cityCode: hotel.hotel.cityCode || '',
       checkIn,
@@ -71,8 +79,8 @@ function normalizeHotels(hotelIds, offersData, checkIn, checkOut) {
       pricePerNight: parseFloat(offer.price.total) / nights,
       currency: offer.price.currency,
       totalPrice: parseFloat(offer.price.total)
-    }))
-  );
+    }));
+  });
 }
 
 async function searchFlights(query) {
