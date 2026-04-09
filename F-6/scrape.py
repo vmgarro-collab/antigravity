@@ -115,8 +115,13 @@ def _parse_player_table(html, equipo_paraguas=False):
             return result if result is not None else default
 
         i_name   = _idx(col(["jugador", "player", "nombre"]), 1)
-        i_equipo = _idx(col(["equipo", "team", "club"]), 2)
-        i_goles  = _idx(col(["goles", "goals", "gol"]), 3)
+        # Team pages (equipo_paraguas) have no team column — skip to avoid defaulting onto goles
+        if equipo_paraguas:
+            i_equipo = None
+            i_goles  = _idx(col(["goles", "goals", "gol"]), 2)
+        else:
+            i_equipo = _idx(col(["equipo", "team", "club"]), 2)
+            i_goles  = _idx(col(["goles", "goals", "gol"]), 3)
         i_part   = col(["partidos", "played", "pj", "nº"])
 
         print(f"  Col indices — name:{i_name} equipo:{i_equipo} goles:{i_goles} partidos:{i_part}")
@@ -130,7 +135,7 @@ def _parse_player_table(html, equipo_paraguas=False):
             jugador = cols[i_name] if i_name < len(cols) else ""
             if not jugador:
                 continue
-            equipo = cols[i_equipo] if i_equipo < len(cols) else ""
+            equipo = (cols[i_equipo] if i_equipo < len(cols) else "") if i_equipo is not None else ""
             is_paraguas = PARAGUAS_NAME in equipo.lower() or equipo_paraguas
             result.append({
                 "pos": len(result) + 1,
@@ -228,16 +233,17 @@ def scrape_matches_from_page(html, jornada, fecha):
     soup = BeautifulSoup(html, "lxml")
     played, upcoming = [], []
     for table in soup.find_all("table"):
+        current_hora = ""
         for row in table.find_all("tr"):
             tds = row.find_all("td")
+            row_text = row.get_text()
+            # Track time from any row (time headers have few TDs)
+            tm = re.search(r"\b(\d{1,2}:\d{2})\b", row_text)
+            if tm:
+                current_hora = tm.group(1)
             if len(tds) < 3:
                 continue
-            row_text = row.get_text()
-            # Time
-            hora = ""
-            tm = re.search(r"(\d{1,2}:\d{2})", row_text)
-            if tm:
-                hora = tm.group(1)
+            hora = current_hora
             # Score (played)
             score_td = next((td for td in tds if re.search(r"\d+\s*-\s*\d+", td.get_text())), None)
             if score_td:
