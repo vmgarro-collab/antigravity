@@ -36,6 +36,7 @@ async function apiFetch(endpoint) {
     '/api/resultados':    'data/resultados.json',
     '/api/goleadores':    'data/goleadores.json',
     '/api/calendario':    'data/calendario.json',
+    '/api/paraguas':      'data/paraguas.json',
   };
   const url = staticMap[endpoint] || endpoint;
   const res = await fetch(url);
@@ -62,6 +63,7 @@ async function loadTab(tabName) {
     case 'resultados':    return loadResultados();
     case 'goleadores':    return loadGoleadores();
     case 'calendario':    return loadCalendario();
+    case 'paraguas':      return loadParaguas();
     // jugador is search-driven, no initial load
   }
 }
@@ -290,6 +292,54 @@ async function buscarJugador(nombre) {
     const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
     results.innerHTML = `<div class="error-card"><i data-lucide="triangle-alert"></i> ${msg}</div>`;
     lucide.createIcons();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Paraguas
+// ---------------------------------------------------------------------------
+async function loadParaguas() {
+  const panel = document.getElementById('tab-paraguas');
+  panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando Paraguas...</div>';
+  lucide.createIcons();
+  try {
+    const data = await apiFetch('/api/paraguas');
+    if (!data.length) {
+      panel.innerHTML = '<div class="loading">No hay datos del equipo</div>';
+      return;
+    }
+    panel.innerHTML = `
+      <div class="paraguas-header">
+        <span class="paraguas-escudo">☂</span>
+        <div>
+          <div class="paraguas-title">Paraguas</div>
+          <div class="paraguas-sub">${data.length} jugadores</div>
+        </div>
+      </div>
+      ${data.map(j => `
+        <div class="jugador-card paraguas-row">
+          <div class="jugador-avatar">${escHtml((j.jugador || '?')[0].toUpperCase())}</div>
+          <div class="jugador-info">
+            <div class="jugador-nombre">${escHtml(j.jugador)}</div>
+            <div class="jugador-equipo">${escHtml(j.equipo)}</div>
+          </div>
+          <div class="jugador-stats">
+            <div class="stat-item">
+              <div class="stat-val">${j.goles ?? '—'}</div>
+              <div class="stat-lbl">Goles</div>
+            </div>
+            ${j.partidos != null ? `<div class="stat-item">
+              <div class="stat-val">${j.partidos}</div>
+              <div class="stat-lbl">Partidos</div>
+            </div>` : ''}
+            <div class="stat-item">
+              <div class="stat-val">${j.pos ?? '—'}</div>
+              <div class="stat-lbl">Ranking</div>
+            </div>
+          </div>
+        </div>`).join('')}`;
+  } catch (e) {
+    showError('tab-paraguas', 'Error cargando datos');
   }
 }
 
