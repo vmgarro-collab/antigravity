@@ -4,7 +4,7 @@
 const http = require('http');
 const fs   = require('fs');
 const path = require('path');
-const { getGrupos, getClasificacion, getResultados } = require('./scraper.js');
+const { getGrupos, getClasificacion, getResultados, getGoleadores } = require('./scraper.js');
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -50,6 +50,9 @@ async function handleApi(req, res, pathname) {
     } else if (pathname === '/api/resultados') {
       if (!q.grupo || !q.competicion) return sendError(res, 'Faltan parámetros: grupo, competicion', 400);
       sendJson(res, await getResultados(q.grupo, q.competicion, q.jornada));
+    } else if (pathname === '/api/goleadores') {
+      if (!q.grupo || !q.competicion) return sendError(res, 'Faltan parámetros: grupo, competicion', 400);
+      sendJson(res, await getGoleadores(q.grupo, q.competicion));
     } else {
       sendError(res, 'Endpoint no encontrado', 404);
     }

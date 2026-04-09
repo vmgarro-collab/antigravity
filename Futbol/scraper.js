@@ -137,9 +137,33 @@ async function getResultados(grupoId, competicionId, jornada) {
         jugado:    p.situacion_juego === '1',
         fecha:     p.fecha || '',
         hora:      p.hora || '',
+        campo:     p.campojuego || '',
       })),
     };
   });
 }
 
-module.exports = { getGrupos, getClasificacion, getResultados };
+async function getGoleadores(grupoId, competicionId) {
+  const key = `goleadores_${grupoId}_${competicionId}`;
+  return cached(key, async () => {
+    const props = await fetchNextData(
+      `/competicion/goleadores?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${competicionId}&grupo=${grupoId}`
+    );
+    const goles = props.scorers?.goles || [];
+    return {
+      competicion: props.scorers?.competicion || '',
+      grupo: props.scorers?.grupo || '',
+      goleadores: goles.map(g => ({
+        jugador:        g.jugador || '',
+        equipo:         g.nombre_equipo || '',
+        codigo_equipo:  g.codigo_equipo || '',
+        partidos:       parseInt(g.partidos_jugados) || 0,
+        goles:          parseInt(g.goles) || 0,
+        penaltis:       parseInt(g.goles_penalti) || 0,
+        media:          parseFloat(g.goles_por_partidos) || 0,
+      }))
+    };
+  });
+}
+
+module.exports = { getGrupos, getClasificacion, getResultados, getGoleadores };
