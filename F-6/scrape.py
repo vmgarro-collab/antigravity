@@ -76,9 +76,12 @@ def _parse_player_table(html, equipo_paraguas=False):
                     if kw in h:
                         return i
             return None
-        i_name   = col(["jugador", "player", "nombre"]) or 1
-        i_equipo = col(["equipo", "team", "club"]) or 2
-        i_goles  = col(["goles", "goals", "gol"]) or 3
+        def _idx(result, default):
+            return result if result is not None else default
+
+        i_name   = _idx(col(["jugador", "player", "nombre"]), 1)
+        i_equipo = _idx(col(["equipo", "team", "club"]), 2)
+        i_goles  = _idx(col(["goles", "goals", "gol"]), 3)
         i_part   = col(["partidos", "played", "pj", "nº"])
 
         for row in table.find_all("tr"):
@@ -233,6 +236,8 @@ def main():
 
     save("goleadores", jugadores)
     save("jugador", jugadores)  # same data, searched client-side
+    paraguas = [p for p in jugadores if p.get("paraguas")]
+    save("paraguas", paraguas)
 
     print("Scraping partidos (matchHub)...")
     resultados, calendario = scrape_resultados_y_calendario()
