@@ -85,7 +85,9 @@ async function loadAll() {
       ? Math.max(0, jornadas.findIndex(j => j.num === result.jornada_actual))
       : Math.max(0, jornadas.length - 1);
     renderResultados(result);
-    renderGoleadores(goles);
+    _goleadoresAll = goles;
+    _goleadoresExpanded = false;
+    renderGoleadores(goles, false);
     document.getElementById('panels').style.display = '';
     document.getElementById('panel-goleadores').style.display = '';
     lucide.createIcons();
@@ -124,12 +126,15 @@ function renderClasificacion(data) {
         <th class="col-gc" title="Goles en contra">GC</th>
         <th>Pts</th>
       </tr></thead>
-      <tbody>${data.tabla.map(r => `<tr>
-        <td>${r.pos}</td><td>${r.equipo}</td>
-        <td>${r.pj}</td><td>${r.pg}</td><td>${r.pe}</td><td>${r.pp}</td>
-        <td class="col-gf">${r.gf}</td><td class="col-gc">${r.gc}</td>
-        <td class="pts">${r.pts}</td>
-      </tr>`).join('')}</tbody>
+      <tbody>${data.tabla.map(r => {
+        const lib = r.equipo.toUpperCase().includes('LIBERTAD');
+        return `<tr${lib ? ' class="libertad-clasif"' : ''}>
+          <td>${r.pos}</td><td>${r.equipo}${lib ? '<span class="libertad-badge">★</span>' : ''}</td>
+          <td>${r.pj}</td><td>${r.pg}</td><td>${r.pe}</td><td>${r.pp}</td>
+          <td class="col-gf">${r.gf}</td><td class="col-gc">${r.gc}</td>
+          <td class="pts">${r.pts}</td>
+        </tr>`;
+      }).join('')}</tbody>
     </table>`;
 }
 
@@ -163,27 +168,41 @@ function updateJornadaNav() {
   next.disabled = jornadaIdx >= jornadas.length - 1;
 }
 
-function renderGoleadores(goles) {
+function renderGoleadores(goles, showAll = false) {
   const body = document.getElementById('goleadores-body');
   if (!goles?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin datos</p>'; return; }
+  const TOP = 10;
+  const visible = showAll ? goles : goles.slice(0, TOP);
+  const rows = visible.map((g, i) => {
+    const lib = g.codigo_equipo === LIBERTAD_ID;
+    return `<tr${lib ? ' class="libertad-row"' : ''}>
+      <td>${i + 1}</td>
+      <td>${g.jugador}${lib ? '<span class="libertad-badge">LIBERTAD</span>' : ''}</td>
+      <td class="col-equipo">${g.equipo}</td>
+      <td>${g.partidos}</td>
+      <td class="goles-cell">${g.goles}</td>
+      <td>${g.penaltis}</td>
+    </tr>`;
+  }).join('');
+  const btn = goles.length > TOP
+    ? `<button class="btn-ver-todos" onclick="toggleGoleadores()">${showAll ? '▲ Ver menos' : `▼ Ver todos (${goles.length})`}</button>`
+    : '';
   body.innerHTML = `
     <table class="tabla-goleadores">
       <thead><tr>
         <th>#</th><th>Jugador</th><th class="col-equipo">Equipo</th>
         <th title="Partidos">PJ</th><th title="Goles">G</th><th title="Penaltis">P</th>
       </tr></thead>
-      <tbody>${goles.map((g, i) => {
-        const lib = g.codigo_equipo === LIBERTAD_ID;
-        return `<tr${lib ? ' class="libertad-row"' : ''}>
-          <td>${i + 1}</td>
-          <td>${g.jugador}${lib ? '<span class="libertad-badge">LIBERTAD</span>' : ''}</td>
-          <td class="col-equipo">${g.equipo}</td>
-          <td>${g.partidos}</td>
-          <td class="goles-cell">${g.goles}</td>
-          <td>${g.penaltis}</td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table>`;
+      <tbody>${rows}</tbody>
+    </table>${btn}`;
+}
+
+let _goleadoresAll = [];
+let _goleadoresExpanded = false;
+
+function toggleGoleadores() {
+  _goleadoresExpanded = !_goleadoresExpanded;
+  renderGoleadores(_goleadoresAll, _goleadoresExpanded);
 }
 
 function skeletonPartidos() {
