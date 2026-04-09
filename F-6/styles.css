@@ -327,3 +327,91 @@ tbody td {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* ============================================================
+   MOBILE — max-width 640px
+   ============================================================ */
+@media (max-width: 640px) {
+
+  .app-container {
+    padding: 16px 10px;
+    gap: 16px;
+  }
+
+  /* Title */
+  .app-title { font-size: 1.25rem; }
+  .app-title svg { width: 22px; height: 22px; }
+
+  /* Tabs: 2 per row on mobile, 5th centered */
+  .tab-nav {
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+  }
+  .tab-btn {
+    flex: 1 1 calc(33.333% - 4px);
+    min-width: 0;
+    font-size: 0.72rem;
+    padding: 9px 4px;
+    gap: 4px;
+  }
+  .tab-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* Tables: smaller text, touch scroll */
+  .tabla-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  table { font-size: 0.8rem; }
+  thead th { padding: 8px 6px; font-size: 0.68rem; }
+  tbody td { padding: 10px 6px; }
+
+  /* Resultados: keep 3-col grid but tighter */
+  .partido-card {
+    padding: 10px 10px;
+    gap: 6px;
+  }
+  .partido-marcador {
+    font-size: 1.05rem;
+    padding: 4px 10px;
+  }
+
+  /* Goleadores */
+  .goleador-row { padding: 10px 12px; gap: 10px; }
+  .goleador-goles { font-size: 0.95rem; }
+
+  /* Calendario: stack vertically */
+  .fixture-card {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px 8px;
+    padding: 12px 12px;
+  }
+  .fixture-fecha {
+    grid-column: 1 / -1;
+    font-size: 0.78rem;
+  }
+  .fixture-local  { text-align: right; font-size: 0.88rem; }
+  .fixture-visitante { text-align: left; font-size: 0.88rem; }
+  .fixture-vs {
+    display: none; /* hide VS text, layout implies it */
+  }
+
+  /* Jugador card: stack stats below info */
+  .jugador-card {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .jugador-info { flex: 1 1 60%; }
+  .jugador-stats {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  /* Search box */
+  .search-box { padding: 10px 14px; }
+  .search-box input { font-size: 0.95rem; }
+
+  /* Glass card */
+  .glass-card { padding: 14px 12px; }
+}
