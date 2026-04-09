@@ -188,6 +188,7 @@ async function loadGoleadores() {
         <div class="goleador-goles">${g.goles} ⚽</div>
       </div>
     `).join('') || '<div class="loading">No hay datos de goleadores</div>';
+    lucide.createIcons();
   } catch (e) {
     const msg = e.message.includes('Failed to fetch') ? 'Arranca server.py primero' : e.message;
     showError('tab-goleadores', msg);
@@ -203,7 +204,8 @@ async function loadCalendario() {
   lucide.createIcons();
   try {
     const data = await apiFetch('/api/calendario');
-    const today = new Date().toISOString().slice(0, 10);
+    const d = new Date();
+    const today = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
     panel.innerHTML = data.map(f => {
       const isToday = f.fecha === today;
       return `
