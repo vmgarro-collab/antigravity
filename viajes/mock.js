@@ -181,3 +181,8 @@ async function searchHotels(query) {
     totalPrice: h.pricePerNight * nights
   }));
 }
+
+// Aliases para que app.js pueda referenciarlas en modo demo
+// (amadeus.js sobreescribe searchFlights/searchHotels en el scope global)
+const mockSearchFlights = searchFlights;
+const mockSearchHotels = searchHotels;
