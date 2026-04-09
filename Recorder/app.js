@@ -675,6 +675,8 @@ async function reTranscribeCurrent() {
         alert("No se pudo recuperar el audio para transcribir.");
     }
 }
+// Exponer para onclick inline en preloadRecording (innerHTML no puede usar funciones locales directamente)
+window.reTranscribeCurrent = reTranscribeCurrent;
 
 // --- EXPORT ---
 // Uses the native OS "Save As" dialog — works from file:// with no name issues
