@@ -740,9 +740,53 @@ if (btnExportTxt) {
 
 if (btnExportPdf) {
     btnExportPdf.addEventListener('click', () => {
-        alert('La exportación a PDF requiere un servidor. Por ahora se descarga como TXT.');
         const text = transcriptContent ? transcriptContent.innerText : '';
-        downloadBlob(new Blob([text], {type:'text/plain'}), 'Reunion-NeuroScribe.txt');
+        if (!text.trim()) {
+            alert('No hay transcripción para exportar.');
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+        const margin = 20;
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const maxWidth = pageWidth - margin * 2;
+        const lineHeight = 7;
+        let y = margin;
+
+        // Título
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Transcripción — NeuroScribe', margin, y);
+        y += lineHeight * 1.5;
+
+        // Fecha
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(120, 120, 120);
+        doc.text(new Date().toLocaleDateString('es-ES', { dateStyle: 'long' }), margin, y);
+        y += lineHeight * 1.5;
+
+        // Línea separadora
+        doc.setDrawColor(200, 200, 200);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += lineHeight;
+
+        // Contenido
+        doc.setFontSize(11);
+        doc.setTextColor(30, 30, 30);
+        const lines = doc.splitTextToSize(text, maxWidth);
+        lines.forEach(line => {
+            if (y + lineHeight > doc.internal.pageSize.getHeight() - margin) {
+                doc.addPage();
+                y = margin;
+            }
+            doc.text(line, margin, y);
+            y += lineHeight;
+        });
+
+        doc.save('Reunion-NeuroScribe.pdf');
     });
 }
 
