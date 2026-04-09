@@ -53,33 +53,64 @@ def n(v):
 
 def scrape_clasificacion():
     soup = BeautifulSoup(get(URL_STANDINGS), "lxml")
-    table = soup.find("table")
-    if not table:
-        raise ValueError("No standings table")
+    tables = soup.find_all("table")
+    print(f"  Found {len(tables)} table(s) on standings page")
     result = []
-    for i, row in enumerate(table.find_all("tr")[1:], start=1):
-        cols = [td.get_text(strip=True) for td in row.find_all("td")]
-        if len(cols) < 8:
-            continue
-        team_td = row.find("td", class_=lambda c: c and "highlight" in c)
-        equipo = team_td.get_text(strip=True) if team_td else cols[0]
-        # Extract team ID: last long number in href (competition ID is first, team ID is last)
-        team_link = row.find("a", href=True)
-        team_id = None
-        if team_link:
-            ids = re.findall(r'(\d{6,})', team_link["href"])
-            if len(ids) >= 2:
-                team_id = ids[-1]  # last number = team ID
-            elif len(ids) == 1 and ids[0] != "890842856":
-                team_id = ids[0]
-        entry = {
-            "pos": i, "equipo": equipo,
-            "pj": n(cols[1]), "g": n(cols[2]), "e": n(cols[3]), "p": n(cols[4]),
-            "gf": n(cols[5]), "gc": n(cols[6]), "pts": n(cols[7]),
-        }
-        if team_id:
-            entry["team_id"] = team_id
-        result.append(entry)
+    pos = 1
+    for t_idx, table in enumerate(tables):
+        all_rows = table.find_all("tr")
+        print(f"  Table {t_idx}: {len(all_rows)} rows")
+        for row in all_rows:
+            # Skip header rows (contain <th>)
+            if row.find("th"):
+                continue
+            cols = [td.get_text(strip=True) for td in row.find_all("td")]
+            print(f"    Row cols({len(cols)}): {cols[:10]}")
+            if len(cols) < 8:
+                continue
+            # Find team name: prefer linked td or td with text (skip numeric-only first col)
+            team_td = row.find("td", class_=lambda c: c and "highlight" in c)
+            if not team_td:
+                # Find first td with a link (team name)
+                for td in row.find_all("td"):
+                    if td.find("a"):
+                        team_td = td
+                        break
+            equipo = team_td.get_text(strip=True) if team_td else cols[1]
+            team_link = row.find("a", href=True)
+            team_id = None
+            if team_link:
+                ids = re.findall(r'(\d{6,})', team_link["href"])
+                if len(ids) >= 2:
+                    team_id = ids[-1]
+                elif len(ids) == 1 and ids[0] != "890842856":
+                    team_id = ids[0]
+            # Detect which cols hold the stats (skip pos/name cols, take last 7 numeric cols)
+            nums = []
+            for c in cols:
+                try:
+                    nums.append(int(c))
+                except ValueError:
+                    nums.append(None)
+            # Find a run of 7 consecutive numeric values (pj g e p gf gc pts)
+            stats = None
+            for start in range(len(nums) - 6):
+                run = nums[start:start+7]
+                if all(v is not None for v in run):
+                    stats = run
+                    break
+            if stats is None:
+                continue
+            entry = {
+                "pos": pos, "equipo": equipo,
+                "pj": stats[0], "g": stats[1], "e": stats[2], "p": stats[3],
+                "gf": stats[4], "gc": stats[5], "pts": stats[6],
+            }
+            if team_id:
+                entry["team_id"] = team_id
+            result.append(entry)
+            pos += 1
+    print(f"  Clasificacion total: {len(result)} equipos")
     return result
 
 # ---------------------------------------------------------------------------
