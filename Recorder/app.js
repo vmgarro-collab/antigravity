@@ -419,11 +419,13 @@ async function diarizeTranscript(text, apiKey) {
         if (!response.ok) throw new Error('Diarization API error: ' + response.status);
 
         const data = await response.json();
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) throw new Error('Invalid diarization response');
         const diarized = data.choices[0].message.content
             .replace(/```/g, '').trim();
 
-        const speakerMatches = diarized.match(/Hablante\s+(\d+):/g) || [];
-        const uniqueSpeakers = new Set(speakerMatches.map(m => m.match(/\d+/)[0])).size;
+        const uniqueSpeakers = new Set(
+            [...(diarized.matchAll(/Hablante\s+(\d+):/g))].map(m => m[1])
+        ).size;
 
         return { text: diarized, speakers: uniqueSpeakers };
     } catch(e) {
