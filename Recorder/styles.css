@@ -853,3 +853,110 @@ body {
 .ai-result-content tr:last-child td {
     border-bottom: none;
 }
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+    body { overflow: auto; }
+
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Sidebar → top bar */
+    .sidebar {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 16px;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brand { margin-bottom: 0; }
+
+    .sidebar-menu {
+        display: none; /* history oculto en móvil — accesible via scroll */
+    }
+
+    .user-profile {
+        margin-left: auto;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .user-info { display: none; }
+
+    /* Main content */
+    .main-content {
+        padding: 16px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    /* Recorder view */
+    .recorder-header h1 { font-size: 1.6rem; }
+    .recorder-header p  { font-size: 0.95rem; margin-bottom: 32px; }
+
+    .direct-api-box {
+        flex-direction: column;
+        margin: 16px 0 32px;
+    }
+
+    /* Results view */
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .results-header h1 { font-size: 1.4rem; }
+
+    .export-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .btn-secondary {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+
+    /* Results layout: columna en móvil */
+    .results-layout {
+        flex-direction: column;
+        gap: 16px;
+        min-height: unset;
+    }
+
+    .transcript-panel,
+    .ai-tools-panel {
+        flex: unset;
+    }
+
+    .transcript-content {
+        max-height: 300px;
+    }
+
+    .ai-result-content {
+        max-height: 400px;
+    }
+
+    /* Transcript header wrap */
+    .transcript-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 16px;
+    }
+
+    /* Transcription progress */
+    .transcription-container {
+        padding: 24px 16px;
+    }
+}
