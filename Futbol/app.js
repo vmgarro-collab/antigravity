@@ -10,11 +10,12 @@ const TIPOJUEGO       = '2';
 
 const CORS_PROXY = 'https://corsproxy.io/?url=';
 const RFFM       = 'https://www.rffm.es';
+const LOCAL      = ['localhost', '127.0.0.1'].includes(location.hostname);
 
-// ─── RFFM fetch helpers ───────────────────────────────────────────────────────
-async function fetchNextData(path) {
-  const url  = RFFM + path;
-  const res  = await fetch(CORS_PROXY + encodeURIComponent(url));
+// ─── RFFM data fetchers ───────────────────────────────────────────────────────
+async function fetchPageProps(path) {
+  const url = RFFM + path;
+  const res = await fetch(CORS_PROXY + encodeURIComponent(url));
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const html  = await res.text();
   const match = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]+?)<\/script>/);
@@ -24,37 +25,39 @@ async function fetchNextData(path) {
 
 async function getClasificacion(jornada) {
   const j = jornada ? `&jornada=${jornada}` : '';
-  const props = await fetchNextData(
+  if (LOCAL) {
+    const res = await fetch(`/api/clasificacion?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}${j}`);
+    return res.json(); // server returns {tabla:[{pos,equipo,pj,...}]}
+  }
+  const props = await fetchPageProps(
     `/competicion/clasificaciones?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${COMPETICION_ID}&grupo=${GRUPO_ID}${j}`
   );
   const s = props.standings || {};
   return {
     tabla: (s.clasificacion || []).map(r => ({
-      pos:    parseInt(r.posicion) || 0,
-      equipo: r.nombre || '',
-      pj:     parseInt(r.jugados) || 0,
-      pg:     parseInt(r.ganados) || 0,
-      pe:     parseInt(r.empatados) || 0,
-      pp:     parseInt(r.perdidos) || 0,
-      gf:     parseInt(r.goles_a_favor) || 0,
-      gc:     parseInt(r.goles_en_contra) || 0,
-      pts:    parseInt(r.puntos) || 0,
+      pos: parseInt(r.posicion)||0, equipo: r.nombre||'',
+      pj:  parseInt(r.jugados)||0,  pg: parseInt(r.ganados)||0,
+      pe:  parseInt(r.empatados)||0,pp: parseInt(r.perdidos)||0,
+      gf:  parseInt(r.goles_a_favor)||0, gc: parseInt(r.goles_en_contra)||0,
+      pts: parseInt(r.puntos)||0,
     })),
   };
 }
 
 async function getResultados(jornada) {
   const j = jornada ? `&jornada=${jornada}` : '';
-  const props = await fetchNextData(
+  if (LOCAL) {
+    const res = await fetch(`/api/resultados?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}${j}`);
+    return res.json(); // server returns {jornada_actual, jornadas, partidos}
+  }
+  const props = await fetchPageProps(
     `/competicion/resultados-y-jornadas?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${COMPETICION_ID}&grupo=${GRUPO_ID}${j}`
   );
   const r = props.results || {};
   return {
     jornada_actual: r.jornada || null,
     jornadas: (r.listado_jornadas?.[0]?.jornadas || []).map(j => ({
-      num:   j.codjornada,
-      label: `Jornada ${j.nombre}`,
-      fecha: j.fecha_jornada,
+      num: j.codjornada, label: `Jornada ${j.nombre}`, fecha: j.fecha_jornada,
     })),
     partidos: (r.partidos || []).map(p => ({
       local:     p.Nombre_equipo_local || '',
@@ -68,16 +71,17 @@ async function getResultados(jornada) {
 }
 
 async function getGoleadores() {
-  const props = await fetchNextData(
+  if (LOCAL) {
+    const res = await fetch(`/api/goleadores?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}`);
+    const data = await res.json();
+    return data.goleadores || []; // server returns {goleadores:[...]}
+  }
+  const props = await fetchPageProps(
     `/competicion/goleadores?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${COMPETICION_ID}&grupo=${GRUPO_ID}`
   );
   return (props.scorers?.goles || []).map(g => ({
-    jugador:       g.jugador || '',
-    equipo:        g.nombre_equipo || '',
-    codigo_equipo: g.codigo_equipo || '',
-    partidos:      parseInt(g.partidos_jugados) || 0,
-    goles:         parseInt(g.goles) || 0,
-    penaltis:      parseInt(g.goles_penalti) || 0,
+    jugador: g.jugador||'', equipo: g.nombre_equipo||'', codigo_equipo: g.codigo_equipo||'',
+    partidos: parseInt(g.partidos_jugados)||0, goles: parseInt(g.goles)||0, penaltis: parseInt(g.goles_penalti)||0,
   }));
 }
 
