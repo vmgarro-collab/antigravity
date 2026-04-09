@@ -66,16 +66,25 @@ def _parse_player_table(html, equipo_paraguas=False):
     soup = BeautifulSoup(html, "lxml")
     result = []
     for table in soup.find_all("table"):
-        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
-        if not headers:
+        rows = table.find_all("tr")
+        if len(rows) < 2:
             continue
-        # Detect column indices dynamically
+        # Try <th> first, fall back to first <tr>'s <td> as headers
+        header_row = rows[0]
+        headers = [th.get_text(strip=True).lower() for th in header_row.find_all("th")]
+        if not headers:
+            headers = [td.get_text(strip=True).lower() for td in header_row.find_all("td")]
+        data_rows = rows[1:] if headers else rows
+
+        print(f"  Table headers: {headers[:8]}")
+
         def col(keywords):
             for kw in keywords:
                 for i, h in enumerate(headers):
                     if kw in h:
                         return i
             return None
+
         def _idx(result, default):
             return result if result is not None else default
 
@@ -84,7 +93,9 @@ def _parse_player_table(html, equipo_paraguas=False):
         i_goles  = _idx(col(["goles", "goals", "gol"]), 3)
         i_part   = col(["partidos", "played", "pj", "nº"])
 
-        for row in table.find_all("tr"):
+        print(f"  Col indices — name:{i_name} equipo:{i_equipo} goles:{i_goles} partidos:{i_part}")
+
+        for row in data_rows:
             if row.find("th"):
                 continue
             cols = [td.get_text(strip=True) for td in row.find_all("td")]
@@ -99,36 +110,45 @@ def _parse_player_table(html, equipo_paraguas=False):
                 "pos": len(result) + 1,
                 "jugador": jugador,
                 "equipo": equipo,
-                "goles": n(cols[i_goles]) if i_goles and i_goles < len(cols) else 0,
-                "partidos": n(cols[i_part]) if i_part and i_part < len(cols) else None,
+                "goles": n(cols[i_goles]) if i_goles is not None and i_goles < len(cols) else 0,
+                "partidos": n(cols[i_part]) if i_part is not None and i_part < len(cols) else None,
                 "paraguas": is_paraguas,
             })
+        print(f"  Players found in this table: {len(result)}")
         if result:
-            break  # use first valid table
+            break  # use first valid table with data
     return result
 
 def scrape_jugadores():
+    print(f"Fetching: {URL_STATS}")
     r = requests.get(URL_STATS, headers=HEADERS, timeout=20)
+    print(f"  Status: {r.status_code}, Content-length: {len(r.text)}")
     r.raise_for_status()
     players = _parse_player_table(r.text)
+    print(f"Total players from main URL: {len(players)}")
 
-    # Merge Paraguas players (in case some don't appear in main stats)
+    # Merge Paraguas players
     try:
+        print(f"Fetching Paraguas: {URL_PARAGUAS}")
         r2 = requests.get(URL_PARAGUAS, headers=HEADERS, timeout=20)
+        print(f"  Paraguas status: {r2.status_code}")
         if r2.status_code == 200:
             paraguas_players = _parse_player_table(r2.text, equipo_paraguas=True)
+            print(f"  Paraguas players found: {len(paraguas_players)}")
             existing = {p["jugador"].lower() for p in players}
+            added = 0
             for p in paraguas_players:
                 if p["jugador"].lower() not in existing:
                     p["pos"] = len(players) + 1
                     players.append(p)
+                    added += 1
                 else:
-                    # Mark as paraguas in main list
                     for mp in players:
                         if mp["jugador"].lower() == p["jugador"].lower():
                             mp["paraguas"] = True
+            print(f"  Added {added} new Paraguas players not in main list")
     except Exception as e:
-        print(f"  ⚠ Paraguas merge failed: {e}")
+        print(f"  Paraguas merge failed: {e}")
 
     return players
 
