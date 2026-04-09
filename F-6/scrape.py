@@ -26,8 +26,22 @@ OUT_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 # ---------------------------------------------------------------------------
 
+_session = None
+
+def _get_session():
+    global _session
+    if _session is None:
+        _session = requests.Session()
+        _session.headers.update(HEADERS)
+        # Visit home page first to pick up any session cookies
+        try:
+            _session.get(BASE, timeout=10)
+        except Exception:
+            pass
+    return _session
+
 def get(url):
-    r = requests.get(url, headers=HEADERS, timeout=20)
+    r = _get_session().get(url, headers={"Referer": BASE + "/"}, timeout=20)
     r.raise_for_status()
     return r.text
 
