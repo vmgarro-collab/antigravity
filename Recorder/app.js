@@ -27,6 +27,15 @@ let animationId = null;
 let currentRecordingId = null; // Store ID for persistence updates
 
 // --- HELPERS ---
+function updateMetaInfo(rec) {
+    if (!metaInfo) return;
+    const date = rec.id ? new Date(rec.id).toLocaleDateString('es-ES', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    }) : '—';
+    const dur = rec.duration ? formatTime(rec.duration) : '—';
+    metaInfo.textContent = `${date} • ${dur} min`;
+}
+
 function formatTime(s) {
     const m = Math.floor(s / 60).toString().padStart(2, '0');
     return m + ':' + (s % 60).toString().padStart(2, '0');
@@ -72,6 +81,7 @@ const settingsModal     = document.getElementById('settings-modal');
 const modalApiKeyInput  = document.getElementById('groq-api-key');
 const btnCloseSettings  = document.getElementById('btn-close-settings');
 const btnSaveSettings   = document.getElementById('btn-save-settings');
+const metaInfo          = document.getElementById('meta-info');
 
 // --- GLOBAL AI STATE ---
 let rawTranscriptText = ""; // Store actual transcript
@@ -258,6 +268,7 @@ async function startRecording() {
                 id:        now.getTime(),
                 title:     'Grabación ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
                 dateLabel: now.toLocaleDateString(),
+                duration:  secondsRecorded,
                 audioBlob: rawBlob, // Persist compressed for transcription
                 audioUrl:  audioUrl,
                 mimeType:  rawBlob.type
@@ -413,6 +424,12 @@ async function performRealTranscription(blob) {
 
         finishStep(3);
         progressBar.style.width = '100%';
+
+        // Actualizar meta-info con datos de la grabación actual
+        try {
+            const recForMeta = await getRecordingById(currentRecordingId);
+            if (recForMeta) updateMetaInfo(recForMeta);
+        } catch(e) {}
 
         setTimeout(() => {
             switchView(State.RESULTS);
@@ -573,7 +590,8 @@ async function preloadRecording(rec, btnEl) {
     audioUrl = rec.audioUrl || await blobToDataUrl(rec.audioBlob);
 
     switchView(State.RESULTS);
-    
+    updateMetaInfo(rec);
+
     // Inject player (Browsers handle WebM/Ogg natively)
     const container = document.getElementById('real-audio-container');
     if (container) {
