@@ -299,6 +299,7 @@ async function startRecording() {
                 title:     'Grabación ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
                 dateLabel: now.toLocaleDateString(),
                 duration:  secondsRecorded,
+                speakers:  0,
                 audioBlob: rawBlob, // Persist compressed for transcription
                 audioUrl:  audioUrl,
                 mimeType:  rawBlob.type
@@ -391,6 +392,46 @@ function finishStep(i) {
     setStepIcon(progressSteps[i], 'check-circle-2', false);
 }
 
+async function diarizeTranscript(text, apiKey) {
+    if (!text || text.trim().length < 20) return { text, speakers: 0 };
+
+    try {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Eres un experto en análisis de conversaciones. Analiza el siguiente transcript e identifica cambios de hablante basándote en cambios de tema, tono y contexto conversacional. Reformatea el texto añadiendo 'Hablante N:' al inicio de cada intervención (N = número entero empezando en 1). Mantén el texto original exacto, solo añade las etiquetas. Si el texto parece ser de una sola persona, añade 'Hablante 1:' al inicio. Responde ÚNICAMENTE con el transcript reformateado, sin explicaciones ni texto adicional."
+                    },
+                    { role: "user", content: text }
+                ],
+                temperature: 0.1,
+                max_tokens: 4096
+            })
+        });
+
+        if (!response.ok) throw new Error('Diarization API error: ' + response.status);
+
+        const data = await response.json();
+        const diarized = data.choices[0].message.content
+            .replace(/```/g, '').trim();
+
+        const speakerMatches = diarized.match(/Hablante\s+(\d+):/g) || [];
+        const uniqueSpeakers = new Set(speakerMatches.map(m => m.match(/\d+/)[0])).size;
+
+        return { text: diarized, speakers: uniqueSpeakers };
+    } catch(e) {
+        console.warn('Diarization failed, using raw transcript:', e.message);
+        return { text, speakers: 0 };
+    }
+}
+
 async function performRealTranscription(blob) {
     let apiKey = getGroqApiKey();
     if (!apiKey) {
@@ -440,14 +481,17 @@ async function performRealTranscription(blob) {
         progressBar.style.width = '85%';
 
         const result = await response.json();
-        rawTranscriptText = result.text || "No se detectó voz.";
+        const rawText = result.text || "No se detectó voz.";
 
-        // Persistir transcript en IndexedDB
+        const { text: diarizedText, speakers } = await diarizeTranscript(rawText, apiKey);
+        rawTranscriptText = diarizedText;
+
         if (currentRecordingId) {
             try {
                 const rec = await getRecordingById(currentRecordingId);
                 if (rec) {
                     rec.transcript = rawTranscriptText;
+                    rec.speakers   = speakers;
                     await updateRecording(rec);
                 }
             } catch(e) { console.warn("Error persistiendo transcripción:", e); }

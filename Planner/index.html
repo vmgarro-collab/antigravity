@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlook Flow | Calendario Inteligente</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    
+    <!-- MSAL & Graph -->
+    <script src="https://alcdn.msauth.net/browser/2.35.0/js/msal-browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Auth Overlay (Shown by default) -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-card">
+            <div class="logo" style="margin-bottom: 1rem;">OUTLOOK FLOW</div>
+            <h1>Organiza tu semana con inteligencia</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                Arrastra, suelta y sincroniza tus tareas de Outlook en una interfaz premium diseñada para la productividad.
+            </p>
+            <button id="loginBtn" class="btn-primary">
+                <i data-lucide="log-in"></i>
+                Iniciar sesión con Microsoft
+            </button>
+            <button id="localModeBtn" style="margin-top: 10px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border-color); padding: 12px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600;">
+                Usar en Modo Local (Sin Outlook)
+            </button>
+            <p id="setupTrigger" style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--accent-color); cursor: pointer; text-decoration: underline;">
+                ¿Tu empresa permite Outlook? Configura Azure aquí.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main App Container (Hidden until auth) -->
+    <div id="appContainer" class="app-container" style="display: none;">
+        <aside class="sidebar">
+            <div class="logo">O.FLOW</div>
+            <nav style="flex: 1;">
+                <!-- Future features could go here -->
+                <div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 10px;">
+                    <small style="color: var(--text-muted)">VISTA ACTUAL</small>
+                    <div style="margin-top: 5px; font-weight: 600;">Calendario Semanal</div>
+                </div>
+            </nav>
+            <div id="userInfo" style="display: flex; align-items: center; gap: 12px; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                    U
+                </div>
+                <div style="flex: 1;">
+                    <div id="userName" style="font-size: 0.9rem; font-weight: 600;">Usuario</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Conectado</div>
+                </div>
+                <button id="logoutBtn" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;">
+                    <i data-lucide="log-out" size="18"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="calendar"></div>
+        </main>
+    </div>
+
+    <!-- Setup Modal -->
+    <div id="setupModal" class="setup-modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1.5rem;">Configuración de Azure Integration</h2>
+            
+            <div class="step-card">
+                <span>Paso 1:</span> Ve a <a href="https://portal.azure.com" target="_blank" style="color: var(--accent-color)">portal.azure.com</a> y entra en <b>Entra ID (Active Directory)</b> > <b>App Registrations</b>.
+            </div>
+            
+            <div class="step-card">
+                <span>Paso 2:</span> Crea un "New Registration". Ponle nombre "Outlook Flow" y elige <b>"Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)"</b>.
+            </div>
+
+            <div class="step-card">
+              <span>Paso 3:</span> En "Redirect URI", elige <b>SPA (Single Page Application)</b> y pon la URL de esta app (normalmente http://localhost:5173 o similar).
+            </div>
+
+            <div class="form-group">
+                <label for="clientId">Application (Client) ID</label>
+                <input type="text" id="clientId" placeholder="Pega aquí tu Client ID de Azure">
+            </div>
+
+            <div class="form-group">
+                <label for="tenantId">Tenant ID (Opcional, usa 'organizations' por defecto)</label>
+                <input type="text" id="tenantId" value="organizations">
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid var(--accent-color);">
+              <p><b>💡 Si no tienes permisos:</b> Copia este texto y envíalo a tu departamento de IT:</p>
+              <pre style="background: rgba(0,0,0,0.3); padding: 10px; font-size: 0.75rem; margin-top: 5px; white-space: pre-wrap; color: #cbd5e1;">
+"Hola IT. Necesito registrar una aplicación SPA (Outlook Flow) en Azure para sincronizar mi calendario con una herramienta de productividad local. Los permisos necesarios son: User.Read y Calendars.ReadWrite. El Redirect URI será: [Poner la URL de esta app]"
+              </pre>
+            </div>
+                <button id="saveSetup" class="btn-primary">Guardar y Vincular</button>
+                <button id="closeSetup" style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; flex: 1;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="graph.js"></script>
+    <script src="calendar.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
