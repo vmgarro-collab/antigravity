@@ -3,16 +3,20 @@
 Liga Veteranos F-6 — proxy server
 Serves static files from F-6/ and proxies LeagueRepublic via Playwright.
 
-LeagueRepublic URLs (fill in from DevTools discovery in Task 1):
-  Clasificación : https://artificialfsala.leaguerepublic.com/l/standings.html
-  Resultados    : https://artificialfsala.leaguerepublic.com/l/results.html
-  Goleadores    : https://artificialfsala.leaguerepublic.com/l/topScorers.html
-  Calendario    : https://artificialfsala.leaguerepublic.com/l/fixtures.html
-  Jugador       : filtered from goleadores data
+LeagueRepublic URLs (confirmed from browser):
+  Clasificación   : https://artificialfsala.leaguerepublic.com/standingsForDate/950925790/2/-1/-1.html
+  Jugadores/Goles : https://artificialfsala.leaguerepublic.com/playerStats/890842856/1_950925790.html
+  Resultados/Cal  : https://artificialfsala.leaguerepublic.com/matchHub.html
+                    + per-date pages: /matchHub/890842856/-1_-1/-1/-1/-1/year{Y}_month{M}_day{D}/-1/false.html
+
+IDs:
+  League/group ID   : 950925790
+  Competition ID    : 890842856
 """
 
 import json
 import os
+import re
 import time
 import threading
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -22,6 +26,14 @@ from playwright.sync_api import sync_playwright
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PORT = 8080
+
+LR_BASE        = "https://artificialfsala.leaguerepublic.com"
+LR_COMPETITION = "890842856"
+LR_DIVISION    = "950925790"
+
+URL_CLASIFICACION = f"{LR_BASE}/standingsForDate/{LR_DIVISION}/2/-1/-1.html"
+URL_PLAYER_STATS  = f"{LR_BASE}/playerStats/{LR_COMPETITION}/1_{LR_DIVISION}.html"
+URL_MATCH_HUB     = f"{LR_BASE}/matchHub.html"
 
 # ---------------------------------------------------------------------------
 # In-memory cache: { endpoint_key: (timestamp, data) }
@@ -63,100 +75,263 @@ def fetch_page_html(url: str) -> str:
         browser.close()
         return html
 
+def fetch_pages_html(urls: list[str]) -> list[str]:
+    """Fetch multiple URLs in one browser session for efficiency."""
+    results = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        for url in urls:
+            try:
+                page = browser.new_page()
+                page.goto(url, wait_until="networkidle", timeout=30000)
+                results.append(page.content())
+                page.close()
+            except Exception:
+                results.append("")
+        browser.close()
+    return results
+
 # ---------------------------------------------------------------------------
-# Parsers (fill selectors after Task 1 discovery)
+# Parsers
 # ---------------------------------------------------------------------------
-LR_BASE = "https://artificialfsala.leaguerepublic.com"
 
 def scrape_clasificacion() -> list:
-    html = fetch_page_html(f"{LR_BASE}/l/standings.html")
+    """
+    Page: /standingsForDate/950925790/2/-1/-1.html
+    Table headers: # | [team] | J | V | E | D | GA | GC | DG | PTS | ...
+    Cols (0-indexed td): 0=#, 1=equipo(link), 2=J, 3=V, 4=E, 5=D, 6=GA, 7=GC, 8=DG, 9=PTS
+    Team name is inside <a> within td.left.highlight
+    """
+    html = fetch_page_html(URL_CLASIFICACION)
     soup = BeautifulSoup(html, "html.parser")
-    # TODO after Task 1: adjust selector to match actual table
     table = soup.find("table")
     if not table:
         raise ValueError("No standings table found")
-    rows = table.find_all("tr")[1:]  # skip header
+
     result = []
-    for i, row in enumerate(rows, start=1):
-        cols = [td.get_text(strip=True) for td in row.find_all("td")]
+    rows = table.find_all("tr")
+    pos = 0
+    for row in rows:
+        cols = row.find_all("td")
         if len(cols) < 8:
             continue
+        # Team name: td with class containing 'left' and 'highlight', text from <a>
+        equipo_td = row.find("td", class_=lambda c: c and "left" in c and "highlight" in c)
+        equipo = ""
+        if equipo_td:
+            a = equipo_td.find("a")
+            equipo = a.get_text(strip=True) if a else equipo_td.get_text(strip=True)
+        if not equipo:
+            continue
+        pos += 1
+
+        def safe_int(td_list, idx):
+            try:
+                return int(td_list[idx].get_text(strip=True) or 0)
+            except (ValueError, IndexError):
+                return 0
+
         result.append({
-            "pos": i,
-            "equipo": cols[0],
-            "pj": int(cols[1] or 0),
-            "g":  int(cols[2] or 0),
-            "e":  int(cols[3] or 0),
-            "p":  int(cols[4] or 0),
-            "gf": int(cols[5] or 0),
-            "gc": int(cols[6] or 0),
-            "pts": int(cols[7] or 0),
+            "pos": pos,
+            "equipo": equipo,
+            "pj": safe_int(cols, 2),
+            "g":  safe_int(cols, 3),
+            "e":  safe_int(cols, 4),
+            "p":  safe_int(cols, 5),
+            "gf": safe_int(cols, 6),
+            "gc": safe_int(cols, 7),
+            "dg": safe_int(cols, 8),
+            "pts": safe_int(cols, 9),
         })
     return result
 
-def scrape_resultados() -> list:
-    html = fetch_page_html(f"{LR_BASE}/l/results.html")
-    soup = BeautifulSoup(html, "html.parser")
-    # TODO after Task 1: adjust selectors
-    result = []
-    jornada = 1
-    for table in soup.find_all("table"):
-        for row in table.find_all("tr")[1:]:
-            cols = [td.get_text(strip=True) for td in row.find_all("td")]
-            if len(cols) < 4:
-                continue
-            result.append({
-                "jornada": jornada,
-                "fecha": cols[0],
-                "local": cols[1],
-                "golesLocal": int(cols[2].split("-")[0]) if "-" in cols[2] else 0,
-                "golesVisitante": int(cols[2].split("-")[1]) if "-" in cols[2] else 0,
-                "visitante": cols[3],
-            })
-        jornada += 1
-    return result
 
-def scrape_goleadores() -> list:
-    html = fetch_page_html(f"{LR_BASE}/l/topScorers.html")
+def _parse_match_hub_page(html: str, fecha: str) -> list:
+    """
+    Parse a single matchHub date page.
+    Row structure: td.right.wrap (local) | td.highlight.nowrap or td (score/VS) | td.left.wrap (visitante)
+    Score text: "2 - 1" (played) or contains "VS" (not played yet).
+    """
     soup = BeautifulSoup(html, "html.parser")
-    # TODO after Task 1: adjust selectors
-    table = soup.find("table")
-    if not table:
-        raise ValueError("No scorers table found")
-    rows = table.find_all("tr")[1:]
-    result = []
-    for i, row in enumerate(rows, start=1):
-        cols = [td.get_text(strip=True) for td in row.find_all("td")]
+    matches = []
+
+    for row in soup.find_all("tr", attrs={"data-match-href": True}):
+        cols = row.find_all("td")
         if len(cols) < 3:
             continue
-        result.append({
-            "pos": i,
-            "jugador": cols[0],
-            "equipo": cols[1],
-            "goles": int(cols[2] or 0),
+
+        # Local team: first td (right wrap)
+        local_td = cols[0]
+        local_a = local_td.find("a")
+        local = local_a.get_text(strip=True) if local_a else local_td.get_text(strip=True)
+
+        # Score: second td
+        score_td = cols[1]
+        score_text = score_td.get_text(strip=True)
+
+        # Visitante: third td
+        vis_td = cols[2]
+        vis_a = vis_td.find("a")
+        visitante = vis_a.get_text(strip=True) if vis_a else vis_td.get_text(strip=True)
+
+        if not local or not visitante:
+            continue
+
+        # Determine if played
+        score_match = re.search(r"(\d+)\s*-\s*(\d+)", score_text)
+        if score_match:
+            goles_local = int(score_match.group(1))
+            goles_visitante = int(score_match.group(2))
+            jugado = True
+        else:
+            goles_local = None
+            goles_visitante = None
+            jugado = False
+
+        # Extract time from time-heading span (look in th above the row)
+        hora = ""
+        table = row.find_parent("table")
+        if table:
+            time_span = table.find("span", class_="time-heading")
+            if time_span:
+                hora = time_span.get_text(strip=True)
+
+        matches.append({
+            "fecha": fecha,
+            "hora": hora,
+            "local": local,
+            "visitante": visitante,
+            "golesLocal": goles_local,
+            "golesVisitante": goles_visitante,
+            "jugado": jugado,
         })
-    return result
+    return matches
+
+
+def _get_match_hub_dates() -> list[str]:
+    """
+    Fetch matchHub.html and extract all date URLs for this competition.
+    Returns list of relative paths like /matchHub/890842856/-1_-1/...
+    """
+    html = fetch_page_html(URL_MATCH_HUB)
+    soup = BeautifulSoup(html, "html.parser")
+    pattern = re.compile(rf"/matchHub/{LR_COMPETITION}/")
+    links = []
+    seen = set()
+    for a in soup.find_all("a", href=pattern):
+        href = a["href"]
+        if href not in seen:
+            seen.add(href)
+            links.append(href)
+    return links
+
+
+def _date_from_match_hub_url(url: str) -> str:
+    """Extract human-readable date from URL like .../year2025_month10_day18/..."""
+    m = re.search(r"year(\d+)_month(\d+)_day(\d+)", url)
+    if m:
+        y, mo, d = m.group(1), m.group(2), m.group(3)
+        return f"{d.zfill(2)}/{mo.zfill(2)}/{y}"
+    return ""
+
+
+def _scrape_all_matches() -> list:
+    """Fetch all match dates and parse them. Results and fixtures combined."""
+    date_paths = _get_match_hub_dates()
+    if not date_paths:
+        return []
+
+    urls = [f"{LR_BASE}{p}" for p in date_paths]
+    htmls = fetch_pages_html(urls)
+
+    all_matches = []
+    jornada = 0
+    for path, html in zip(date_paths, htmls):
+        if not html:
+            continue
+        fecha = _date_from_match_hub_url(path)
+        matches = _parse_match_hub_page(html, fecha)
+        if matches:
+            jornada += 1
+            for m in matches:
+                m["jornada"] = jornada
+            all_matches.extend(matches)
+    return all_matches
+
+
+def scrape_resultados() -> list:
+    """Return only played matches (jugado=True)."""
+    all_matches = cache_get("all_matches")
+    if all_matches is None:
+        all_matches = _scrape_all_matches()
+        cache_set("all_matches", all_matches)
+    return [m for m in all_matches if m.get("jugado")]
+
 
 def scrape_calendario() -> list:
-    html = fetch_page_html(f"{LR_BASE}/l/fixtures.html")
+    """Return only upcoming matches (jugado=False)."""
+    all_matches = cache_get("all_matches")
+    if all_matches is None:
+        all_matches = _scrape_all_matches()
+        cache_set("all_matches", all_matches)
+    return [m for m in all_matches if not m.get("jugado")]
+
+
+def scrape_goleadores() -> list:
+    """
+    Page: /playerStats/890842856/1_950925790.html
+    Table columns: POS | Jugadores | Equipo | Goals | Red Cards | Yellow Cards | Nº Partidos
+    td indices (0-based): 0=pos, 1=jugador(link), 2=equipo(link), 3=goals, 4=red, 5=yellow, 6=partidos
+    """
+    html = fetch_page_html(URL_PLAYER_STATS)
     soup = BeautifulSoup(html, "html.parser")
-    # TODO after Task 1: adjust selectors
+    table = soup.find("table")
+    if not table:
+        raise ValueError("No player stats table found")
+
     result = []
-    jornada = 1
-    for table in soup.find_all("table"):
-        for row in table.find_all("tr")[1:]:
-            cols = [td.get_text(strip=True) for td in row.find_all("td")]
-            if len(cols) < 3:
-                continue
-            fecha_hora = cols[0].split(" ")
-            result.append({
-                "jornada": jornada,
-                "fecha": fecha_hora[0] if fecha_hora else cols[0],
-                "hora": fecha_hora[1] if len(fecha_hora) > 1 else "",
-                "local": cols[1],
-                "visitante": cols[2],
-            })
-        jornada += 1
+    for row in table.find_all("tr"):
+        cols = row.find_all("td")
+        if len(cols) < 4:
+            continue
+
+        # pos: td.fixed-col (first td)
+        try:
+            pos = int(cols[0].get_text(strip=True) or 0)
+        except ValueError:
+            continue
+        if pos == 0:
+            continue
+
+        # jugador: td.fixed-col.left.highlight
+        jugador_td = row.find("td", class_=lambda c: c and "fixed-col" in c and "left" in c)
+        jugador = ""
+        if jugador_td:
+            a = jugador_td.find("a")
+            jugador = a.get_text(strip=True) if a else jugador_td.get_text(strip=True)
+
+        # equipo: td.left (not fixed-col)
+        equipo_td = row.find("td", class_=lambda c: c and "left" in c and "fixed-col" not in c)
+        equipo = ""
+        if equipo_td:
+            a = equipo_td.find("a")
+            equipo = a.get_text(strip=True) if a else equipo_td.get_text(strip=True)
+
+        def safe_int_col(idx):
+            try:
+                return int(cols[idx].get_text(strip=True) or 0)
+            except (ValueError, IndexError):
+                return 0
+
+        result.append({
+            "pos": pos,
+            "jugador": jugador,
+            "equipo": equipo,
+            "goles": safe_int_col(3),
+            "tarjetasRojas": safe_int_col(4),
+            "tarjetasAmarillas": safe_int_col(5),
+            "partidos": safe_int_col(6),
+        })
     return result
 
 # ---------------------------------------------------------------------------
