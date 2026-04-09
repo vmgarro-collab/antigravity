@@ -8,30 +8,53 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "es-ES,es;q=0.9",
 }
-URL = "https://artificialfsala.leaguerepublic.com/playerStats/890842856/1_950925790.html"
+BASE = "https://artificialfsala.leaguerepublic.com"
+
+def n(v):
+    try: return int(v)
+    except: return 0
 
 def scrape_all():
-    r = requests.get(URL, headers=HEADERS, timeout=15)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "lxml")
-    table = soup.find("table")
-    if not table:
-        raise ValueError("No player table found")
     result = []
-    for i, row in enumerate(table.find_all("tr")[1:], start=1):
-        cols = [td.get_text(strip=True) for td in row.find_all("td")]
-        if len(cols) < 3:
-            continue
-        def n(v):
-            try: return int(v)
-            except: return 0
-        result.append({
-            "pos": i,
-            "jugador": cols[1] if len(cols) > 1 else cols[0],
-            "equipo": cols[2] if len(cols) > 2 else "",
-            "goles": n(cols[3]) if len(cols) > 3 else 0,
-            "partidos": n(cols[6]) if len(cols) > 6 else None,
-        })
+    page = 1
+    seen_names = set()
+    while True:
+        url = f"{BASE}/playerStats/890842856/{page}_950925790.html"
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=20)
+            if r.status_code != 200:
+                break
+        except Exception:
+            break
+        soup = BeautifulSoup(r.text, "lxml")
+        table = soup.find("table")
+        if not table:
+            break
+        rows = table.find_all("tr")
+        added_this_page = 0
+        for row in rows:
+            if row.find("th"):
+                continue
+            cols = [td.get_text(strip=True) for td in row.find_all("td")]
+            if len(cols) < 3:
+                continue
+            jugador = cols[1] if len(cols) > 1 else cols[0]
+            if not jugador or jugador in seen_names:
+                continue
+            seen_names.add(jugador)
+            result.append({
+                "pos": len(result) + 1,
+                "jugador": jugador,
+                "equipo": cols[2] if len(cols) > 2 else "",
+                "goles": n(cols[3]) if len(cols) > 3 else 0,
+                "partidos": n(cols[6]) if len(cols) > 6 else None,
+            })
+            added_this_page += 1
+        if added_this_page == 0:
+            break
+        page += 1
+        if page > 20:
+            break
     return result
 
 class handler(BaseHTTPRequestHandler):
