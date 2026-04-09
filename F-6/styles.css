@@ -415,3 +415,17 @@ tbody td {
   /* Glass card */
   .glass-card { padding: 14px 12px; }
 }
+
+/* Paraguas highlight */
+.paraguas-row {
+  background: rgba(121, 40, 202, 0.08) !important;
+  border-color: rgba(121, 40, 202, 0.25) !important;
+}
+.paraguas-row:hover {
+  background: rgba(121, 40, 202, 0.15) !important;
+}
+.paraguas-badge {
+  font-size: 0.85em;
+  color: var(--primary-color);
+  margin-left: 4px;
+}

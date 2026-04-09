@@ -93,7 +93,7 @@ async function loadClasificacion() {
           </thead>
           <tbody>
             ${data.map(row => `
-              <tr>
+              <tr class="${row.equipo.toLowerCase().includes('paraguas') ? 'paraguas-row' : ''}">
                 <td class="center">${row.pos}</td>
                 <td>
                   <span class="equipo-link" onclick="buscarEquipo('${escHtml(row.equipo)}')">
@@ -191,9 +191,9 @@ async function loadGoleadores() {
     const data = await apiFetch('/api/goleadores');
     const medalClass = (pos) => pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : '';
     panel.innerHTML = data.map(g => `
-      <div class="goleador-row">
+      <div class="goleador-row${g.paraguas ? ' paraguas-row' : ''}">
         <div class="rank-badge ${medalClass(g.pos)}">${g.pos}</div>
-        <div class="goleador-nombre">${escHtml(g.jugador)}</div>
+        <div class="goleador-nombre">${escHtml(g.jugador)}${g.paraguas ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
         <div class="goleador-equipo">${escHtml(g.equipo)}</div>
         <div class="goleador-goles">${g.goles} ⚽</div>
       </div>
@@ -222,7 +222,7 @@ async function loadCalendario() {
         <div class="fixture-card">
           <div class="fixture-fecha">
             ${isToday ? '<span class="hoy-badge">HOY</span> ' : ''}
-            ${escHtml(f.fecha)} ${f.hora ? escHtml(f.hora) : ''}
+            ${escHtml(f.fecha)}
           </div>
           <div class="fixture-local">${escHtml(f.local)}</div>
           <div class="fixture-vs">vs</div>
