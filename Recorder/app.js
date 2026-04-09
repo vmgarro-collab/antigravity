@@ -254,10 +254,14 @@ async function startRecording() {
         // MediaRecorder — collect a chunk every 100ms so stop() has data
         // Optimization: 24kbps is perfect for speech and keeps files tiny for hours
         audioChunks = [];
-        const options = { mimeType: 'audio/webm;codecs=opus' };
-        if (!MediaRecorder.isTypeSupported(options.mimeType)) {
-            options.mimeType = 'audio/ogg;codecs=opus';
-        }
+        const preferredTypes = [
+            'audio/webm;codecs=opus',
+            'audio/ogg;codecs=opus',
+            'audio/mp4;codecs=aac',
+            'audio/mp4',
+            ''
+        ];
+        const options = { mimeType: preferredTypes.find(t => !t || MediaRecorder.isTypeSupported(t)) || '' };
 
         mediaRecorder = new MediaRecorder(stream, {
             ...options,
