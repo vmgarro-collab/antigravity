@@ -51,7 +51,7 @@ function renderTranscript(rec, text) {
 
     const headerHtml = (date || dur) ? `
         <div class="transcript-header">
-            <span class="th-date">${escapeHtml(date)}${time ? ' · ' + time : ''}</span>
+            <span class="th-date">${escapeHtml(date)}${time ? ' · ' + escapeHtml(time) : ''}</span>
             <span class="th-meta">${dur}${spk ? ' · ' + spk : ''}</span>
         </div>` : '';
 
@@ -397,7 +397,7 @@ async function performRealTranscription(blob) {
         if (!askForGroqApiKey()) {
             switchView(State.RESULTS);
             rawTranscriptText = "No se pudo transcribir: Falta API Key.";
-            transcriptContent.innerHTML = escapeHtml(rawTranscriptText);
+            renderTranscript(null, rawTranscriptText);
             return;
         }
         apiKey = getGroqApiKey();
