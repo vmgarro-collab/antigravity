@@ -523,6 +523,12 @@ async function performRealTranscription(blob) {
 }
 
 // --- AI ACTIONS (GROQ LLAMA) ---
+function buildMeetingContext() {
+    const metaEl = document.getElementById('meta-info');
+    const metaText = metaEl ? metaEl.textContent : '';
+    return metaText && metaText !== '—' ? `[Reunión: ${metaText}]\n` : '';
+}
+
 async function triggerAiAction(type, title) {
     if (!aiResultPanel) return;
     
@@ -539,11 +545,28 @@ async function triggerAiAction(type, title) {
 
     let systemPrompt = "";
     if (type === 'summary') {
-        systemPrompt = "Eres un asistente de reuniones. Con la transcripción, genera un resumen ejecutivo directo y claro en HTML (usa <h4>, <p>, <ul>). Responde SOLO el HTML, nada más y en español.";
+        systemPrompt = `Eres un asistente ejecutivo de reuniones. Genera un resumen estructurado en HTML usando EXACTAMENTE estas 4 secciones con <h4>:
+1. <h4>Contexto</h4> — 1-2 frases sobre el propósito de la reunión
+2. <h4>Puntos Clave</h4> — <ul> con los temas más importantes tratados
+3. <h4>Decisiones Tomadas</h4> — <ul> con decisiones concretas; si no hay, escribe <p>No se tomaron decisiones formales.</p>
+4. <h4>Próximos Pasos</h4> — <ul> con acciones acordadas; si no hay, escribe <p>Sin próximos pasos identificados.</p>
+Sé específico y usa información real del transcript. Responde SOLO el HTML, en español.`;
     } else if (type === 'tasks') {
-        systemPrompt = "Eres un gestor de proyectos. Extrae todas las tareas implícitas o explícitas y responsables. Genera HTML (usa <h4>, <ul>). Responde SOLO HTML en español.";
+        systemPrompt = `Eres un gestor de proyectos. Extrae todas las tareas del transcript (explícitas e implícitas). Genera una tabla HTML con esta estructura exacta:
+<table><thead><tr><th>Tarea</th><th>Responsable</th><th>Prioridad</th></tr></thead><tbody>
+[una <tr> por tarea con <td> para cada columna]
+</tbody></table>
+Reglas: Responsable = nombre mencionado en el transcript o "Sin asignar". Prioridad = "Alta" (urgente/esta semana), "Media" (próximo sprint), "Baja" (cuando se pueda). Si no hay tareas escribe <p>No se identificaron tareas en esta reunión.</p>. Responde SOLO el HTML, en español.`;
     } else if (type === 'mindmap') {
-        systemPrompt = "Eres un analista lógico. Representa los conceptos clave en un árbol de texto ASCII dentro de un bloque <pre>. Responde SOLO el bloque <pre> HTML en español.";
+        systemPrompt = `Eres un analista de contenido. Identifica el tema central de la reunión y los 4-6 conceptos principales con sus sub-ideas. Genera un mapa mental en HTML con esta estructura exacta:
+<ul class="mindmap-root">
+  <li class="mindmap-center">[TEMA CENTRAL DE LA REUNIÓN]</li>
+  <li>[Concepto 1]
+    <ul><li>[sub-idea]</li><li>[sub-idea]</li></ul>
+  </li>
+  [más conceptos...]
+</ul>
+Usa información real del transcript. Responde SOLO el HTML, en español.`;
     }
 
     try {
@@ -557,7 +580,7 @@ async function triggerAiAction(type, title) {
                 model: "llama-3.3-70b-versatile",
                 messages: [
                     { role: "system", content: systemPrompt },
-                    { role: "user", content: `Transcripción: ${rawTranscriptText}` }
+                    { role: "user", content: `${buildMeetingContext()}Transcripción: ${rawTranscriptText}` }
                 ],
                 temperature: 0.2
             })
