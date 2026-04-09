@@ -145,32 +145,49 @@ def _parse_player_table(html, equipo_paraguas=False):
             break  # use first valid table with data
     return result
 
+URL_GOLEADORES = f"{BASE}/playerStats/890842856/1_950925790.html"
+
 def scrape_jugadores():
     players = []
     seen = set()
 
-    # Scrape each known team URL directly
-    team_urls = [
-        ("EL PARAGUAS", URL_PARAGUAS),
-    ]
+    # Goleadores generales
+    print(f"  Fetching goleadores: {URL_GOLEADORES}")
+    try:
+        r = _get_session().get(URL_GOLEADORES, headers={"Referer": BASE + "/"}, timeout=20)
+        print(f"    Status: {r.status_code}, size: {len(r.text)}")
+        if r.status_code == 200:
+            general = _parse_player_table(r.text)
+            print(f"    Players found: {len(general)}")
+            for p in general:
+                if p["jugador"].lower() not in seen:
+                    seen.add(p["jugador"].lower())
+                    p["paraguas"] = PARAGUAS_NAME in p.get("equipo", "").lower()
+                    players.append(p)
+    except Exception as e:
+        print(f"    Error: {e}")
 
-    for equipo, url in team_urls:
-        print(f"  Fetching {equipo}: {url}")
-        try:
-            r = _get_session().get(url, headers={"Referer": BASE + "/"}, timeout=20)
-            print(f"    Status: {r.status_code}")
-            if r.status_code != 200:
-                continue
-            team_players = _parse_player_table(r.text)
-            for p in team_players:
+    # Paraguas team (garantiza que aparecen aunque no estén en goleadores)
+    print(f"  Fetching Paraguas: {URL_PARAGUAS}")
+    try:
+        r2 = _get_session().get(URL_PARAGUAS, headers={"Referer": BASE + "/"}, timeout=20)
+        print(f"    Status: {r2.status_code}")
+        if r2.status_code == 200:
+            paraguas = _parse_player_table(r2.text, equipo_paraguas=True)
+            added = 0
+            for p in paraguas:
                 if p["jugador"].lower() not in seen:
                     seen.add(p["jugador"].lower())
                     p["pos"] = len(players) + 1
-                    p["paraguas"] = PARAGUAS_NAME in equipo.lower()
                     players.append(p)
-            print(f"    Players added: {len(team_players)}")
-        except Exception as e:
-            print(f"    Error: {e}")
+                    added += 1
+            print(f"    Paraguas players added: {added}")
+    except Exception as e:
+        print(f"    Error: {e}")
+
+    # Fix positions
+    for i, p in enumerate(players, start=1):
+        p["pos"] = i
 
     print(f"Total players: {len(players)}")
     return players
