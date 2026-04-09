@@ -37,6 +37,31 @@ function updateMetaInfo(rec) {
     metaInfo.textContent = `${date} • ${dur} min`;
 }
 
+function renderTranscript(rec, text) {
+    if (!transcriptContent) return;
+
+    const date = rec && rec.id ? new Date(rec.id).toLocaleDateString('es-ES', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    }) : '';
+    const time = rec && rec.id ? new Date(rec.id).toLocaleTimeString('es-ES', {
+        hour: '2-digit', minute: '2-digit'
+    }) : '';
+    const dur  = rec && rec.duration ? formatTime(rec.duration) + ' min' : '—';
+    const spk  = rec && rec.speakers  ? rec.speakers + ' hablante' + (rec.speakers !== 1 ? 's' : '') : '';
+
+    const headerHtml = (date || dur) ? `
+        <div class="transcript-header">
+            <span class="th-date">${escapeHtml(date)}${time ? ' · ' + time : ''}</span>
+            <span class="th-meta">${dur}${spk ? ' · ' + spk : ''}</span>
+        </div>` : '';
+
+    const bodyHtml = escapeHtml(text)
+        .replace(/\n/g, '<br>')
+        .replace(/(Hablante\s+\d+):/g, '<span class="speaker">$1:</span>');
+
+    transcriptContent.innerHTML = headerHtml + '<div style="padding:24px">' + bodyHtml + '</div>';
+}
+
 function formatTime(s) {
     const m = Math.floor(s / 60).toString().padStart(2, '0');
     return m + ':' + (s % 60).toString().padStart(2, '0');
@@ -437,9 +462,10 @@ async function performRealTranscription(blob) {
             if (recForMeta) updateMetaInfo(recForMeta);
         } catch(e) {}
 
-        setTimeout(() => {
+        setTimeout(async () => {
             switchView(State.RESULTS);
-            transcriptContent.innerHTML = escapeHtml(rawTranscriptText).replace(/\n/g, '<br>');
+            const recForRender = await getRecordingById(currentRecordingId).catch(() => null);
+            renderTranscript(recForRender, rawTranscriptText);
         }, 500);
 
     } catch (err) {
@@ -607,7 +633,7 @@ async function preloadRecording(rec, btnEl) {
     // Show saved transcript or fallback
     if (rec.transcript) {
         rawTranscriptText = rec.transcript;
-        transcriptContent.innerHTML = escapeHtml(rawTranscriptText).replace(/\n/g, '<br>');
+        renderTranscript(rec, rawTranscriptText);
     } else {
         rawTranscriptText = "";
         transcriptContent.innerHTML = `
