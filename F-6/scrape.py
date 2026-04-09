@@ -63,11 +63,21 @@ def scrape_clasificacion():
             continue
         team_td = row.find("td", class_=lambda c: c and "highlight" in c)
         equipo = team_td.get_text(strip=True) if team_td else cols[0]
-        result.append({
+        # Extract team ID from link href if present
+        team_link = row.find("a", href=True)
+        team_id = None
+        if team_link:
+            m = re.search(r'/(\d{6,})', team_link["href"])
+            if m:
+                team_id = m.group(1)
+        entry = {
             "pos": i, "equipo": equipo,
             "pj": n(cols[1]), "g": n(cols[2]), "e": n(cols[3]), "p": n(cols[4]),
             "gf": n(cols[5]), "gc": n(cols[6]), "pts": n(cols[7]),
-        })
+        }
+        if team_id:
+            entry["team_id"] = team_id
+        result.append(entry)
     return result
 
 # ---------------------------------------------------------------------------
@@ -134,36 +144,33 @@ def _parse_player_table(html, equipo_paraguas=False):
     return result
 
 def scrape_jugadores():
-    print(f"Fetching: {URL_STATS}")
-    r = requests.get(URL_STATS, headers=HEADERS, timeout=20)
-    print(f"  Status: {r.status_code}, Content-length: {len(r.text)}")
-    r.raise_for_status()
-    players = _parse_player_table(r.text)
-    print(f"Total players from main URL: {len(players)}")
+    # Get team IDs from standings page
+    clasificacion = scrape_clasificacion()
+    team_ids = [(e["equipo"], e.get("team_id")) for e in clasificacion if e.get("team_id")]
+    print(f"  Teams with IDs found: {len(team_ids)}")
 
-    # Merge Paraguas players
-    try:
-        print(f"Fetching Paraguas: {URL_PARAGUAS}")
-        r2 = requests.get(URL_PARAGUAS, headers=HEADERS, timeout=20)
-        print(f"  Paraguas status: {r2.status_code}")
-        if r2.status_code == 200:
-            paraguas_players = _parse_player_table(r2.text, equipo_paraguas=True)
-            print(f"  Paraguas players found: {len(paraguas_players)}")
-            existing = {p["jugador"].lower() for p in players}
-            added = 0
-            for p in paraguas_players:
-                if p["jugador"].lower() not in existing:
+    players = []
+    seen = set()
+    for equipo, team_id in team_ids:
+        url = f"{BASE}/playerStatsForTeam/890842856/{team_id}.html"
+        print(f"  Fetching {equipo} ({team_id})...")
+        try:
+            r = requests.get(url, headers={"Referer": BASE + "/"}, timeout=20)
+            print(f"    Status: {r.status_code}")
+            if r.status_code != 200:
+                continue
+            team_players = _parse_player_table(r.text)
+            for p in team_players:
+                if p["jugador"].lower() not in seen:
+                    seen.add(p["jugador"].lower())
                     p["pos"] = len(players) + 1
+                    p["paraguas"] = PARAGUAS_NAME in equipo.lower()
                     players.append(p)
-                    added += 1
-                else:
-                    for mp in players:
-                        if mp["jugador"].lower() == p["jugador"].lower():
-                            mp["paraguas"] = True
-            print(f"  Added {added} new Paraguas players not in main list")
-    except Exception as e:
-        print(f"  Paraguas merge failed: {e}")
+            print(f"    Players: {len(team_players)}")
+        except Exception as e:
+            print(f"    Error: {e}")
 
+    print(f"Total players from all teams: {len(players)}")
     return players
 
 # ---------------------------------------------------------------------------
