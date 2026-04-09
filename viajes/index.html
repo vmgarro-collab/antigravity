@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelFinder — Viajes Baratos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <i data-lucide="plane"></i>
+      TravelFinder
+    </div>
+    <button class="btn-config" id="btnConfig" onclick="openConfig()">
+      <i data-lucide="settings"></i>
+      Configurar API
+    </button>
+  </header>
+
+  <!-- Banner modo demo -->
+  <div class="demo-banner" id="demoBanner">
+    Modo demo — datos de ejemplo. <a href="#" onclick="openConfig()" style="color:inherit;font-weight:600">Configura tu API key de Amadeus</a> para ver precios reales.
+  </div>
+
+  <!-- Layout principal -->
+  <div class="main">
+
+    <!-- Sidebar izquierdo: formulario + filtros -->
+    <aside class="sidebar">
+
+      <!-- Búsqueda de vuelos -->
+      <div class="form-section">
+        <div class="form-title">Buscar vuelos</div>
+
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="typeOneway" name="searchType" value="oneway">
+            <label for="typeOneway">Solo ida</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="typeRoundtrip" name="searchType" value="roundtrip" checked>
+            <label for="typeRoundtrip">Ida y vuelta</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputOrigin">Origen (código IATA)</label>
+          <input class="form-input" id="inputOrigin" type="text" placeholder="ej. MAD" maxlength="3">
+        </div>
+
+        <div class="form-group">
+          <label for="inputDestination">Destino (código IATA)</label>
+          <input class="form-input" id="inputDestination" type="text" placeholder="ej. BCN" maxlength="3">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputDepartDate">Ida</label>
+            <input class="form-input" id="inputDepartDate" type="date">
+          </div>
+          <div class="form-group" id="returnDateGroup">
+            <label for="inputReturnDate">Vuelta</label>
+            <input class="form-input" id="inputReturnDate" type="date">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassengers">Pasajeros</label>
+          <input class="form-input" id="inputPassengers" type="number" value="1" min="1" max="9">
+        </div>
+
+        <button class="btn-search" onclick="handleFlightSearch()">
+          <i data-lucide="search"></i>
+          Buscar vuelos
+        </button>
+      </div>
+
+      <!-- Filtros (se muestran tras la primera búsqueda) -->
+      <div class="filters-section" id="filtersSection">
+        <div class="form-title">Filtros</div>
+
+        <div class="filter-group">
+          <label class="form-group" style="flex-direction:row;justify-content:space-between;align-items:center">
+            <span style="font-size:12px;color:var(--text-muted)">Precio máximo</span>
+            <span class="range-value" id="maxPriceValue">sin límite</span>
+          </label>
+          <input class="range-input" id="filterMaxPrice" type="range" min="0" max="1000" step="10" value="1000" oninput="handleFilterChange()">
+        </div>
+
+        <div class="filter-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="filterDirect" onchange="handleFilterChange()">
+            Solo vuelos directos
+          </label>
+        </div>
+
+        <div class="filter-group" id="airlineFilterGroup" style="display:none">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">Aerolíneas</div>
+          <div class="airlines-list" id="airlinesList"></div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Panel derecho: resultados -->
+    <main class="results-panel">
+
+      <!-- Sección vuelos -->
+      <section class="results-section" id="flightsSection">
+        <div class="results-header">
+          <div class="results-title">
+            <i data-lucide="plane"></i>
+            Vuelos
+          </div>
+          <span class="results-count" id="flightsCount" style="display:none"></span>
+        </div>
+        <div id="flightsContainer">
+          <!-- Estado vacío inicial -->
+          <div class="empty-state" id="flightsEmpty">
+            <i data-lucide="plane-takeoff" style="width:48px;height:48px"></i>
+            <p>Busca tu próximo viaje ✈</p>
+            <span>Introduce origen, destino y fechas para ver vuelos disponibles</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección hoteles -->
+      <section class="results-section" id="hotelsSection" style="display:none">
+        <div class="results-header">
+          <div class="results-title">
+            <i data-lucide="building-2"></i>
+            Hoteles
+          </div>
+          <span class="results-count" id="hotelsCount" style="display:none"></span>
+        </div>
+
+        <!-- Indicador de vuelo seleccionado -->
+        <div class="selected-flight-badge" id="selectedFlightBadge">
+          <i data-lucide="check-circle" style="width:16px;height:16px"></i>
+          <span id="selectedFlightText"></span>
+        </div>
+
+        <!-- Barra de búsqueda de hoteles -->
+        <div class="hotel-search-bar">
+          <div class="form-group">
+            <label>Ciudad (IATA)</label>
+            <input class="form-input" id="hotelCityInput" type="text" placeholder="ej. BCN" maxlength="3">
+          </div>
+          <div class="form-group">
+            <label>Check-in</label>
+            <input class="form-input" id="hotelCheckIn" type="date">
+          </div>
+          <div class="form-group">
+            <label>Check-out</label>
+            <input class="form-input" id="hotelCheckOut" type="date">
+          </div>
+          <button class="btn-search-sm" onclick="handleHotelSearch()">
+            <i data-lucide="search"></i>
+            Buscar
+          </button>
+        </div>
+
+        <div id="hotelsContainer"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="mock.js"></script>
+  <script src="amadeus.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
