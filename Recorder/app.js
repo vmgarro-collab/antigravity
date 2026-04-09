@@ -66,7 +66,12 @@ const btnAiSummary   = document.getElementById('btn-ai-summary');
 const btnAiTasks     = document.getElementById('btn-ai-tasks');
 const btnAiMindmap   = document.getElementById('btn-ai-mindmap');
 const historyMenu    = document.getElementById('history-menu');
-const btnNewRecording= document.querySelector('.menu-item.active');
+const btnNewRecording = document.getElementById('btn-new-recording');
+const btnSaveDirectApi  = document.getElementById('btn-save-direct-api');
+const settingsModal     = document.getElementById('settings-modal');
+const modalApiKeyInput  = document.getElementById('groq-api-key');
+const btnCloseSettings  = document.getElementById('btn-close-settings');
+const btnSaveSettings   = document.getElementById('btn-save-settings');
 
 // --- GLOBAL AI STATE ---
 let rawTranscriptText = ""; // Store actual transcript
@@ -118,7 +123,7 @@ function sanitizeAiHtml(html) {
 }
 
 // Bypass all DOM / Modal issues using a robust native browser prompt.
-window.askForGroqApiKey = function() {
+function askForGroqApiKey() {
     console.log("askForGroqApiKey called");
     const current = getGroqApiKey();
     const key = prompt("Para transcribir y usar la IA, pega aquí tu API Key de Groq (empieza por gsk_...):\n\nEs gratis en console.groq.com", current);
@@ -130,9 +135,9 @@ window.askForGroqApiKey = function() {
         return true;
     }
     return false;
-};
+}
 
-window.saveDirectApiKey = function() {
+function saveDirectApiKey() {
     const input = document.getElementById('direct-api-key');
     if (input && input.value.trim()) {
         setGroqApiKey(input.value.trim());
@@ -140,7 +145,7 @@ window.saveDirectApiKey = function() {
     } else {
         alert("Por favor, pega una clave válida.");
     }
-};
+}
 
 
 // Convert Blob to base64 data URL (works from file:// unlike blob: URLs)
@@ -596,7 +601,7 @@ async function preloadRecording(rec, btnEl) {
     if (aiResultPanel) aiResultPanel.classList.add('hidden');
 }
 
-window.reTranscribeCurrent = async function() {
+async function reTranscribeCurrent() {
     if (!currentRecordingId) return;
     try {
         const rec = await getRecordingById(currentRecordingId);
@@ -605,7 +610,7 @@ window.reTranscribeCurrent = async function() {
             // Reset UI for transcription
             progressSteps.forEach(s => { s.classList.remove('active','done'); setStepIcon(s,'circle',false); });
             progressBar.style.width = '0%';
-            activateStep(0); 
+            activateStep(0);
             // Send the raw compressed blob to Groq
             await performRealTranscription(rec.audioBlob);
         }
@@ -613,7 +618,7 @@ window.reTranscribeCurrent = async function() {
         console.error(e);
         alert("No se pudo recuperar el audio para transcribir.");
     }
-};
+}
 
 // --- EXPORT ---
 // Uses the native OS "Save As" dialog — works from file:// with no name issues
@@ -728,7 +733,7 @@ if (btnExportAudio) {
             alert('No hay ninguna grabación cargada. Graba o selecciona una reunión primero.');
             return;
         }
-        
+
         // If it's already a WAV (old logic), download directly
         if (audioBlob.type === 'audio/wav') {
             downloadBlob(audioBlob, 'Audio-NeuroScribe.wav');
@@ -751,5 +756,47 @@ if (btnExportAudio) {
             btnExportAudio.innerHTML = oldText;
             lucide.createIcons();
         }
+    });
+}
+
+// --- SETTINGS MODAL ---
+function openSettingsModal() {
+    const key = getGroqApiKey();
+    if (modalApiKeyInput) modalApiKeyInput.value = key || '';
+    if (settingsModal) settingsModal.classList.remove('hidden');
+}
+
+function closeSettingsModal() {
+    if (settingsModal) settingsModal.classList.add('hidden');
+}
+
+document.getElementById('btn-settings-modal')
+    .addEventListener('click', openSettingsModal);
+
+if (btnCloseSettings) btnCloseSettings.addEventListener('click', closeSettingsModal);
+
+if (btnSaveSettings) {
+    btnSaveSettings.addEventListener('click', () => {
+        const key = modalApiKeyInput ? modalApiKeyInput.value.trim() : '';
+        if (key) {
+            setGroqApiKey(key);
+            const directInput = document.getElementById('direct-api-key');
+            if (directInput) directInput.value = key;
+            closeSettingsModal();
+            alert('¡Clave guardada con éxito!');
+        } else {
+            alert('Por favor, pega una clave válida (gsk_...).');
+        }
+    });
+}
+
+if (btnSaveDirectApi) {
+    btnSaveDirectApi.addEventListener('click', saveDirectApiKey);
+}
+
+// Cerrar modal al hacer click fuera
+if (settingsModal) {
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) closeSettingsModal();
     });
 }

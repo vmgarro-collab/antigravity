@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Meeting Recorder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <i data-lucide="audio-lines" class="brand-icon"></i>
+                <h2>NeuroScribe</h2>
+            </div>
+            
+            <div class="sidebar-menu">
+                <button id="btn-new-recording" class="menu-item active">
+                    <i data-lucide="mic"></i> Nueva Grabación
+                </button>
+                <div class="menu-section">
+                    <h3>RECIENTES</h3>
+                    <div id="history-menu">
+                        <!-- Record items will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">V</div>
+                <div class="user-info">
+                    <span class="name">Víctor</span>
+                    <span class="plan">Plan Premium</span>
+                </div>
+                <button id="btn-settings-modal" class="settings-btn" title="Configuración Groq">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- View 1: Recorder -->
+            <section id="view-recorder" class="view active">
+                <div class="recorder-header">
+                    <h1>Grabar Nueva Reunión</h1>
+                    <p>Captura el audio de tu entorno. La IA se encargará del resto.</p>
+                    
+                    <!-- New direct API Key Box -->
+                    <div id="direct-api-box" class="direct-api-box">
+                        <input type="password" id="direct-api-key" placeholder="Pega aquí tu Groq API Key (gsk_...)">
+                        <button id="btn-save-direct-api" class="btn-save-api">Guardar Clave</button>
+                    </div>
+                </div>
+                
+                <div class="recorder-center">
+                    <div class="pulsing-ring-container" id="recorder-ring">
+                        <button id="btn-record" class="recorder-button">
+                            <i data-lucide="mic" id="mic-icon"></i>
+                        </button>
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                    </div>
+                    
+                    <div class="recording-status">
+                        <h2 id="status-text">Listo para empezar</h2>
+                        <div id="recording-timer" class="timer hidden">00:00</div>
+                    </div>
+                    
+                    <div class="audio-visualizer hidden" id="audio-visualizer">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                </div>
+                
+                <div class="recorder-actions hidden" id="recorder-actions">
+                    <button id="btn-stop" class="btn-primary">
+                        <i data-lucide="square"></i> Detener y Transcribir
+                    </button>
+                </div>
+            </section>
+
+            <!-- View 2: Transcription Progress -->
+            <section id="view-transcribing" class="view">
+                <div class="transcription-container glass-panel">
+                    <div class="ai-brain-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h2>Procesando con IA...</h2>
+                    
+                    <div class="progress-steps" id="progress-steps">
+                        <div class="step active" id="step-1">
+                            <i data-lucide="loader-2" class="spin"></i> Subiendo audio seguro...
+                        </div>
+                        <div class="step" id="step-2">
+                            <i data-lucide="circle"></i> Optimizando calidad y cancelando ruido...
+                        </div>
+                        <div class="step" id="step-3">
+                            <i data-lucide="circle"></i> Generando transcripción de alta precisión...
+                        </div>
+                        <div class="step" id="step-4">
+                            <i data-lucide="circle"></i> Analizando contexto y separando altavoces...
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progress-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View 3: Results Dashboard -->
+            <section id="view-results" class="view">
+                <div class="results-header">
+                    <div>
+                        <h1>Reunión Completada</h1>
+                        <p class="meta-info">15 de Abril, 2026 • 24 mins • 3 Participantes identificados</p>
+                    </div>
+                    <div class="export-actions">
+                        <button class="btn-secondary" id="btn-export-audio">
+                            <i data-lucide="music"></i> Descargar Audio
+                        </button>
+                        <button class="btn-secondary" id="btn-export-pdf">
+                            <i data-lucide="file-down"></i> PDF
+                        </button>
+                        <button class="btn-secondary" id="btn-export-txt">
+                            <i data-lucide="download"></i> TXT
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="results-layout">
+                    <!-- Left: Transcript -->
+                    <div class="transcript-panel glass-panel">
+                        <div class="panel-header">
+                            <h3><i data-lucide="align-left"></i> Transcripción Completa</h3>
+                            <div id="real-audio-container" class="audio-player-wrapper"></div>
+                        </div>
+                        <div class="transcript-content" id="transcript-content">
+                            <!-- Text injected via JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Right: AI Tools -->
+                    <div class="ai-tools-panel">
+                        <div class="ai-hero glass-panel">
+                            <h3>¿Qué quieres hacer con esta reunión?</h3>
+                            <p>Usa IA para extraer valor inmediato de la grabación.</p>
+                            
+                            <div class="ai-buttons">
+                                <button class="btn-ai" id="btn-ai-summary">
+                                    <i data-lucide="zap"></i> Resumen Ejecutivo
+                                </button>
+                                <button class="btn-ai" id="btn-ai-tasks">
+                                    <i data-lucide="check-square"></i> Extraer Tareas
+                                </button>
+                                <button class="btn-ai" id="btn-ai-mindmap">
+                                    <i data-lucide="network"></i> Crear Mapa Mental
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-result-panel glass-panel hidden" id="ai-result-panel">
+                            <div class="panel-header">
+                                <h3 id="ai-result-title">Resultados</h3>
+                                <button class="btn-icon" title="Copiar al portapapeles"><i data-lucide="copy"></i></button>
+                            </div>
+                            <div class="ai-result-content" id="ai-result-content">
+                                <!-- AI output injected here -->
+                                <div class="loader-container">
+                                    <i data-lucide="loader-2" class="spin"></i> Generando...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2><i data-lucide="settings"></i> Configuración Groq API</h2>
+                <button id="btn-close-settings" class="btn-icon"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Para usar la transcripción e IA avanzadas, necesitas una clave. Es gratis.</p>
+                <ol>
+                    <li>Ve a <a href="https://console.groq.com/keys" target="_blank">console.groq.com</a> y regístrate.</li>
+                    <li>Crea una nueva <strong>API Key</strong> y pégala abajo.</li>
+                </ol>
+                <div class="input-group">
+                    <label for="groq-api-key">Groq API Key (gsk_...)</label>
+                    <input type="password" id="groq-api-key" placeholder="gsk_1a2b3c4d5e...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-save-settings" class="btn-primary">Guardar Configuración</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="db.js?v=22"></script>
+    <script src="app.js?v=22"></script>
+</body>
+</html>
