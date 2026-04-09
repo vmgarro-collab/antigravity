@@ -838,8 +838,8 @@ function closeSettingsModal() {
     if (settingsModal) settingsModal.classList.add('hidden');
 }
 
-document.getElementById('btn-settings-modal')
-    .addEventListener('click', openSettingsModal);
+const btnSettingsModal = document.getElementById('btn-settings-modal');
+if (btnSettingsModal) btnSettingsModal.addEventListener('click', openSettingsModal);
 
 if (btnCloseSettings) btnCloseSettings.addEventListener('click', closeSettingsModal);
 
