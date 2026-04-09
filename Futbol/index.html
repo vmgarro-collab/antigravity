@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benjamines Madrid</title>
+  <title>Preferente Benjamín F7 — Grupo 12</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
@@ -12,31 +12,27 @@
     <header class="header">
       <div class="header-content">
         <i data-lucide="trophy" class="header-icon"></i>
-        <h1>Benjamines Madrid</h1>
-        <span class="season-badge">2025-2026</span>
+        <div class="header-text">
+          <h1>Grupo 12</h1>
+          <p class="header-sub">Preferente Benjamín F7 · 2025-2026</p>
+        </div>
+        <span class="season-badge">RFFM</span>
       </div>
     </header>
 
     <main class="main">
-      <div class="grupo-selector glass">
-        <label for="grupo-select">Grupo</label>
-        <select id="grupo-select" disabled>
-          <option>Cargando grupos...</option>
-        </select>
-      </div>
-
       <div class="panels" id="panels" style="display:none">
         <section class="panel glass" id="panel-clasificacion">
           <h2><i data-lucide="list-ordered"></i> Clasificación</h2>
-          <div id="clasificacion-body"></div>
+          <div class="table-scroll" id="clasificacion-body"></div>
         </section>
 
         <section class="panel glass" id="panel-resultados">
           <h2><i data-lucide="calendar-days"></i> Resultados</h2>
           <div class="jornada-nav">
-            <button id="jornada-prev" class="btn-nav">&#8592;</button>
+            <button id="jornada-prev" class="btn-nav" aria-label="Jornada anterior">&#8592;</button>
             <span id="jornada-label">Jornada 1</span>
-            <button id="jornada-next" class="btn-nav">&#8594;</button>
+            <button id="jornada-next" class="btn-nav" aria-label="Jornada siguiente">&#8594;</button>
           </div>
           <div id="resultados-body"></div>
         </section>
@@ -44,10 +40,10 @@
 
       <section class="panel glass goleadores-panel" id="panel-goleadores" style="display:none">
         <h2><i data-lucide="award"></i> Goleadores</h2>
-        <div id="goleadores-body"></div>
+        <div class="table-scroll" id="goleadores-body"></div>
       </section>
 
-      <div id="loading" class="loading-msg" style="display:none">Cargando datos...</div>
+      <div id="loading" class="loading-msg"><span class="spinner"></span> Cargando datos...</div>
       <div id="error-msg" class="error-msg" style="display:none"></div>
     </main>
   </div>
