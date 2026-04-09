@@ -766,3 +766,90 @@ body {
     box-shadow: 0 0 15px var(--accent-color);
 }
 
+/* Transcript header (fecha, duración, hablantes) */
+.transcript-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.th-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.th-meta {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    letter-spacing: 0.3px;
+}
+
+/* Mapa mental */
+.mindmap-root {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mindmap-root li {
+    padding: 6px 0 6px 16px;
+    border-left: 2px solid var(--border-subtle);
+    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #e2e2e2;
+}
+
+.mindmap-center {
+    border-left: 3px solid var(--accent-color) !important;
+    color: var(--accent-color) !important;
+    font-weight: 700;
+    font-size: 1rem !important;
+    padding-left: 12px !important;
+}
+
+.mindmap-root ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 4px 0;
+}
+
+.mindmap-root ul li {
+    border-left: 2px solid rgba(121, 40, 202, 0.4);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Tabla de tareas */
+.ai-result-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+.ai-result-content th {
+    text-align: left;
+    padding: 8px 12px;
+    background: rgba(121, 40, 202, 0.15);
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.ai-result-content td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: #e2e2e2;
+    vertical-align: top;
+}
+
+.ai-result-content tr:last-child td {
+    border-bottom: none;
+}
