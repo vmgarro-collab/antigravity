@@ -22,6 +22,7 @@ let audioUrl = null;    // object URL for the WAV blob
 // Web Audio (visualizer only)
 let audioCtx = null;
 let analyser = null;
+let currentSource = null;  // Para desconectar al parar
 let dataArray = null;
 let animationId = null;
 let currentRecordingId = null; // Store ID for persistence updates
@@ -220,10 +221,10 @@ async function startRecording() {
         if (!audioCtx) audioCtx = new AC();
         if (audioCtx.state === 'suspended') await audioCtx.resume();
 
-        const source = audioCtx.createMediaStreamSource(stream);
+        currentSource = audioCtx.createMediaStreamSource(stream);
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 64;
-        source.connect(analyser);
+        currentSource.connect(analyser);
         dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         // MediaRecorder — collect a chunk every 100ms so stop() has data
@@ -246,6 +247,9 @@ async function startRecording() {
         mediaRecorder.addEventListener('stop', async () => {
             // Stop mic hardware
             stream.getTracks().forEach(t => t.stop());
+            // Limpiar nodos de Web Audio
+            if (currentSource) { currentSource.disconnect(); currentSource = null; }
+            if (analyser) { analyser.disconnect(); analyser = null; }
 
             // Build raw blob (COMPRESSED)
             const rawBlob = new Blob(audioChunks, { type: mediaRecorder.mimeType });
@@ -305,6 +309,7 @@ async function startRecording() {
         }, 1000);
 
     } catch(err) {
+        if (currentSource) { currentSource.disconnect(); currentSource = null; }
         console.error('Mic error:', err);
         alert('No se pudo acceder al micrófono. Comprueba los permisos del navegador.');
     }
