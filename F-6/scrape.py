@@ -58,48 +58,162 @@ def scrape_clasificacion():
 
 # ---------------------------------------------------------------------------
 
+def _detect_col_indices(header_row):
+    """
+    Inspect <th> cells to map column names → indices.
+    Returns dict with keys: jugador, equipo, goles, partidos (or None if not found).
+    Falls back to heuristic defaults if headers are ambiguous.
+    """
+    ths = [th.get_text(strip=True).lower() for th in header_row.find_all("th")]
+    print(f"  [debug] header cols: {ths}")
+
+    def find(keywords):
+        for i, h in enumerate(ths):
+            if any(k in h for k in keywords):
+                return i
+        return None
+
+    jugador_i  = find(["jugador", "player", "nombre", "name"])
+    equipo_i   = find(["equipo", "team", "club"])
+    goles_i    = find(["goles", "goals", "gol"])
+    partidos_i = find(["partidos", "played", "pj", "pg"])
+
+    # Fallback defaults if headers are missing / unrecognised
+    if jugador_i  is None: jugador_i  = 1
+    if equipo_i   is None: equipo_i   = 2
+    if goles_i    is None: goles_i    = 3
+    if partidos_i is None: partidos_i = 6
+
+    print(f"  [debug] col map → jugador:{jugador_i} equipo:{equipo_i} goles:{goles_i} partidos:{partidos_i}")
+    return jugador_i, equipo_i, goles_i, partidos_i
+
+
 def scrape_jugadores():
     result = []
     page = 1
     seen_names = set()
+    col_map = None  # detected once from page 1 headers
+
     while True:
         url = f"{BASE}/playerStats/890842856/{page}_950925790.html"
+        print(f"  Fetching page {page}: {url}")
         try:
             r = requests.get(url, headers=HEADERS, timeout=20)
+            print(f"  Status: {r.status_code}")
             if r.status_code != 200:
                 break
-        except Exception:
+        except Exception as e:
+            print(f"  Error fetching page {page}: {e}")
             break
+
         soup = BeautifulSoup(r.text, "lxml")
         table = soup.find("table")
         if not table:
+            print(f"  No table on page {page}, stopping.")
             break
+
         rows = table.find_all("tr")
+        print(f"  Rows on page {page}: {len(rows)}")
+
+        # Detect column indices from the first header row we encounter
+        if col_map is None:
+            header_row = next((r for r in rows if r.find("th")), None)
+            if header_row:
+                col_map = _detect_col_indices(header_row)
+            else:
+                col_map = (1, 2, 3, 6)  # hard fallback
+
+        jugador_i, equipo_i, goles_i, partidos_i = col_map
+
         added_this_page = 0
         for row in rows:
-            # Skip header rows (contain <th> cells)
             if row.find("th"):
                 continue
             cols = [td.get_text(strip=True) for td in row.find_all("td")]
             if len(cols) < 3:
                 continue
-            jugador = cols[1] if len(cols) > 1 else cols[0]
+            jugador = cols[jugador_i] if jugador_i < len(cols) else ""
             if not jugador or jugador in seen_names:
-                continue  # skip duplicates or empty rows
+                continue
             seen_names.add(jugador)
+            equipo   = cols[equipo_i]   if equipo_i   < len(cols) else ""
+            goles    = n(cols[goles_i]) if goles_i    < len(cols) else 0
+            partidos = n(cols[partidos_i]) if partidos_i < len(cols) else None
             result.append({
-                "pos": len(result) + 1,
-                "jugador": jugador,
-                "equipo":  cols[2] if len(cols) > 2 else "",
-                "goles":   n(cols[3]) if len(cols) > 3 else 0,
-                "partidos": n(cols[6]) if len(cols) > 6 else None,
+                "pos":      len(result) + 1,
+                "jugador":  jugador,
+                "equipo":   equipo,
+                "goles":    goles,
+                "partidos": partidos,
             })
             added_this_page += 1
+
+        print(f"  Added {added_this_page} players from page {page}")
         if added_this_page == 0:
-            break  # empty page = done
-        page += 1
-        if page > 20:  # safety limit
             break
+        page += 1
+        if page > 20:
+            break
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+
+URL_PARAGUAS = f"{BASE}/playerStatsForTeam/890842856/565913747.html"
+
+def scrape_paraguas():
+    """
+    Scrape the EL PARAGUAS team-specific stats page and return a list of players
+    in the same format as scrape_jugadores() rows.
+    """
+    print(f"  Fetching Paraguas page: {URL_PARAGUAS}")
+    try:
+        r = requests.get(URL_PARAGUAS, headers=HEADERS, timeout=20)
+        print(f"  Status: {r.status_code}")
+        if r.status_code != 200:
+            return []
+    except Exception as e:
+        print(f"  Error: {e}")
+        return []
+
+    soup = BeautifulSoup(r.text, "lxml")
+    table = soup.find("table")
+    if not table:
+        print("  No table found on Paraguas page.")
+        return []
+
+    rows = table.find_all("tr")
+    print(f"  Rows on Paraguas page: {len(rows)}")
+
+    # Detect headers
+    header_row = next((row for row in rows if row.find("th")), None)
+    if header_row:
+        jugador_i, equipo_i, goles_i, partidos_i = _detect_col_indices(header_row)
+    else:
+        jugador_i, equipo_i, goles_i, partidos_i = 1, 2, 3, 6
+
+    result = []
+    for row in rows:
+        if row.find("th"):
+            continue
+        cols = [td.get_text(strip=True) for td in row.find_all("td")]
+        if len(cols) < 3:
+            continue
+        jugador = cols[jugador_i] if jugador_i < len(cols) else ""
+        if not jugador:
+            continue
+        equipo   = cols[equipo_i]      if equipo_i   < len(cols) else "EL PARAGUAS"
+        goles    = n(cols[goles_i])    if goles_i    < len(cols) else 0
+        partidos = n(cols[partidos_i]) if partidos_i < len(cols) else None
+        result.append({
+            "jugador":  jugador,
+            "equipo":   equipo or "EL PARAGUAS",
+            "goles":    goles,
+            "partidos": partidos,
+        })
+
+    print(f"  Paraguas players found: {len(result)}")
     return result
 
 # ---------------------------------------------------------------------------
@@ -203,6 +317,20 @@ def main():
 
     print("Scraping jugadores...")
     jugadores = scrape_jugadores()
+
+    print("Scraping Paraguas team players...")
+    paraguas_players = scrape_paraguas()
+    existing_names = {j["jugador"] for j in jugadores}
+    added = 0
+    for p in paraguas_players:
+        if p["jugador"] not in existing_names:
+            p["pos"] = len(jugadores) + 1
+            jugadores.append(p)
+            existing_names.add(p["jugador"])
+            added += 1
+    if added:
+        print(f"  Merged {added} Paraguas players not in main list.")
+
     save("goleadores", jugadores)
     save("jugador", jugadores)  # same data, searched client-side
 
