@@ -11,7 +11,7 @@
     "pos": 21,
     "jugador": "Daniel GOMEZ GANCEDO",
     "equipo": "EL PARAGUAS",
-    "goles": 1,
+    "goles": 9,
     "partidos": null,
     "paraguas": true
   },
@@ -19,7 +19,7 @@
     "pos": 22,
     "jugador": "Ruben Ríos Cepeda",
     "equipo": "EL PARAGUAS",
-    "goles": 1,
+    "goles": 8,
     "partidos": null,
     "paraguas": true
   },
@@ -27,7 +27,7 @@
     "pos": 23,
     "jugador": "Aitor GARCIA MARTIN",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 5,
     "partidos": null,
     "paraguas": true
   },
@@ -35,7 +35,7 @@
     "pos": 24,
     "jugador": "Marco SANCHEZ MORALES",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 4,
     "partidos": null,
     "paraguas": true
   },
@@ -43,7 +43,7 @@
     "pos": 25,
     "jugador": "Julio GONZALEZ DE MANUELES",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 3,
     "partidos": null,
     "paraguas": true
   },
@@ -51,7 +51,7 @@
     "pos": 26,
     "jugador": "Javier Gómez Gancedo",
     "equipo": "EL PARAGUAS",
-    "goles": 2,
+    "goles": 3,
     "partidos": null,
     "paraguas": true
   },
@@ -59,7 +59,7 @@
     "pos": 27,
     "jugador": "Roberto Jiménez Tejedor",
     "equipo": "EL PARAGUAS",
-    "goles": 2,
+    "goles": 3,
     "partidos": null,
     "paraguas": true
   },
@@ -67,7 +67,7 @@
     "pos": 28,
     "jugador": "Petko Atanasov Marinov",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 2,
     "partidos": null,
     "paraguas": true
   },
@@ -75,7 +75,7 @@
     "pos": 29,
     "jugador": "Cesar CRISTOBAL BUENO",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 2,
     "partidos": null,
     "paraguas": true
   },
@@ -83,7 +83,7 @@
     "pos": 30,
     "jugador": "Jorge HIDALGO MARTINEZ",
     "equipo": "EL PARAGUAS",
-    "goles": 1,
+    "goles": 2,
     "partidos": null,
     "paraguas": true
   },
@@ -91,7 +91,7 @@
     "pos": 31,
     "jugador": "Ramon VICENTE FERNANDEZ",
     "equipo": "EL PARAGUAS",
-    "goles": 0,
+    "goles": 2,
     "partidos": null,
     "paraguas": true
   },
@@ -99,7 +99,7 @@
     "pos": 32,
     "jugador": "Ignacio SANCHEZ MORALES",
     "equipo": "EL PARAGUAS",
-    "goles": 1,
+    "goles": 0,
     "partidos": null,
     "paraguas": true
   }
