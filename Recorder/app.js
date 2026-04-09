@@ -68,6 +68,7 @@ const transcriptContent = document.getElementById('transcript-content');
 const aiResultPanel  = document.getElementById('ai-result-panel');
 const aiResultTitle  = document.getElementById('ai-result-title');
 const aiResultContent= document.getElementById('ai-result-content');
+const btnCopyAi      = document.getElementById('btn-copy-ai');
 const btnExportPdf   = document.getElementById('btn-export-pdf');
 const btnExportTxt   = document.getElementById('btn-export-txt');
 const btnExportAudio = document.getElementById('btn-export-audio');
@@ -816,5 +817,34 @@ if (btnSaveDirectApi) {
 if (settingsModal) {
     settingsModal.addEventListener('click', (e) => {
         if (e.target === settingsModal) closeSettingsModal();
+    });
+}
+
+// --- COPY AI RESULT ---
+if (btnCopyAi) {
+    btnCopyAi.addEventListener('click', async () => {
+        const text = aiResultContent ? aiResultContent.innerText : '';
+        if (!text.trim()) return;
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch(e) {
+            // Fallback para file:// donde clipboard API puede estar bloqueada
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        }
+        // Feedback visual: cambiar icono a check por 1.5s
+        const iconEl = btnCopyAi.querySelector('[data-lucide]');
+        if (iconEl) {
+            iconEl.setAttribute('data-lucide', 'check');
+            lucide.createIcons();
+            setTimeout(() => {
+                iconEl.setAttribute('data-lucide', 'copy');
+                lucide.createIcons();
+            }, 1500);
+        }
     });
 }
