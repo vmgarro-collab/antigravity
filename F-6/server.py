@@ -339,9 +339,7 @@ def scrape_goleadores() -> list:
 # ---------------------------------------------------------------------------
 ENDPOINTS = {
     "/api/clasificacion": ("clasificacion", scrape_clasificacion),
-    "/api/resultados":    ("resultados",    scrape_resultados),
     "/api/goleadores":    ("goleadores",    scrape_goleadores),
-    "/api/calendario":    ("calendario",    scrape_calendario),
 }
 
 def handle_api(path: str, query: dict) -> tuple[int, dict | list]:
@@ -360,6 +358,19 @@ def handle_api(path: str, query: dict) -> tuple[int, dict | list]:
         matches = [p for p in goleadores if nombre in p["jugador"].lower()]
         return 200, matches
 
+    if path in ("/api/resultados", "/api/calendario"):
+        try:
+            data = scrape_resultados() if path == "/api/resultados" else scrape_calendario()
+            return 200, data
+        except Exception as e:
+            stale = cache_get_stale("all_matches")
+            if stale:
+                if path == "/api/resultados":
+                    return 200, [m for m in stale if m.get("jugado")]
+                else:
+                    return 200, [m for m in stale if not m.get("jugado")]
+            return 502, {"error": f"No se pudo extraer los datos: {e}"}
+
     if path not in ENDPOINTS:
         return 404, {"error": "Endpoint no encontrado"}
 
@@ -375,7 +386,7 @@ def handle_api(path: str, query: dict) -> tuple[int, dict | list]:
     except Exception as e:
         stale = cache_get_stale(cache_key)
         if stale:
-            return 200, stale  # serve stale, frontend unaware
+            return 200, stale
         return 502, {"error": f"No se pudo extraer los datos: {e}"}
 
 # ---------------------------------------------------------------------------

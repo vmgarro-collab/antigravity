@@ -2,6 +2,8 @@
 
 lucide.createIcons();
 
+const API_BASE = 'http://localhost:8080';
+
 // ---------------------------------------------------------------------------
 // Tab navigation
 // ---------------------------------------------------------------------------
@@ -28,7 +30,7 @@ tabBtns.forEach(btn => {
 // Generic fetch helper
 // ---------------------------------------------------------------------------
 async function apiFetch(endpoint) {
-  const res = await fetch(`http://localhost:8080${endpoint}`);
+  const res = await fetch(`${API_BASE}${endpoint}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
     throw new Error(err.error || `HTTP ${res.status}`);
@@ -118,7 +120,7 @@ function buscarEquipo(nombre) {
 }
 
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 // ---------------------------------------------------------------------------
