@@ -146,16 +146,16 @@ def _parse_player_table(html, equipo_paraguas=False):
     return result
 
 def scrape_jugadores():
-    # Get team IDs from standings page
-    clasificacion = scrape_clasificacion()
-    team_ids = [(e["equipo"], e.get("team_id")) for e in clasificacion if e.get("team_id")]
-    print(f"  Teams with IDs found: {len(team_ids)}")
-
     players = []
     seen = set()
-    for equipo, team_id in team_ids:
-        url = f"{BASE}/playerStatsForTeam/890842856/{team_id}.html"
-        print(f"  Fetching {equipo} ({team_id})...")
+
+    # Scrape each known team URL directly
+    team_urls = [
+        ("EL PARAGUAS", URL_PARAGUAS),
+    ]
+
+    for equipo, url in team_urls:
+        print(f"  Fetching {equipo}: {url}")
         try:
             r = _get_session().get(url, headers={"Referer": BASE + "/"}, timeout=20)
             print(f"    Status: {r.status_code}")
@@ -168,11 +168,11 @@ def scrape_jugadores():
                     p["pos"] = len(players) + 1
                     p["paraguas"] = PARAGUAS_NAME in equipo.lower()
                     players.append(p)
-            print(f"    Players: {len(team_players)}")
+            print(f"    Players added: {len(team_players)}")
         except Exception as e:
             print(f"    Error: {e}")
 
-    print(f"Total players from all teams: {len(players)}")
+    print(f"Total players: {len(players)}")
     return players
 
 # ---------------------------------------------------------------------------
