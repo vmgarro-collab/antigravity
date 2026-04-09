@@ -30,7 +30,15 @@ tabBtns.forEach(btn => {
 // Generic fetch helper
 // ---------------------------------------------------------------------------
 async function apiFetch(endpoint) {
-  const res = await fetch(`${API_BASE}${endpoint}`);
+  // Map API endpoints to static JSON files
+  const staticMap = {
+    '/api/clasificacion': 'data/clasificacion.json',
+    '/api/resultados':    'data/resultados.json',
+    '/api/goleadores':    'data/goleadores.json',
+    '/api/calendario':    'data/calendario.json',
+  };
+  const url = staticMap[endpoint] || endpoint;
+  const res = await fetch(url);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
     throw new Error(err.error || `HTTP ${res.status}`);
@@ -107,7 +115,7 @@ async function loadClasificacion() {
     lucide.createIcons();
   } catch (e) {
     const msg = e.message.includes('Failed to fetch')
-      ? 'Arranca server.py primero'
+      ? 'Error cargando datos'
       : e.message;
     showError('tab-clasificacion', msg);
   }
@@ -158,7 +166,7 @@ async function loadResultados() {
     panel.innerHTML = html || '<div class="loading">No hay resultados aún</div>';
     lucide.createIcons();
   } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Arranca server.py primero' : e.message;
+    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
     showError('tab-resultados', msg);
   }
 }
@@ -192,7 +200,7 @@ async function loadGoleadores() {
     `).join('') || '<div class="loading">No hay datos de goleadores</div>';
     lucide.createIcons();
   } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Arranca server.py primero' : e.message;
+    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
     showError('tab-goleadores', msg);
   }
 }
@@ -222,7 +230,7 @@ async function loadCalendario() {
         </div>`;
     }).join('') || '<div class="loading">No hay partidos próximos</div>';
   } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Arranca server.py primero' : e.message;
+    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
     showError('tab-calendario', msg);
   }
 }
@@ -247,7 +255,11 @@ async function buscarJugador(nombre) {
   results.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Buscando...</div>';
   lucide.createIcons();
   try {
-    const data = await apiFetch(`/api/jugador?nombre=${encodeURIComponent(nombre)}`);
+    const todos = await apiFetch('/api/goleadores');
+    const data = todos.filter(j =>
+      j.jugador.toLowerCase().includes(nombre.toLowerCase()) ||
+      j.equipo.toLowerCase().includes(nombre.toLowerCase())
+    );
     if (!Array.isArray(data) || data.length === 0) {
       results.innerHTML = '<div class="loading">No se encontró ningún jugador</div>';
       return;
@@ -275,7 +287,7 @@ async function buscarJugador(nombre) {
         </div>`;
     }).join('');
   } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Arranca server.py primero' : e.message;
+    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
     results.innerHTML = `<div class="error-card"><i data-lucide="triangle-alert"></i> ${msg}</div>`;
     lucide.createIcons();
   }
