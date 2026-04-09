@@ -1,1 +1,166 @@
-/* styles added in Task 3 */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --accent-green: #00ff88;
+  --accent-blue: #4facfe;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --radius: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.app { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+/* Header */
+.header { margin-bottom: 24px; }
+.header-content { display: flex; align-items: center; gap: 12px; }
+.header-icon { color: var(--accent-green); width: 32px; height: 32px; }
+h1 { font-size: 1.8rem; font-weight: 700; color: var(--text); }
+.season-badge {
+  margin-left: auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--accent-blue);
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+}
+
+/* Glass panel */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+/* Grupo selector */
+.grupo-selector { margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.grupo-selector label { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; }
+.grupo-selector select {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+}
+.grupo-selector select:focus { border-color: var(--accent-blue); }
+
+/* Panels layout */
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .panels { grid-template-columns: 1fr; } }
+
+.panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Clasificacion table */
+.tabla-clasificacion { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.tabla-clasificacion th {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--glass-border);
+  font-weight: 500;
+}
+.tabla-clasificacion th:nth-child(2) { text-align: left; }
+.tabla-clasificacion td { padding: 8px 4px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.tabla-clasificacion td:nth-child(2) { text-align: left; }
+.tabla-clasificacion tbody tr:first-child td { color: var(--accent-green); font-weight: 600; }
+.tabla-clasificacion td.pts { font-weight: 700; color: var(--accent-green); }
+
+/* Resultados */
+.jornada-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.btn-nav {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.btn-nav:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+#jornada-label { flex: 1; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+.partido {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.partido:last-child { border-bottom: none; }
+.partido .equipo-local { flex: 1; text-align: right; }
+.partido .resultado {
+  min-width: 56px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent-green);
+  background: rgba(0,255,136,0.08);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.partido .resultado.pendiente {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+.partido .equipo-visitante { flex: 1; }
+
+/* Messages */
+.loading-msg, .error-msg { text-align: center; padding: 40px; color: var(--text-muted); }
+.error-msg { color: #ff6b6b; }
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Skeleton */
+.skeleton {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 4px;
+  height: 14px; width: 60%;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* Grupo optgroup */
+select optgroup { color: var(--text-muted); font-size: 0.85em; }
