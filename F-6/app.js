@@ -224,7 +224,7 @@ async function loadCalendario() {
         <div class="fixture-card">
           <div class="fixture-fecha">
             ${isToday ? '<span class="hoy-badge">HOY</span> ' : ''}
-            ${escHtml(f.fecha)}
+            ${escHtml(f.fecha)}${f.hora ? ' · <strong>' + escHtml(f.hora) + '</strong>' : ''}
           </div>
           <div class="fixture-local">${escHtml(f.local)}</div>
           <div class="fixture-vs">vs</div>
