@@ -263,44 +263,65 @@ def parse_score(text):
 def scrape_matches_from_page(html, jornada, fecha):
     soup = BeautifulSoup(html, "lxml")
     played, upcoming = [], []
-    for table in soup.find_all("table"):
-        current_hora = ""
-        for row in table.find_all("tr"):
-            tds = row.find_all("td")
-            row_text = row.get_text()
-            # Track time from any row (time headers have few TDs)
-            tm = re.search(r"\b(\d{1,2}:\d{2})\b", row_text)
-            if tm:
-                current_hora = tm.group(1)
-            if len(tds) < 3:
-                continue
-            hora = current_hora
-            # Score (played)
-            score_td = next((td for td in tds if re.search(r"\d+\s*-\s*\d+", td.get_text())), None)
-            if score_td:
-                score = parse_score(score_td.get_text(strip=True))
-                if score:
-                    idx = tds.index(score_td)
-                    local     = tds[idx-1].get_text(strip=True) if idx > 0 else ""
-                    visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
-                    if local or visitante:
-                        played.append({
-                            "jornada": jornada, "fecha": fecha,
-                            "local": local, "golesLocal": score[0],
-                            "golesVisitante": score[1], "visitante": visitante,
-                        })
-                continue
-            # VS (upcoming)
-            vs_td = next((td for td in tds if re.search(r"\bVS\b", td.get_text(), re.IGNORECASE)), None)
-            if vs_td:
-                idx = tds.index(vs_td)
+    current_hora = ""
+
+    # Walk every element in document order so time headers are captured
+    # regardless of whether they're inside a table or in a div/p outside.
+    for element in soup.find_all(["tr", "div", "p", "span", "h1", "h2", "h3", "h4", "li"]):
+        text = element.get_text(strip=True)
+
+        # Capture time patterns from any element (e.g. "10:00")
+        tm = re.match(r'^(\d{1,2}:\d{2})$', text)
+        if not tm:
+            tm = re.search(r'^\s*(\d{1,2}:\d{2})\s*$', text)
+        if tm:
+            current_hora = tm.group(1)
+
+        if element.name != "tr":
+            continue
+
+        tds = element.find_all("td")
+        if len(tds) < 3:
+            # Still check for time in short rows (colspan headers)
+            tm2 = re.search(r'\b(\d{1,2}:\d{2})\b', text)
+            if tm2:
+                current_hora = tm2.group(1)
+            continue
+
+        # Score (played)
+        score_td = next((td for td in tds if re.search(r"\d+\s*-\s*\d+", td.get_text())), None)
+        if score_td:
+            score = parse_score(score_td.get_text(strip=True))
+            if score:
+                idx = tds.index(score_td)
                 local     = tds[idx-1].get_text(strip=True) if idx > 0 else ""
                 visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
                 if local or visitante:
-                    upcoming.append({
-                        "jornada": jornada, "fecha": fecha, "hora": hora,
-                        "local": local, "visitante": visitante,
+                    played.append({
+                        "jornada": jornada, "fecha": fecha,
+                        "local": local, "golesLocal": score[0],
+                        "golesVisitante": score[1], "visitante": visitante,
                     })
+            continue
+
+        # VS (upcoming)
+        vs_td = next((td for td in tds if re.search(r"\bVS\b", td.get_text(), re.IGNORECASE)), None)
+        if vs_td:
+            idx = tds.index(vs_td)
+            local     = tds[idx-1].get_text(strip=True) if idx > 0 else ""
+            visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
+            if local or visitante:
+                # Also try to find time in this row if not already captured
+                if not current_hora:
+                    tm3 = re.search(r'\b(\d{1,2}:\d{2})\b', text)
+                    if tm3:
+                        current_hora = tm3.group(1)
+                print(f"    Upcoming: {local} vs {visitante} @ {current_hora}")
+                upcoming.append({
+                    "jornada": jornada, "fecha": fecha, "hora": current_hora,
+                    "local": local, "visitante": visitante,
+                })
+
     return played, upcoming
 
 def scrape_resultados_y_calendario():
