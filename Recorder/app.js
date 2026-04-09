@@ -47,17 +47,16 @@ function renderTranscript(rec, text) {
         hour: '2-digit', minute: '2-digit'
     }) : '';
     const dur  = rec && rec.duration ? formatTime(rec.duration) + ' min' : '—';
-    const spk  = rec && rec.speakers  ? rec.speakers + ' hablante' + (rec.speakers !== 1 ? 's' : '') : '';
 
     const headerHtml = (date || dur) ? `
         <div class="transcript-header">
             <span class="th-date">${escapeHtml(date)}${time ? ' · ' + escapeHtml(time) : ''}</span>
-            <span class="th-meta">${dur}${spk ? ' · ' + spk : ''}</span>
+            <span class="th-meta">${dur}</span>
         </div>` : '';
 
     const bodyHtml = escapeHtml(text)
         .replace(/\n/g, '<br>')
-        .replace(/(Hablante\s+\d+):/g, '<span class="speaker">$1:</span>');
+        .replace(/\[(\d{2}:\d{2})\]/g, '<span class="speaker">[$1]</span>');
 
     transcriptContent.innerHTML = headerHtml + '<div style="padding:24px">' + bodyHtml + '</div>';
 }
@@ -392,46 +391,14 @@ function finishStep(i) {
     setStepIcon(progressSteps[i], 'check-circle-2', false);
 }
 
-async function diarizeTranscript(text, apiKey) {
-    if (!text || text.trim().length < 20) return { text, speakers: 0 };
-
-    try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: [
-                    {
-                        role: "system",
-                        content: "Eres un experto en análisis de conversaciones. Analiza el siguiente transcript e identifica cambios de hablante basándote en cambios de tema, tono y contexto conversacional. Reformatea el texto añadiendo 'Hablante N:' al inicio de cada intervención (N = número entero empezando en 1). Mantén el texto original exacto, solo añade las etiquetas. Si el texto parece ser de una sola persona, añade 'Hablante 1:' al inicio. Responde ÚNICAMENTE con el transcript reformateado, sin explicaciones ni texto adicional."
-                    },
-                    { role: "user", content: text }
-                ],
-                temperature: 0.1,
-                max_tokens: 4096
-            })
-        });
-
-        if (!response.ok) throw new Error('Diarization API error: ' + response.status);
-
-        const data = await response.json();
-        if (!data.choices || !data.choices[0] || !data.choices[0].message) throw new Error('Invalid diarization response');
-        const diarized = data.choices[0].message.content
-            .replace(/```/g, '').trim();
-
-        const uniqueSpeakers = new Set(
-            [...(diarized.matchAll(/Hablante\s+(\d+):/g))].map(m => m[1])
-        ).size;
-
-        return { text: diarized, speakers: uniqueSpeakers };
-    } catch(e) {
-        console.warn('Diarization failed, using raw transcript:', e.message);
-        return { text, speakers: 0 };
-    }
+function buildTimestampedTranscript(segments) {
+    if (!segments || segments.length === 0) return '';
+    return segments.map(seg => {
+        const totalSecs = Math.floor(seg.start);
+        const m = Math.floor(totalSecs / 60).toString().padStart(2, '0');
+        const s = (totalSecs % 60).toString().padStart(2, '0');
+        return `[${m}:${s}] ${(seg.text || '').trim()}`;
+    }).join('\n');
 }
 
 async function performRealTranscription(blob) {
@@ -458,6 +425,8 @@ async function performRealTranscription(blob) {
         formData.append("file", blob, "audio.webm");
         formData.append("model", "whisper-large-v3-turbo");
         formData.append("language", "es");
+        formData.append("response_format", "verbose_json");
+        formData.append("timestamp_granularities[]", "segment");
 
         finishStep(1);
 
@@ -483,17 +452,14 @@ async function performRealTranscription(blob) {
         progressBar.style.width = '85%';
 
         const result = await response.json();
-        const rawText = result.text || "No se detectó voz.";
-
-        const { text: diarizedText, speakers } = await diarizeTranscript(rawText, apiKey);
-        rawTranscriptText = diarizedText;
+        const timestamped = buildTimestampedTranscript(result.segments);
+        rawTranscriptText = timestamped || result.text || "No se detectó voz.";
 
         if (currentRecordingId) {
             try {
                 const rec = await getRecordingById(currentRecordingId);
                 if (rec) {
                     rec.transcript = rawTranscriptText;
-                    rec.speakers   = speakers;
                     await updateRecording(rec);
                 }
             } catch(e) { console.warn("Error persistiendo transcripción:", e); }
