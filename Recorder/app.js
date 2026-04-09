@@ -107,6 +107,7 @@ function sanitizeAiHtml(html) {
     tmp.querySelectorAll('*').forEach(el => {
         if (!allowed.test(el.tagName)) {
             el.replaceWith(document.createTextNode(el.textContent));
+            return;
         }
         // Eliminar todos los atributos excepto class y style
         [...el.attributes].forEach(attr => {
@@ -467,7 +468,7 @@ async function triggerAiAction(type, title) {
         aiResultContent.innerHTML = sanitizeAiHtml(cleanContent);
     } catch(err) {
         console.error("AI Generation error:", err);
-        aiResultContent.innerHTML = `<div style="color:var(--error-color)">Error al generar IA: ${err.message}</div>`;
+        aiResultContent.innerHTML = `<div style="color:var(--error-color)">Error al generar IA: ${escapeHtml(err.message)}</div>`;
     }
 }
 
