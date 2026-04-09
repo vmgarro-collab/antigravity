@@ -1,1 +1,106 @@
-[]
+[
+  {
+    "pos": 68,
+    "jugador": "Victor Manuel GARRO PEREZ",
+    "equipo": "16",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 69,
+    "jugador": "Daniel GOMEZ GANCEDO",
+    "equipo": "9",
+    "goles": 1,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 70,
+    "jugador": "Ruben Ríos Cepeda",
+    "equipo": "8",
+    "goles": 1,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 71,
+    "jugador": "Aitor GARCIA MARTIN",
+    "equipo": "5",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 72,
+    "jugador": "Marco SANCHEZ MORALES",
+    "equipo": "4",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 73,
+    "jugador": "Julio GONZALEZ DE MANUELES",
+    "equipo": "3",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 74,
+    "jugador": "Javier Gómez Gancedo",
+    "equipo": "3",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 75,
+    "jugador": "Roberto Jiménez Tejedor",
+    "equipo": "3",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 76,
+    "jugador": "Petko Atanasov Marinov",
+    "equipo": "2",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 77,
+    "jugador": "Cesar CRISTOBAL BUENO",
+    "equipo": "2",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 78,
+    "jugador": "Jorge HIDALGO MARTINEZ",
+    "equipo": "2",
+    "goles": 1,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 79,
+    "jugador": "Ramon VICENTE FERNANDEZ",
+    "equipo": "2",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 80,
+    "jugador": "Ignacio SANCHEZ MORALES",
+    "equipo": "",
+    "goles": 1,
+    "partidos": null,
+    "paraguas": true
+  }
+]
