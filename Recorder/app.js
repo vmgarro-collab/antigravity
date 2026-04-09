@@ -85,6 +85,32 @@ const btnCloseSettings  = document.getElementById('btn-close-settings');
 const btnSaveSettings   = document.getElementById('btn-save-settings');
 const metaInfo          = document.getElementById('meta-info');
 
+// --- MIC SELECTOR ---
+const micSelect = document.getElementById('mic-select');
+
+async function populateMicList() {
+    if (!micSelect) return;
+    try {
+        // Necesitamos permiso previo para obtener labels de los dispositivos
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const mics = devices.filter(d => d.kind === 'audioinput');
+        micSelect.innerHTML = '<option value="">Micrófono por defecto</option>';
+        mics.forEach(mic => {
+            const opt = document.createElement('option');
+            opt.value = mic.deviceId;
+            opt.textContent = mic.label || `Micrófono ${micSelect.options.length}`;
+            micSelect.appendChild(opt);
+        });
+    } catch(e) {
+        console.warn('No se pudo enumerar dispositivos de audio:', e);
+    }
+}
+
+// Poblar lista al cargar (puede tener labels vacíos hasta que el permiso se conceda)
+populateMicList();
+// Re-poblar si cambian los dispositivos (USB mic conectado/desconectado)
+navigator.mediaDevices.addEventListener('devicechange', populateMicList);
+
 // --- GLOBAL AI STATE ---
 let rawTranscriptText = ""; // Store actual transcript
 
@@ -214,7 +240,13 @@ async function startRecording() {
     if (currentState !== State.IDLE) return;
 
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const selectedDeviceId = micSelect ? micSelect.value : '';
+        const audioConstraints = selectedDeviceId
+            ? { deviceId: { exact: selectedDeviceId } }
+            : true;
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: audioConstraints });
+        // Re-poblar lista con labels reales ahora que tenemos permiso
+        populateMicList();
 
         // Visualizer setup
         const AC = window.AudioContext || window.webkitAudioContext;
