@@ -357,22 +357,27 @@ async function performRealTranscription(blob) {
     }
 
     try {
-        activateStep(1); // "Enviando a la nube"
-        progressBar.style.width = '30%';
+        // Paso 0 ya activo desde stopRecordingAndTranscribe — marcarlo done
+        finishStep(0);
+
+        // Paso 1: Preparando FormData
+        activateStep(1);
+        progressBar.style.width = '20%';
 
         const formData = new FormData();
         formData.append("file", blob, "audio.webm");
         formData.append("model", "whisper-large-v3-turbo");
-        formData.append("language", "es"); // Force Spanish
+        formData.append("language", "es");
 
-        activateStep(2); // "Transcribiendo"
-        progressBar.style.width = '60%';
+        finishStep(1);
+
+        // Paso 2: Enviando a Groq
+        activateStep(2);
+        progressBar.style.width = '50%';
 
         const response = await fetch("https://api.groq.com/openai/v1/audio/transcriptions", {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`
-            },
+            headers: { "Authorization": `Bearer ${apiKey}` },
             body: formData
         });
 
@@ -381,14 +386,16 @@ async function performRealTranscription(blob) {
             throw new Error(`Error de Groq API: ${response.status} ${errDetails}`);
         }
 
-        const result = await response.json();
-        
-        activateStep(3); // "Generando Insights"
-        progressBar.style.width = '90%';
+        finishStep(2);
 
+        // Paso 3: Procesando resultado
+        activateStep(3);
+        progressBar.style.width = '85%';
+
+        const result = await response.json();
         rawTranscriptText = result.text || "No se detectó voz.";
-        
-        // SAVE TRANSCRIPT TO DB
+
+        // Persistir transcript en IndexedDB
         if (currentRecordingId) {
             try {
                 const rec = await getRecordingById(currentRecordingId);
@@ -402,7 +409,6 @@ async function performRealTranscription(blob) {
         finishStep(3);
         progressBar.style.width = '100%';
 
-        // Wait a tiny bit and show results
         setTimeout(() => {
             switchView(State.RESULTS);
             transcriptContent.innerHTML = escapeHtml(rawTranscriptText).replace(/\n/g, '<br>');
