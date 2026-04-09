@@ -63,13 +63,15 @@ def scrape_clasificacion():
             continue
         team_td = row.find("td", class_=lambda c: c and "highlight" in c)
         equipo = team_td.get_text(strip=True) if team_td else cols[0]
-        # Extract team ID from link href if present
+        # Extract team ID: last long number in href (competition ID is first, team ID is last)
         team_link = row.find("a", href=True)
         team_id = None
         if team_link:
-            m = re.search(r'/(\d{6,})', team_link["href"])
-            if m:
-                team_id = m.group(1)
+            ids = re.findall(r'(\d{6,})', team_link["href"])
+            if len(ids) >= 2:
+                team_id = ids[-1]  # last number = team ID
+            elif len(ids) == 1 and ids[0] != "890842856":
+                team_id = ids[0]
         entry = {
             "pos": i, "equipo": equipo,
             "pj": n(cols[1]), "g": n(cols[2]), "e": n(cols[3]), "p": n(cols[4]),
@@ -155,7 +157,7 @@ def scrape_jugadores():
         url = f"{BASE}/playerStatsForTeam/890842856/{team_id}.html"
         print(f"  Fetching {equipo} ({team_id})...")
         try:
-            r = requests.get(url, headers={"Referer": BASE + "/"}, timeout=20)
+            r = _get_session().get(url, headers={"Referer": BASE + "/"}, timeout=20)
             print(f"    Status: {r.status_code}")
             if r.status_code != 200:
                 continue
