@@ -1,7 +1,7 @@
 // F-6/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'veteranos-v1';
+const CACHE = 'veteranos-v2';
 const PRECACHE = [
   '/antigravity/F-6/',
   '/antigravity/F-6/index.html',
