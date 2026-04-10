@@ -1,5 +1,5 @@
 // Family/sw.js
-const CACHE = 'familia-v1';
+const CACHE = 'familia-v3';
 const ASSETS = [
   '/antigravity/Family/',
   '/antigravity/Family/index.html',
