@@ -35,9 +35,24 @@ function initCalendar() {
     eventDrop: onEventDrop,
     dateClick: onDateClick,
     eventClick: onEventClick,
+    eventContent: renderEventContent,
     events: []
   });
   calendar.render();
+}
+
+function renderEventContent(arg) {
+  const assignees = arg.event.extendedProps.assignees || [];
+  const initials = assignees.map(a => {
+    const color = COLOR_MAP[a] || COLOR_NONE;
+    return `<span style="display:inline-block;width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.35);font-size:0.55rem;font-weight:800;line-height:13px;text-align:center;flex-shrink:0">${a.charAt(0)}</span>`;
+  }).join('');
+  return {
+    html: `<div style="display:flex;align-items:center;gap:2px;padding:1px 3px;overflow:hidden;width:100%">
+      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.68rem;font-weight:600">${arg.event.title}</span>
+      <span style="display:flex;gap:1px;flex-shrink:0">${initials}</span>
+    </div>`
+  };
 }
 
 function onEventDrop(info) {
