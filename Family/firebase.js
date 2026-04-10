@@ -2,12 +2,12 @@
 // Sustituir los valores de firebaseConfig con los del proyecto Firebase real.
 
 const firebaseConfig = {
-  apiKey:            "REEMPLAZAR",
-  authDomain:        "REEMPLAZAR",
-  projectId:         "REEMPLAZAR",
-  storageBucket:     "REEMPLAZAR",
-  messagingSenderId: "REEMPLAZAR",
-  appId:             "REEMPLAZAR"
+  apiKey:            "AIzaSyBVwkTsiamEEz3AGbIeL_OuGn5eTcCaJQs",
+  authDomain:        "family-planner-70a4d.firebaseapp.com",
+  projectId:         "family-planner-70a4d",
+  storageBucket:     "family-planner-70a4d.firebasestorage.app",
+  messagingSenderId: "122830421513",
+  appId:             "1:122830421513:web:3f925b45355e9af73582d8"
 };
 
 firebase.initializeApp(firebaseConfig);
