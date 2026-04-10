@@ -73,7 +73,7 @@ Los eventos en el calendario muestran el color del primer asignado. Sin asignado
 
 ## UI y layout
 
-### Layout móvil (una sola pantalla, scroll vertical)
+### Layout portrait (vertical) — scroll vertical
 
 ```
 ┌─────────────────────────┐
@@ -90,6 +90,22 @@ Los eventos en el calendario muestran el color del primer asignado. Sin asignado
 │  ✓ Pagar luz       M    │  ← tachado cuando done=true
 └─────────────────────────┘
 ```
+
+### Layout landscape (horizontal) — side-by-side
+
+```
+┌──────────────────────────────────────────────┐
+│  🏠 Familia Garro                             │  ← header fijo
+├────────────────────────┬─────────────────────┤
+│                        │  PENDIENTES     [+] │
+│   CALENDARIO MENSUAL   │  ☐ Comprar leche VJ │
+│   (tocar día → añadir) │  ☐ Llamar dentista S│
+│                        │  ✓ Pagar luz    M   │
+│                        │                     │
+└────────────────────────┴─────────────────────┘
+```
+
+Implementado con CSS `@media (orientation: landscape)` — flexbox row en landscape, column en portrait. El calendario ocupa ~60% del ancho, los pendientes el 40% restante con scroll propio.
 
 ### Formulario (modal)
 
