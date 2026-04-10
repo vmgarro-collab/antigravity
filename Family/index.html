@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Familia Garro</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FullCalendar -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+  <!-- Firebase v10 modular (compat layer for simplicity) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <span class="app-logo">🏠 Familia Garro</span>
+  </header>
+
+  <div class="app-layout">
+    <!-- Calendario -->
+    <section class="calendar-section">
+      <div id="calendar"></div>
+    </section>
+
+    <!-- Pendientes -->
+    <section class="pending-section">
+      <div class="pending-header">
+        <span class="section-title">Pendientes</span>
+        <button class="btn-add-pending" id="btnAddPending" title="Añadir pendiente">+</button>
+      </div>
+      <ul class="pending-list" id="pendingList"></ul>
+    </section>
+  </div>
+
+  <!-- Modal crear/editar -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none">
+    <div class="modal-card">
+      <h2 class="modal-title" id="modalTitle">Nueva tarea</h2>
+      <input type="text" class="modal-input" id="modalInputTitle" placeholder="Título" autocomplete="off">
+      <label class="modal-label">Fecha (vacío = pendiente sin fecha)</label>
+      <input type="date" class="modal-input" id="modalInputDate">
+      <label class="modal-label">Asignado a</label>
+      <div class="assignee-toggles" id="assigneeToggles">
+        <button class="assignee-btn" data-name="Victor"  data-color="#3b82f6">Víctor</button>
+        <button class="assignee-btn" data-name="Johanna" data-color="#ec4899">Johanna</button>
+        <button class="assignee-btn" data-name="Sofia"   data-color="#22c55e">Sofía</button>
+        <button class="assignee-btn" data-name="Martin"  data-color="#f97316">Martín</button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-save"   id="btnSave">Guardar</button>
+        <button class="btn-cancel" id="btnCancel">Cancelar</button>
+        <button class="btn-delete" id="btnDelete" style="display:none">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

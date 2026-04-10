@@ -1,0 +1,198 @@
+:root {
+  --bg: #0a0a0f;
+  --surface: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent: #6366f1;
+  --header-h: 52px;
+  --color-victor:  #3b82f6;
+  --color-johanna: #ec4899;
+  --color-sofia:   #22c55e;
+  --color-martin:  #f97316;
+  --color-none:    #6b7280;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+.app-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--header-h);
+  display: flex; align-items: center; padding: 0 1rem;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.app-logo { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em; }
+
+/* ── Layout portrait (default) ── */
+.app-layout {
+  margin-top: var(--header-h);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--header-h));
+}
+
+.calendar-section {
+  padding: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pending-section {
+  padding: 0.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Layout landscape ── */
+@media (orientation: landscape) and (max-height: 600px) {
+  .app-layout {
+    flex-direction: row;
+    height: calc(100dvh - var(--header-h));
+    overflow: hidden;
+  }
+  .calendar-section {
+    width: 60%;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    border-top: none;
+  }
+  .pending-section {
+    width: 40%;
+    overflow-y: auto;
+    border-top: none;
+  }
+}
+
+/* ── FullCalendar overrides ── */
+.fc {
+  --fc-border-color: var(--border);
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: var(--surface);
+  --fc-today-bg-color: rgba(99,102,241,0.15);
+  --fc-event-border-color: transparent;
+  --fc-button-bg-color: var(--accent);
+  --fc-button-border-color: transparent;
+  --fc-button-hover-bg-color: #4f46e5;
+  --fc-button-active-bg-color: #4338ca;
+}
+.fc .fc-toolbar-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+.fc .fc-col-header-cell { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
+.fc .fc-daygrid-day-number { font-size: 0.75rem; color: var(--text-muted); }
+.fc .fc-event { border-radius: 4px; font-size: 0.7rem; padding: 1px 3px; }
+.fc .fc-daygrid-day:hover { background: rgba(255,255,255,0.03); cursor: pointer; }
+.fc .fc-day-today .fc-daygrid-day-number { color: var(--accent); font-weight: 800; }
+
+/* ── Pendientes ── */
+.pending-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.section-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+
+.btn-add-pending {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent); border: none; color: white;
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.btn-add-pending:hover { background: #4f46e5; }
+
+.pending-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.pending-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pending-item:hover { background: rgba(255,255,255,0.08); }
+.pending-item.done .pending-title { text-decoration: line-through; color: var(--text-muted); }
+
+.pending-check {
+  width: 18px; height: 18px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  background: transparent; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pending-item.done .pending-check { background: var(--accent); border-color: var(--accent); }
+
+.pending-title { flex: 1; font-size: 0.88rem; }
+
+.assignee-pills { display: flex; gap: 3px; flex-wrap: wrap; }
+.assignee-pill {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; font-weight: 700; color: white;
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-card {
+  background: #13131a;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.modal-title { font-size: 1.1rem; font-weight: 700; }
+.modal-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+.modal-input {
+  width: 100%; padding: 0.65rem 0.85rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;
+  outline: none;
+}
+.modal-input:focus { border-color: var(--accent); }
+.modal-input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); }
+
+.assignee-toggles { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.assignee-btn {
+  padding: 0.35rem 0.85rem; border-radius: 20px;
+  border: 2px solid var(--border);
+  background: transparent; color: var(--text-muted);
+  font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  transition: all 0.15s;
+}
+.assignee-btn.active { color: white; border-color: transparent; }
+
+.modal-actions { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+.btn-save {
+  flex: 1; padding: 0.7rem; border-radius: 10px;
+  background: var(--accent); border: none; color: white;
+  font-weight: 700; font-size: 0.9rem; cursor: pointer;
+}
+.btn-save:hover { background: #4f46e5; }
+.btn-cancel {
+  flex: 1; padding: 0.7rem; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+}
+.btn-delete {
+  padding: 0.7rem 1rem; border-radius: 10px;
+  background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #ef4444;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+}
+.btn-delete:hover { background: rgba(239,68,68,0.25); }
