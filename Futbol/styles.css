@@ -229,10 +229,6 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   letter-spacing: 0.04em;
 }
 
-/* Hide equipo column on very small screens in goleadores */
-@media (max-width: 420px) {
-  .tabla-goleadores .col-equipo { display: none; }
-}
 
 /* Ver todos button */
 .btn-ver-todos {
