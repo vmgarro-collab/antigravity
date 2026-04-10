@@ -183,13 +183,16 @@ body {
   flex: 1; padding: 0.7rem; border-radius: 10px;
   background: var(--accent); border: none; color: white;
   font-weight: 700; font-size: 0.9rem; cursor: pointer;
+  transition: background 0.2s;
 }
 .btn-save:hover { background: #4f46e5; }
 .btn-cancel {
   flex: 1; padding: 0.7rem; border-radius: 10px;
   background: var(--surface); border: 1px solid var(--border); color: var(--text);
   font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  transition: background 0.2s;
 }
+.btn-cancel:hover { background: rgba(255,255,255,0.08); }
 .btn-delete {
   padding: 0.7rem 1rem; border-radius: 10px;
   background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #ef4444;
