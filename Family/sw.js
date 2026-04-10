@@ -1,13 +1,13 @@
 // Family/sw.js
 const CACHE = 'familia-v1';
 const ASSETS = [
-  '/Family/',
-  '/Family/index.html',
-  '/Family/styles.css',
-  '/Family/firebase.js',
-  '/Family/app.js',
-  '/Family/manifest.json',
-  '/Family/icon.png'
+  '/antigravity/Family/',
+  '/antigravity/Family/index.html',
+  '/antigravity/Family/styles.css',
+  '/antigravity/Family/firebase.js',
+  '/antigravity/Family/app.js',
+  '/antigravity/Family/manifest.json',
+  '/antigravity/Family/icon.png'
 ];
 
 self.addEventListener('install', e => {
@@ -26,7 +26,7 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   // Solo cachear assets propios, dejar pasar Firebase y CDNs
-  if (!e.request.url.includes('/Family/')) return;
+  if (!e.request.url.includes('/antigravity/Family/')) return;
   e.respondWith(
     caches.match(e.request).then(cached => cached || fetch(e.request))
   );

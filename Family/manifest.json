@@ -4,8 +4,8 @@
   "description": "Planificador familiar compartido",
   "display": "standalone",
   "orientation": "any",
-  "start_url": "/Family/",
-  "scope": "/Family/",
+  "start_url": "/antigravity/Family/",
+  "scope": "/antigravity/Family/",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
   "icons": [
