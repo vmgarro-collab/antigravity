@@ -15,6 +15,27 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Tema claro en desktop ── */
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --color-none: #94a3b8;
+  }
+  .app-header { background: rgba(255,255,255,0.9); }
+  .fc .fc-daygrid-day:hover { background: #f0f4ff; }
+  .pending-item:hover { background: rgba(0,0,0,0.03); }
+  .btn-cancel { background: #f1f5f9; color: #1e293b; }
+  .btn-cancel:hover { background: #e2e8f0; }
+  .modal-card { background: #ffffff; }
+  .modal-input { background: #f8fafc; color: #1e293b; }
+  .modal-input[type="date"]::-webkit-calendar-picker-indicator { filter: none; }
+  .assignee-btn { background: #f8fafc; }
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
