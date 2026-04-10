@@ -129,6 +129,103 @@ function escapeHtml(str) {
 
 // ── Inicialización ──
 
+// ── Modal ──
+
+let modalState = {}; // { mode, id?, date?, title?, assignees? }
+
+function initModal() {
+  document.getElementById('btnSave').addEventListener('click', saveModal);
+  document.getElementById('btnCancel').addEventListener('click', closeModal);
+  document.getElementById('btnDelete').addEventListener('click', deleteFromModal);
+  document.getElementById('modalOverlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+
+  // Assignee toggles
+  document.querySelectorAll('.assignee-btn').forEach(btn => {
+    btn.addEventListener('click', () => btn.classList.toggle('active'));
+  });
+
+  // Estilo dinámico para assignee-btn.active
+  const style = document.createElement('style');
+  MEMBERS.forEach(m => {
+    style.textContent += `.assignee-btn[data-name="${m.name}"].active { background: ${m.color}; border-color: ${m.color}; }`;
+  });
+  document.head.appendChild(style);
+}
+
+function openModal({ mode, id, title = '', date = '', assignees = [] }) {
+  modalState = { mode, id, title, date, assignees };
+
+  const isEdit = mode === 'edit-event' || mode === 'edit-pending';
+  document.getElementById('modalTitle').textContent = isEdit ? 'Editar tarea' : 'Nueva tarea';
+  document.getElementById('modalInputTitle').value = title;
+  document.getElementById('modalInputDate').value = date;
+  document.getElementById('btnDelete').style.display = isEdit ? '' : 'none';
+
+  // Reset + activar assignees
+  document.querySelectorAll('.assignee-btn').forEach(btn => {
+    btn.classList.toggle('active', assignees.includes(btn.dataset.name));
+  });
+
+  // Ocultar date picker si es crear/editar pendiente
+  const dateInput = document.getElementById('modalInputDate');
+  const dateLabel = dateInput.previousElementSibling;
+  if (mode === 'create-pending' || mode === 'edit-pending') {
+    dateInput.style.display = 'none';
+    dateLabel.style.display = 'none';
+  } else {
+    dateInput.style.display = '';
+    dateLabel.style.display = '';
+  }
+
+  document.getElementById('modalOverlay').style.display = 'flex';
+  document.getElementById('modalInputTitle').focus();
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').style.display = 'none';
+  modalState = {};
+}
+
+function getSelectedAssignees() {
+  return Array.from(document.querySelectorAll('.assignee-btn.active'))
+    .map(btn => btn.dataset.name);
+}
+
+function saveModal() {
+  const title = document.getElementById('modalInputTitle').value.trim();
+  if (!title) {
+    document.getElementById('modalInputTitle').focus();
+    return;
+  }
+  const date = document.getElementById('modalInputDate').value;
+  const assignees = getSelectedAssignees();
+  const { mode, id } = modalState;
+
+  if (mode === 'create-event' || (mode === 'create-pending' && date)) {
+    // Si tiene fecha → evento en calendario
+    addEvent({ title, start: date, assignees });
+  } else if (mode === 'create-pending') {
+    addPending({ title, assignees });
+  } else if (mode === 'edit-event') {
+    updateEvent(id, { title, start: date, assignees });
+  } else if (mode === 'edit-pending') {
+    updatePending(id, { title, assignees });
+  }
+
+  closeModal();
+}
+
+function deleteFromModal() {
+  const { mode, id } = modalState;
+  if (mode === 'edit-event') deleteEvent(id);
+  else if (mode === 'edit-pending') deletePending(id);
+  closeModal();
+}
+
+// ── Inicialización ──
+
 document.addEventListener('DOMContentLoaded', () => {
   initCalendar();
   startEventsListener();
