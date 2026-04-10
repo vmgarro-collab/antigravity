@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seed — Familia Garro</title>
+  <style>
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+    button {
+      padding: 1rem 2rem;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #4f46e5;
+    }
+    button:disabled {
+      background: #64748b;
+      cursor: not-allowed;
+    }
+    #log {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: "Monaco", "Courier New", monospace;
+    }
+    .ok {
+      color: #22c55e;
+    }
+    .err {
+      color: #ef4444;
+    }
+    .info {
+      color: #60a5fa;
+    }
+    .summary {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #1e293b;
+      border-radius: 6px;
+      border-left: 4px solid #6366f1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Seed datos iniciales</h1>
+  <p>Pulsa el botón para insertar todos los eventos en Firestore (abril-mayo 2026).</p>
+  <button id="seedBtn" onclick="seedAll()">Insertar eventos</button>
+  <div id="log"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey:            "AIzaSyBVwkTsiamEEz3AGbIeL_OuGn5eTcCaJQs",
+      authDomain:        "family-planner-70a4d.firebaseapp.com",
+      projectId:         "family-planner-70a4d",
+      storageBucket:     "family-planner-70a4d.firebasestorage.app",
+      messagingSenderId: "122830421513",
+      appId:             "1:122830421513:web:3f925b45355e9af73582d8"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const log = document.getElementById('log');
+    const seedBtn = document.getElementById('seedBtn');
+
+    // Lista completa de eventos
+    const EVENTS = [
+      // ── Lunes recurrentes (13, 20, 27 Apr; 4, 11, 18 May) ──
+      { title: "Sofia atletismo", start: "2026-04-13", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-04-13", assignees: ["Martin"] },
+      { title: "Sofia atletismo", start: "2026-04-20", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-04-20", assignees: ["Martin"] },
+      { title: "Sofia atletismo", start: "2026-04-27", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-04-27", assignees: ["Martin"] },
+      { title: "Sofia atletismo", start: "2026-05-04", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-05-04", assignees: ["Martin"] },
+      { title: "Sofia atletismo", start: "2026-05-11", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-05-11", assignees: ["Martin"] },
+      { title: "Sofia atletismo", start: "2026-05-18", assignees: ["Sofia"] },
+      { title: "Martin karate y futbol 18h", start: "2026-05-18", assignees: ["Martin"] },
+
+      // ── Miércoles recurrentes (15, 22, 29 Apr; 6, 13, 20 May) ──
+      { title: "Sofia atletismo 17:30", start: "2026-04-15", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-04-15", assignees: ["Martin"] },
+      { title: "Sofia atletismo 17:30", start: "2026-04-22", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-04-22", assignees: ["Martin"] },
+      { title: "Sofia atletismo 17:30", start: "2026-04-29", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-04-29", assignees: ["Martin"] },
+      { title: "Sofia atletismo 17:30", start: "2026-05-06", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-05-06", assignees: ["Martin"] },
+      { title: "Sofia atletismo 17:30", start: "2026-05-13", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-05-13", assignees: ["Martin"] },
+      { title: "Sofia atletismo 17:30", start: "2026-05-20", assignees: ["Sofia"] },
+      { title: "Martin futbol 17", start: "2026-05-20", assignees: ["Martin"] },
+
+      // ── Viernes recurrentes (10, 17, 24 Apr; 1, 8, 15, 22 May) ──
+      { title: "Sofia baile", start: "2026-04-10", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-04-10", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-04-17", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-04-17", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-04-24", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-04-24", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-05-01", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-05-01", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-05-08", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-05-08", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-05-15", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-05-15", assignees: ["Martin"] },
+      { title: "Sofia baile", start: "2026-05-22", assignees: ["Sofia"] },
+      { title: "Martin karate", start: "2026-05-22", assignees: ["Martin"] },
+
+      // ── Eventos específicos ──
+      { title: "Medico Sofia 16h", start: "2026-04-10", assignees: ["Sofia"] },
+      { title: "Medico Sofia 16h", start: "2026-04-13", assignees: ["Sofia"] },
+      { title: "Pruebas Martin", start: "2026-04-14", assignees: ["Martin"] },
+      { title: "Martin padel 17:30", start: "2026-04-14", assignees: ["Martin"] },
+      { title: "Victor va Barcelona", start: "2026-04-14", assignees: ["Victor"] },
+      { title: "Pruebas Martin", start: "2026-04-15", assignees: ["Martin"] },
+      { title: "Piscina Sofia", start: "2026-04-16", assignees: ["Sofia"] },
+      { title: "Cumple Mateo", start: "2026-04-17", assignees: [] },
+      { title: "Mostoles Escape Room 17:30", start: "2026-04-17", assignees: ["Victor", "Johanna", "Sofia", "Martin"] },
+      { title: "Cumple Mateo", start: "2026-04-18", assignees: [] },
+      { title: "GUARDIA", start: "2026-04-19", assignees: ["Victor"] },
+      { title: "10h Peluqueria", start: "2026-04-20", assignees: ["Victor"] },
+      { title: "Martin padel 17:30", start: "2026-04-21", assignees: ["Martin"] },
+      { title: "Llevar coche revision 10:30", start: "2026-04-23", assignees: ["Victor"] },
+      { title: "Piscina Sofia", start: "2026-04-23", assignees: ["Sofia"] },
+      { title: "9:30 Peluqueria", start: "2026-04-25", assignees: ["Johanna"] },
+      { title: "Futbol Martin 10h", start: "2026-04-25", assignees: ["Martin"] },
+      { title: "12:30 BODA", start: "2026-04-25", assignees: ["Victor", "Johanna"] },
+      { title: "Martin padel 17:30", start: "2026-04-28", assignees: ["Martin"] },
+      { title: "Piscina Sofia", start: "2026-04-30", assignees: ["Sofia"] },
+      { title: "Masaje 14h", start: "2026-04-30", assignees: ["Johanna"] },
+      { title: "Futbol Martin 09h", start: "2026-05-02", assignees: ["Martin"] },
+      { title: "Martin padel 17:30", start: "2026-05-05", assignees: ["Martin"] },
+      { title: "Masaje 13h", start: "2026-05-05", assignees: ["Johanna"] },
+      { title: "Piscina Sofia", start: "2026-05-07", assignees: ["Sofia"] },
+      { title: "Futbol Martin 09h", start: "2026-05-09", assignees: ["Martin"] },
+      { title: "Cumple Anagel Attope Park Fuenla 12 a 14:30h", start: "2026-05-10", assignees: ["Martin"] },
+      { title: "Martin padel 17:30", start: "2026-05-12", assignees: ["Martin"] },
+      { title: "Piscina Sofia", start: "2026-05-14", assignees: ["Sofia"] },
+      { title: "Comunion primos", start: "2026-05-16", assignees: ["Victor", "Johanna", "Sofia", "Martin"] },
+      { title: "Futbol Martin 10h", start: "2026-05-16", assignees: ["Martin"] },
+      { title: "Martin padel 17:30", start: "2026-05-19", assignees: ["Martin"] },
+      { title: "Piscina Sofia", start: "2026-05-21", assignees: ["Sofia"] },
+      { title: "Tgcf el pardo", start: "2026-05-21", assignees: ["Victor", "Johanna"] },
+      { title: "Futbol Martin 10h", start: "2026-05-23", assignees: ["Martin"] },
+    ];
+
+    function log_msg(text, className = '') {
+      const line = document.createElement('div');
+      if (className) line.className = className;
+      line.textContent = text;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function seedAll() {
+      seedBtn.disabled = true;
+      log.innerHTML = '';
+
+      log_msg(`Iniciando inserción de ${EVENTS.length} eventos...`, 'info');
+      log_msg('');
+
+      let ok = 0, err = 0;
+
+      for (const ev of EVENTS) {
+        try {
+          await db.collection('events').add({
+            title: ev.title,
+            start: ev.start,
+            assignees: ev.assignees,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          log_msg(`✓ ${ev.start} — ${ev.title}`, 'ok');
+          ok++;
+        } catch(e) {
+          log_msg(`✗ ${ev.start} — ${ev.title}: ${e.message}`, 'err');
+          err++;
+        }
+      }
+
+      log_msg('');
+      const summary = document.createElement('div');
+      summary.className = 'summary';
+      summary.innerHTML = `<strong>Proceso completado:</strong><br>
+        <span class="ok">✓ ${ok} eventos insertados correctamente</span><br>
+        ${err > 0 ? `<span class="err">✗ ${err} errores</span>` : '<span class="ok">Sin errores</span>'}`;
+      log.appendChild(summary);
+
+      seedBtn.disabled = false;
+    }
+  </script>
+</body>
+</html>
