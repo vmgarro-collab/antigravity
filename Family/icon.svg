@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Fondo redondeado indigo oscuro -->
+  <rect width="192" height="192" rx="38" fill="#3730a3"/>
+
+  <!-- Cuerpo del calendario (blanco) -->
+  <rect x="24" y="52" width="144" height="120" rx="8" fill="#f8fafc"/>
+
+  <!-- Header rojo -->
+  <rect x="24" y="28" width="144" height="40" rx="8" fill="#dc2626"/>
+  <!-- Parte inferior del header sin redondear -->
+  <rect x="24" y="52" width="144" height="16" fill="#dc2626"/>
+
+  <!-- Argollas -->
+  <circle cx="68" cy="28" r="8" fill="#1e1b4b"/>
+  <circle cx="68" cy="28" r="4" fill="#3730a3"/>
+  <circle cx="124" cy="28" r="8" fill="#1e1b4b"/>
+  <circle cx="124" cy="28" r="4" fill="#3730a3"/>
+
+  <!-- Líneas de grid horizontales -->
+  <line x1="24" y1="88" x2="168" y2="88" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="24" y1="116" x2="168" y2="116" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="24" y1="144" x2="168" y2="144" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Líneas de grid verticales -->
+  <line x1="65" y1="68" x2="65" y2="172" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="106" y1="68" x2="106" y2="172" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="147" y1="68" x2="147" y2="172" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Día destacado (hoy) en indigo -->
+  <rect x="28" y="92" width="34" height="22" rx="5" fill="#6366f1"/>
+
+  <!-- Puntitos simulando números en las celdas -->
+  <circle cx="45" cy="103" r="4" fill="white"/>
+
+  <circle cx="83" cy="75" r="3" fill="#94a3b8"/>
+  <circle cx="124" cy="75" r="3" fill="#94a3b8"/>
+  <circle cx="83" cy="103" r="3" fill="#94a3b8"/>
+  <circle cx="124" cy="103" r="3" fill="#94a3b8"/>
+  <circle cx="83" cy="131" r="3" fill="#94a3b8"/>
+  <circle cx="45" cy="131" r="3" fill="#94a3b8"/>
+  <circle cx="124" cy="131" r="3" fill="#94a3b8"/>
+  <circle cx="45" cy="159" r="3" fill="#94a3b8"/>
+  <circle cx="83" cy="159" r="3" fill="#94a3b8"/>
+
+  <!-- Rayita evento (naranja) -->
+  <rect x="112" y="98" width="50" height="6" rx="3" fill="#f97316" opacity="0.9"/>
+  <!-- Rayita evento (verde) -->
+  <rect x="112" y="126" width="38" height="6" rx="3" fill="#22c55e" opacity="0.9"/>
+  <!-- Rayita evento (rosa) -->
+  <rect x="28" y="126" width="32" height="6" rx="3" fill="#ec4899" opacity="0.9"/>
+</svg>
