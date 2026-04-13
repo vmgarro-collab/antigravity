@@ -8,7 +8,8 @@ import {
   setPersistence
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
-  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
   doc,
   getDoc,
   setDoc,
@@ -36,7 +37,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache()
+});
 
 // Persistencia de sesión en localStorage (sobrevive al cierre del navegador)
 setPersistence(auth, browserLocalPersistence);
