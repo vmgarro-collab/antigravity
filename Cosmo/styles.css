@@ -199,6 +199,7 @@ input:focus { border-color: var(--color-primary); }
 .cosmo-avatar-wrap.state-off-short svg { animation: breathe 4s ease-in-out infinite; }
 .cosmo-avatar-wrap.state-off-medium svg { animation: droop 3s ease-in-out infinite; }
 .cosmo-avatar-wrap.state-off-long svg { animation: droop 2s ease-in-out infinite; }
+.cosmo-avatar-wrap.state-celebrating svg { animation: celebrate 0.6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .cosmo-avatar-wrap svg,
