@@ -27,12 +27,12 @@ import {
 // ── CONFIGURACIÓN ───────────────────────────────────────────────
 // Reemplaza con los valores de tu proyecto Firebase
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROJECT.firebaseapp.com",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_PROJECT.appspot.com",
-  messagingSenderId: "TU_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyB7B02fo7fbMro7bqmzc-7Rnq_M2mvGCBo",
+  authDomain: "cosmo-corse.firebaseapp.com",
+  projectId: "cosmo-corse",
+  storageBucket: "cosmo-corse.firebasestorage.app",
+  messagingSenderId: "942015789023",
+  appId: "1:942015789023:web:e7519efb9247033cabb66a"
 };
 
 const app = initializeApp(firebaseConfig);
