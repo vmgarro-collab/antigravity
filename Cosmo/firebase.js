@@ -92,8 +92,9 @@ export async function obtenerSesiones(uid, diasAtras = 35) {
 }
 
 export async function obtenerSesionAbierta(uid) {
+  // Sin orderBy para evitar índice compuesto — solo puede haber una sesión abierta
   const ref = collection(db, 'usuarios', uid, 'sesiones');
-  const q = query(ref, where('fin', '==', null), orderBy('inicio', 'desc'));
+  const q = query(ref, where('fin', '==', null));
   const snap = await getDocs(q);
   if (snap.empty) return null;
   const d = snap.docs[0];
