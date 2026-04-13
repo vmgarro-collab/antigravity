@@ -203,25 +203,36 @@ function ultimaSesionCerrada() {
 }
 
 function calcularRachas() {
-  let actual = 0, mejor = 0, temp = 0;
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
 
+  // Construir array de días (hoy=0, ayer=1, ...) con boolean cumplido
+  const cumplidos = [];
   for (let i = 0; i < 365; i++) {
     const d = new Date(hoy);
     d.setDate(d.getDate() - i);
-    const min = calcularMinutosFecha(d);
-    if (min >= 18 * 60) {
+    cumplidos.push(calcularMinutosFecha(d) >= 18 * 60);
+  }
+
+  // Racha actual: días consecutivos desde hoy hacia atrás
+  let actual = 0;
+  for (let i = 0; i < cumplidos.length; i++) {
+    if (cumplidos[i]) actual++;
+    else break;
+  }
+
+  // Mejor racha histórica (puede incluir la actual)
+  let mejor = 0;
+  let temp = 0;
+  for (let i = 0; i < cumplidos.length; i++) {
+    if (cumplidos[i]) {
       temp++;
-      if (i === 0) actual = temp;
-    } else {
       if (temp > mejor) mejor = temp;
-      if (i === 0) actual = 0;
+    } else {
       temp = 0;
     }
   }
-  if (temp > mejor) mejor = temp;
-  if (actual === 0 && temp > 0) actual = temp;
+
   return { actual, mejor };
 }
 
@@ -422,7 +433,15 @@ async function init() {
       return;
     }
     uid = user.uid;
-    await cargarDatos();
+    try {
+      await cargarDatos();
+    } catch (err) {
+      console.error('Error cargando datos:', err);
+      document.getElementById('login-error').textContent = 'Error al cargar datos. Comprueba tu conexión.';
+      document.getElementById('login-error').classList.remove('hidden');
+      mostrarVista('view-login');
+      return;
+    }
 
     if (!perfil.fechaInicio) {
       perfil.fechaInicio = new Date();
@@ -456,6 +475,7 @@ const btnToggle = document.getElementById('btn-toggle');
 const holdRing = document.getElementById('btn-hold-ring');
 
 function iniciarHold() {
+  if (holdTimer) return; // guard: prevent double-fire on iOS (pointerdown + touchstart)
   holdRing.classList.remove('filling');
   void holdRing.offsetWidth;
   holdRing.classList.add('filling');
@@ -490,6 +510,7 @@ async function toggleSesion() {
   if (sesionActiva) {
     try {
       await cerrarSesionCorse(uid, sesionActiva.id, sesionActiva.inicio);
+      // Only mutate local state after Firebase confirms the session was closed
       const idx = sesiones.findIndex(s => s.id === sesionActiva.id);
       if (idx >= 0) {
         const durMin = Math.floor((Date.now() - sesionActiva.inicio.toMillis()) / 60000);
@@ -509,11 +530,13 @@ async function toggleSesion() {
       setTimeout(() => delete msgEl.dataset.locked, 5000);
     } catch (err) {
       console.error('Error al cerrar sesión:', err);
+      return; // Don't update UI if Firebase failed
     }
   } else {
     try {
       cancelarRecordatorio();
       const id = await abrirSesion(uid);
+      // Only mutate local state after Firebase confirms the session was created
       const now = { toMillis: () => Date.now(), toDate: () => new Date() };
       sesionActiva = { id, inicio: now };
       sesiones.push({ id, inicio: now, fin: null, duracionMinutos: 0 });
@@ -525,6 +548,7 @@ async function toggleSesion() {
       setTimeout(() => delete msgEl.dataset.locked, 5000);
     } catch (err) {
       console.error('Error al abrir sesión:', err);
+      return; // Don't update UI if Firebase failed
     }
   }
 
