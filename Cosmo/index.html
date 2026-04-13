@@ -27,7 +27,7 @@
         <input type="password" id="input-password" placeholder="Contraseña" autocomplete="current-password" required>
         <button type="submit" class="btn-primary">Entrar</button>
       </form>
-      <p id="login-error" class="error-msg hidden"></p>
+      <p id="login-error" class="error-msg hidden" aria-live="polite"></p>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
         <span id="cosmo-name-display" class="cosmo-name">Cosmo</span>
         <button id="btn-edit-name" class="btn-icon" aria-label="Editar nombre">✏️</button>
       </div>
-      <button id="btn-padres" class="btn-padres">👨‍👩‍👧 Padres</button>
+      <button id="btn-padres" class="btn-padres" aria-label="Acceso panel de padres">👨‍👩‍👧 Padres</button>
     </header>
 
     <!-- Avatar de Cosmo -->
@@ -67,7 +67,7 @@
 
     <!-- Botón principal (mantener 1.5s) -->
     <div class="main-btn-wrap">
-      <button id="btn-toggle" class="btn-toggle btn-wearing-off">
+      <button id="btn-toggle" class="btn-toggle btn-wearing-off" aria-label="Activar o desactivar corsé">
         <span id="btn-toggle-text">Ponerte a Cosmo 💪</span>
         <div class="btn-hold-ring" id="btn-hold-ring"></div>
       </button>
@@ -87,9 +87,9 @@
     </div>
 
     <!-- Modal editar nombre -->
-    <div id="modal-edit-name" class="modal-overlay hidden">
+    <div id="modal-edit-name" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-edit-name-title">
       <div class="modal-box">
-        <h3>¿Cómo se llama tu corsé?</h3>
+        <h3 id="modal-edit-name-title">¿Cómo se llama tu corsé?</h3>
         <input type="text" id="input-new-name" maxlength="20" placeholder="Cosmo">
         <div class="modal-actions">
           <button id="btn-cancel-name" class="btn-secondary">Cancelar</button>
@@ -131,7 +131,7 @@
     <section class="padres-section">
       <h3 class="section-title">Esta semana</h3>
       <div class="chart-wrap">
-        <canvas id="chart-semana"></canvas>
+        <canvas id="chart-semana" role="img" aria-label="Gráfica de horas semanales con Cosmo"></canvas>
       </div>
     </section>
 
@@ -201,11 +201,11 @@
   </div>
 
   <!-- ===================== MODAL: PIN PADRES ===================== -->
-  <div id="modal-pin" class="modal-overlay hidden">
+  <div id="modal-pin" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-pin-title">
     <div class="modal-box">
-      <h3>Acceso Padres 🔒</h3>
+      <h3 id="modal-pin-title">Acceso Padres 🔒</h3>
       <p class="modal-subtitle">Introduce el PIN de 4 dígitos</p>
-      <input type="password" id="input-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••">
+      <input type="password" id="input-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••" autocomplete="off">
       <p id="pin-error" class="error-msg hidden">PIN incorrecto</p>
       <div class="modal-actions">
         <button id="btn-cancel-pin" class="btn-secondary">Cancelar</button>
@@ -219,7 +219,7 @@
   <div id="modal-cambiar-pin" class="modal-overlay hidden">
     <div class="modal-box">
       <h3>Nuevo PIN</h3>
-      <input type="password" id="input-nuevo-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••">
+      <input type="password" id="input-nuevo-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••" autocomplete="off">
       <div class="modal-actions">
         <button id="btn-cancel-nuevo-pin" class="btn-secondary">Cancelar</button>
         <button id="btn-save-nuevo-pin" class="btn-primary">Guardar</button>
@@ -228,7 +228,7 @@
   </div>
 
   <!-- ===================== MODAL: LOGRO DESBLOQUEADO ===================== -->
-  <div id="modal-logro" class="modal-overlay hidden">
+  <div id="modal-logro" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-logro-nombre">
     <div class="modal-box modal-logro-box">
       <div id="modal-logro-icono" class="logro-icono-grande"></div>
       <h3 id="modal-logro-nombre"></h3>
