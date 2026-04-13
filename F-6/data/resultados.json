@@ -662,5 +662,45 @@
     "golesLocal": 8,
     "golesVisitante": 5,
     "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 35,
+    "fecha": "12/04/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 12,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 35,
+    "fecha": "12/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 6,
+    "golesVisitante": 7,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 35,
+    "fecha": "12/04/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 3,
+    "golesVisitante": 7,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 35,
+    "fecha": "12/04/2026",
+    "local": "TROPICAL",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 35,
+    "fecha": "12/04/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 3,
+    "golesVisitante": 10,
+    "visitante": "CHAOX F.C"
   }
 ]
