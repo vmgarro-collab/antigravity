@@ -1,5 +1,4 @@
 import {
-  onAuthChange, loginConEmail,
   obtenerPerfil, guardarPerfil, obtenerConfig, guardarConfig,
   abrirSesion, cerrarSesionCorse,
   obtenerSesiones, obtenerSesionAbierta,
@@ -13,7 +12,7 @@ import {
 } from './notifications.js';
 
 // ── ESTADO GLOBAL ────────────────────────────────────────────────
-let uid = null;
+const uid = 'cosmo-familia';
 let perfil = { nombreCorse: 'Cosmo', objetivoHoras: 18, pinPadres: null, fechaInicio: null };
 let config = { notificacionesActivas: true, recordatorioMinutos: 60, horaResumenDiario: '21:00' };
 let sesionActiva = null;       // { id, inicio (Timestamp) } o null
@@ -382,20 +381,6 @@ function iniciarTicker() {
   }, 30000);
 }
 
-// ── LOGIN ────────────────────────────────────────────────────────
-document.getElementById('form-login').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const email = document.getElementById('input-email').value.trim();
-  const pass = document.getElementById('input-password').value;
-  const errEl = document.getElementById('login-error');
-  errEl.classList.add('hidden');
-  try {
-    await loginConEmail(email, pass);
-  } catch (err) {
-    errEl.textContent = 'Email o contraseña incorrectos';
-    errEl.classList.remove('hidden');
-  }
-});
 
 // ── ARRANQUE ─────────────────────────────────────────────────────
 async function cargarDatos() {
@@ -426,46 +411,35 @@ async function init() {
     document.getElementById('banner-pwa').classList.remove('hidden');
   }
 
-  onAuthChange(async function(user) {
-    if (!user) {
-      if (tickInterval) clearInterval(tickInterval);
-      mostrarVista('view-login');
-      return;
-    }
-    uid = user.uid;
-    try {
-      await cargarDatos();
-    } catch (err) {
-      console.error('Error cargando datos:', err);
-      document.getElementById('login-error').textContent = 'Error al cargar datos. Comprueba tu conexión.';
-      document.getElementById('login-error').classList.remove('hidden');
-      mostrarVista('view-login');
-      return;
-    }
+  try {
+    await cargarDatos();
+  } catch (err) {
+    console.error('Error cargando datos:', err);
+    // Seguir con datos vacíos — puede estar offline la primera vez
+  }
 
-    if (!perfil.fechaInicio) {
-      perfil.fechaInicio = new Date();
-      await guardarPerfil(uid, perfil);
-    }
+  if (!perfil.fechaInicio) {
+    perfil.fechaInicio = new Date();
+    await guardarPerfil(uid, perfil).catch(() => {});
+  }
 
-    if (config.notificacionesActivas) await pedirPermisoNotificaciones();
+  if (config.notificacionesActivas) await pedirPermisoNotificaciones();
 
-    programarResumenDiario(
-      config.horaResumenDiario || '21:00',
-      function() {
-        const min = calcularMinutosHoy();
-        return { horas: Math.floor(min / 60), minutos: min % 60 };
-      },
-      perfil.nombreCorse || 'Cosmo'
-    );
+  programarResumenDiario(
+    config.horaResumenDiario || '21:00',
+    function() {
+      const min = calcularMinutosHoy();
+      return { horas: Math.floor(min / 60), minutos: min % 60 };
+    },
+    perfil.nombreCorse || 'Cosmo'
+  );
 
-    const noVistos = logros.filter(l => !l.visto);
-    for (const l of noVistos) mostrarModalLogro(l);
+  const noVistos = logros.filter(l => !l.visto);
+  for (const l of noVistos) mostrarModalLogro(l);
 
-    mostrarVista('view-cosmo');
-    actualizarUICosmo();
-    iniciarTicker();
-  });
+  mostrarVista('view-cosmo');
+  actualizarUICosmo();
+  iniciarTicker();
 }
 
 // ── BOTÓN HOLD (1.5 segundos) ────────────────────────────────────
