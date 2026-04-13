@@ -568,10 +568,15 @@ document.getElementById('btn-cancel-name').addEventListener('click', function() 
 
 document.getElementById('btn-save-name').addEventListener('click', async function() {
   const nuevo = document.getElementById('input-new-name').value.trim() || 'Cosmo';
-  perfil.nombreCorse = nuevo;
-  await guardarPerfil(uid, { nombreCorse: nuevo });
-  document.getElementById('modal-edit-name').classList.add('hidden');
-  actualizarUICosmo();
+  try {
+    await guardarPerfil(uid, { nombreCorse: nuevo });
+    perfil.nombreCorse = nuevo;
+    document.getElementById('modal-edit-name').classList.add('hidden');
+    actualizarUICosmo();
+  } catch (err) {
+    console.error('Error guardando nombre:', err);
+    alert('No se pudo guardar el nombre. Comprueba tu conexión.');
+  }
 });
 
 // ── MODAL LOGRO DESBLOQUEADO ─────────────────────────────────────
@@ -589,7 +594,11 @@ function mostrarModalLogro(logro) {
 
   document.getElementById('btn-cerrar-logro').onclick = async function() {
     document.getElementById('modal-logro').classList.add('hidden');
-    await marcarLogroVisto(uid, logro.id);
+    try {
+      await marcarLogroVisto(uid, logro.id);
+    } catch (err) {
+      console.error('Error marcando logro como visto:', err);
+    }
     actualizarUICosmo();
   };
 }
@@ -829,14 +838,20 @@ document.getElementById('btn-guardar-ajustes').addEventListener('click', async f
   config.horaResumenDiario = nuevaHoraResumen;
   config.notificacionesActivas = nuevasNotif;
 
-  await Promise.all([
-    guardarPerfil(uid, { nombreCorse: nuevoNombre }),
-    guardarConfig(uid, {
-      recordatorioMinutos: nuevoRecordatorio,
-      horaResumenDiario: nuevaHoraResumen,
-      notificacionesActivas: nuevasNotif
-    })
-  ]);
+  try {
+    await Promise.all([
+      guardarPerfil(uid, { nombreCorse: nuevoNombre }),
+      guardarConfig(uid, {
+        recordatorioMinutos: nuevoRecordatorio,
+        horaResumenDiario: nuevaHoraResumen,
+        notificacionesActivas: nuevasNotif
+      })
+    ]);
+  } catch (err) {
+    console.error('Error guardando ajustes:', err);
+    alert('No se pudieron guardar los ajustes. Comprueba tu conexión.');
+    return;
+  }
 
   programarResumenDiario(
     nuevaHoraResumen,
@@ -867,10 +882,15 @@ document.getElementById('btn-save-nuevo-pin').addEventListener('click', async fu
     return;
   }
   const pinHash = await hashPin(pin);
-  perfil.pinPadres = pinHash;
-  await guardarPerfil(uid, { pinPadres: pinHash });
-  document.getElementById('modal-cambiar-pin').classList.add('hidden');
-  alert('✅ PIN actualizado');
+  try {
+    await guardarPerfil(uid, { pinPadres: pinHash });
+    perfil.pinPadres = pinHash;
+    document.getElementById('modal-cambiar-pin').classList.add('hidden');
+    alert('✅ PIN actualizado');
+  } catch (err) {
+    console.error('Error guardando PIN:', err);
+    alert('No se pudo guardar el PIN. Comprueba tu conexión.');
+  }
 });
 
 // ── INICIO ───────────────────────────────────────────────────────
