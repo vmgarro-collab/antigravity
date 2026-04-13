@@ -1,0 +1,533 @@
+/* ============================
+   VARIABLES Y RESET
+   ============================ */
+:root {
+  --color-bg: #FAF8F5;
+  --color-primary: #C4B5FD;
+  --color-primary-dark: #A78BFA;
+  --color-secondary: #FDBA74;
+  --color-secondary-dark: #FB923C;
+  --color-accent: #6EE7B7;
+  --color-text: #2D2D2D;
+  --color-text-muted: #6B7280;
+  --color-error: #EF4444;
+  --color-white: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-border: #E5E7EB;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(196,181,253,0.18);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+  --transition: 0.2s ease;
+  --font: 'Nunito', sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  font-family: var(--font);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================
+   VISTAS
+   ============================ */
+.view {
+  display: none;
+  min-height: 100dvh;
+  flex-direction: column;
+  padding-bottom: calc(24px + var(--safe-bottom));
+}
+.view.active { display: flex; }
+
+/* ============================
+   LOGIN
+   ============================ */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 32px 24px;
+  gap: 16px;
+}
+
+.login-logo { font-size: 72px; animation: float 3s ease-in-out infinite; }
+.login-title { font-size: 2.4rem; font-weight: 900; color: var(--color-primary-dark); }
+.login-subtitle { font-size: 1rem; color: var(--color-text-muted); margin-bottom: 8px; }
+
+#form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ============================
+   INPUTS GLOBALES
+   ============================ */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+input[type="time"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-white);
+  outline: none;
+  transition: border-color var(--transition);
+}
+input:focus { border-color: var(--color-primary); }
+
+/* ============================
+   BOTONES
+   ============================ */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+  min-height: 48px;
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+}
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.btn-sm { width: auto; padding: 10px 16px; font-size: 0.9rem; min-height: 40px; }
+
+/* ============================
+   MODO COSMO — HEADER
+   ============================ */
+.cosmo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+.cosmo-name-wrap { display: flex; align-items: center; gap: 4px; }
+.cosmo-name { font-size: 1.3rem; font-weight: 800; color: var(--color-primary-dark); }
+.btn-padres {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  padding: 8px 14px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  min-height: 40px;
+}
+
+/* ============================
+   AVATAR DE COSMO
+   ============================ */
+.cosmo-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  min-height: 200px;
+}
+.cosmo-avatar-wrap svg { width: 160px; height: 200px; }
+
+/* Animaciones del avatar */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@keyframes droop {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(4px) rotate(-2deg); }
+}
+@keyframes celebrate {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.12) rotate(5deg); }
+  50% { transform: scale(1.12) rotate(-5deg); }
+  75% { transform: scale(1.08) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.cosmo-avatar-wrap.state-wearing svg { animation: float 3s ease-in-out infinite; }
+.cosmo-avatar-wrap.state-goal-reached svg { animation: celebrate 0.6s ease-in-out 3; }
+.cosmo-avatar-wrap.state-off-short svg { animation: breathe 4s ease-in-out infinite; }
+.cosmo-avatar-wrap.state-off-medium svg { animation: droop 3s ease-in-out infinite; }
+.cosmo-avatar-wrap.state-off-long svg { animation: droop 2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmo-avatar-wrap svg,
+  .login-logo { animation: none !important; }
+}
+
+/* ============================
+   MENSAJE DE COSMO
+   ============================ */
+.cosmo-message-wrap {
+  padding: 0 24px;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cosmo-message {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* ============================
+   BARRA DE PROGRESO
+   ============================ */
+.progress-section {
+  padding: 12px 24px;
+}
+.progress-bar-bg {
+  background: var(--color-border);
+  border-radius: 100px;
+  height: 14px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.progress-labels {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  gap: 4px;
+}
+.progress-hours { font-size: 1.1rem; font-weight: 800; color: var(--color-primary-dark); }
+.progress-goal { font-size: 0.9rem; color: var(--color-text-muted); flex: 1; }
+.progress-pct { font-size: 1rem; font-weight: 700; color: var(--color-text-muted); }
+
+/* ============================
+   BOTÓN PRINCIPAL (hold)
+   ============================ */
+.main-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+}
+
+.btn-toggle {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  padding: 22px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow var(--transition);
+  min-height: 72px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-toggle.btn-wearing-off {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-white);
+  box-shadow: 0 6px 24px rgba(196,181,253,0.4);
+}
+
+.btn-toggle.btn-wearing-on {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+  color: var(--color-white);
+  box-shadow: 0 6px 24px rgba(253,186,116,0.4);
+}
+
+.btn-toggle:active { transform: scale(0.97); }
+
+/* Anillo de progreso de hold */
+.btn-hold-ring {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 0 0 var(--radius) var(--radius);
+  width: 0%;
+  transition: none;
+}
+.btn-hold-ring.filling { transition: width 1.5s linear; width: 100%; }
+
+.btn-hint { font-size: 0.78rem; color: var(--color-text-muted); }
+
+/* ============================
+   LOGROS DEL DÍA
+   ============================ */
+.daily-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 24px 16px;
+  gap: 16px;
+}
+.stars-today, .streak-today {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  box-shadow: var(--shadow-card);
+  flex: 1;
+}
+.stars-display { font-size: 1.4rem; }
+.stars-label, .streak-label { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.streak-display { font-size: 1rem; font-weight: 800; color: var(--color-secondary-dark); }
+
+/* ============================
+   MODO PADRES
+   ============================ */
+.padres-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.btn-back { background: none; border: none; font-family: var(--font); font-size: 0.95rem; font-weight: 700; color: var(--color-primary-dark); cursor: pointer; min-height: 44px; }
+.padres-title { font-size: 1.2rem; font-weight: 800; }
+
+.padres-section { padding: 20px 20px 0; }
+.section-title { font-size: 1rem; font-weight: 800; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+
+.today-stats, .global-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.global-stats { grid-template-columns: repeat(2, 1fr); }
+
+.stat-card {
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stat-value { font-size: 1.3rem; font-weight: 900; color: var(--color-primary-dark); }
+.stat-label { font-size: 0.72rem; color: var(--color-text-muted); font-weight: 600; text-align: center; }
+
+/* Gráfica */
+.chart-wrap {
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Historial */
+.historial-lista { display: flex; flex-direction: column; gap: 8px; }
+.historial-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-card);
+}
+.historial-fecha { font-size: 0.9rem; color: var(--color-text-muted); font-weight: 600; }
+.historial-horas { font-size: 1rem; font-weight: 800; color: var(--color-text); }
+.historial-stars { font-size: 0.9rem; }
+.historial-ok { color: var(--color-accent); font-weight: 800; }
+.historial-warn { color: var(--color-secondary-dark); font-weight: 800; }
+
+/* Logros */
+.logros-lista { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.logro-card {
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.35;
+}
+.logro-card.unlocked { opacity: 1; }
+.logro-icono { font-size: 1.5rem; }
+.logro-nombre { font-size: 0.85rem; font-weight: 700; }
+.logro-fecha { font-size: 0.72rem; color: var(--color-text-muted); }
+
+/* Ajustes */
+.ajustes-lista { display: flex; flex-direction: column; gap: 14px; }
+.ajuste-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.ajuste-row label { font-size: 0.9rem; font-weight: 600; color: var(--color-text); flex: 1; }
+.ajuste-row input[type="number"],
+.ajuste-row input[type="time"],
+.ajuste-row input[type="text"] { width: 120px; }
+.ajuste-row input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--color-primary-dark); }
+
+/* ============================
+   MODALES
+   ============================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+.modal-overlay.hidden { display: none; }
+
+.modal-box {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-box h3 { font-size: 1.2rem; font-weight: 800; text-align: center; }
+.modal-subtitle { font-size: 0.9rem; color: var(--color-text-muted); text-align: center; }
+.modal-actions { display: flex; gap: 10px; }
+.modal-actions .btn-secondary { flex: 1; }
+.modal-actions .btn-primary { flex: 2; }
+
+.modal-logro-box { text-align: center; }
+.logro-icono-grande { font-size: 4rem; }
+
+/* PIN input */
+#input-pin, #input-nuevo-pin {
+  text-align: center;
+  font-size: 1.8rem;
+  letter-spacing: 0.5em;
+}
+
+/* ============================
+   BANNER PWA
+   ============================ */
+.banner-pwa {
+  position: fixed;
+  bottom: calc(16px + var(--safe-bottom));
+  left: 16px;
+  right: 16px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+.banner-pwa p { flex: 1; }
+.banner-pwa.hidden { display: none; }
+
+/* ============================
+   UTILIDADES
+   ============================ */
+.hidden { display: none !important; }
+.error-msg { color: var(--color-error); font-size: 0.85rem; text-align: center; font-weight: 600; }
+.pin-first-time { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; }
+
+/* ============================
+   TABLET (iPad)
+   ============================ */
+@media (min-width: 768px) {
+  .cosmo-avatar-wrap svg { width: 200px; height: 250px; }
+  .cosmo-message { font-size: 1.2rem; }
+  .btn-toggle { max-width: 400px; }
+  .progress-section, .main-btn-wrap, .daily-summary, .cosmo-header, .cosmo-message-wrap { max-width: 500px; margin-left: auto; margin-right: auto; }
+  #view-cosmo { align-items: stretch; }
+  .padres-section { max-width: 700px; margin-left: auto; margin-right: auto; }
+  .today-stats { grid-template-columns: repeat(3, 1fr); }
+  .global-stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ============================
+   AJUSTES iOS / SAFARI
+   ============================ */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="number"],
+  input[type="time"] {
+    font-size: 16px;
+  }
+}
+* { -webkit-tap-highlight-color: transparent; }
+.view { -webkit-overflow-scrolling: touch; overflow-y: auto; }
+button { -webkit-user-select: none; user-select: none; }
+#view-cosmo {
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+}

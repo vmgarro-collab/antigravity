@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cosmo">
+  <meta name="theme-color" content="#C4B5FD">
+  <title>Cosmo 🌟</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===================== VISTA: LOGIN ===================== -->
+  <div id="view-login" class="view active">
+    <div class="login-container">
+      <div class="login-logo">🌟</div>
+      <h1 class="login-title">Cosmo</h1>
+      <p class="login-subtitle">Tu compañero de corsé</p>
+      <form id="form-login">
+        <input type="email" id="input-email" placeholder="Email" autocomplete="email" required>
+        <input type="password" id="input-password" placeholder="Contraseña" autocomplete="current-password" required>
+        <button type="submit" class="btn-primary">Entrar</button>
+      </form>
+      <p id="login-error" class="error-msg hidden"></p>
+    </div>
+  </div>
+
+  <!-- ===================== VISTA: MODO COSMO ===================== -->
+  <div id="view-cosmo" class="view">
+
+    <!-- Cabecera -->
+    <header class="cosmo-header">
+      <div class="cosmo-name-wrap">
+        <span id="cosmo-name-display" class="cosmo-name">Cosmo</span>
+        <button id="btn-edit-name" class="btn-icon" aria-label="Editar nombre">✏️</button>
+      </div>
+      <button id="btn-padres" class="btn-padres">👨‍👩‍👧 Padres</button>
+    </header>
+
+    <!-- Avatar de Cosmo -->
+    <div id="cosmo-avatar-wrap" class="cosmo-avatar-wrap">
+      <!-- SVG se inyecta por app.js -->
+    </div>
+
+    <!-- Mensaje de Cosmo -->
+    <div class="cosmo-message-wrap">
+      <p id="cosmo-message" class="cosmo-message"></p>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-section">
+      <div class="progress-bar-bg">
+        <div id="progress-bar" class="progress-bar-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="progress-hours" class="progress-hours">0h 0min</span>
+        <span class="progress-goal">/ 18h</span>
+        <span id="progress-pct" class="progress-pct">0%</span>
+      </div>
+    </div>
+
+    <!-- Botón principal (mantener 1.5s) -->
+    <div class="main-btn-wrap">
+      <button id="btn-toggle" class="btn-toggle btn-wearing-off">
+        <span id="btn-toggle-text">Ponerte a Cosmo 💪</span>
+        <div class="btn-hold-ring" id="btn-hold-ring"></div>
+      </button>
+      <p class="btn-hint">Mantén pulsado para activar</p>
+    </div>
+
+    <!-- Logros del día -->
+    <div class="daily-summary">
+      <div class="stars-today">
+        <span id="stars-display" class="stars-display">—</span>
+        <span class="stars-label">hoy</span>
+      </div>
+      <div class="streak-today">
+        <span class="streak-label">Racha</span>
+        <span id="streak-display" class="streak-display">0 días 🔥</span>
+      </div>
+    </div>
+
+    <!-- Modal editar nombre -->
+    <div id="modal-edit-name" class="modal-overlay hidden">
+      <div class="modal-box">
+        <h3>¿Cómo se llama tu corsé?</h3>
+        <input type="text" id="input-new-name" maxlength="20" placeholder="Cosmo">
+        <div class="modal-actions">
+          <button id="btn-cancel-name" class="btn-secondary">Cancelar</button>
+          <button id="btn-save-name" class="btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== VISTA: MODO PADRES ===================== -->
+  <div id="view-padres" class="view">
+
+    <header class="padres-header">
+      <button id="btn-volver-cosmo" class="btn-back">← Volver</button>
+      <h2 class="padres-title">Dashboard</h2>
+    </header>
+
+    <!-- Resumen de hoy -->
+    <section class="padres-section">
+      <h3 class="section-title">Hoy</h3>
+      <div class="today-stats">
+        <div class="stat-card">
+          <span id="padres-horas-hoy" class="stat-value">0h</span>
+          <span class="stat-label">acumuladas</span>
+        </div>
+        <div class="stat-card">
+          <span id="padres-estado" class="stat-value">—</span>
+          <span class="stat-label">estado</span>
+        </div>
+        <div class="stat-card">
+          <span id="padres-estrellas-hoy" class="stat-value">—</span>
+          <span class="stat-label">estrellas hoy</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gráfica semanal -->
+    <section class="padres-section">
+      <h3 class="section-title">Esta semana</h3>
+      <div class="chart-wrap">
+        <canvas id="chart-semana"></canvas>
+      </div>
+    </section>
+
+    <!-- Historial 7 días -->
+    <section class="padres-section">
+      <h3 class="section-title">Últimos 7 días</h3>
+      <div id="historial-lista" class="historial-lista"></div>
+    </section>
+
+    <!-- Estadísticas globales -->
+    <section class="padres-section">
+      <h3 class="section-title">Global</h3>
+      <div class="global-stats">
+        <div class="stat-card">
+          <span id="stat-racha" class="stat-value">0</span>
+          <span class="stat-label">racha actual 🔥</span>
+        </div>
+        <div class="stat-card">
+          <span id="stat-mejor-racha" class="stat-value">0</span>
+          <span class="stat-label">mejor racha 👑</span>
+        </div>
+        <div class="stat-card">
+          <span id="stat-pct-mes" class="stat-value">—%</span>
+          <span class="stat-label">% mes actual</span>
+        </div>
+        <div class="stat-card">
+          <span id="stat-horas-total" class="stat-value">0h</span>
+          <span class="stat-label">horas totales</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logros -->
+    <section class="padres-section">
+      <h3 class="section-title">Logros</h3>
+      <div id="logros-lista" class="logros-lista"></div>
+    </section>
+
+    <!-- Ajustes -->
+    <section class="padres-section">
+      <h3 class="section-title">Ajustes</h3>
+      <div class="ajustes-lista">
+        <div class="ajuste-row">
+          <label>Nombre del corsé</label>
+          <input type="text" id="ajuste-nombre" maxlength="20">
+        </div>
+        <div class="ajuste-row">
+          <label>Recordatorio si no lo lleva (min)</label>
+          <input type="number" id="ajuste-recordatorio" min="15" max="240" step="15">
+        </div>
+        <div class="ajuste-row">
+          <label>Hora resumen diario</label>
+          <input type="time" id="ajuste-hora-resumen">
+        </div>
+        <div class="ajuste-row">
+          <label>Notificaciones</label>
+          <input type="checkbox" id="ajuste-notificaciones">
+        </div>
+        <div class="ajuste-row">
+          <label>Cambiar PIN de padres</label>
+          <button id="btn-cambiar-pin" class="btn-secondary btn-sm">Cambiar PIN</button>
+        </div>
+        <button id="btn-guardar-ajustes" class="btn-primary">Guardar ajustes</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===================== MODAL: PIN PADRES ===================== -->
+  <div id="modal-pin" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3>Acceso Padres 🔒</h3>
+      <p class="modal-subtitle">Introduce el PIN de 4 dígitos</p>
+      <input type="password" id="input-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••">
+      <p id="pin-error" class="error-msg hidden">PIN incorrecto</p>
+      <div class="modal-actions">
+        <button id="btn-cancel-pin" class="btn-secondary">Cancelar</button>
+        <button id="btn-confirm-pin" class="btn-primary">Entrar</button>
+      </div>
+      <p class="pin-first-time hidden" id="pin-first-time">Primera vez: este PIN se guardará</p>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: CAMBIAR PIN ===================== -->
+  <div id="modal-cambiar-pin" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3>Nuevo PIN</h3>
+      <input type="password" id="input-nuevo-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••">
+      <div class="modal-actions">
+        <button id="btn-cancel-nuevo-pin" class="btn-secondary">Cancelar</button>
+        <button id="btn-save-nuevo-pin" class="btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: LOGRO DESBLOQUEADO ===================== -->
+  <div id="modal-logro" class="modal-overlay hidden">
+    <div class="modal-box modal-logro-box">
+      <div id="modal-logro-icono" class="logro-icono-grande"></div>
+      <h3 id="modal-logro-nombre"></h3>
+      <p id="modal-logro-desc" class="modal-subtitle"></p>
+      <button id="btn-cerrar-logro" class="btn-primary">¡Genial! 🎉</button>
+    </div>
+  </div>
+
+  <!-- ===================== BANNER PWA ===================== -->
+  <div id="banner-pwa" class="banner-pwa hidden">
+    <p>📲 Añade Cosmo a tu pantalla de inicio para recibir notificaciones</p>
+    <button id="btn-cerrar-banner" class="btn-icon">✕</button>
+  </div>
+
+  <!-- Scripts — orden importa -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="notifications.js"></script>
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>
