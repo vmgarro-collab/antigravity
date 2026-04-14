@@ -2,7 +2,8 @@ import {
   obtenerPerfil, guardarPerfil, obtenerConfig, guardarConfig,
   abrirSesion, cerrarSesionCorse,
   obtenerSesiones, obtenerSesionAbierta,
-  obtenerLogros, desbloquearLogro, marcarLogroVisto
+  obtenerLogros, desbloquearLogro, marcarLogroVisto,
+  obtenerComentarios, agregarComentario
 } from './firebase.js';
 
 import {
@@ -13,7 +14,8 @@ import {
 
 // ── ESTADO GLOBAL ────────────────────────────────────────────────
 const uid = 'cosmo-familia';
-let perfil = { nombreCorse: 'Cosmo', objetivoHoras: 18, pinPadres: null, fechaInicio: null };
+let perfil = { nombreCorse: 'Cosmo', objetivoHoras: 18, miembros: ['Papá', 'Mamá', 'Sofía'], fechaInicio: null };
+let comentarios = [];
 let config = { notificacionesActivas: true, recordatorioMinutos: 60, horaResumenDiario: '21:00' };
 let sesionActiva = null;       // { id, inicio (Timestamp) } o null
 let sesiones = [];             // array de todas las sesiones cargadas
@@ -397,28 +399,28 @@ function iniciarTicker() {
 
 // ── ARRANQUE ─────────────────────────────────────────────────────
 async function cargarDatos() {
-  const [p, c, sa, ses, lg] = await Promise.all([
+  const [p, c, sa, ses, lg, coms] = await Promise.all([
     obtenerPerfil(uid).then(p => p || perfil),
     obtenerConfig(uid),
     obtenerSesionAbierta(uid),
     obtenerSesiones(uid, 35),
-    obtenerLogros(uid)
+    obtenerLogros(uid),
+    obtenerComentarios(uid)
   ]);
   perfil = p;
+  if (!perfil.miembros) perfil.miembros = ['Papá', 'Mamá', 'Sofía'];
   config = c;
   sesionActiva = sa;
   sesiones = ses;
   logros = lg;
+  comentarios = coms;
 
   if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
     sesiones.push(sesionActiva);
   }
-
-  // Verificar que la sesión "activa" de caché no esté en realidad cerrada en Firestore
   if (sesionActiva) {
     const enFirestore = sesiones.find(s => s.id === sesionActiva.id);
     if (enFirestore && enFirestore.fin != null) {
-      // La caché local está desincronizada — la sesión ya estaba cerrada
       sesionActiva = null;
     }
   }
@@ -461,6 +463,7 @@ async function init() {
 
   mostrarVista('view-cosmo');
   actualizarUICosmo();
+  renderComentarios();
   iniciarTicker();
 }
 
@@ -612,56 +615,9 @@ document.getElementById('btn-cerrar-banner').addEventListener('click', function(
   document.getElementById('banner-pwa').classList.add('hidden');
 });
 
-// ── HASH SHA-256 PARA PIN ────────────────────────────────────────
-async function hashPin(pin) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(pin + 'cosmo-salt');
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// ── MODAL PIN ────────────────────────────────────────────────────
-document.getElementById('btn-padres').addEventListener('click', function() {
-  document.getElementById('pin-error').classList.add('hidden');
-  document.getElementById('input-pin').value = '';
-  if (!perfil.pinPadres) {
-    document.getElementById('pin-first-time').classList.remove('hidden');
-  } else {
-    document.getElementById('pin-first-time').classList.add('hidden');
-  }
-  document.getElementById('modal-pin').classList.remove('hidden');
-});
-
-document.getElementById('btn-cancel-pin').addEventListener('click', function() {
-  document.getElementById('modal-pin').classList.add('hidden');
-});
-
-document.getElementById('btn-confirm-pin').addEventListener('click', async function() {
-  const pin = document.getElementById('input-pin').value;
-  if (pin.length !== 4) {
-    document.getElementById('pin-error').textContent = 'Introduce 4 dígitos';
-    document.getElementById('pin-error').classList.remove('hidden');
-    return;
-  }
-  const pinHash = await hashPin(pin);
-
-  if (!perfil.pinPadres) {
-    perfil.pinPadres = pinHash;
-    await guardarPerfil(uid, { pinPadres: pinHash });
-    document.getElementById('modal-pin').classList.add('hidden');
-    await abrirModoPadres();
-  } else if (pinHash === perfil.pinPadres) {
-    document.getElementById('modal-pin').classList.add('hidden');
-    await abrirModoPadres();
-  } else {
-    document.getElementById('pin-error').textContent = 'PIN incorrecto';
-    document.getElementById('pin-error').classList.remove('hidden');
-  }
-});
-
-document.getElementById('input-pin').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') document.getElementById('btn-confirm-pin').click();
+// ── ACCESO FAMILIA ───────────────────────────────────────────────────────────────
+document.getElementById('btn-padres').addEventListener('click', async function() {
+  await abrirModoPadres();
 });
 
 // ── MODO PADRES ──────────────────────────────────────────────────
@@ -700,6 +656,11 @@ function renderDashboardPadres() {
   document.getElementById('ajuste-recordatorio').value = config.recordatorioMinutos || 60;
   document.getElementById('ajuste-hora-resumen').value = config.horaResumenDiario || '21:00';
   document.getElementById('ajuste-notificaciones').checked = config.notificacionesActivas !== false;
+  const miembros = perfil.miembros || ['Papá', 'Mamá', 'Sofía'];
+  for (let i = 0; i < 3; i++) {
+    const el = document.getElementById(`ajuste-miembro-${i}`);
+    if (el) el.value = miembros[i] || '';
+  }
 }
 
 function renderHistorial() {
@@ -836,15 +797,20 @@ document.getElementById('btn-guardar-ajustes').addEventListener('click', async f
   const nuevoRecordatorio = parseInt(document.getElementById('ajuste-recordatorio').value) || 60;
   const nuevaHoraResumen = document.getElementById('ajuste-hora-resumen').value || '21:00';
   const nuevasNotif = document.getElementById('ajuste-notificaciones').checked;
+  const nuevosMiembros = [0, 1, 2].map(i =>
+    (document.getElementById(`ajuste-miembro-${i}`)?.value || '').trim()
+  ).filter(Boolean);
+  if (nuevosMiembros.length < 1) { alert('Añade al menos un miembro'); return; }
 
   perfil.nombreCorse = nuevoNombre;
+  perfil.miembros = nuevosMiembros;
   config.recordatorioMinutos = nuevoRecordatorio;
   config.horaResumenDiario = nuevaHoraResumen;
   config.notificacionesActivas = nuevasNotif;
 
   try {
     await Promise.all([
-      guardarPerfil(uid, { nombreCorse: nuevoNombre }),
+      guardarPerfil(uid, { nombreCorse: nuevoNombre, miembros: nuevosMiembros }),
       guardarConfig(uid, {
         recordatorioMinutos: nuevoRecordatorio,
         horaResumenDiario: nuevaHoraResumen,
@@ -869,32 +835,93 @@ document.getElementById('btn-guardar-ajustes').addEventListener('click', async f
   alert('✅ Ajustes guardados');
 });
 
-// ── CAMBIAR PIN ──────────────────────────────────────────────────
-document.getElementById('btn-cambiar-pin').addEventListener('click', function() {
-  document.getElementById('input-nuevo-pin').value = '';
-  document.getElementById('modal-cambiar-pin').classList.remove('hidden');
-});
 
-document.getElementById('btn-cancel-nuevo-pin').addEventListener('click', function() {
-  document.getElementById('modal-cambiar-pin').classList.add('hidden');
-});
+// ── COMENTARIOS ──────────────────────────────────────────────────
+function formatearFechaRelativa(fecha) {
+  if (!fecha) return '';
+  const d = fecha?.toDate ? fecha.toDate() : new Date(fecha);
+  const ahora = new Date();
+  const diffMs = ahora - d;
+  const diffMin = Math.floor(diffMs / 60000);
+  if (diffMin < 1) return 'ahora';
+  if (diffMin < 60) return `hace ${diffMin}m`;
+  const diffH = Math.floor(diffMin / 60);
+  if (diffH < 24) return `hace ${diffH}h`;
+  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+}
 
-document.getElementById('btn-save-nuevo-pin').addEventListener('click', async function() {
-  const pin = document.getElementById('input-nuevo-pin').value;
-  if (pin.length !== 4) {
-    alert('El PIN debe tener 4 dígitos');
+function renderComentarios() {
+  const lista = document.getElementById('comentarios-lista');
+  lista.innerHTML = '';
+  if (comentarios.length === 0) {
+    lista.innerHTML = '<p style="text-align:center;color:#9CA3AF;font-size:13px;padding:16px">Sé el primero en dejar un ánimo 💜</p>';
     return;
   }
-  const pinHash = await hashPin(pin);
-  try {
-    await guardarPerfil(uid, { pinPadres: pinHash });
-    perfil.pinPadres = pinHash;
-    document.getElementById('modal-cambiar-pin').classList.add('hidden');
-    alert('✅ PIN actualizado');
-  } catch (err) {
-    console.error('Error guardando PIN:', err);
-    alert('No se pudo guardar el PIN. Comprueba tu conexión.');
+  for (const c of comentarios) {
+    const inicial = (c.autor || '?')[0].toUpperCase();
+    const card = document.createElement('div');
+    card.className = 'comentario-card';
+    card.innerHTML = `
+      <div class="comentario-avatar">${inicial}</div>
+      <div class="comentario-body">
+        <div class="comentario-meta">
+          <span class="comentario-autor">${c.autor}</span>
+          <span class="comentario-fecha">${formatearFechaRelativa(c.fecha)}</span>
+        </div>
+        <p class="comentario-texto">${c.texto}</p>
+      </div>
+    `;
+    lista.appendChild(card);
   }
+}
+
+function mostrarModalQuienEres(callback) {
+  const miembros = perfil.miembros || ['Papá', 'Mamá', 'Sofía'];
+  const botonesEl = document.getElementById('quien-eres-botones');
+  botonesEl.innerHTML = '';
+  for (const nombre of miembros) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-quien';
+    btn.textContent = nombre;
+    btn.addEventListener('click', function() {
+      localStorage.setItem('cosmo_autor', nombre);
+      document.getElementById('modal-quien-eres').classList.add('hidden');
+      callback(nombre);
+    });
+    botonesEl.appendChild(btn);
+  }
+  document.getElementById('modal-quien-eres').classList.remove('hidden');
+}
+
+async function enviarComentario() {
+  const input = document.getElementById('input-comentario');
+  const texto = input.value.trim();
+  if (!texto) return;
+
+  const autorGuardado = localStorage.getItem('cosmo_autor');
+
+  const doEnvio = async (autor) => {
+    input.value = '';
+    try {
+      await agregarComentario(uid, autor, texto);
+      comentarios = await obtenerComentarios(uid);
+      renderComentarios();
+    } catch (err) {
+      console.error('Error enviando comentario:', err);
+      alert('No se pudo enviar el comentario. Comprueba tu conexión.');
+    }
+  };
+
+  if (autorGuardado) {
+    await doEnvio(autorGuardado);
+  } else {
+    mostrarModalQuienEres(doEnvio);
+  }
+}
+
+document.getElementById('btn-enviar-comentario').addEventListener('click', enviarComentario);
+document.getElementById('input-comentario').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') enviarComentario();
 });
 
 // ── INICIO ───────────────────────────────────────────────────────
