@@ -162,28 +162,38 @@ function calcularMinutosHoy() {
 
   let total = 0;
   for (const s of sesiones) {
-    const inicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
-    if (inicio < hoy || inicio >= maniana) continue;
-    if (s.fin) {
-      total += s.duracionMinutos || 0;
-    } else if (sesionActiva?.id === s.id) {
-      total += Math.floor((Date.now() - inicio.getTime()) / 60000);
-    }
+    const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
+    const sFin = s.fin
+      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
+      : (sesionActiva?.id === s.id ? new Date() : null);
+    if (!sFin) continue;
+    if (sFin <= hoy || sInicio >= maniana) continue; // sin solapamiento
+    const inicioEfectivo = sInicio < hoy ? hoy : sInicio;
+    const finEfectivo = sFin > maniana ? maniana : sFin;
+    const minutos = Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
+    if (minutos > 0) total += minutos;
   }
   return total;
 }
 
 function calcularMinutosFecha(fecha) {
-  const inicio = new Date(fecha);
-  inicio.setHours(0, 0, 0, 0);
-  const fin = new Date(inicio);
-  fin.setDate(fin.getDate() + 1);
+  const diaInicio = new Date(fecha);
+  diaInicio.setHours(0, 0, 0, 0);
+  const diaFin = new Date(diaInicio);
+  diaFin.setDate(diaFin.getDate() + 1);
 
   let total = 0;
   for (const s of sesiones) {
     const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
-    if (sInicio < inicio || sInicio >= fin) continue;
-    total += s.duracionMinutos || 0;
+    const sFin = s.fin
+      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
+      : (sesionActiva?.id === s.id ? new Date() : null);
+    if (!sFin) continue;
+    if (sFin <= diaInicio || sInicio >= diaFin) continue; // sin solapamiento
+    const inicioEfectivo = sInicio < diaInicio ? diaInicio : sInicio;
+    const finEfectivo = sFin > diaFin ? diaFin : sFin;
+    const minutos = Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
+    if (minutos > 0) total += minutos;
   }
   return total;
 }
