@@ -161,24 +161,19 @@ function calcularMinutosHoy() {
   maniana.setDate(maniana.getDate() + 1);
 
   let total = 0;
-  console.log('[DEBUG] sesionActiva:', sesionActiva?.id, sesionActiva?.inicio?.toDate?.());
-  console.log('[DEBUG] sesiones total:', sesiones.length);
   for (const s of sesiones) {
     const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
+    // Sesión abierta: solo cuenta si es la sesión activa confirmada
     const sFin = s.fin
       ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
       : (sesionActiva?.id === s.id ? new Date() : null);
-    const minutos_contribuidos = (() => {
-      if (!sFin) return 0;
-      if (sFin <= hoy || sInicio >= maniana) return 0;
-      const inicioEfectivo = sInicio < hoy ? hoy : sInicio;
-      const finEfectivo = sFin > maniana ? maniana : sFin;
-      return Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
-    })();
-    console.log(`[DEBUG] sesión ${s.id}: inicio=${sInicio.toISOString()}, fin=${sFin?.toISOString() ?? 'abierta'}, aportaHoy=${minutos_contribuidos}min`);
-    if (minutos_contribuidos > 0) total += minutos_contribuidos;
+    if (!sFin) continue;
+    if (sFin <= hoy || sInicio >= maniana) continue;
+    const inicioEfectivo = sInicio < hoy ? hoy : sInicio;
+    const finEfectivo = sFin > maniana ? maniana : sFin;
+    const minutos = Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
+    if (minutos > 0) total += minutos;
   }
-  console.log('[DEBUG] total minutos hoy:', total);
   return total;
 }
 
@@ -416,6 +411,15 @@ async function cargarDatos() {
   if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
     sesiones.push(sesionActiva);
   }
+
+  // Verificar que la sesión "activa" de caché no esté en realidad cerrada en Firestore
+  if (sesionActiva) {
+    const enFirestore = sesiones.find(s => s.id === sesionActiva.id);
+    if (enFirestore && enFirestore.fin != null) {
+      // La caché local está desincronizada — la sesión ya estaba cerrada
+      sesionActiva = null;
+    }
+  }
 }
 
 async function init() {
@@ -525,6 +529,14 @@ async function toggleSesion() {
   } else {
     try {
       cancelarRecordatorio();
+      // Verificar en Firestore que no hay ya una sesión abierta (evita duplicados)
+      const sesionExistente = await obtenerSesionAbierta(uid);
+      if (sesionExistente) {
+        sesionActiva = sesionExistente;
+        if (!sesiones.find(s => s.id === sesionExistente.id)) sesiones.push(sesionExistente);
+        actualizarUICosmo();
+        return;
+      }
       const id = await abrirSesion(uid);
       // Only mutate local state after Firebase confirms the session was created
       const now = { toMillis: () => Date.now(), toDate: () => new Date() };
