@@ -263,9 +263,23 @@ function calcularPctMes() {
 }
 
 function calcularTotalMinutos() {
-  return sesiones
-    .filter(s => s.fin !== null)
-    .reduce((acc, s) => acc + (s.duracionMinutos || 0), 0);
+  const intervalos = [];
+  for (const s of sesiones) {
+    const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
+    const sFin = s.fin
+      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
+      : (sesionActiva?.id === s.id ? new Date() : null);
+    if (!sFin || sFin <= sInicio) continue;
+    intervalos.push([sInicio.getTime(), sFin.getTime()]);
+  }
+  intervalos.sort((a, b) => a[0] - b[0]);
+  let total = 0;
+  let cursor = -1;
+  for (const [a, b] of intervalos) {
+    if (a > cursor) { total += b - a; cursor = b; }
+    else if (b > cursor) { total += b - cursor; cursor = b; }
+  }
+  return Math.floor(total / 60000);
 }
 
 function determinarEstadoAvatar() {
