@@ -13,7 +13,8 @@ import {
   orderBy,
   getDocs,
   Timestamp,
-  serverTimestamp
+  serverTimestamp,
+  limit
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -120,6 +121,19 @@ export async function desbloquearLogro(uid, tipo) {
 export async function marcarLogroVisto(uid, logroId) {
   const ref = doc(db, 'usuarios', uid, 'logros', logroId);
   await updateDoc(ref, { visto: true });
+}
+
+// ── COMENTARIOS ──────────────────────────────────────────────────
+export async function obtenerComentarios(uid) {
+  const ref = collection(db, 'usuarios', uid, 'comentarios');
+  const q = query(ref, orderBy('fecha', 'desc'), limit(50));
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+export async function agregarComentario(uid, autor, texto) {
+  const ref = collection(db, 'usuarios', uid, 'comentarios');
+  await addDoc(ref, { autor, texto, fecha: serverTimestamp() });
 }
 
 // ── REGLAS FIRESTORE (aplicar en consola Firebase) ────────────────
