@@ -154,27 +154,43 @@ function mensajeAleatorio(categoria) {
 
 // ── CÁLCULOS ─────────────────────────────────────────────────────
 
+// Fusiona intervalos solapados y devuelve minutos totales dentro del rango [diaInicio, diaFin)
+function minutosEnRango(diaInicio, diaFin) {
+  const intervalos = [];
+  for (const s of sesiones) {
+    const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
+    const sFin = s.fin
+      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
+      : (sesionActiva?.id === s.id ? new Date() : null);
+    if (!sFin) continue;
+    if (sFin <= diaInicio || sInicio >= diaFin) continue;
+    const a = Math.max(sInicio.getTime(), diaInicio.getTime());
+    const b = Math.min(sFin.getTime(), diaFin.getTime());
+    if (b > a) intervalos.push([a, b]);
+  }
+
+  // Ordenar y fusionar solapamientos
+  intervalos.sort((x, y) => x[0] - y[0]);
+  let total = 0;
+  let cursor = -1;
+  for (const [a, b] of intervalos) {
+    if (a > cursor) {
+      total += b - a;
+      cursor = b;
+    } else if (b > cursor) {
+      total += b - cursor;
+      cursor = b;
+    }
+  }
+  return Math.floor(total / 60000);
+}
+
 function calcularMinutosHoy() {
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
   const maniana = new Date(hoy);
   maniana.setDate(maniana.getDate() + 1);
-
-  let total = 0;
-  for (const s of sesiones) {
-    const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
-    // Sesión abierta: solo cuenta si es la sesión activa confirmada
-    const sFin = s.fin
-      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
-      : (sesionActiva?.id === s.id ? new Date() : null);
-    if (!sFin) continue;
-    if (sFin <= hoy || sInicio >= maniana) continue;
-    const inicioEfectivo = sInicio < hoy ? hoy : sInicio;
-    const finEfectivo = sFin > maniana ? maniana : sFin;
-    const minutos = Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
-    if (minutos > 0) total += minutos;
-  }
-  return total;
+  return minutosEnRango(hoy, maniana);
 }
 
 function calcularMinutosFecha(fecha) {
@@ -182,21 +198,7 @@ function calcularMinutosFecha(fecha) {
   diaInicio.setHours(0, 0, 0, 0);
   const diaFin = new Date(diaInicio);
   diaFin.setDate(diaFin.getDate() + 1);
-
-  let total = 0;
-  for (const s of sesiones) {
-    const sInicio = s.inicio?.toDate ? s.inicio.toDate() : new Date(s.inicio);
-    const sFin = s.fin
-      ? (s.fin?.toDate ? s.fin.toDate() : new Date(s.fin))
-      : (sesionActiva?.id === s.id ? new Date() : null);
-    if (!sFin) continue;
-    if (sFin <= diaInicio || sInicio >= diaFin) continue; // sin solapamiento
-    const inicioEfectivo = sInicio < diaInicio ? diaInicio : sInicio;
-    const finEfectivo = sFin > diaFin ? diaFin : sFin;
-    const minutos = Math.floor((finEfectivo.getTime() - inicioEfectivo.getTime()) / 60000);
-    if (minutos > 0) total += minutos;
-  }
-  return total;
+  return minutosEnRango(diaInicio, diaFin);
 }
 
 function estrellasParaMinutos(min) {
