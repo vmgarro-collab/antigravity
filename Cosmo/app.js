@@ -228,9 +228,11 @@ function calcularRachas() {
     cumplidos.push(calcularMinutosFecha(d) >= 18 * 60);
   }
 
-  // Racha actual: días consecutivos desde hoy hacia atrás
+  // Racha actual: si hoy ya cumplió el objetivo, contar desde hoy;
+  // si no, contar desde ayer (el día de hoy aún está en curso)
   let actual = 0;
-  for (let i = 0; i < cumplidos.length; i++) {
+  const desde = cumplidos[0] ? 0 : 1;
+  for (let i = desde; i < cumplidos.length; i++) {
     if (cumplidos[i]) actual++;
     else break;
   }
