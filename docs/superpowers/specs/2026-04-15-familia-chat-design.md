@@ -28,8 +28,12 @@ App de mensajería privada para 4 miembros de la familia (Papá, Mamá, Sofía, 
 ### Firebase (plan Spark — gratuito)
 
 - **Firestore** — base de datos en tiempo real. Colección única `messages`.
-- **Firebase Cloud Messaging (FCM)** — notificaciones push.
 - **Firebase SDK** cargado via CDN, sin build system ni npm.
+
+### OneSignal (gratuito, sin tarjeta)
+
+- **Notificaciones push** — servicio externo que gestiona el envío a otros dispositivos directamente desde el navegador, sin backend propio ni Cloud Functions.
+- SDK cargado via CDN.
 
 ### Estructura de datos
 
@@ -96,13 +100,12 @@ Familia/
 
 ## Notificaciones push
 
-- Al entrar al chat por primera vez: solicitar permiso de notificaciones
-- Token FCM del dispositivo guardado en Firestore (colección `users`)
-- Al enviar un mensaje, una **Firebase Cloud Function** (o regla de Firestore + extensión FCM) notifica a los otros 3 dispositivos
+- Al entrar al chat por primera vez: solicitar permiso de notificaciones via OneSignal
+- OneSignal gestiona los tokens de dispositivo y el envío — no se necesita backend propio ni tarjeta
+- Al enviar un mensaje, se llama a la API REST de OneSignal desde el navegador para notificar a los otros 3 usuarios
 - Texto de notificación: `"Papá: Hola a todos!"`
-- El service worker (`sw.js`) recibe el push y muestra la notificación del sistema
-
-> **Nota sobre FCM:** El envío de notificaciones a otros dispositivos requiere ejecutar código en servidor (no se puede hacer desde el navegador por seguridad). Se usará **Firebase Cloud Functions** (plan Blaze) o la extensión "Trigger Email" como alternativa. Si el plan Blaze supone fricción, la primera versión puede funcionar sin notificaciones y añadirlas en una segunda iteración.
+- El service worker de OneSignal (`OneSignalSDKWorker.js`) recibe el push y muestra la notificación del sistema
+- iOS requiere instalación en pantalla de inicio para recibir notificaciones
 
 ---
 
