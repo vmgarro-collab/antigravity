@@ -9,6 +9,14 @@
   },
   {
     "pos": 2,
+    "jugador": "Francisco PASCUAL RODRIGUEZ",
+    "equipo": "SPORTING SARRIA",
+    "goles": 29,
+    "partidos": null,
+    "paraguas": false
+  },
+  {
+    "pos": 3,
     "jugador": "Ruben RODRIGUEZ PENA",
     "equipo": "SACONIA 2.0",
     "goles": 29,
@@ -16,7 +24,15 @@
     "paraguas": false
   },
   {
-    "pos": 3,
+    "pos": 4,
+    "jugador": "Cristhian COLMAN BRITAZ",
+    "equipo": "BOCA SENIOR",
+    "goles": 27,
+    "partidos": null,
+    "paraguas": false
+  },
+  {
+    "pos": 5,
     "jugador": "Adrian García Lopez",
     "equipo": "CHAOX F.C",
     "goles": 27,
@@ -24,26 +40,10 @@
     "paraguas": false
   },
   {
-    "pos": 4,
-    "jugador": "Francisco PASCUAL RODRIGUEZ",
-    "equipo": "SPORTING SARRIA",
-    "goles": 27,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 5,
-    "jugador": "Cristhian COLMAN BRITAZ",
-    "equipo": "BOCA SENIOR",
-    "goles": 26,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
     "pos": 6,
     "jugador": "Antonio JIMENEZ GALAN",
     "equipo": "SPORTING SARRIA",
-    "goles": 26,
+    "goles": 27,
     "partidos": null,
     "paraguas": false
   },
@@ -65,19 +65,19 @@
   },
   {
     "pos": 9,
+    "jugador": "Oscar LORENZO GONZALEZ",
+    "equipo": "BOCA SENIOR",
+    "goles": 17,
+    "partidos": null,
+    "paraguas": false
+  },
+  {
+    "pos": 10,
     "jugador": "Victor Manuel GARRO PEREZ",
     "equipo": "EL PARAGUAS",
     "goles": 16,
     "partidos": null,
     "paraguas": true
-  },
-  {
-    "pos": 10,
-    "jugador": "Oscar LORENZO GONZALEZ",
-    "equipo": "BOCA SENIOR",
-    "goles": 16,
-    "partidos": null,
-    "paraguas": false
   },
   {
     "pos": 11,
