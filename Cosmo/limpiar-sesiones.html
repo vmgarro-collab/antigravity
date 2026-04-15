@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limpieza de sesiones — Cosmo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 16px; }
+    button { padding: 14px 24px; font-size: 16px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 12px; }
+    #btn-limpiar { background: #ef4444; color: white; font-weight: bold; }
+    #btn-limpiar:disabled { background: #ccc; cursor: not-allowed; }
+    #log { margin-top: 20px; background: #f3f4f6; border-radius: 8px; padding: 14px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; min-height: 60px; }
+    .ok { color: #16a34a; }
+    .err { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h2>🧹 Limpieza de sesiones Cosmo</h2>
+  <p>Este botón borrará todas las sesiones incorrectas y dejará solo los datos reales:</p>
+  <ul>
+    <li><strong>Lunes 13 abr</strong> — 22:18 a 00:00 (1h42min)</li>
+    <li><strong>Martes 14 abr</strong> — sin datos (día corrupto)</li>
+    <li><strong>Hoy miércoles</strong> — sesión limpia, usa el botón de la app</li>
+  </ul>
+
+  <button id="btn-limpiar">🗑️ Limpiar y restaurar datos reales</button>
+  <div id="log">Pulsa el botón para empezar...</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import {
+  initializeFirestore, persistentLocalCache,
+  collection, getDocs, deleteDoc, addDoc, doc, Timestamp
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB7B02fo7fbMro7bqmzc-7Rnq_M2mvGCBo",
+  authDomain: "cosmo-corse.firebaseapp.com",
+  projectId: "cosmo-corse",
+  storageBucket: "cosmo-corse.firebasestorage.app",
+  messagingSenderId: "942015789023",
+  appId: "1:942015789023:web:e7519efb9247033cabb66a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = initializeFirestore(app, { localCache: persistentLocalCache() });
+const uid = 'cosmo-familia';
+
+const log = document.getElementById('log');
+const btn = document.getElementById('btn-limpiar');
+
+function escribe(msg, tipo = '') {
+  log.innerHTML += `<span class="${tipo}">${msg}</span>\n`;
+}
+
+btn.addEventListener('click', async () => {
+  btn.disabled = true;
+  log.innerHTML = '';
+
+  try {
+    // 1. Borrar todas las sesiones existentes
+    escribe('🔍 Buscando sesiones existentes...');
+    const ref = collection(db, 'usuarios', uid, 'sesiones');
+    const snap = await getDocs(ref);
+    escribe(`📦 Encontradas ${snap.docs.length} sesiones. Borrando...`);
+
+    for (const d of snap.docs) {
+      await deleteDoc(doc(db, 'usuarios', uid, 'sesiones', d.id));
+    }
+    escribe(`✅ Todas las sesiones borradas.`, 'ok');
+
+    // 2. Crear sesión real del lunes 13 de abril
+    // 22:18 CEST = 20:18 UTC | 00:00 CEST = 22:00 UTC del mismo día
+    escribe('\n📅 Creando sesión del lunes 13 de abril (22:18 → 00:00)...');
+    await addDoc(ref, {
+      inicio: Timestamp.fromDate(new Date('2026-04-13T20:18:00Z')),
+      fin:    Timestamp.fromDate(new Date('2026-04-13T22:00:00Z')),
+      duracionMinutos: 102
+    });
+    escribe('✅ Sesión del lunes creada (1h42min).', 'ok');
+
+    escribe('\n🎉 ¡Listo! Ahora abre la app Cosmo y usa el botón para empezar la sesión de hoy.', 'ok');
+
+  } catch (err) {
+    escribe(`\n❌ Error: ${err.message}`, 'err');
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
