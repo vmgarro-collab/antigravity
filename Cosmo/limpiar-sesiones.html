@@ -19,8 +19,8 @@
   <p>Este botón borrará todas las sesiones incorrectas y dejará solo los datos reales:</p>
   <ul>
     <li><strong>Lunes 13 abr</strong> — 22:18 a 00:00 (1h42min)</li>
-    <li><strong>Martes 14 abr</strong> — sin datos (día corrupto)</li>
-    <li><strong>Hoy miércoles</strong> — sesión limpia, usa el botón de la app</li>
+    <li><strong>Martes 14 abr</strong> — 00:00 a 17:00 y 18:00 a 00:00 (23h)</li>
+    <li><strong>Hoy miércoles 15</strong> — desde las 00:00, sesión abierta</li>
   </ul>
 
   <button id="btn-limpiar">🗑️ Limpiar y restaurar datos reales</button>
@@ -69,17 +69,47 @@ btn.addEventListener('click', async () => {
     }
     escribe(`✅ Todas las sesiones borradas.`, 'ok');
 
-    // 2. Crear sesión real del lunes 13 de abril
-    // 22:18 CEST = 20:18 UTC | 00:00 CEST = 22:00 UTC del mismo día
+    // 2. Lunes 13 abr: 22:18 CEST → 00:00 CEST (1h42min)
+    // 22:18 CEST = 20:18 UTC | medianoche CEST = 22:00 UTC
     escribe('\n📅 Creando sesión del lunes 13 de abril (22:18 → 00:00)...');
     await addDoc(ref, {
       inicio: Timestamp.fromDate(new Date('2026-04-13T20:18:00Z')),
       fin:    Timestamp.fromDate(new Date('2026-04-13T22:00:00Z')),
       duracionMinutos: 102
     });
-    escribe('✅ Sesión del lunes creada (1h42min).', 'ok');
+    escribe('✅ Lunes: 1h42min', 'ok');
 
-    escribe('\n🎉 ¡Listo! Ahora abre la app Cosmo y usa el botón para empezar la sesión de hoy.', 'ok');
+    // 3. Martes 14 abr primera parte: 00:00 → 17:00 CEST (17h)
+    // medianoche CEST = 22:00 UTC Apr 13 | 17:00 CEST = 15:00 UTC Apr 14
+    escribe('\n📅 Creando sesión del martes 14 de abril (00:00 → 17:00)...');
+    await addDoc(ref, {
+      inicio: Timestamp.fromDate(new Date('2026-04-13T22:00:00Z')),
+      fin:    Timestamp.fromDate(new Date('2026-04-14T15:00:00Z')),
+      duracionMinutos: 1020
+    });
+    escribe('✅ Martes mañana/tarde: 17h', 'ok');
+
+    // 4. Martes 14 abr segunda parte: 18:00 → 00:00 CEST (6h)
+    // 18:00 CEST = 16:00 UTC | medianoche CEST = 22:00 UTC Apr 14
+    escribe('\n📅 Creando sesión del martes 14 de abril (18:00 → 00:00)...');
+    await addDoc(ref, {
+      inicio: Timestamp.fromDate(new Date('2026-04-14T16:00:00Z')),
+      fin:    Timestamp.fromDate(new Date('2026-04-14T22:00:00Z')),
+      duracionMinutos: 360
+    });
+    escribe('✅ Martes noche: 6h', 'ok');
+
+    // 5. Hoy miércoles 15 abr: desde 00:00 CEST, sesión abierta
+    // medianoche CEST = 22:00 UTC Apr 14
+    escribe('\n📅 Creando sesión de hoy (desde las 00:00, abierta)...');
+    await addDoc(ref, {
+      inicio: Timestamp.fromDate(new Date('2026-04-14T22:00:00Z')),
+      fin: null,
+      duracionMinutos: 0
+    });
+    escribe('✅ Hoy: sesión abierta desde medianoche', 'ok');
+
+    escribe('\n🎉 ¡Listo! Abre la app Cosmo — debería mostrar los datos correctos.', 'ok');
 
   } catch (err) {
     escribe(`\n❌ Error: ${err.message}`, 'err');
