@@ -81,3 +81,73 @@ document.getElementById("btn-change-user").addEventListener("click", () => {
   document.getElementById("messages-container").innerHTML = "";
   showLogin();
 });
+
+// ============================================================
+// MENSAJES — Firestore real-time
+// ============================================================
+function subscribeToMessages() {
+  const container = document.getElementById("messages-container");
+
+  unsubscribeMessages = db.collection("messages")
+    .orderBy("timestamp", "asc")
+    .limitToLast(100)
+    .onSnapshot(snapshot => {
+      container.innerHTML = "";
+      snapshot.forEach(doc => {
+        const msg = doc.data();
+        container.appendChild(buildMessageEl(msg));
+      });
+      container.scrollTop = container.scrollHeight;
+    });
+}
+
+function buildMessageEl(msg) {
+  const user = USERS[msg.sender];
+  const isOwn = msg.sender === currentUser;
+  const time  = msg.timestamp
+    ? new Date(msg.timestamp.toMillis()).toLocaleTimeString("es", { hour: "2-digit", minute: "2-digit" })
+    : "";
+
+  const row = document.createElement("div");
+  row.className = `message-row ${isOwn ? "own" : "other"}`;
+
+  const meta = document.createElement("div");
+  meta.className = "message-meta";
+  meta.textContent = isOwn ? time : `${user ? user.avatar + " " + user.name : msg.sender} · ${time}`;
+
+  const bubble = document.createElement("div");
+  bubble.className = `message-bubble ${user ? user.bubble : ""}`;
+  bubble.textContent = msg.text;
+
+  row.appendChild(meta);
+  row.appendChild(bubble);
+  return row;
+}
+
+// ============================================================
+// ENVÍO DE MENSAJES
+// ============================================================
+async function sendMessage() {
+  const input = document.getElementById("message-input");
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = "";
+
+  await db.collection("messages").add({
+    sender:    currentUser,
+    text:      text,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  sendNotification(currentUser, text); // no await — no bloqueamos la UI
+}
+
+document.getElementById("btn-send").addEventListener("click", sendMessage);
+
+document.getElementById("message-input").addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
