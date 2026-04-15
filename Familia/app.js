@@ -155,3 +155,67 @@ async function sendMessage() {
   sendNotification(currentUser, text); // no await — no bloqueamos la UI
 }
 
+
+// ============================================================
+// ONESIGNAL — notificaciones push
+// ============================================================
+function initOneSignal() {
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async (OneSignal) => {
+    await OneSignal.init({
+      appId: ONESIGNAL_APP_ID,
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
+      notifyButton: { enable: false }
+    });
+
+    // Pedir permiso si no se ha pedido antes
+    const permission = await OneSignal.Notifications.permission;
+    if (!permission) {
+      await OneSignal.Notifications.requestPermission();
+    }
+
+    // Guardar player ID en Firestore
+    const playerId = await OneSignal.User.PushSubscription.id;
+    if (playerId) {
+      await db.collection("tokens").doc(currentUser).set({
+        playerId:  playerId,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+  });
+}
+
+async function sendNotification(senderKey, text) {
+  try {
+    // Obtener los player IDs de los otros usuarios desde Firestore
+    const tokensSnap = await db.collection("tokens").get();
+    const playerIds = [];
+    tokensSnap.forEach(doc => {
+      if (doc.id !== senderKey && doc.data().playerId) {
+        playerIds.push(doc.data().playerId);
+      }
+    });
+
+    if (playerIds.length === 0) return; // Nadie más ha instalado la app aún
+
+    const senderName = USERS[senderKey].name;
+    const preview    = text.length > 60 ? text.slice(0, 60) + "…" : text;
+
+    await fetch("https://onesignal.com/api/v1/notifications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Basic ${ONESIGNAL_REST_API_KEY}`
+      },
+      body: JSON.stringify({
+        app_id:             ONESIGNAL_APP_ID,
+        include_player_ids: playerIds,
+        headings:           { en: "FamiliaChat" },
+        contents:           { en: `${senderName}: ${preview}` }
+      })
+    });
+  } catch (err) {
+    console.warn("No se pudo enviar notificación:", err);
+    // Fallo silencioso — el mensaje ya se guardó en Firestore
+  }
+}
