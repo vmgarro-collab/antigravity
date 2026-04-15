@@ -34,6 +34,7 @@ const db = firebase.firestore();
 // ============================================================
 let currentUser = localStorage.getItem("familia_user"); // "papa" | "mama" | "sofia" | "martin" | null
 let unsubscribeMessages = null;
+let oneSignalInitialized = false;
 
 // ============================================================
 // ARRANQUE
@@ -160,6 +161,8 @@ async function sendMessage() {
 // ONESIGNAL — notificaciones push
 // ============================================================
 function initOneSignal() {
+  if (oneSignalInitialized) return;
+  oneSignalInitialized = true;
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   window.OneSignalDeferred.push(async (OneSignal) => {
     await OneSignal.init({
