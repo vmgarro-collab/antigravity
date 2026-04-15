@@ -403,17 +403,10 @@ function actualizarUICosmo() {
 function iniciarTicker() {
   if (tickInterval) clearInterval(tickInterval);
   tickInterval = setInterval(async () => {
-    // Refrescar sesión activa y sesiones desde Firestore para sincronizar entre dispositivos
+    // Refrescar sesiones desde Firestore para sincronizar entre dispositivos
     try {
-      const [sa, ses] = await Promise.all([
-        obtenerSesionAbierta(uid),
-        obtenerSesiones(uid, 35)
-      ]);
-      sesionActiva = sa;
-      sesiones = ses;
-      if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
-        sesiones.push(sesionActiva);
-      }
+      sesiones = await obtenerSesiones(uid, 35);
+      sesionActiva = resolverSesionActiva(sesiones);
     } catch (_) { /* si falla, usamos los datos que ya tenemos */ }
 
     actualizarUICosmo();
@@ -426,27 +419,31 @@ function iniciarTicker() {
 document.addEventListener('visibilitychange', async function() {
   if (document.visibilityState === 'visible') {
     try {
-      const [sa, ses] = await Promise.all([
-        obtenerSesionAbierta(uid),
-        obtenerSesiones(uid, 35)
-      ]);
-      sesionActiva = sa;
-      sesiones = ses;
-      if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
-        sesiones.push(sesionActiva);
-      }
+      sesiones = await obtenerSesiones(uid, 35);
+      sesionActiva = resolverSesionActiva(sesiones);
       actualizarUICosmo();
     } catch (_) {}
   }
 });
 
 
+// Devuelve la sesión abierta más reciente de entre todas las sesiones cargadas.
+// Ignora sesiones huérfanas antiguas (fin=null de pruebas) eligiendo siempre la de inicio más reciente.
+function resolverSesionActiva(todasLasSesiones) {
+  const abiertas = todasLasSesiones.filter(s => s.fin == null);
+  if (abiertas.length === 0) return null;
+  return abiertas.reduce((mejor, s) => {
+    const tMejor = mejor.inicio?.toDate ? mejor.inicio.toDate().getTime() : 0;
+    const tS = s.inicio?.toDate ? s.inicio.toDate().getTime() : 0;
+    return tS > tMejor ? s : mejor;
+  });
+}
+
 // ── ARRANQUE ─────────────────────────────────────────────────────
 async function cargarDatos() {
-  const [p, c, sa, ses, lg, coms] = await Promise.all([
+  const [p, c, ses, lg, coms] = await Promise.all([
     obtenerPerfil(uid).then(p => p || perfil),
     obtenerConfig(uid),
-    obtenerSesionAbierta(uid),
     obtenerSesiones(uid, 35),
     obtenerLogros(uid),
     obtenerComentarios(uid)
@@ -454,20 +451,11 @@ async function cargarDatos() {
   perfil = p;
   if (!perfil.miembros) perfil.miembros = ['Papá', 'Mamá', 'Sofía'];
   config = c;
-  sesionActiva = sa;
   sesiones = ses;
   logros = lg;
   comentarios = coms;
-
-  if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
-    sesiones.push(sesionActiva);
-  }
-  if (sesionActiva) {
-    const enFirestore = sesiones.find(s => s.id === sesionActiva.id);
-    if (enFirestore && enFirestore.fin != null) {
-      sesionActiva = null;
-    }
-  }
+  // Elegir la más reciente entre todas las abiertas — evita sesiones huérfanas
+  sesionActiva = resolverSesionActiva(sesiones);
 }
 
 async function init() {
@@ -578,11 +566,10 @@ async function toggleSesion() {
   } else {
     try {
       cancelarRecordatorio();
-      // Verificar en Firestore que no hay ya una sesión abierta (evita duplicados)
-      const sesionExistente = await obtenerSesionAbierta(uid);
-      if (sesionExistente) {
-        sesionActiva = sesionExistente;
-        if (!sesiones.find(s => s.id === sesionExistente.id)) sesiones.push(sesionExistente);
+      // Verificar que no hay ya una abierta en el estado local (evita duplicados)
+      const yaAbierta = resolverSesionActiva(sesiones);
+      if (yaAbierta) {
+        sesionActiva = yaAbierta;
         actualizarUICosmo();
         return;
       }

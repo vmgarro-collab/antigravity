@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cosmo-v9';
+const CACHE_NAME = 'cosmo-v10';
 const ASSETS = [
   './index.html',
   './styles.css',
