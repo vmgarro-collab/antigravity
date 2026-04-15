@@ -2,24 +2,24 @@
 // CONFIGURACIÓN — reemplazar con valores reales de Firebase y OneSignal
 // ============================================================
 const FIREBASE_CONFIG = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyBgLKcaRqvgSUL1JHBLUJOvq1XGciKlsiw",
+  authDomain: "familia-chat-f7a39.firebaseapp.com",
+  projectId: "familia-chat-f7a39",
+  storageBucket: "familia-chat-f7a39.firebasestorage.app",
+  messagingSenderId: "1060799290671",
+  appId: "1:1060799290671:web:957347df95406825d195da"
 };
 
-const ONESIGNAL_APP_ID       = "YOUR_ONESIGNAL_APP_ID";
+const ONESIGNAL_APP_ID = "YOUR_ONESIGNAL_APP_ID";
 const ONESIGNAL_REST_API_KEY = "YOUR_ONESIGNAL_REST_API_KEY";
 
 // ============================================================
 // USUARIOS
 // ============================================================
 const USERS = {
-  papa:   { name: "Papá",   color: "#4a90d9", bubble: "bubble-papa",   avatar: "👨" },
-  mama:   { name: "Mamá",   color: "#5cb85c", bubble: "bubble-mama",   avatar: "👩" },
-  sofia:  { name: "Sofía",  color: "#e8834a", bubble: "bubble-sofia",  avatar: "👧" },
+  papa: { name: "Papá", color: "#4a90d9", bubble: "bubble-papa", avatar: "👨" },
+  mama: { name: "Mamá", color: "#5cb85c", bubble: "bubble-mama", avatar: "👩" },
+  sofia: { name: "Sofía", color: "#e8834a", bubble: "bubble-sofia", avatar: "👧" },
   martin: { name: "Martín", color: "#9b59b6", bubble: "bubble-martin", avatar: "👦" }
 };
 
@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================
 function showLogin() {
   document.getElementById("screen-login").style.display = "flex";
-  document.getElementById("screen-chat").style.display  = "none";
+  document.getElementById("screen-chat").style.display = "none";
 }
 
 function showChat() {
   document.getElementById("screen-login").style.display = "none";
-  document.getElementById("screen-chat").style.display  = "flex";
+  document.getElementById("screen-chat").style.display = "flex";
   document.getElementById("chat-header-title").textContent =
     `${USERS[currentUser].avatar} ${USERS[currentUser].name}`;
   initOneSignal();
@@ -117,7 +117,7 @@ function subscribeToMessages() {
 function buildMessageEl(msg) {
   const user = USERS[msg.sender];
   const isOwn = msg.sender === currentUser;
-  const time  = msg.timestamp
+  const time = msg.timestamp
     ? new Date(msg.timestamp.toMillis()).toLocaleTimeString("es", { hour: "2-digit", minute: "2-digit" })
     : "";
 
@@ -148,8 +148,8 @@ async function sendMessage() {
   input.value = "";
 
   await db.collection("messages").add({
-    sender:    currentUser,
-    text:      text,
+    sender: currentUser,
+    text: text,
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   });
 
@@ -181,7 +181,7 @@ function initOneSignal() {
     const playerId = await OneSignal.User.PushSubscription.id;
     if (playerId) {
       await db.collection("tokens").doc(currentUser).set({
-        playerId:  playerId,
+        playerId: playerId,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
     }
@@ -202,7 +202,7 @@ async function sendNotification(senderKey, text) {
     if (playerIds.length === 0) return; // Nadie más ha instalado la app aún
 
     const senderName = USERS[senderKey].name;
-    const preview    = text.length > 60 ? text.slice(0, 60) + "…" : text;
+    const preview = text.length > 60 ? text.slice(0, 60) + "…" : text;
 
     await fetch("https://onesignal.com/api/v1/notifications", {
       method: "POST",
@@ -211,10 +211,10 @@ async function sendNotification(senderKey, text) {
         "Authorization": `Basic ${ONESIGNAL_REST_API_KEY}`
       },
       body: JSON.stringify({
-        app_id:             ONESIGNAL_APP_ID,
+        app_id: ONESIGNAL_APP_ID,
         include_player_ids: playerIds,
-        headings:           { en: "FamiliaChat" },
-        contents:           { en: `${senderName}: ${preview}` }
+        headings: { en: "FamiliaChat" },
+        contents: { en: `${senderName}: ${preview}` }
       })
     });
   } catch (err) {
