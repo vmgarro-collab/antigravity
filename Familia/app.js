@@ -63,29 +63,41 @@ function showChat() {
   subscribeToMessages();
 }
 
-// Botones de usuario en login
-document.querySelectorAll(".user-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const userId = btn.dataset.user;
-    localStorage.setItem("familia_user", userId);
-    currentUser = userId;
-    showChat();
+// Botones de usuario en login — registrados en DOMContentLoaded para no depender del orden del script
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".user-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const userId = btn.dataset.user;
+      localStorage.setItem("familia_user", userId);
+      currentUser = userId;
+      showChat();
+    });
   });
-});
 
-// Botón cambiar usuario
-document.getElementById("btn-change-user").addEventListener("click", () => {
-  if (unsubscribeMessages) { unsubscribeMessages(); unsubscribeMessages = null; }
-  localStorage.removeItem("familia_user");
-  currentUser = null;
-  document.getElementById("messages-container").innerHTML = "";
-  showLogin();
+  // Botón cambiar usuario
+  document.getElementById("btn-change-user").addEventListener("click", () => {
+    if (unsubscribeMessages) { unsubscribeMessages(); unsubscribeMessages = null; }
+    localStorage.removeItem("familia_user");
+    currentUser = null;
+    document.getElementById("messages-container").innerHTML = "";
+    showLogin();
+  });
+
+  // Envío de mensajes
+  document.getElementById("btn-send").addEventListener("click", sendMessage);
+  document.getElementById("message-input").addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 });
 
 // ============================================================
 // MENSAJES — Firestore real-time
 // ============================================================
 function subscribeToMessages() {
+  if (unsubscribeMessages) return; // ya suscrito
   const container = document.getElementById("messages-container");
 
   unsubscribeMessages = db.collection("messages")
@@ -143,11 +155,3 @@ async function sendMessage() {
   sendNotification(currentUser, text); // no await — no bloqueamos la UI
 }
 
-document.getElementById("btn-send").addEventListener("click", sendMessage);
-
-document.getElementById("message-input").addEventListener("keydown", e => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-});
