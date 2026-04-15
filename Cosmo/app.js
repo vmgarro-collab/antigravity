@@ -402,13 +402,43 @@ function actualizarUICosmo() {
 
 function iniciarTicker() {
   if (tickInterval) clearInterval(tickInterval);
-  tickInterval = setInterval(() => {
+  tickInterval = setInterval(async () => {
+    // Refrescar sesión activa y sesiones desde Firestore para sincronizar entre dispositivos
+    try {
+      const [sa, ses] = await Promise.all([
+        obtenerSesionAbierta(uid),
+        obtenerSesiones(uid, 35)
+      ]);
+      sesionActiva = sa;
+      sesiones = ses;
+      if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
+        sesiones.push(sesionActiva);
+      }
+    } catch (_) { /* si falla, usamos los datos que ya tenemos */ }
+
     actualizarUICosmo();
-    // Desbloquear mensaje tras 5s para que el ticker pueda actualizarlo
     const msgEl = document.getElementById('cosmo-message');
     delete msgEl.dataset.locked;
   }, 30000);
 }
+
+// Refrescar al volver a primer plano (cambio de pestaña / desbloqueo del móvil)
+document.addEventListener('visibilitychange', async function() {
+  if (document.visibilityState === 'visible') {
+    try {
+      const [sa, ses] = await Promise.all([
+        obtenerSesionAbierta(uid),
+        obtenerSesiones(uid, 35)
+      ]);
+      sesionActiva = sa;
+      sesiones = ses;
+      if (sesionActiva && !sesiones.find(s => s.id === sesionActiva.id)) {
+        sesiones.push(sesionActiva);
+      }
+      actualizarUICosmo();
+    } catch (_) {}
+  }
+});
 
 
 // ── ARRANQUE ─────────────────────────────────────────────────────
