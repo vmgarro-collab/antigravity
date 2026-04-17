@@ -10,8 +10,8 @@ const FIREBASE_CONFIG = {
   appId: "1:1060799290671:web:957347df95406825d195da"
 };
 
-const ONESIGNAL_APP_ID = "YOUR_ONESIGNAL_APP_ID";
-const ONESIGNAL_REST_API_KEY = "YOUR_ONESIGNAL_REST_API_KEY";
+const ONESIGNAL_APP_ID = "2297cd12-e071-4d04-bc4f-1c7f597bb3d6";
+const ONESIGNAL_REST_API_KEY = "os_v2_app_ekl42exaofgqjpcpdr7vs65t23n2a2ionavewenflohc54hals66yvfuw5agjmxsl7rxrshkz2mfktlxli2b262seies365w2lfaqiq";
 
 // ============================================================
 // USUARIOS
