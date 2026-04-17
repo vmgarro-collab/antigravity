@@ -167,14 +167,16 @@ function initOneSignal() {
   window.OneSignalDeferred.push(async (OneSignal) => {
     await OneSignal.init({
       appId: ONESIGNAL_APP_ID,
-      serviceWorkerPath: "/OneSignalSDKWorker.js",
+      serviceWorkerPath: "/antigravity/OneSignalSDKWorker.js",
+      serviceWorkerParam: { scope: "/antigravity/" },
       notifyButton: { enable: false }
     });
 
-    // Pedir permiso si no se ha pedido antes
-    const permission = await OneSignal.Notifications.permission;
+    // Pedir permiso solo si no se ha pedido antes — requiere gesto del usuario en iOS
+    const permission = OneSignal.Notifications.permission;
     if (!permission) {
-      await OneSignal.Notifications.requestPermission();
+      // Mostramos botón para que el usuario lo active con un tap
+      mostrarBotonNotificaciones(OneSignal);
     }
 
     // Guardar player ID en Firestore
@@ -186,6 +188,25 @@ function initOneSignal() {
       });
     }
   });
+}
+
+function mostrarBotonNotificaciones(OneSignal) {
+  const banner = document.getElementById("notif-banner");
+  const btn    = document.getElementById("btn-enable-notif");
+  if (!banner || !btn) return;
+  banner.style.display = "flex";
+  btn.addEventListener("click", async () => {
+    await OneSignal.Notifications.requestPermission();
+    banner.style.display = "none";
+    // Guardar player ID tras conceder permiso
+    const playerId = OneSignal.User.PushSubscription.id;
+    if (playerId) {
+      await db.collection("tokens").doc(currentUser).set({
+        playerId:  playerId,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+  }, { once: true });
 }
 
 async function sendNotification(senderKey, text) {
