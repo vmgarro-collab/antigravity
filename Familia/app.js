@@ -165,46 +165,61 @@ function initOneSignal() {
   oneSignalInitialized = true;
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   window.OneSignalDeferred.push(async (OneSignal) => {
-    await OneSignal.init({
-      appId: ONESIGNAL_APP_ID,
-      serviceWorkerPath: "/antigravity/OneSignalSDKWorker.js",
-      serviceWorkerParam: { scope: "/antigravity/" },
-      notifyButton: { enable: false }
-    });
-
-    // Pedir permiso solo si no se ha pedido antes — requiere gesto del usuario en iOS
-    const permission = OneSignal.Notifications.permission;
-    if (!permission) {
-      // Mostramos botón para que el usuario lo active con un tap
-      mostrarBotonNotificaciones(OneSignal);
-    }
-
-    // Guardar player ID en Firestore
-    const playerId = await OneSignal.User.PushSubscription.id;
-    if (playerId) {
-      await db.collection("tokens").doc(currentUser).set({
-        playerId: playerId,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    try {
+      setNotifStatus("Conectando con OneSignal...");
+      await OneSignal.init({
+        appId: ONESIGNAL_APP_ID,
+        serviceWorkerPath: "/antigravity/OneSignalSDKWorker.js",
+        serviceWorkerParam: { scope: "/antigravity/" },
+        notifyButton: { enable: false }
       });
+      setNotifStatus("OneSignal listo");
+      const permission = OneSignal.Notifications.permission;
+      if (!permission) {
+        mostrarBotonNotificaciones(OneSignal);
+      } else {
+        // Ya tenemos permiso — guardar player ID y ocultar banner
+        const playerId = OneSignal.User.PushSubscription.id;
+        if (playerId) {
+          await db.collection("tokens").doc(currentUser).set({
+            playerId:  playerId,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        }
+        setNotifStatus("Notificaciones activas ✓");
+        setTimeout(() => {
+          const banner = document.getElementById("notif-banner");
+          if (banner) banner.style.display = "none";
+        }, 2000);
+      }
+    } catch (err) {
+      setNotifStatus("Error: " + err.message);
     }
   });
+}
+
+function setNotifStatus(msg) {
+  const el = document.getElementById("notif-status");
+  if (el) el.textContent = msg;
 }
 
 function mostrarBotonNotificaciones(OneSignal) {
   const banner = document.getElementById("notif-banner");
   const btn    = document.getElementById("btn-enable-notif");
   if (!banner || !btn) return;
-  banner.style.display = "flex";
+  setNotifStatus("Activa las notificaciones para recibir mensajes");
+  btn.style.display = "inline-block";
   btn.addEventListener("click", async () => {
     await OneSignal.Notifications.requestPermission();
-    banner.style.display = "none";
-    // Guardar player ID tras conceder permiso
     const playerId = OneSignal.User.PushSubscription.id;
     if (playerId) {
       await db.collection("tokens").doc(currentUser).set({
         playerId:  playerId,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
+      banner.style.display = "none";
+    } else {
+      setNotifStatus("No se pudo obtener el token. ¿Aceptaste el permiso?");
     }
   }, { once: true });
 }
