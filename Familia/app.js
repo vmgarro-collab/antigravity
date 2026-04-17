@@ -169,8 +169,6 @@ function initOneSignal() {
       setNotifStatus("Conectando con OneSignal...");
       await OneSignal.init({
         appId: ONESIGNAL_APP_ID,
-        serviceWorkerPath: "/antigravity/OneSignalSDKWorker.js",
-        serviceWorkerParam: { scope: "/antigravity/" },
         notifyButton: { enable: false }
       });
       setNotifStatus("OneSignal listo");
