@@ -173,7 +173,7 @@ function renderClasificacion(data) {
         const lib = r.equipo.toUpperCase().includes('LIBERTAD');
         const click = lib ? '' : ` onclick="showH2H('${r.equipo.replace(/'/g, "\\'")}')" style="cursor:pointer" title="Ver enfrentamientos vs Libertad"`;
         return `<tr${lib ? ' class="libertad-clasif"' : ''}${click}>
-          <td>${r.pos}</td><td>${r.equipo}${lib ? '<span class="libertad-badge">★</span>' : '<span class="h2h-hint">⚽</span>'}</td>
+          <td>${r.pos}</td><td>${r.equipo}${lib ? '<span class="libertad-badge">★</span>' : ''}</td>
           <td>${r.pj}</td><td>${r.pg}</td><td>${r.pe}</td><td>${r.pp}</td>
           <td class="col-gf">${r.gf}</td><td class="col-gc">${r.gc}</td>
           <td class="pts">${r.pts}</td>
