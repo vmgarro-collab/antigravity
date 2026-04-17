@@ -248,6 +248,44 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 }
 .btn-ver-todos:hover { border-color: var(--accent-blue); }
 
+/* Head-to-head hint icon */
+.h2h-hint { font-size: 0.7rem; margin-left: 4px; opacity: 0.4; }
+.tabla-clasificacion tr:not(.libertad-clasif):hover td { background: rgba(79,172,254,0.06); }
+
+/* H2H modal */
+.h2h-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.h2h-box {
+  background: #13131f;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  width: 100%; max-width: 480px;
+  max-height: 80vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.h2h-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  font-weight: 600; color: var(--accent-blue);
+}
+.h2h-close {
+  background: none; border: none; color: var(--text-muted);
+  font-size: 1.1rem; cursor: pointer; padding: 4px 8px;
+}
+.tabla-h2h { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.tabla-h2h th { padding: 8px 12px; color: var(--text-muted); text-align: left; }
+.tabla-h2h td { padding: 8px 12px; border-top: 1px solid rgba(255,255,255,0.05); }
+.h2h-score { font-weight: 700; text-align: center; }
+tr.h2h-win  td { color: var(--accent-green); }
+tr.h2h-loss td { color: #ff6b6b; }
+tr.h2h-draw td { color: var(--text-muted); }
+
 /* Libertad row in clasificacion */
 .tabla-clasificacion tr.libertad-clasif td {
   background: rgba(0,255,136,0.06);

@@ -2,8 +2,8 @@ name: Scrape Futbol Benjamines
 
 on:
   schedule:
-    - cron: '0 7,13,19 * * 1-6'  # lunes a sábado: 3 veces al día
-    - cron: '0 8-20 * * 0'       # domingos: cada hora de 8h a 20h
+    - cron: '0 7,13,19 * * 0-5'  # domingo a viernes: 3 veces al día
+    - cron: '0 8-20 * * 6'       # sábados: cada hora de 8h a 20h
   workflow_dispatch:             # disparo manual desde GitHub
 
 permissions:

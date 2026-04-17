@@ -51,6 +51,22 @@
     </main>
   </div>
 
+  <!-- Head-to-head modal -->
+  <div id="h2h-modal" style="display:none" class="h2h-overlay" onclick="if(event.target===this)closeH2H()">
+    <div class="h2h-box">
+      <div class="h2h-header">
+        <span id="h2h-title"></span>
+        <button class="h2h-close" onclick="closeH2H()">✕</button>
+      </div>
+      <div class="table-scroll">
+        <table class="tabla-h2h">
+          <thead><tr><th>Fecha</th><th>Rival</th><th>Resultado</th><th>Campo</th></tr></thead>
+          <tbody id="h2h-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
