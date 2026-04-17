@@ -1,7 +1,7 @@
 // Futbol/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'libertad-v1';
+const CACHE = 'libertad-v3';
 const PRECACHE = [
   '/antigravity/Futbol/',
   '/antigravity/Futbol/index.html',
@@ -12,6 +12,7 @@ const PRECACHE = [
   '/antigravity/Futbol/data/clasificacion.json',
   '/antigravity/Futbol/data/resultados.json',
   '/antigravity/Futbol/data/goleadores.json',
+  '/antigravity/Futbol/data/todos_partidos.json',
 ];
 
 self.addEventListener('install', e => {
