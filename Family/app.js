@@ -27,7 +27,7 @@ function initCalendar() {
     headerToolbar: {
       left: 'prev',
       center: 'title',
-      right: 'next'
+      right: 'dayGridMonth,dayGridWeek next'
     },
     height: 'auto',
     editable: true,
