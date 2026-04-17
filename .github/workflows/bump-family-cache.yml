@@ -1,0 +1,32 @@
+name: Bump Family Cache Version
+
+on:
+  push:
+    paths:
+      - 'Family/**'
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Bump sw.js cache version
+        run: |
+          TIMESTAMP=$(date +%s)
+          sed -i "s/const CACHE = 'familia-v[^']*'/const CACHE = 'familia-v$TIMESTAMP'/" Family/sw.js
+          echo "Cache bumped to familia-v$TIMESTAMP"
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet Family/sw.js || (git add Family/sw.js && git commit -m "chore(family): bump cache version [skip ci]")
+          git push
