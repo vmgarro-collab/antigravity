@@ -32,6 +32,7 @@ async function main() {
   fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(result));
 
   // Fetch each individual jornada — skip on error, keep existing file
+  const todosPartidos = [];
   for (const j of result.jornadas || []) {
     const filePath = path.join(DATA_DIR, `resultados_j${j.num}.json`);
     let ok = false;
@@ -39,15 +40,26 @@ async function main() {
       try {
         const jResult = await getResultados(GRUPO_ID, COMPETICION_ID, j.num);
         fs.writeFileSync(filePath, JSON.stringify(jResult));
-        console.log(`  Jornada ${j.num} OK`);
+        todosPartidos.push(...(jResult.partidos || []));
+        console.log(`  Jornada ${j.num} OK (${jResult.partidos?.length || 0} partidos)`);
         ok = true;
       } catch (e) {
         console.warn(`  Jornada ${j.num} intento ${attempt} fallido: ${e.message}`);
         if (attempt < 3) await new Promise(r => setTimeout(r, 3000));
       }
     }
-    if (!ok) console.warn(`  Jornada ${j.num} omitida (se mantiene fichero anterior si existe)`);
+    if (!ok) {
+      // Try to recover from existing file
+      if (fs.existsSync(filePath)) {
+        try {
+          const existing = JSON.parse(fs.readFileSync(filePath));
+          todosPartidos.push(...(existing.partidos || []));
+        } catch (_) {}
+      }
+      console.warn(`  Jornada ${j.num} omitida (se mantiene fichero anterior si existe)`);
+    }
   }
+  fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 
   console.log('Fetching goleadores...');
   const goles = await retry(() => getGoleadores(GRUPO_ID, COMPETICION_ID), 'goleadores');

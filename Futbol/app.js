@@ -116,17 +116,20 @@ async function loadAll() {
   setLoading(true);
   hideError();
   try {
-    const [clasif, result, goles] = await Promise.all([
+    const [clasif, result, goles, todosPartidos] = await Promise.all([
       getClasificacion(),
       getResultados(),
       getGoleadores(),
+      LOCAL
+        ? fetch(`/api/resultados?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}`).then(r => r.json()).then(d => d.partidos || [])
+        : fetch('data/todos_partidos.json').then(r => r.ok ? r.json() : []),
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
     jornadaIdx = result.jornada_actual
       ? Math.max(0, jornadas.findIndex(j => j.num === result.jornada_actual))
       : Math.max(0, jornadas.length - 1);
-    _todosPartidos = result.partidos || [];
+    _todosPartidos = todosPartidos;
     renderResultados(result);
     _goleadoresAll = goles;
     _goleadoresExpanded = false;
