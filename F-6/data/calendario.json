@@ -1,33 +1,5 @@
 [
   {
-    "jornada": 36,
-    "fecha": "19/04/2026",
-    "hora": "10:00",
-    "local": "RAYO PILAR",
-    "visitante": "SPORTING SARRIA"
-  },
-  {
-    "jornada": 36,
-    "fecha": "19/04/2026",
-    "hora": "11:00",
-    "local": "TROPICAL",
-    "visitante": "CHAOX F.C"
-  },
-  {
-    "jornada": 36,
-    "fecha": "19/04/2026",
-    "hora": "12:00",
-    "local": "EL PARAGUAS",
-    "visitante": "RAYO HUESCA"
-  },
-  {
-    "jornada": 36,
-    "fecha": "19/04/2026",
-    "hora": "13:00",
-    "local": "RCD CAMBADOS",
-    "visitante": "SACONIA 2.0"
-  },
-  {
     "jornada": 37,
     "fecha": "26/04/2026",
     "hora": "10:00",
