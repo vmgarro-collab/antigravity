@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar sesión — Cosmo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 16px; }
+    button { padding: 14px 24px; font-size: 16px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 12px; font-weight: bold; }
+    #btn-editar { background: #7c3aed; color: white; }
+    #btn-editar:disabled { background: #ccc; cursor: not-allowed; }
+    input[type=time] { padding: 10px; font-size: 16px; border: 2px solid #C4B5FD; border-radius: 8px; width: 100%; box-sizing: border-box; margin-top: 8px; }
+    label { font-weight: bold; display: block; margin-top: 16px; }
+    #log { margin-top: 20px; background: #f3f4f6; border-radius: 8px; padding: 14px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; min-height: 40px; }
+    .ok { color: #16a34a; }
+    .err { color: #dc2626; }
+    .info { color: #6b7280; }
+  </style>
+</head>
+<body>
+  <h2>✏️ Editar inicio de sesión de hoy</h2>
+  <p>Cambia la hora a la que empezó la sesión activa de hoy.</p>
+
+  <label>Nueva hora de inicio (hora local):</label>
+  <input type="time" id="input-hora" value="00:01">
+
+  <button id="btn-editar">✅ Guardar nueva hora</button>
+  <div id="log">Cargando sesión activa...</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import {
+  initializeFirestore, persistentLocalCache,
+  collection, getDocs, updateDoc, doc, Timestamp, query, orderBy
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB7B02fo7fbMro7bqmzc-7Rnq_M2mvGCBo",
+  authDomain: "cosmo-corse.firebaseapp.com",
+  projectId: "cosmo-corse",
+  storageBucket: "cosmo-corse.firebasestorage.app",
+  messagingSenderId: "942015789023",
+  appId: "1:942015789023:web:e7519efb9247033cabb66a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = initializeFirestore(app, { localCache: persistentLocalCache() });
+const uid = 'cosmo-familia';
+
+const log = document.getElementById('log');
+const btn = document.getElementById('btn-editar');
+
+function escribe(msg, tipo = 'info') {
+  log.innerHTML = `<span class="${tipo}">${msg}</span>`;
+}
+
+// Encontrar la sesión abierta más reciente
+let sesionActivaId = null;
+let sesionActivaInicio = null;
+
+const ref = collection(db, 'usuarios', uid, 'sesiones');
+const snap = await getDocs(ref);
+const abiertas = snap.docs
+  .map(d => ({ id: d.id, ...d.data() }))
+  .filter(s => s.fin == null)
+  .sort((a, b) => {
+    const ta = a.inicio?.toDate ? a.inicio.toDate().getTime() : 0;
+    const tb = b.inicio?.toDate ? b.inicio.toDate().getTime() : 0;
+    return tb - ta;
+  });
+
+if (abiertas.length === 0) {
+  escribe('⚠️ No hay ninguna sesión abierta en este momento.', 'err');
+  btn.disabled = true;
+} else {
+  sesionActivaId = abiertas[0].id;
+  sesionActivaInicio = abiertas[0].inicio?.toDate ? abiertas[0].inicio.toDate() : new Date(abiertas[0].inicio);
+  escribe(`Sesión activa encontrada.\nInicio actual: ${sesionActivaInicio.toLocaleString('es-ES')}\n\nElige la nueva hora y pulsa Guardar.`, 'info');
+}
+
+btn.addEventListener('click', async () => {
+  if (!sesionActivaId) return;
+  const horaStr = document.getElementById('input-hora').value;
+  if (!horaStr) { escribe('⚠️ Elige una hora.', 'err'); return; }
+
+  const [h, m] = horaStr.split(':').map(Number);
+  const nuevaFecha = new Date();
+  nuevaFecha.setHours(h, m, 0, 0);
+
+  btn.disabled = true;
+  escribe('Guardando...', 'info');
+
+  try {
+    await updateDoc(doc(db, 'usuarios', uid, 'sesiones', sesionActivaId), {
+      inicio: Timestamp.fromDate(nuevaFecha)
+    });
+    escribe(`✅ Inicio actualizado a las ${horaStr} de hoy.\n\nRecarga la app Cosmo para ver el cambio.`, 'ok');
+  } catch (err) {
+    escribe(`❌ Error: ${err.message}`, 'err');
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
