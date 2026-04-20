@@ -702,5 +702,37 @@
     "golesLocal": 3,
     "golesVisitante": 10,
     "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 36,
+    "fecha": "19/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 5,
+    "golesVisitante": 13,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 36,
+    "fecha": "19/04/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 10,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 36,
+    "fecha": "19/04/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 5,
+    "golesVisitante": 1,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 36,
+    "fecha": "19/04/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 11,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
   }
 ]
