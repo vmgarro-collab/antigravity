@@ -12,7 +12,7 @@ def transcribe_chunk(audio_path: str) -> str:
     with open(audio_path, "rb") as f:
         audio_bytes = f.read()
     response = _model.generate_content([
-        "Transcribe el siguiente audio en español. Devuelve solo el texto transcrito, sin comentarios ni explicaciones.",
+        "Transcribe the following audio accurately. Return only the transcribed text in the same language as the audio, no comments or explanations.",
         {"mime_type": "audio/wav", "data": audio_bytes},
     ])
     return response.text.strip()
