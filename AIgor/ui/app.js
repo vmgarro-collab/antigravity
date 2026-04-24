@@ -1,5 +1,5 @@
 const API = 'http://localhost:8765';
-const CHUNK_SECONDS = 8;
+const CHUNK_SECONDS = 4;
 
 // --- State ---
 const State = { IDLE: 'idle', RECORDING: 'recording', RESULTS: 'results', SUMMARIZING: 'summarizing', MINUTAS: 'minutas' };
