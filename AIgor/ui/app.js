@@ -1,28 +1,26 @@
 const API = 'http://localhost:8765';
-const CHUNK_SECONDS = 8;
 
 // --- State ---
-const State = { IDLE: 'idle', RECORDING: 'recording', RESULTS: 'results', SUMMARIZING: 'summarizing', MINUTAS: 'minutas' };
+const State = { IDLE: 'idle', RECORDING: 'recording', TRANSCRIBING: 'transcribing', RESULTS: 'results', SUMMARIZING: 'summarizing', MINUTAS: 'minutas' };
 let currentState = State.IDLE;
 let mediaRecorder = null;
+let audioChunks = [];
 let audioCtx = null;
 let analyser = null;
 let animId = null;
 let timerInterval = null;
 let secondsElapsed = 0;
 let fullTranscript = '';
-let chunkInterval = null;
-let currentChunkChunks = [];
 
 // --- DOM ---
 const views = {
   idle: document.getElementById('view-idle'),
   recording: document.getElementById('view-recording'),
+  transcribing: document.getElementById('view-transcribing'),
   results: document.getElementById('view-results'),
   summarizing: document.getElementById('view-summarizing'),
   minutas: document.getElementById('view-minutas'),
 };
-const liveTranscript = document.getElementById('live-transcript');
 const fullTranscriptEl = document.getElementById('full-transcript');
 const minutasContent = document.getElementById('minutas-content');
 const timerEl = document.getElementById('timer');
@@ -61,7 +59,6 @@ function startVisualizer(stream) {
     animId = requestAnimationFrame(draw);
     analyser.getByteFrequencyData(data);
     ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-    ctx2d.fillStyle = 'rgba(0,0,0,0)';
     const bw = canvas.width / data.length;
     data.forEach((v, i) => {
       const h = (v / 255) * canvas.height;
@@ -80,39 +77,7 @@ function stopVisualizer() {
   if (audioCtx) { audioCtx.close(); audioCtx = null; }
 }
 
-// --- Chunk recording & transcription ---
-function startChunkRecorder(stream) {
-  currentChunkChunks = [];
-
-  function recordChunk() {
-    currentChunkChunks = [];
-    const mr = new MediaRecorder(stream, { mimeType: 'audio/webm' });
-    mr.ondataavailable = e => { if (e.data.size > 0) currentChunkChunks.push(e.data); };
-    mr.onstop = async () => {
-      const blob = new Blob(currentChunkChunks, { type: 'audio/webm' });
-      const wav = await convertToWav(blob);
-      await sendChunk(wav);
-    };
-    mr.start();
-    mediaRecorder = mr;
-  }
-
-  recordChunk();
-  chunkInterval = setInterval(() => {
-    if (mediaRecorder && mediaRecorder.state === 'recording') {
-      mediaRecorder.stop();
-      recordChunk();
-    }
-  }, CHUNK_SECONDS * 1000);
-}
-
-function stopChunkRecorder() {
-  clearInterval(chunkInterval);
-  if (mediaRecorder && mediaRecorder.state === 'recording') {
-    mediaRecorder.stop();
-  }
-}
-
+// --- WAV conversion ---
 async function convertToWav(blob) {
   const arrayBuffer = await blob.arrayBuffer();
   const tmpCtx = new AudioContext();
@@ -148,43 +113,48 @@ async function convertToWav(blob) {
   return new Blob([wavBuf], { type: 'audio/wav' });
 }
 
-async function sendChunk(wavBlob) {
-  try {
-    const form = new FormData();
-    form.append('audio', wavBlob, 'chunk.wav');
-    const res = await fetch(`${API}/transcribe`, { method: 'POST', body: form });
-    if (!res.ok) return;
-    const { text } = await res.json();
-    if (text && text.trim()) {
-      fullTranscript += (fullTranscript ? ' ' : '') + text.trim();
-      liveTranscript.textContent = fullTranscript;
-      liveTranscript.classList.remove('empty');
-      liveTranscript.scrollTop = liveTranscript.scrollHeight;
-    }
-  } catch (e) {
-    console.error('Error transcribiendo chunk:', e);
-  }
-}
-
 // --- Recording flow ---
 async function startRecording() {
+  audioChunks = [];
   fullTranscript = '';
-  liveTranscript.textContent = 'Transcripción en tiempo real...';
-  liveTranscript.classList.add('empty');
   showView(State.RECORDING);
 
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   startVisualizer(stream);
   startTimer();
-  startChunkRecorder(stream);
+
+  mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+  mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+  mediaRecorder.onstop = async () => {
+    stopVisualizer();
+    showView(State.TRANSCRIBING);
+    const blob = new Blob(audioChunks, { type: 'audio/webm' });
+    const wav = await convertToWav(blob);
+    await transcribeFullAudio(wav);
+  };
+  mediaRecorder.start();
 }
 
-async function stopRecording() {
+function stopRecording() {
   stopTimer();
-  stopVisualizer();
-  stopChunkRecorder();
-  showView(State.RESULTS);
-  fullTranscriptEl.textContent = fullTranscript || '(Sin transcripción)';
+  mediaRecorder.stop();
+}
+
+// --- Transcribe full audio ---
+async function transcribeFullAudio(wavBlob) {
+  try {
+    const form = new FormData();
+    form.append('audio', wavBlob, 'recording.wav');
+    const res = await fetch(`${API}/transcribe`, { method: 'POST', body: form });
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    const { text } = await res.json();
+    fullTranscript = text || '(Sin transcripción)';
+    fullTranscriptEl.textContent = fullTranscript;
+    showView(State.RESULTS);
+  } catch (e) {
+    alert('Error transcribiendo: ' + e.message);
+    showView(State.IDLE);
+  }
 }
 
 // --- Summarize ---
@@ -207,9 +177,8 @@ async function generateMinutas() {
 
 // --- Reset ---
 function resetToIdle() {
+  audioChunks = [];
   fullTranscript = '';
-  liveTranscript.textContent = 'Transcripción en tiempo real...';
-  liveTranscript.classList.add('empty');
   fullTranscriptEl.textContent = '';
   minutasContent.innerHTML = '';
   showView(State.IDLE);

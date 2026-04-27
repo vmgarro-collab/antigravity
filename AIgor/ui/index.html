@@ -28,15 +28,20 @@
         <span class="timer" id="timer">00:00</span>
       </div>
       <canvas class="visualizer" id="visualizer"></canvas>
-      <div class="transcript-box empty" id="live-transcript">Transcripción en tiempo real...</div>
       <div class="row">
-        <button class="btn btn-danger" id="btn-stop">■ Detener</button>
+        <button class="btn btn-danger" id="btn-stop">■ Detener y transcribir</button>
       </div>
+    </div>
+
+    <!-- TRANSCRIBING -->
+    <div id="view-transcribing" class="view" style="align-items:center;gap:16px">
+      <div class="spinner"></div>
+      <p style="color:var(--text-muted)">Transcribiendo grabación...</p>
     </div>
 
     <!-- RESULTS -->
     <div id="view-results" class="view">
-      <p style="font-weight:600">Transcripción completa</p>
+      <p style="font-weight:600">Transcripción</p>
       <div class="transcript-box" id="full-transcript"></div>
       <div class="row">
         <button class="btn btn-primary" id="btn-summarize">✦ Generar minutas</button>
@@ -47,7 +52,7 @@
     <!-- SUMMARIZING -->
     <div id="view-summarizing" class="view" style="align-items:center;gap:16px">
       <div class="spinner"></div>
-      <p style="color:var(--text-muted)">Generando minutas con Gemini...</p>
+      <p style="color:var(--text-muted)">Generando minutas con LLaMA...</p>
     </div>
 
     <!-- MINUTAS -->
