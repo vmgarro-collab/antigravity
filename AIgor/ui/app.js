@@ -151,6 +151,7 @@ async function transcribeFullAudio(wavBlob) {
     fullTranscript = text || '(Sin transcripción)';
     fullTranscriptEl.textContent = fullTranscript;
     showView(State.RESULTS);
+    await generateMinutas();
   } catch (e) {
     alert('Error transcribiendo: ' + e.message);
     showView(State.IDLE);
@@ -166,8 +167,10 @@ async function generateMinutas() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: fullTranscript }),
     });
-    const { result } = await res.json();
+    const { result, saved_to } = await res.json();
     minutasContent.innerHTML = marked.parse(result);
+    const savedEl = document.getElementById('saved-path');
+    if (savedEl) savedEl.textContent = saved_to || '';
     showView(State.MINUTAS);
   } catch (e) {
     alert('Error generando minutas: ' + e.message);
@@ -198,7 +201,6 @@ function copyMinutas() {
 // --- Event listeners ---
 document.getElementById('btn-start').addEventListener('click', startRecording);
 document.getElementById('btn-stop').addEventListener('click', stopRecording);
-document.getElementById('btn-summarize').addEventListener('click', generateMinutas);
 document.getElementById('btn-copy').addEventListener('click', copyMinutas);
 document.getElementById('btn-new-1').addEventListener('click', resetToIdle);
 document.getElementById('btn-new-2').addEventListener('click', resetToIdle);
