@@ -48,7 +48,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
   initializeFirestore, persistentLocalCache,
-  collection, getDocs, updateDoc, doc, Timestamp, query, orderBy
+  collection, getDocs, updateDoc, addDoc, deleteDoc, doc, Timestamp
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -118,10 +118,8 @@ btn.addEventListener('click', async () => {
   }
 });
 
-// Poner fecha de ayer por defecto
-const ayer = new Date();
-ayer.setDate(ayer.getDate() - 1);
-document.getElementById('input-fecha').value = ayer.toISOString().split('T')[0];
+// Poner fecha de hoy por defecto
+document.getElementById('input-fecha').value = new Date().toISOString().split('T')[0];
 
 document.getElementById('btn-añadir').addEventListener('click', async () => {
   const fechaStr = document.getElementById('input-fecha').value;
@@ -146,6 +144,18 @@ document.getElementById('btn-añadir').addEventListener('click', async () => {
   log2.innerHTML = 'Guardando...';
 
   try {
+    // Borrar todas las sesiones del día elegido antes de añadir
+    const diaInicio = new Date(`${fechaStr}T00:00:00`).getTime();
+    const diaFin = new Date(`${fechaStr}T23:59:59`).getTime();
+    const todosSnap = await getDocs(ref);
+    for (const d of todosSnap.docs) {
+      const s = d.data();
+      const sT = s.inicio?.toDate ? s.inicio.toDate().getTime() : 0;
+      if (sT >= diaInicio && sT <= diaFin) {
+        await deleteDoc(doc(db, 'usuarios', uid, 'sesiones', d.id));
+      }
+    }
+
     await addDoc(ref, {
       inicio: Timestamp.fromDate(inicioDate),
       fin: Timestamp.fromDate(finDate),
@@ -153,7 +163,7 @@ document.getElementById('btn-añadir').addEventListener('click', async () => {
     });
     const h = Math.floor(duracionMinutos / 60);
     const m = duracionMinutos % 60;
-    log2.innerHTML = `<span style="color:#16a34a">✅ Sesión añadida: ${fechaStr} de ${inicioStr} a ${finStr} (${h}h ${m}min).\n\nRecarga la app Cosmo para ver el cambio.</span>`;
+    log2.innerHTML = `<span style="color:#16a34a">✅ Sesiones del día borradas y nueva creada: ${inicioStr} → ${finStr} (${h}h ${m}min).\n\nRecarga la app Cosmo para ver el cambio.</span>`;
   } catch (err) {
     log2.innerHTML = `<span style="color:#dc2626">❌ Error: ${err.message}</span>`;
   }
