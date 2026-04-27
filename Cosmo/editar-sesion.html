@@ -27,6 +27,23 @@
   <button id="btn-editar">✅ Guardar nueva hora</button>
   <div id="log">Cargando sesión activa...</div>
 
+  <hr style="margin: 32px 0">
+
+  <h2>➕ Añadir sesión de un día pasado</h2>
+  <p>Para cuando se olvidó pulsar el botón.</p>
+
+  <label>Fecha:</label>
+  <input type="date" id="input-fecha" style="padding:10px;font-size:16px;border:2px solid #C4B5FD;border-radius:8px;width:100%;box-sizing:border-box;margin-top:8px">
+
+  <label>Hora inicio:</label>
+  <input type="time" id="input-inicio-pasado" value="00:01" style="padding:10px;font-size:16px;border:2px solid #C4B5FD;border-radius:8px;width:100%;box-sizing:border-box;margin-top:8px">
+
+  <label>Hora fin:</label>
+  <input type="time" id="input-fin-pasado" value="18:00" style="padding:10px;font-size:16px;border:2px solid #C4B5FD;border-radius:8px;width:100%;box-sizing:border-box;margin-top:8px">
+
+  <button id="btn-añadir" style="background:#16a34a;color:white;padding:14px 24px;font-size:16px;border-radius:10px;border:none;cursor:pointer;width:100%;margin-top:12px;font-weight:bold">➕ Añadir sesión</button>
+  <div id="log2" style="margin-top:20px;background:#f3f4f6;border-radius:8px;padding:14px;font-size:14px;line-height:1.8;min-height:40px"></div>
+
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
@@ -98,6 +115,47 @@ btn.addEventListener('click', async () => {
   } catch (err) {
     escribe(`❌ Error: ${err.message}`, 'err');
     btn.disabled = false;
+  }
+});
+
+// Poner fecha de ayer por defecto
+const ayer = new Date();
+ayer.setDate(ayer.getDate() - 1);
+document.getElementById('input-fecha').value = ayer.toISOString().split('T')[0];
+
+document.getElementById('btn-añadir').addEventListener('click', async () => {
+  const fechaStr = document.getElementById('input-fecha').value;
+  const inicioStr = document.getElementById('input-inicio-pasado').value;
+  const finStr = document.getElementById('input-fin-pasado').value;
+  const log2 = document.getElementById('log2');
+
+  if (!fechaStr || !inicioStr || !finStr) {
+    log2.innerHTML = '<span style="color:#dc2626">⚠️ Rellena todos los campos.</span>';
+    return;
+  }
+
+  const inicioDate = new Date(`${fechaStr}T${inicioStr}:00`);
+  const finDate = new Date(`${fechaStr}T${finStr}:00`);
+
+  if (finDate <= inicioDate) {
+    log2.innerHTML = '<span style="color:#dc2626">⚠️ La hora de fin debe ser posterior al inicio.</span>';
+    return;
+  }
+
+  const duracionMinutos = Math.round((finDate - inicioDate) / 60000);
+  log2.innerHTML = 'Guardando...';
+
+  try {
+    await addDoc(ref, {
+      inicio: Timestamp.fromDate(inicioDate),
+      fin: Timestamp.fromDate(finDate),
+      duracionMinutos
+    });
+    const h = Math.floor(duracionMinutos / 60);
+    const m = duracionMinutos % 60;
+    log2.innerHTML = `<span style="color:#16a34a">✅ Sesión añadida: ${fechaStr} de ${inicioStr} a ${finStr} (${h}h ${m}min).\n\nRecarga la app Cosmo para ver el cambio.</span>`;
+  } catch (err) {
+    log2.innerHTML = `<span style="color:#dc2626">❌ Error: ${err.message}</span>`;
   }
 });
 </script>
