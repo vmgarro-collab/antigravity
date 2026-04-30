@@ -242,3 +242,126 @@ function shuffle(arr) {
   }
   return a
 }
+
+// === Quiz Rápido ===
+const QUIZ_TOTAL = 20
+const QUIZ_TIME  = 10   // segundos por pregunta
+const QUIZ_BONUS_THRESHOLD = 4  // segundos para bonus
+
+function startQuiz() {
+  quizQuestions = randomQuestions(QUIZ_TOTAL)
+  quizIndex = 0
+  quizScore = 0
+  quizAnswers = []
+  activeMode = 'quiz'
+  buildNumpad('quiz-numpad')
+  showScreen('quiz')
+  renderQuizQuestion()
+}
+
+function renderQuizQuestion() {
+  if (quizIndex >= quizQuestions.length) {
+    finishQuiz()
+    return
+  }
+  currentInput = ''
+  const q = quizQuestions[quizIndex]
+  const qEl = document.getElementById('quiz-question')
+  qEl.dataset.base = `${q.a} × ${q.b} =`
+  qEl.textContent = `${q.a} × ${q.b} = ?`
+
+  document.getElementById('quiz-q-num').textContent = quizIndex + 1
+  document.getElementById('quiz-score').textContent = quizScore
+
+  hideFeedback('quiz-feedback')
+  startTimer()
+}
+
+function startTimer() {
+  if (quizTimer) clearInterval(quizTimer)
+  quizStartTime = Date.now()
+  const fillEl = document.getElementById('timer-fill')
+  fillEl.style.width = '100%'
+  fillEl.classList.remove('urgent')
+
+  quizTimer = setInterval(() => {
+    const elapsed = (Date.now() - quizStartTime) / 1000
+    const pct = Math.max(0, 1 - elapsed / QUIZ_TIME)
+    fillEl.style.width = (pct * 100) + '%'
+    if (pct < 0.3) fillEl.classList.add('urgent')
+    if (pct <= 0) {
+      clearInterval(quizTimer)
+      quizTimer = null
+      handleQuizAnswer(false, QUIZ_TIME * 1000)
+    }
+  }, 100)
+}
+
+function submitAnswer() {
+  if (!activeMode) return
+  if (activeMode === 'quiz')    handleQuizAnswer(null, null)
+  if (activeMode === 'isla')    handleIslaAnswer()
+  if (activeMode === 'entrena') handleEntrenaAnswer()
+}
+
+function handleQuizAnswer(forceCorrect, forceTime) {
+  if (quizTimer) { clearInterval(quizTimer); quizTimer = null }
+  const q = quizQuestions[quizIndex]
+  const timeMs = forceTime !== null ? forceTime : (Date.now() - quizStartTime)
+  const userAnswer = forceCorrect !== null ? (forceCorrect ? q.answer : -1) : parseInt(currentInput, 10)
+  const correct = userAnswer === q.answer
+
+  recordAnswer(q.a, q.b, correct, timeMs)
+  quizAnswers.push({ correct, timeMs })
+
+  if (correct) {
+    const bonus = (timeMs / 1000) < QUIZ_BONUS_THRESHOLD ? 5 : 0
+    quizScore += 10 + bonus
+    showFeedback('quiz-feedback', true, '✓')
+  } else {
+    showFeedback('quiz-feedback', false, `✗  ${q.answer}`)
+    shakeCard('quiz-question-card')
+  }
+
+  currentInput = ''
+  setTimeout(() => {
+    quizIndex++
+    renderQuizQuestion()
+  }, 900)
+}
+
+function finishQuiz() {
+  activeMode = ''
+  incrementStreak()
+  checkTrophies()
+
+  const correct = quizAnswers.filter(a => a.correct).length
+  const accuracy = Math.round(correct / QUIZ_TOTAL * 100)
+  const avgTime  = (quizAnswers.reduce((s, a) => s + a.timeMs, 0) / QUIZ_TOTAL / 1000).toFixed(1)
+
+  document.getElementById('results-score').textContent    = quizScore
+  document.getElementById('results-correct').textContent  = correct
+  document.getElementById('results-accuracy').textContent = accuracy + '%'
+  document.getElementById('results-avg-time').textContent = avgTime + 's'
+
+  showScreen('quiz-results')
+}
+
+// === Feedback helpers ===
+function showFeedback(id, correct, text) {
+  const el = document.getElementById(id)
+  el.textContent = text
+  el.className = 'feedback-overlay ' + (correct ? 'correct' : 'incorrect')
+}
+function hideFeedback(id) {
+  const el = document.getElementById(id)
+  el.className = 'feedback-overlay'
+  el.textContent = ''
+}
+function shakeCard(id) {
+  const el = document.getElementById(id)
+  el.classList.remove('anim-shake')
+  void el.offsetWidth  // reflow para reiniciar animación
+  el.classList.add('anim-shake')
+  setTimeout(() => el.classList.remove('anim-shake'), 500)
+}
