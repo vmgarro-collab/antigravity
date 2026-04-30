@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ff2d78" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>TablasMagia ✖️</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- SCREEN: Home -->
+  <section id="screen-home" class="screen active">
+    <div class="home-header">
+      <h1 class="logo">✖️ TablasMagia</h1>
+      <div class="streak-badge" id="streak-badge">🔥 <span id="streak-count">0</span> días</div>
+    </div>
+    <div class="progress-block">
+      <div class="progress-label">
+        <span>Estrellas</span>
+        <span id="stars-total">0</span>/30 ⭐
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="stars-bar"></div></div>
+    </div>
+    <div class="trophies-row" id="trophies-row">
+      <div class="trophy locked" id="trophy-principiante" title="Principiante: 5 ⭐">🏅</div>
+      <div class="trophy locked" id="trophy-maestra" title="Maestra: 15 ⭐">🥈</div>
+      <div class="trophy locked" id="trophy-leyenda" title="Leyenda: 30 ⭐">🏆</div>
+    </div>
+    <div class="mode-buttons">
+      <button class="btn-mode btn-quiz" onclick="startQuiz()">
+        <span class="mode-icon">⚡</span>
+        <span class="mode-title">Quiz Rápido</span>
+        <span class="mode-sub">20 preguntas · Puntuación</span>
+      </button>
+      <button class="btn-mode btn-aventura" onclick="showAventura()">
+        <span class="mode-icon">🗺️</span>
+        <span class="mode-title">Aventura</span>
+        <span class="mode-sub">Desbloquea las 10 tablas</span>
+      </button>
+      <button class="btn-mode btn-debiles" onclick="startEntrenamiento()">
+        <span class="mode-icon">💪</span>
+        <span class="mode-title">Entrena Débiles</span>
+        <span class="mode-sub">Tus peores multiplicaciones</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- SCREEN: Quiz -->
+  <section id="screen-quiz" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="goHome()">←</button>
+      <span class="screen-title">Quiz Rápido</span>
+      <span class="score-display">⭐ <span id="quiz-score">0</span></span>
+    </div>
+    <div class="quiz-progress">
+      <span id="quiz-q-num">1</span>/20
+      <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+    </div>
+    <div class="question-card" id="quiz-question-card">
+      <div class="question-text" id="quiz-question">7 × 8 = ?</div>
+      <div class="feedback-overlay" id="quiz-feedback"></div>
+    </div>
+    <div class="numpad" id="quiz-numpad"></div>
+  </section>
+
+  <!-- SCREEN: Quiz Results -->
+  <section id="screen-quiz-results" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="goHome()">← Inicio</button>
+      <span class="screen-title">Resultado</span>
+    </div>
+    <div class="results-card">
+      <div class="results-score" id="results-score">85</div>
+      <div class="results-label">puntos</div>
+      <div class="results-stats">
+        <div class="stat"><span id="results-correct">17</span><small>correctas</small></div>
+        <div class="stat"><span id="results-accuracy">85%</span><small>precisión</small></div>
+        <div class="stat"><span id="results-avg-time">4.2s</span><small>tiempo medio</small></div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">Jugar de nuevo</button>
+    <button class="btn-secondary" onclick="goHome()">Volver al inicio</button>
+  </section>
+
+  <!-- SCREEN: Aventura (mapa) -->
+  <section id="screen-aventura" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="goHome()">←</button>
+      <span class="screen-title">Aventura</span>
+    </div>
+    <div class="island-map" id="island-map"></div>
+  </section>
+
+  <!-- SCREEN: Isla (gameplay de aventura) -->
+  <section id="screen-isla" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showAventura()">←</button>
+      <span class="screen-title" id="isla-title">Tabla del 7</span>
+      <span class="score-display" id="isla-progress">1/15</span>
+    </div>
+    <div class="question-card" id="isla-question-card">
+      <div class="question-text" id="isla-question">7 × 3 = ?</div>
+      <div class="feedback-overlay" id="isla-feedback"></div>
+    </div>
+    <div class="numpad" id="isla-numpad"></div>
+  </section>
+
+  <!-- SCREEN: Isla Results -->
+  <section id="screen-isla-results" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showAventura()">← Mapa</button>
+      <span class="screen-title">Isla completada</span>
+    </div>
+    <div class="results-card">
+      <div class="stars-earned" id="isla-stars-earned">⭐⭐⭐</div>
+      <div class="results-stats">
+        <div class="stat"><span id="isla-results-correct">13</span><small>correctas</small></div>
+        <div class="stat"><span id="isla-results-accuracy">86%</span><small>precisión</small></div>
+        <div class="stat"><span id="isla-results-avg-time">5.1s</span><small>tiempo medio</small></div>
+      </div>
+    </div>
+    <button class="btn-primary" id="btn-reto-final" onclick="startRetoFinal()" style="display:none">⚡ Reto Final</button>
+    <button class="btn-secondary" onclick="showAventura()">Volver al mapa</button>
+  </section>
+
+  <!-- SCREEN: Entrena Débiles -->
+  <section id="screen-entrena" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="goHome()">←</button>
+      <span class="screen-title">Entrena Débiles</span>
+      <span class="score-display" id="entrena-progress">1/15</span>
+    </div>
+    <div class="question-card" id="entrena-question-card">
+      <div class="question-text" id="entrena-question">6 × 9 = ?</div>
+      <div class="feedback-overlay" id="entrena-feedback"></div>
+    </div>
+    <div class="numpad" id="entrena-numpad"></div>
+  </section>
+
+  <!-- SCREEN: Entrena Results -->
+  <section id="screen-entrena-results" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="goHome()">← Inicio</button>
+      <span class="screen-title">Entrenamiento completado</span>
+    </div>
+    <div class="results-card">
+      <h3>Multiplicaciones trabajadas</h3>
+      <div class="weakness-list" id="weakness-list"></div>
+    </div>
+    <button class="btn-primary" onclick="startEntrenamiento()">Otra sesión</button>
+    <button class="btn-secondary" onclick="goHome()">Volver al inicio</button>
+  </section>
+
+  <!-- OVERLAY: Trofeo / Celebración -->
+  <div class="trophy-overlay" id="trophy-overlay" style="display:none">
+    <div class="trophy-content">
+      <div class="trophy-icon" id="trophy-icon">🏆</div>
+      <h2 id="trophy-title">¡Trofeo desbloqueado!</h2>
+      <p id="trophy-subtitle">Maestra</p>
+      <div class="particles" id="particles"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
