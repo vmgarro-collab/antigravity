@@ -1,17 +1,11 @@
-const CACHE = 'tablas-magia-v2'
+const CACHE = 'tablas-magia-v3'
 
-// app.js siempre desde red — los demás assets desde caché con fallback
-const NETWORK_FIRST = ['app.js']
+// HTML y JS siempre desde red — CSS y assets desde caché (offline fallback)
+const CACHE_ONLY = ['styles.css', 'manifest.json', 'icon.svg']
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll([
-      './index.html',
-      './styles.css',
-      './manifest.json',
-      './icon.svg',
-      'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'
-    ])).then(() => self.skipWaiting())
+    caches.open(CACHE).then(c => c.addAll(CACHE_ONLY)).then(() => self.skipWaiting())
   )
 })
 
@@ -25,15 +19,17 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url)
-  const isNetworkFirst = NETWORK_FIRST.some(f => url.pathname.endsWith(f))
+  const isCacheFirst = CACHE_ONLY.some(f => url.pathname.endsWith(f))
 
-  if (isNetworkFirst) {
-    e.respondWith(
-      fetch(e.request).catch(() => caches.match(e.request))
-    )
-  } else {
+  if (isCacheFirst) {
+    // CSS y assets estáticos: caché primero, red como fallback
     e.respondWith(
       caches.match(e.request).then(cached => cached || fetch(e.request))
+    )
+  } else {
+    // HTML, JS y fuentes: red primero, caché como fallback offline
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request))
     )
   }
 })
