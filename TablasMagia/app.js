@@ -367,3 +367,188 @@ function shakeCard(id) {
   el.classList.add('anim-shake')
   setTimeout(() => el.classList.remove('anim-shake'), 500)
 }
+
+// === Aventura — Mapa ===
+const BOSS_TABLES = [6, 7, 8, 9]
+
+function showAventura() {
+  renderIslandMap()
+  showScreen('aventura')
+}
+
+function renderIslandMap() {
+  const map = document.getElementById('island-map')
+  map.innerHTML = ''
+
+  for (let t = 1; t <= 10; t++) {
+    const stars = starsData[t] || 0
+    const unlocked = t === 1 || (starsData[t - 1] || 0) >= 1
+    const isBoss = BOSS_TABLES.includes(t)
+
+    const card = document.createElement('div')
+    card.className = 'island-card' + (unlocked ? ' unlocked' : ' locked') + (isBoss ? ' boss' : '')
+    card.id = 'island-' + t
+
+    card.innerHTML = `
+      ${isBoss ? '<span class="island-boss-badge">⚡ RETO</span>' : ''}
+      <div class="island-num">${t}</div>
+      <div class="island-label">Tabla del ${t}</div>
+      <div class="island-stars">${starsToEmoji(stars)}</div>
+    `
+
+    if (unlocked) {
+      card.addEventListener('click', () => startIsla(t))
+    }
+
+    map.appendChild(card)
+  }
+}
+
+function starsToEmoji(count) {
+  return '⭐'.repeat(count) + '☆'.repeat(3 - count)
+}
+
+// === Aventura — Gameplay de isla ===
+const ISLA_TOTAL       = 15
+const ISLA_RETO_TOTAL  = 5
+const ISLA_TIME        = 10   // segundos
+const ISLA_RETO_TIME   = 6    // segundos para reto final
+const ISLA_ACC_THRESH  = 0.8  // >80% para 2+ estrellas
+const ISLA_TIME_THRESH = 6    // <6s medio para 3 estrellas
+
+let islaTimerInterval = null
+let islaQuestionStartTime = 0
+let islaCurrentTime = ISLA_TIME
+
+function startIsla(table) {
+  islaTable = table
+  islaIsRetoFinal = false
+  islaQuestions = tableQuestions(table, ISLA_TOTAL)
+  islaIndex = 0
+  islaAnswers = []
+  activeMode = 'isla'
+  islaCurrentTime = ISLA_TIME
+  buildNumpad('isla-numpad')
+  document.getElementById('isla-title').textContent = `Tabla del ${table}`
+  showScreen('isla')
+  renderIslaQuestion()
+}
+
+function startRetoFinal() {
+  islaIsRetoFinal = true
+  islaQuestions = tableQuestions(islaTable, ISLA_RETO_TOTAL)
+  islaIndex = 0
+  islaAnswers = []
+  islaCurrentTime = ISLA_RETO_TIME
+  activeMode = 'isla'
+  buildNumpad('isla-numpad')
+  document.getElementById('isla-title').textContent = `⚡ Reto del ${islaTable}`
+  showScreen('isla')
+  renderIslaQuestion()
+}
+
+function renderIslaQuestion() {
+  if (islaIndex >= islaQuestions.length) {
+    finishIsla()
+    return
+  }
+  currentInput = ''
+  const total = islaIsRetoFinal ? ISLA_RETO_TOTAL : ISLA_TOTAL
+  const q = islaQuestions[islaIndex]
+  const qEl = document.getElementById('isla-question')
+  qEl.dataset.base = `${q.a} × ${q.b} =`
+  qEl.textContent  = `${q.a} × ${q.b} = ?`
+
+  document.getElementById('isla-progress').textContent = `${islaIndex + 1}/${total}`
+  hideFeedback('isla-feedback')
+  startIslaTimer()
+}
+
+function startIslaTimer() {
+  if (islaTimerInterval) clearInterval(islaTimerInterval)
+  islaQuestionStartTime = Date.now()
+  const timeLimit = islaCurrentTime
+  islaTimerInterval = setInterval(() => {
+    const elapsed = (Date.now() - islaQuestionStartTime) / 1000
+    if (elapsed >= timeLimit) {
+      clearInterval(islaTimerInterval)
+      islaTimerInterval = null
+      handleIslaAnswer(true)
+    }
+  }, 200)
+}
+
+function handleIslaAnswer(timeout) {
+  if (islaTimerInterval) { clearInterval(islaTimerInterval); islaTimerInterval = null }
+  const q = islaQuestions[islaIndex]
+  const timeMs = Date.now() - islaQuestionStartTime
+  const timeLimit = islaCurrentTime
+  const userAnswer = timeout ? -1 : parseInt(currentInput, 10)
+  const correct = userAnswer === q.answer
+
+  recordAnswer(q.a, q.b, correct, timeMs)
+  islaAnswers.push({ correct, timeMs: Math.min(timeMs, timeLimit * 1000) })
+
+  if (correct) {
+    showFeedback('isla-feedback', true, '✓')
+  } else {
+    showFeedback('isla-feedback', false, `✗  ${q.answer}`)
+    shakeCard('isla-question-card')
+  }
+
+  currentInput = ''
+  setTimeout(() => {
+    if (activeMode !== 'isla') return
+    islaIndex++
+    renderIslaQuestion()
+  }, 900)
+}
+
+function finishIsla() {
+  activeMode = ''
+  const correct = islaAnswers.filter(a => a.correct).length
+  const total   = islaAnswers.length
+  const accuracy = correct / total
+  const avgTime  = islaAnswers.reduce((s, a) => s + a.timeMs, 0) / total / 1000
+
+  let stars = 0
+  if (total > 0)                                                       stars = 1
+  if (accuracy > ISLA_ACC_THRESH)                                      stars = 2
+  if (accuracy > ISLA_ACC_THRESH && avgTime < ISLA_TIME_THRESH)        stars = 3
+
+  if (!islaIsRetoFinal) {
+    const prev = starsData[islaTable] || 0
+    if (stars > prev) {
+      const wasLocked = prev === 0 && islaTable < 10
+      starsData[islaTable] = stars
+      saveToStorage()
+      if (wasLocked) {
+        setTimeout(() => revealIsland(islaTable + 1), 500)
+      }
+    }
+    checkTrophies()
+    incrementStreak()
+  }
+
+  document.getElementById('isla-stars-earned').textContent   = starsToEmoji(islaIsRetoFinal ? 3 : stars)
+  document.getElementById('isla-results-correct').textContent = correct
+  document.getElementById('isla-results-accuracy').textContent = Math.round(accuracy * 100) + '%'
+  document.getElementById('isla-results-avg-time').textContent = avgTime.toFixed(1) + 's'
+
+  const btnReto = document.getElementById('btn-reto-final')
+  const showReto = !islaIsRetoFinal && BOSS_TABLES.includes(islaTable) && stars >= 1
+  btnReto.style.display = showReto ? 'block' : 'none'
+
+  showScreen('isla-results')
+}
+
+function revealIsland(table) {
+  showAventura()
+  setTimeout(() => {
+    const card = document.getElementById('island-' + table)
+    if (card) {
+      card.classList.remove('locked')
+      card.classList.add('unlocked', 'anim-reveal')
+    }
+  }, 300)
+}
