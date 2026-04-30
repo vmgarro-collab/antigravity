@@ -131,3 +131,114 @@ function incrementStreak() {
   streak.date = today
   saveToStorage()
 }
+
+// === Numpad ===
+function buildNumpad(containerId) {
+  const container = document.getElementById(containerId)
+  container.innerHTML = ''
+  // Layout: 1 2 3 / 4 5 6 / 7 8 9 / ← 0 ✓
+  const keys = ['1','2','3','4','5','6','7','8','9','⌫','0','✓']
+  keys.forEach(k => {
+    const btn = document.createElement('button')
+    btn.type = 'button'
+    btn.className = 'numpad-btn'
+    btn.textContent = k
+    if (k === '⌫') btn.classList.add('btn-clear')
+    if (k === '✓') btn.classList.add('btn-ok')
+    btn.addEventListener('click', () => {
+      if (k === '⌫') deleteDigit()
+      else if (k === '✓') submitAnswer()
+      else appendDigit(k)
+    })
+    container.appendChild(btn)
+  })
+}
+
+function appendDigit(digit) {
+  if (currentInput.length >= 3) return  // máximo 3 dígitos (1×1=1 … 10×10=100)
+  currentInput += digit
+  updateInputDisplay()
+}
+
+function deleteDigit() {
+  currentInput = currentInput.slice(0, -1)
+  updateInputDisplay()
+}
+
+function updateInputDisplay() {
+  const idMap = { quiz: 'quiz-question', isla: 'isla-question', entrena: 'entrena-question' }
+  const el = document.getElementById(idMap[activeMode])
+  if (!el) return
+  const base = el.dataset.base || el.textContent.split('=')[0] + '='
+  el.dataset.base = base
+  el.textContent = base + (currentInput ? ' ' + currentInput : ' ?')
+}
+
+// === Algoritmo adaptativo ===
+function recordAnswer(a, b, correct, timeMs) {
+  const key = `${Math.min(a,b)}x${Math.max(a,b)}`
+  const entry = weakness[key] || { attempts: 0, errors: 0 }
+  entry.attempts++
+  if (!correct) entry.errors++
+  weakness[key] = entry
+  saveToStorage()
+}
+
+function errorRate(key) {
+  const e = weakness[key]
+  if (!e || e.attempts === 0) return 0
+  return e.errors / e.attempts
+}
+
+// === Generadores de preguntas ===
+function allMultiplications() {
+  const pairs = []
+  for (let a = 1; a <= 10; a++)
+    for (let b = 1; b <= 10; b++)
+      pairs.push([a, b])
+  return pairs
+}
+
+function randomQuestions(count) {
+  const all = allMultiplications()
+  return shuffle(all).slice(0, count).map(([a, b]) => ({ a, b, answer: a * b }))
+}
+
+function tableQuestions(table, count) {
+  const pairs = []
+  for (let b = 1; b <= 10; b++) pairs.push([table, b])
+  return shuffle(pairs).slice(0, count).map(([a, b]) => ({ a, b, answer: a * b }))
+}
+
+function weaknessQuestions(count) {
+  const withHistory = Object.entries(weakness)
+    .filter(([_, v]) => v.attempts >= 2)
+    .sort((a, b) => errorRate(b[0]) - errorRate(a[0]))
+    .map(([key]) => {
+      const [a, b] = key.split('x').map(Number)
+      return { a, b, answer: a * b }
+    })
+
+  let questions = withHistory.slice(0, count)
+
+  // Rellenar con tablas 6-9 si no hay suficientes
+  if (questions.length < 5) {
+    const hard = []
+    for (let a = 6; a <= 9; a++)
+      for (let b = 6; b <= 9; b++)
+        hard.push({ a, b, answer: a * b })
+    const fill = shuffle(hard).slice(0, count - questions.length)
+    questions = [...questions, ...fill]
+  }
+
+  return questions.slice(0, count)
+}
+
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
