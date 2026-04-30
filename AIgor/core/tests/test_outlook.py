@@ -58,3 +58,68 @@ def test_get_emails_filters_by_sender():
 
     assert len(result) == 1
     assert "victor" in result[0]["sender_email"]
+
+
+def test_get_thread_includes_sent():
+    """get_thread should search both Inbox and Sent."""
+    inbox_item = _make_mail_item(subject="Thread test")
+    inbox_item.ConversationID = "CONV123"
+    inbox_item.EntryID = "INBOX001"
+
+    sent_item = _make_mail_item(subject="Re: Thread test", sender="me@example.com")
+    sent_item.ConversationID = "CONV123"
+    sent_item.EntryID = "SENT001"
+
+    def mock_get_default_folder(folder_id):
+        folder = MagicMock()
+        if folder_id == 6:
+            folder.Items.__iter__ = MagicMock(return_value=iter([inbox_item]))
+        else:
+            folder.Items.__iter__ = MagicMock(return_value=iter([sent_item]))
+        return folder
+
+    mock_ns = MagicMock()
+    mock_ns.GetItemFromID.return_value = inbox_item
+    mock_ns.GetDefaultFolder.side_effect = mock_get_default_folder
+
+    with patch("win32com.client.Dispatch") as mock_dispatch:
+        mock_dispatch.return_value.GetNamespace.return_value = mock_ns
+        from core.agents.outlook import get_thread
+        result = get_thread("INBOX001")
+
+    assert len(result) == 2
+
+
+def test_save_draft_creates_new_mail():
+    mock_mail = MagicMock()
+    mock_outlook = MagicMock()
+    mock_outlook.CreateItem.return_value = mock_mail
+    mock_mail.EntryID = "DRAFT001"
+
+    with patch("win32com.client.Dispatch", return_value=mock_outlook):
+        from core.agents.outlook import save_draft
+        result = save_draft("to@test.com", "Test subject", "Test body")
+
+    mock_mail.Save.assert_called_once()
+    assert result == "DRAFT001"
+
+
+def test_get_emails_subject_filter():
+    items = [
+        _make_mail_item(subject="NOVA project update"),
+        _make_mail_item(subject="Team lunch invitation"),
+    ]
+    mock_items = MagicMock()
+    mock_items.__iter__ = MagicMock(return_value=iter(items))
+    mock_folder = MagicMock()
+    mock_folder.Items = mock_items
+    mock_ns = MagicMock()
+    mock_ns.GetDefaultFolder.return_value = mock_folder
+
+    with patch("win32com.client.Dispatch") as mock_dispatch:
+        mock_dispatch.return_value.GetNamespace.return_value = mock_ns
+        from core.agents.outlook import get_emails
+        result = get_emails(subject_contains="nova", limit=10)
+
+    assert len(result) == 1
+    assert "NOVA" in result[0]["subject"]
