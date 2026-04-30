@@ -1,4 +1,4 @@
-const CACHE = 'tablas-magia-v1'
+const CACHE = 'tablas-magia-v2'
 const ASSETS = [
   './index.html',
   './app.js',
