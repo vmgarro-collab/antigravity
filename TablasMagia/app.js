@@ -245,7 +245,7 @@ function shuffle(arr) {
 }
 
 // === Quiz Rápido ===
-const QUIZ_TOTAL = 20
+const QUIZ_TOTAL = 12
 const QUIZ_TIME  = 10   // segundos por pregunta
 const QUIZ_BONUS_THRESHOLD = 4  // segundos para bonus
 
