@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "aigor": {
+      "command": "python",
+      "args": ["C:/Users/victor.m.garro.perez/Documents/AntiGravity/AIgor/core/mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "C:/Users/victor.m.garro.perez/Documents/AntiGravity"
+      }
+    }
+  }
+}
