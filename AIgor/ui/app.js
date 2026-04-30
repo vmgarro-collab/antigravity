@@ -204,3 +204,15 @@ document.getElementById('btn-stop').addEventListener('click', stopRecording);
 document.getElementById('btn-copy').addEventListener('click', copyMinutas);
 document.getElementById('btn-new-1').addEventListener('click', resetToIdle);
 document.getElementById('btn-new-2').addEventListener('click', resetToIdle);
+
+// ── Sidebar navigation ──
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+    btn.classList.add('active');
+    const moduleId = 'module-' + btn.dataset.module;
+    document.getElementById(moduleId).classList.add('active');
+    if (btn.dataset.module === 'calendar') loadMeetingsToday();
+  });
+});

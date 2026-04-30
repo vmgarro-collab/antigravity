@@ -8,64 +8,128 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-  <div class="card">
-    <h1>AIgor</h1>
-    <p class="subtitle">Orquestador local de agentes de IA</p>
+  <div class="layout">
 
-    <!-- IDLE -->
-    <div id="view-idle" class="view active">
-      <p style="color:var(--text-muted)">Listo para grabar. Pulsa el botón para comenzar.</p>
-      <div class="row">
-        <button class="btn btn-primary" id="btn-start">● Iniciar grabación</button>
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">AI</div>
+      <button class="nav-btn active" data-module="recording" title="Grabación">🎙️</button>
+      <button class="nav-btn" data-module="mail" title="Correos">📧</button>
+      <button class="nav-btn" data-module="calendar" title="Calendario">📅</button>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ── MÓDULO GRABACIÓN ── -->
+      <div id="module-recording" class="module active">
+        <div class="card">
+          <h1>AIgor</h1>
+          <p class="subtitle">Orquestador local de agentes de IA</p>
+
+          <div id="view-idle" class="view active">
+            <p style="color:var(--text-muted)">Listo para grabar. Pulsa el botón para comenzar.</p>
+            <div class="row"><button class="btn btn-primary" id="btn-start">● Iniciar grabación</button></div>
+          </div>
+
+          <div id="view-recording" class="view">
+            <div class="row" style="align-items:center">
+              <span class="recording-dot"></span>
+              <span class="badge">Grabando</span>
+              <span class="timer" id="timer">00:00</span>
+            </div>
+            <canvas class="visualizer" id="visualizer"></canvas>
+            <div class="row"><button class="btn btn-danger" id="btn-stop">■ Detener y transcribir</button></div>
+          </div>
+
+          <div id="view-transcribing" class="view" style="align-items:center;gap:16px">
+            <div class="spinner"></div>
+            <p style="color:var(--text-muted)">Transcribiendo grabación...</p>
+          </div>
+
+          <div id="view-results" class="view">
+            <p style="font-weight:600">Transcripción</p>
+            <div class="transcript-box" id="full-transcript"></div>
+            <div class="row"><button class="btn btn-ghost" id="btn-new-1">Nueva grabación</button></div>
+          </div>
+
+          <div id="view-summarizing" class="view" style="align-items:center;gap:16px">
+            <div class="spinner"></div>
+            <p style="color:var(--text-muted)">Generando minutas con LLaMA...</p>
+          </div>
+
+          <div id="view-minutas" class="view">
+            <p style="font-weight:600">Minutas de la reunión</p>
+            <div class="result-box" id="minutas-content"></div>
+            <p id="saved-path" style="font-size:0.75rem;color:var(--text-muted);word-break:break-all;margin-top:8px"></p>
+            <div class="row">
+              <button class="btn btn-primary" id="btn-copy">Copiar</button>
+              <button class="btn btn-ghost" id="btn-new-2">Nueva grabación</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- RECORDING -->
-    <div id="view-recording" class="view">
-      <div class="row" style="align-items:center">
-        <span class="recording-dot"></span>
-        <span class="badge">Grabando</span>
-        <span class="timer" id="timer">00:00</span>
+      <!-- ── MÓDULO CORREOS ── -->
+      <div id="module-mail" class="module">
+        <div class="outlook-layout">
+          <div class="outlook-list">
+            <div class="outlook-toolbar">
+              <h2>Correos</h2>
+              <div class="row" style="gap:8px;margin-top:12px">
+                <input class="input-filter" id="mail-filter-sender" placeholder="Remitente..." />
+                <input class="input-filter" id="mail-filter-subject" placeholder="Asunto..." />
+                <button class="btn btn-primary btn-sm" id="btn-load-emails">Cargar</button>
+              </div>
+            </div>
+            <div id="email-list"></div>
+          </div>
+          <div class="outlook-detail">
+            <div id="email-detail-empty" style="color:var(--text-muted);padding:32px">Selecciona un correo para ver el hilo.</div>
+            <div id="email-detail" style="display:none">
+              <div id="email-thread"></div>
+              <div class="draft-area" id="draft-area" style="display:none">
+                <p style="font-weight:600;margin-bottom:8px">Borrador generado por Claude</p>
+                <textarea id="draft-text" rows="8"></textarea>
+                <div class="row" style="margin-top:8px">
+                  <button class="btn btn-primary btn-sm" id="btn-save-draft">Guardar en Drafts</button>
+                  <button class="btn btn-ghost btn-sm" id="btn-cancel-draft">Cancelar</button>
+                </div>
+              </div>
+              <div class="row" style="margin-top:16px" id="draft-actions">
+                <button class="btn btn-primary" id="btn-request-draft">✦ Pedir borrador a Claude</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <canvas class="visualizer" id="visualizer"></canvas>
-      <div class="row">
-        <button class="btn btn-danger" id="btn-stop">■ Detener y transcribir</button>
+
+      <!-- ── MÓDULO CALENDARIO ── -->
+      <div id="module-calendar" class="module">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+            <h2>Calendario</h2>
+            <button class="btn btn-primary btn-sm" id="btn-generate-briefing">✦ Generar briefing ahora</button>
+          </div>
+          <div id="calendar-spinner" style="display:none;text-align:center;padding:32px">
+            <div class="spinner"></div>
+            <p style="color:var(--text-muted);margin-top:12px">Generando briefing...</p>
+          </div>
+          <div id="briefing-result" style="display:none">
+            <div class="result-box" id="briefing-content"></div>
+            <p id="briefing-saved-path" style="font-size:0.75rem;color:var(--text-muted);margin-top:8px"></p>
+          </div>
+          <div id="meetings-today">
+            <h3 style="margin-bottom:16px">Reuniones de hoy</h3>
+            <div id="meetings-list"></div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- TRANSCRIBING -->
-    <div id="view-transcribing" class="view" style="align-items:center;gap:16px">
-      <div class="spinner"></div>
-      <p style="color:var(--text-muted)">Transcribiendo grabación...</p>
-    </div>
-
-    <!-- RESULTS -->
-    <div id="view-results" class="view">
-      <p style="font-weight:600">Transcripción</p>
-      <div class="transcript-box" id="full-transcript"></div>
-      <div class="row">
-        <button class="btn btn-ghost" id="btn-new-1">Nueva grabación</button>
-      </div>
-    </div>
-
-    <!-- SUMMARIZING -->
-    <div id="view-summarizing" class="view" style="align-items:center;gap:16px">
-      <div class="spinner"></div>
-      <p style="color:var(--text-muted)">Generando minutas con LLaMA...</p>
-    </div>
-
-    <!-- MINUTAS -->
-    <div id="view-minutas" class="view">
-      <p style="font-weight:600">Minutas de la reunión</p>
-      <div class="result-box" id="minutas-content"></div>
-      <p id="saved-path" style="font-size:0.75rem;color:var(--text-muted);word-break:break-all;margin-top:8px"></p>
-      <div class="row">
-        <button class="btn btn-primary" id="btn-copy">Copiar</button>
-        <button class="btn btn-ghost" id="btn-new-2">Nueva grabación</button>
-      </div>
-    </div>
+    </main>
   </div>
 
   <script src="app.js"></script>
+  <script src="outlook.js"></script>
 </body>
 </html>
