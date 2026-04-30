@@ -287,7 +287,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-.numpad-btn:active { transform: scale(0.93); background: rgba(255,45,120,0.2); }
+.numpad-btn:active { transform: scale(0.93); background: rgba(255,45,120,0.35); }
 .numpad-btn.btn-clear { color: var(--accent-magenta); font-size: 1rem; }
 .numpad-btn.btn-ok {
   background: linear-gradient(135deg, var(--accent-magenta), #c0005f);
