@@ -552,3 +552,171 @@ function revealIsland(table) {
     }
   }, 300)
 }
+
+// === Entrena Débiles ===
+const ENTRENA_TOTAL = 15
+
+function startEntrenamiento() {
+  const questions = weaknessQuestions(ENTRENA_TOTAL)
+
+  if (questions.length === 0) {
+    alert('¡Juega primero al Quiz o a la Aventura para que pueda aprender cuáles son tus puntos débiles!')
+    return
+  }
+
+  entrenaSnapshotBefore = {}
+  Object.entries(weakness).forEach(([k, v]) => {
+    entrenaSnapshotBefore[k] = v.attempts > 0 ? v.errors / v.attempts : 0
+  })
+
+  entrenaQuestions = questions
+  entrenaIndex = 0
+  activeMode = 'entrena'
+  buildNumpad('entrena-numpad')
+  showScreen('entrena')
+  renderEntrenaQuestion()
+}
+
+function renderEntrenaQuestion() {
+  if (entrenaIndex >= entrenaQuestions.length) {
+    finishEntrena()
+    return
+  }
+  currentInput = ''
+  const q = entrenaQuestions[entrenaIndex]
+  const qEl = document.getElementById('entrena-question')
+  qEl.dataset.base = `${q.a} × ${q.b} =`
+  qEl.textContent  = `${q.a} × ${q.b} = ?`
+
+  document.getElementById('entrena-progress').textContent = `${entrenaIndex + 1}/${ENTRENA_TOTAL}`
+  hideFeedback('entrena-feedback')
+}
+
+function handleEntrenaAnswer() {
+  const q = entrenaQuestions[entrenaIndex]
+  const timeMs = 5000
+  const userAnswer = parseInt(currentInput, 10)
+  const correct = userAnswer === q.answer
+
+  recordAnswer(q.a, q.b, correct, timeMs)
+
+  if (correct) {
+    showFeedback('entrena-feedback', true, '✓')
+  } else {
+    showFeedback('entrena-feedback', false, `✗  ${q.answer}`)
+    shakeCard('entrena-question-card')
+  }
+
+  currentInput = ''
+  setTimeout(() => {
+    if (activeMode !== 'entrena') return
+    entrenaIndex++
+    renderEntrenaQuestion()
+  }, 900)
+}
+
+function finishEntrena() {
+  activeMode = ''
+  incrementStreak()
+
+  const list = document.getElementById('weakness-list')
+  list.innerHTML = ''
+
+  entrenaQuestions.forEach(q => {
+    const key = `${Math.min(q.a,q.b)}x${Math.max(q.a,q.b)}`
+    const before = entrenaSnapshotBefore[key] || 0
+    const after  = errorRate(key)
+    const improved = after < before - 0.05
+
+    const item = document.createElement('div')
+    item.className = 'weakness-item'
+    item.innerHTML = `
+      <span class="weakness-key">${q.a} × ${q.b} = ${q.answer}</span>
+      <span class="${improved ? 'weakness-improvement' : 'weakness-same'}">
+        ${improved ? '↑ Mejorando' : '→ Sigue practicando'}
+      </span>
+    `
+    list.appendChild(item)
+  })
+
+  // Eliminar duplicados visuales
+  const seen = new Set()
+  list.querySelectorAll('.weakness-item').forEach(item => {
+    const key = item.querySelector('.weakness-key').textContent.trim()
+    if (seen.has(key)) item.remove()
+    else seen.add(key)
+  })
+
+  showScreen('entrena-results')
+}
+
+// === Trofeos ===
+const TROPHY_THRESHOLDS = {
+  principiante: 5,
+  maestra: 15,
+  leyenda: 30
+}
+const TROPHY_ICONS = {
+  principiante: '🏅',
+  maestra: '🥈',
+  leyenda: '🏆'
+}
+const TROPHY_NAMES = {
+  principiante: '¡Principiante!',
+  maestra: '¡Maestra!',
+  leyenda: '¡Leyenda!'
+}
+
+function checkTrophies() {
+  const totalStars = Object.values(starsData).reduce((s, v) => s + v, 0)
+  let newTrophy = null
+
+  Object.entries(TROPHY_THRESHOLDS).forEach(([name, threshold]) => {
+    if (totalStars >= threshold && !trophies.includes(name)) {
+      trophies.push(name)
+      newTrophy = name
+    }
+  })
+
+  saveToStorage()
+  renderHome()
+
+  if (newTrophy) showTrophyCelebration(newTrophy)
+}
+
+function showTrophyCelebration(name) {
+  const overlay = document.getElementById('trophy-overlay')
+  document.getElementById('trophy-icon').textContent    = TROPHY_ICONS[name]
+  document.getElementById('trophy-title').textContent   = '¡Trofeo desbloqueado!'
+  document.getElementById('trophy-subtitle').textContent = TROPHY_NAMES[name]
+
+  const container = document.getElementById('particles')
+  container.innerHTML = ''
+  const colors = ['#ff2d78', '#00dfd8', '#ffd700', '#00e676', '#ffffff']
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div')
+    p.className = 'particle'
+    const angle = (i / 24) * 360
+    const dist  = 60 + Math.random() * 60
+    const dx = Math.cos(angle * Math.PI / 180) * dist + 'px'
+    const dy = Math.sin(angle * Math.PI / 180) * dist + 'px'
+    p.style.cssText = `
+      left: 50%; top: 50%;
+      background: ${colors[i % colors.length]};
+      --dx: ${dx}; --dy: ${dy};
+      animation-delay: ${Math.random() * 0.2}s;
+    `
+    container.appendChild(p)
+  }
+
+  overlay.style.display = 'flex'
+  setTimeout(() => {
+    overlay.style.opacity = '0'
+    overlay.style.transition = 'opacity 0.5s'
+    setTimeout(() => {
+      overlay.style.display = 'none'
+      overlay.style.opacity = ''
+      overlay.style.transition = ''
+    }, 500)
+  }, 3000)
+}
