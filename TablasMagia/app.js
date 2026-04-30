@@ -68,6 +68,7 @@ function showScreen(id) {
 
 function goHome() {
   if (quizTimer) { clearInterval(quizTimer); quizTimer = null }
+  activeMode = ''
   renderHome()
   showScreen('home')
 }
@@ -325,6 +326,7 @@ function handleQuizAnswer(forceCorrect, forceTime) {
 
   currentInput = ''
   setTimeout(() => {
+    if (activeMode !== 'quiz') return
     quizIndex++
     renderQuizQuestion()
   }, 900)
