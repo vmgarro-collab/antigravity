@@ -9,3 +9,4 @@ pywin32
 apscheduler==3.10.4
 mcp
 plyer
+cryptography
