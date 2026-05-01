@@ -82,7 +82,7 @@ def update_entry(entry_id: str, data: dict) -> dict:
     for e in entries:
         if e['id'] == entry_id:
             for field in ('name', 'url', 'username', 'password', 'notes'):
-                if data.get(field):
+                if field in data and data[field]:
                     e[field] = data[field]
             e['updated_at'] = datetime.now().isoformat(timespec='seconds')
             _write_vault(entries)
