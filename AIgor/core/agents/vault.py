@@ -29,18 +29,16 @@ def _read_vault() -> list:
     vault_file = VAULT_DIR / "vault.enc"
     if not vault_file.exists():
         return []
-    try:
-        f = _load_key()
-        data = f.decrypt(vault_file.read_bytes())
-        return json.loads(data)
-    except Exception:
-        return []
+    f = _load_key()
+    data = f.decrypt(vault_file.read_bytes())
+    return json.loads(data)
 
 
 def _write_vault(entries: list):
     vault_file = VAULT_DIR / "vault.enc"
     f = _load_key()
     vault_file.write_bytes(f.encrypt(json.dumps(entries, ensure_ascii=False).encode()))
+    vault_file.chmod(0o600)
 
 
 def _strip_password(entry: dict) -> dict:
@@ -79,10 +77,13 @@ def create_entry(data: dict) -> dict:
 
 def update_entry(entry_id: str, data: dict) -> dict:
     entries = _read_vault()
+    REQUIRED_FIELDS = {'name', 'url', 'username', 'password'}
     for e in entries:
         if e['id'] == entry_id:
             for field in ('name', 'url', 'username', 'password', 'notes'):
-                if field in data and data[field]:
+                if field in data:
+                    if field in REQUIRED_FIELDS and not data[field]:
+                        continue  # don't blank required fields
                     e[field] = data[field]
             e['updated_at'] = datetime.now().isoformat(timespec='seconds')
             _write_vault(entries)

@@ -54,3 +54,17 @@ def test_delete_missing_raises(vault_dir):
     from agents.vault import delete_entry
     with pytest.raises(KeyError):
         delete_entry('nonexistent-id')
+
+
+def test_get_password_missing_raises(vault_dir):
+    from agents.vault import get_password
+    with pytest.raises(KeyError):
+        get_password('nonexistent-id')
+
+
+def test_update_notes_to_empty(vault_dir):
+    from agents.vault import create_entry, update_entry, list_entries
+    entry = create_entry({'name': 'N', 'url': 'https://n.com',
+                          'username': 'u', 'password': 'p', 'notes': 'original'})
+    updated = update_entry(entry['id'], {'notes': ''})
+    assert updated['notes'] == ''
