@@ -34,7 +34,13 @@ function init() {
   loadFromStorage()
   updateStreak()
   renderHome()
+  renderConstants()
   registerServiceWorker()
+}
+
+function renderConstants() {
+  document.getElementById('quiz-btn-sub').textContent  = `${QUIZ_TOTAL} preguntas · Puntuación`
+  document.getElementById('quiz-q-total').textContent  = QUIZ_TOTAL
 }
 
 function loadFromStorage() {
