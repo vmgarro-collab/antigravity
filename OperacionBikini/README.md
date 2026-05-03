@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# Operación Bikini 💪
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Agenda diaria de un plan de adelgazamiento + ejercicio de 8 semanas. PWA instalable, funciona offline, sin backend.
 
-Currently, two official plugins are available:
+## Instalación y desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd OperacionBikini
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # Genera dist/
+npm run preview    # Sirve dist/ en http://localhost:4173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Despliegue
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Vercel
+1. Importar el repo en vercel.com
+2. Root directory: `OperacionBikini`
+3. Build command: `npm run build`
+4. Output directory: `dist`
+5. Deploy
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Netlify
+1. Drag & drop de la carpeta `dist/` en app.netlify.com/drop
+
+## Añadir a pantalla de inicio
+
+**iOS (Safari):** Abrir la URL → botón Compartir → "Añadir a pantalla de inicio"  
+**Android (Chrome):** Abrir la URL → menú ⋮ → "Añadir a pantalla de inicio" o el banner automático
+
+## Añadir semana 2
+
+1. Crear `src/data/week2.ts` exportando `week2: Week` y `week2ShoppingList: ShoppingList`
+2. En `src/context/AppContext.tsx`, importar y añadir a `initialState.weeks` y `initialState.shoppingList`
+
+## Estructura de datos
+
+Todo el estado persiste en `localStorage` bajo la clave `plan2meses:v1`.  
+Usa "Exportar JSON" en Progreso para hacer backup antes de cambiar de dispositivo.
