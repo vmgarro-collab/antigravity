@@ -2,7 +2,7 @@
   "name": "Operación Bikini",
   "short_name": "Op. Bikini",
   "description": "Agenda diaria de plan de adelgazamiento 8 semanas",
-  "start_url": "/antigravity/OperacionBikini/",
+  "start_url": "/antigravity/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#22c55e",
