@@ -121,7 +121,7 @@ export default function Progreso() {
                 contentStyle={{ background: '#1f2937', border: 'none', borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: '#9ca3af' }}
                 itemStyle={{ color: '#a78bfa' }}
-                formatter={(v: number) => [`${v} kg`, 'Peso']}
+                formatter={(v) => [`${v} kg`, 'Peso']}
               />
               <ReferenceLine y={user.targetWeight} stroke="#22c55e" strokeDasharray="4 2" strokeWidth={1.5} />
               <Line type="monotone" dataKey="kg" stroke="#a78bfa" strokeWidth={2} dot={{ fill: '#a78bfa', r: 3 }} />
