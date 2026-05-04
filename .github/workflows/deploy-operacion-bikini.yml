@@ -3,7 +3,6 @@ name: Deploy OperacionBikini
 on:
   push:
     branches: [main]
-    paths: ['OperacionBikini/**']
   workflow_dispatch:
 
 permissions:
@@ -20,19 +19,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
           cache-dependency-path: OperacionBikini/package-lock.json
+
+      - name: Build OperacionBikini
+        working-directory: OperacionBikini
+        run: |
+          npm ci
+          npm run build
+
+      # Montar sitio completo: repo + build de OperacionBikini
+      - name: Prepare full site
+        run: |
+          mkdir _site
+          cp -r . _site/
+          rm -rf _site/OperacionBikini
+          mkdir -p _site/OperacionBikini
+          cp -r OperacionBikini/dist/. _site/OperacionBikini/
+          rm -rf _site/.git _site/node_modules _site/_site
+
       - uses: actions/configure-pages@v4
-      - run: npm ci
-        working-directory: OperacionBikini
-      - run: npm run build
-        working-directory: OperacionBikini
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: OperacionBikini/dist
+          path: _site
 
   deploy:
     needs: build
