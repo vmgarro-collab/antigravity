@@ -35,18 +35,16 @@ jobs:
       # Montar sitio completo: repo + build de OperacionBikini
       - name: Prepare full site
         run: |
-          mkdir _site
-          cp -r . _site/
-          rm -rf _site/OperacionBikini
-          mkdir -p _site/OperacionBikini
-          cp -r OperacionBikini/dist/. _site/OperacionBikini/
-          rm -rf _site/.git _site/node_modules _site/_site
+          mkdir /tmp/site
+          rsync -a --exclude='.git' --exclude='node_modules' --exclude='OperacionBikini' . /tmp/site/
+          mkdir -p /tmp/site/OperacionBikini
+          cp -r OperacionBikini/dist/. /tmp/site/OperacionBikini/
 
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: /tmp/site
 
   deploy:
     needs: build
