@@ -14,6 +14,6 @@ createRoot(document.getElementById('root')!).render(
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {/* SW no crítico */})
+    navigator.serviceWorker.register('/antigravity/OperacionBikini/sw.js').catch(() => {/* SW no crítico */})
   })
 }
