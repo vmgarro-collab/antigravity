@@ -1,12 +1,16 @@
 import type { AppState } from '../types'
 
 export const STORAGE_KEY = 'plan2meses:v1'
+export const DATA_VERSION = 3
 
 export function loadState(): AppState | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
-    return JSON.parse(raw) as AppState
+    const saved = JSON.parse(raw) as AppState & { _dataVersion?: number }
+    // Si los datos del código son más nuevos, descartar caché para recargar
+    if ((saved._dataVersion ?? 0) < DATA_VERSION) return null
+    return saved
   } catch {
     return null
   }
@@ -14,7 +18,7 @@ export function loadState(): AppState | null {
 
 export function saveState(state: AppState): void {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, _dataVersion: DATA_VERSION }))
   } catch {
     // localStorage lleno o bloqueado — ignorar silenciosamente
   }
