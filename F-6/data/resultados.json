@@ -734,5 +734,37 @@
     "golesLocal": 11,
     "golesVisitante": 4,
     "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 38,
+    "fecha": "10/05/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 7,
+    "golesVisitante": 8,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 38,
+    "fecha": "10/05/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 13,
+    "golesVisitante": 4,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 38,
+    "fecha": "10/05/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 3,
+    "golesVisitante": 7,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 38,
+    "fecha": "10/05/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 0,
+    "golesVisitante": 9,
+    "visitante": "BOCA SENIOR"
   }
 ]
