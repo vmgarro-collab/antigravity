@@ -1,7 +1,0 @@
-.env
-__pycache__/
-*.pyc
-*.pyo
-core/agents/__pycache__/
-.vault_key
-vault.enc
