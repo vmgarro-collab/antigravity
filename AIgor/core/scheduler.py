@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from agents.outlook import get_calendar_today, get_unread_urgent, get_open_threads
 from agents.summarizer import summarize_briefing
 
-BRIEFINGS_DIR = Path.home() / "Documents" / "AIgor" / "briefings"
+BRIEFINGS_DIR = Path.home() / "OneDrive - Accenture" / "Todos" / "AntiGravity" / "AIgor" / "briefings"
 
 
 def generate_briefing(briefings_dir: Path = None) -> Path:

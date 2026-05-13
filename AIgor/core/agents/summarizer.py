@@ -6,7 +6,31 @@ from core.config import GROQ_API_KEY
 
 from groq import Groq
 
-_client = Groq(api_key=GROQ_API_KEY)
+_groq = Groq(api_key=GROQ_API_KEY)
+
+def _llm(system: str, user: str, temperature: float = 0.2) -> str:
+    """Llama a Claude SDK primero; fallback a Groq si no hay credenciales."""
+    try:
+        import anthropic
+        client = anthropic.Anthropic()
+        msg = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=4096,
+            temperature=temperature,
+            system=system,
+            messages=[{"role": "user", "content": user}],
+        )
+        return msg.content[0].text
+    except Exception:
+        resp = _groq.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            temperature=temperature,
+        )
+        return resp.choices[0].message.content
 
 SYSTEM_PROMPT = """Eres un asistente que genera actas de reunión profesionales en español, con el estilo conciso y estructurado que se utiliza en proyectos de consultoría (ServiceNow, Coty, NOVA).
 
@@ -68,16 +92,38 @@ proyecto: "<NOVA / Coty / Accenture interno / etc., si se infiere>"
 9. Sin preámbulos: empieza directamente con el frontmatter ---. No añadas frases tipo "Aquí tienes el acta"."""
 
 
-def summarize(text: str, provider: str = None) -> str:
-    response = _client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"TRANSCRIPCIÓN:\n{text}"},
-        ],
-        temperature=0.2,
-    )
-    return response.choices[0].message.content
+def summarize(text: str) -> str:
+    return _llm(SYSTEM_PROMPT, f"TRANSCRIPCIÓN:\n{text}")
+
+
+def summarize_stream(text: str):
+    """Yields text chunks for streaming response."""
+    try:
+        import anthropic
+        client = anthropic.Anthropic()
+        with client.messages.stream(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=4096,
+            temperature=0.2,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": f"TRANSCRIPCIÓN:\n{text}"}],
+        ) as stream:
+            for chunk in stream.text_stream:
+                yield chunk
+    except Exception:
+        resp = _groq.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": f"TRANSCRIPCIÓN:\n{text}"},
+            ],
+            temperature=0.2,
+            stream=True,
+        )
+        for chunk in resp:
+            delta = chunk.choices[0].delta.content
+            if delta:
+                yield delta
 
 
 EMAIL_REPLY_PROMPT = """Eres AIgor, asistente de Víctor. Redacta el cuerpo de una respuesta de correo profesional en español.
@@ -90,15 +136,20 @@ Reglas:
 
 
 def generate_email_reply(thread_context: str) -> str:
-    response = _client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": EMAIL_REPLY_PROMPT},
-            {"role": "user", "content": f"HILO DE CORREO:\n{thread_context}"},
-        ],
-        temperature=0.3,
-    )
-    return response.choices[0].message.content
+    return _llm(EMAIL_REPLY_PROMPT, f"HILO DE CORREO:\n{thread_context}", temperature=0.3)
+
+
+EMAIL_SUMMARY_PROMPT = """Eres AIgor, asistente de Víctor. Resume una lista de correos en español de forma concisa.
+
+Para cada correo incluye: remitente, asunto, y UNA frase de qué trata o qué requiere.
+Agrupa por urgencia si procede. Sin preámbulos. Máximo 3 líneas por correo."""
+
+
+def summarize_emails(emails: list) -> str:
+    if not emails:
+        return ""
+    lines = [f"- De: {e['sender']} | Asunto: {e['subject']} | {e['body_preview'][:150]}" for e in emails]
+    return _llm(EMAIL_SUMMARY_PROMPT, f"CORREOS:\n" + "\n".join(lines))
 
 
 BRIEFING_PROMPT = """Eres AIgor, asistente personal de Víctor. Genera un briefing diario conciso en español.
@@ -125,12 +176,4 @@ Reglas: solo hechos de la información proporcionada. No inventes. Conciso. Sin 
 def summarize_briefing(context: str) -> str:
     from datetime import date
     prompt = BRIEFING_PROMPT.replace("{fecha}", date.today().isoformat())
-    response = _client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": prompt},
-            {"role": "user", "content": f"DATOS DEL DÍA:\n{context}"},
-        ],
-        temperature=0.2,
-    )
-    return response.choices[0].message.content
+    return _llm(prompt, f"DATOS DEL DÍA:\n{context}")

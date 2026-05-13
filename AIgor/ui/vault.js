@@ -4,6 +4,7 @@ let _vaultEntries = [];
 let _vaultFilter = '';
 let _vaultSelected = null;
 let _clipboardTimer = null;
+let _launchData = null; // { entry, pw } — avoids encoding issues in onclick attrs
 
 async function loadVault() {
   _renderVaultListLoading();
@@ -11,6 +12,10 @@ async function loadVault() {
     const r = await fetch(`${API}/vault/entries`);
     _vaultEntries = await r.json();
     renderVaultList();
+    if (_vaultSelected) {
+      const still = _vaultEntries.find(e => e.id === _vaultSelected.id);
+      if (still) showVaultDetail(still); else showVaultEmpty();
+    }
   } catch (e) {
     document.getElementById('vault-list').innerHTML =
       `<div class="vault-list-empty">Error: ${e.message}</div>`;
@@ -87,20 +92,27 @@ function showVaultDetail(entry) {
     </div>
 
     <div class="vault-actions">
-      <button class="action-chip" onclick="launchEntry('${entry.id}')">🚀 Lanzar</button>
-      <button class="action-chip secondary" onclick="copyUsername('${entry.id}')">📋 Usuario</button>
-      <button class="action-chip secondary" onclick="copyPass('${entry.id}')">📋 Pass</button>
+      <button class="action-chip" id="btn-launch-${entry.id}">🚀 Lanzar</button>
+      <button class="action-chip secondary" id="btn-copy-user-${entry.id}">📋 Usuario</button>
+      <button class="action-chip secondary" id="btn-copy-pass-${entry.id}">📋 Pass</button>
     </div>
     <div class="vault-actions" style="margin-top:6px">
-      <button class="action-chip secondary" onclick="showVaultForm('${entry.id}')">✏️ Editar</button>
-      <button class="action-chip danger" id="btn-vault-delete-${entry.id}" onclick="confirmDeleteVault('${entry.id}')">🗑 Borrar</button>
+      <button class="action-chip secondary" id="btn-edit-${entry.id}">✏️ Editar</button>
+      <button class="action-chip danger" id="btn-vault-delete-${entry.id}">🗑 Borrar</button>
     </div>
 
     <div id="vault-clip-notice" class="vault-clip-notice" style="display:none"></div>
   `;
+
+  document.getElementById(`btn-launch-${entry.id}`).addEventListener('click', () => launchEntry(entry.id));
+  document.getElementById(`btn-copy-user-${entry.id}`).addEventListener('click', () => copyUsername(entry.id));
+  document.getElementById(`btn-copy-pass-${entry.id}`).addEventListener('click', () => copyPass(entry.id));
+  document.getElementById(`btn-edit-${entry.id}`).addEventListener('click', () => showVaultForm(entry.id));
+  document.getElementById(`btn-vault-delete-${entry.id}`).addEventListener('click', () => confirmDeleteVault(entry.id));
 }
 
 function showVaultEmpty() {
+  _vaultSelected = null;
   document.getElementById('vault-detail').innerHTML = `
     <div class="vault-empty-state">
       <div style="font-size:2.5rem;opacity:0.15">🔑</div>
@@ -138,12 +150,19 @@ async function showVaultForm(entryId = null) {
       <label>Notas</label>
       <textarea id="vf-notes" class="input-filter" rows="2" style="resize:vertical;margin-bottom:16px">${_esc(entry?.notes || '')}</textarea>
       <div class="row">
-        <button class="btn btn-primary btn-sm" onclick="saveVaultEntry('${entryId || ''}')">💾 Guardar</button>
-        <button class="btn btn-ghost btn-sm" onclick="${entry ? `showVaultDetail(_vaultEntries.find(e=>e.id==='${entryId}'))` : 'showVaultEmpty()'}">Cancelar</button>
+        <button class="btn btn-primary btn-sm" id="btn-vf-save">💾 Guardar</button>
+        <button class="btn btn-ghost btn-sm" id="btn-vf-cancel">Cancelar</button>
       </div>
     </div>
   `;
   document.getElementById('vf-name').focus();
+
+  // Attach handlers via JS — avoids any quoting issues with entryId
+  document.getElementById('btn-vf-save').addEventListener('click', () => saveVaultEntry(entryId || null));
+  document.getElementById('btn-vf-cancel').addEventListener('click', () => {
+    if (entry) showVaultDetail(entry);
+    else showVaultEmpty();
+  });
 }
 
 function toggleVaultPassVisibility() {
@@ -202,7 +221,11 @@ function confirmDeleteVault(entryId) {
   btn.onclick = () => deleteVaultEntry(entryId);
   btn.classList.add('btn-danger-confirm');
   setTimeout(() => {
-    if (btn) { btn.textContent = '🗑 Borrar'; btn.onclick = () => confirmDeleteVault(entryId); btn.classList.remove('btn-danger-confirm'); }
+    if (btn) {
+      btn.textContent = '🗑 Borrar';
+      btn.onclick = () => confirmDeleteVault(entryId);
+      btn.classList.remove('btn-danger-confirm');
+    }
   }, 3000);
 }
 
@@ -220,12 +243,78 @@ async function deleteVaultEntry(entryId) {
 }
 
 async function launchEntry(entryId) {
+  const btn = document.getElementById(`btn-launch-${entryId}`);
+  const notice = document.getElementById('vault-clip-notice');
+  if (btn) { btn.textContent = '⏳ Abriendo…'; btn.disabled = true; }
+  if (notice) { notice.textContent = '⏳ Abriendo página y rellenando credenciales en 3s…'; notice.style.display = 'block'; }
   try {
-    await fetch(`${API}/vault/entries/${entryId}/launch`, { method: 'POST' });
-    await copyPass(entryId);
+    const r = await fetch(`${API}/vault/entries/${entryId}/launch`, { method: 'POST' });
+    if (!r.ok) {
+      const err = await r.text();
+      if (notice) { notice.textContent = '✗ Error: ' + err; }
+      return;
+    }
+    if (notice) {
+      notice.textContent = '✓ Rellenando usuario y contraseña…';
+      setTimeout(() => { if (notice) notice.style.display = 'none'; }, 6000);
+    }
   } catch (e) {
-    alert('Error lanzando: ' + e.message);
+    if (notice) { notice.textContent = '✗ Error: ' + e.message; }
+  } finally {
+    if (btn) { btn.textContent = '🚀 Lanzar'; btn.disabled = false; }
   }
+}
+
+function _showLaunchPanel() {
+  const { entry, pw } = _launchData;
+  const panel = document.getElementById('vault-detail');
+  panel.innerHTML = `
+    <div class="vault-launch-panel">
+      <div class="vault-launch-title">
+        <div class="vault-detail-icon" style="width:36px;height:36px;font-size:0.75rem">${_siteIcon(entry.url)}</div>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem">${_esc(entry.name)}</div>
+          <div style="font-size:0.75rem;color:#555">${_esc(entry.url)}</div>
+        </div>
+      </div>
+      <div class="vault-launch-step">
+        <span class="vault-launch-num">1</span>
+        <div class="vault-launch-body">
+          <div class="vault-launch-label">Usuario</div>
+          <div class="vault-launch-value">${_esc(entry.username)}</div>
+        </div>
+        <button class="action-chip secondary" id="btn-launch-user">📋 Copiar</button>
+      </div>
+      <div class="vault-launch-step">
+        <span class="vault-launch-num">2</span>
+        <div class="vault-launch-body">
+          <div class="vault-launch-label">Contraseña</div>
+          <div class="vault-launch-value vault-pass-placeholder">••••••••</div>
+        </div>
+        <button class="action-chip" id="btn-launch-pass">📋 Copiar</button>
+      </div>
+      <div id="vault-clip-notice" class="vault-clip-notice" style="display:none"></div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:8px;align-self:flex-start" id="btn-launch-back">← Volver</button>
+    </div>
+  `;
+
+  document.getElementById('btn-launch-user').addEventListener('click', async function() {
+    await _copyToClipboard(entry.username, 'Usuario copiado', false);
+    this.textContent = '✓ Copiado';
+    setTimeout(() => { this.textContent = '📋 Copiar'; }, 2000);
+  });
+
+  document.getElementById('btn-launch-pass').addEventListener('click', async function() {
+    const password = pw || await (async () => {
+      const r = await fetch(`${API}/vault/entries/${entry.id}/password`);
+      return (await r.json()).password || '';
+    })();
+    await _copyToClipboard(password, 'Contraseña copiada — se borrará en 30s', true);
+    this.textContent = '✓ Copiada';
+    setTimeout(() => { this.textContent = '📋 Copiar'; }, 2000);
+  });
+
+  document.getElementById('btn-launch-back').addEventListener('click', () => showVaultDetail(entry));
 }
 
 async function copyUsername(entryId) {
@@ -269,10 +358,14 @@ function _esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Called from nav-btn click handler in app.js
 function initVaultModule() {
-  if (!_vaultEntries.length) loadVault();
-  else showVaultEmpty();
+  if (!_vaultEntries.length) {
+    loadVault();
+  } else {
+    renderVaultList();
+    if (_vaultSelected) showVaultDetail(_vaultSelected);
+    else showVaultEmpty();
+  }
 }
 
 // Scripts load after DOM is parsed — attach directly

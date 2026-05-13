@@ -206,10 +206,12 @@
           <!-- Sidebar izquierdo: lista -->
           <div class="vault-sidebar">
             <div class="vault-sidebar-header">
-              <span class="vault-sidebar-title">🔑 Contraseñas</span>
-              <div style="display:flex;gap:6px;align-items:center">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="vault-sidebar-title">🔑 Contraseñas</span>
+                <button class="btn btn-primary btn-sm" id="btn-vault-new">+ Nueva</button>
+              </div>
+              <div class="vault-header-row">
                 <input id="vault-filter" class="vault-filter-input" placeholder="Buscar…" />
-                <button class="icon-btn" id="btn-vault-new" title="Nueva entrada">+</button>
               </div>
             </div>
             <div id="vault-list" class="vault-list">

@@ -16,7 +16,8 @@ from pydantic import BaseModel
 from agents.transcriber import transcribe_chunk
 from agents.summarizer import summarize
 
-MINUTAS_DIR = Path.home() / "Documents" / "AIgor" / "minutas"
+_AIGOR_DATA = Path.home() / "OneDrive - Accenture" / "Todos" / "AntiGravity" / "AIgor"
+MINUTAS_DIR = _AIGOR_DATA / "minutas"
 MINUTAS_DIR.mkdir(parents=True, exist_ok=True)
 
 _scheduler = None
@@ -485,13 +486,36 @@ def vault_delete(entry_id: str):
 @app.post("/vault/entries/{entry_id}/launch")
 def vault_launch(entry_id: str):
     try:
-        from agents.vault import list_entries
+        import webbrowser
+        import time
+        import threading
+        import pyautogui
+        import pyperclip
+        from agents.vault import list_entries, get_password
         entries = list_entries()
         entry = next((e for e in entries if e['id'] == entry_id), None)
         if not entry:
             raise HTTPException(status_code=404, detail="Entrada no encontrada")
-        import webbrowser
+        password = get_password(entry_id)
+
+        def _autofill():
+            time.sleep(3)
+            pyperclip.copy(entry['username'])
+            pyautogui.hotkey('ctrl', 'v')
+            time.sleep(0.15)
+            pyautogui.press('tab')
+            time.sleep(0.15)
+            pyperclip.copy(password)
+            pyautogui.hotkey('ctrl', 'v')
+            # clear clipboard after 30s
+            time.sleep(30)
+            try:
+                pyperclip.copy('')
+            except Exception:
+                pass
+
         webbrowser.open(entry['url'])
+        threading.Thread(target=_autofill, daemon=True).start()
         return {"status": "ok", "url": entry['url']}
     except HTTPException:
         raise

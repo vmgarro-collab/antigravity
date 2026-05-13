@@ -53,7 +53,7 @@ def _transcribe_with_diarization(audio_path: str) -> str:
 
     model = WhisperModel("small", device="cpu", compute_type="int8")
     segments_gen, info = model.transcribe(
-        audio_path, language="es", beam_size=5,
+        audio_path, beam_size=5,
         vad_filter=True, vad_parameters={"min_silence_duration_ms": 500},
     )
     segments = list(segments_gen)
@@ -101,8 +101,7 @@ def transcribe_chunk(audio_path: str) -> str:
             with open(part, "rb") as f:
                 result = _client.audio.transcriptions.create(
                     file=("recording.wav", f, "audio/wav"),
-                    model="whisper-large-v3",
-                    language="es",
+                    model="whisper-large-v3-turbo",
                 )
             texts.append(result.text.strip())
     finally:

@@ -142,8 +142,29 @@ async function saveAndShow() {
   activeRecId = id;
   await loadHistory();
   openRecording(id);
-  // Auto-process immediately
-  processInBackground(id, rawBlob);
+  // Save WAV only — transcription happens when user clicks "Generar minutas"
+  saveWavOnly(id, rawBlob);
+}
+
+async function saveWavOnly(id, rawBlob) {
+  try {
+    const recs = await recDbGetAll();
+    const rec = recs.find(r => r.id === id);
+    const stem = rec ? recFileStem(rec) : `grabacion_${id}`;
+    const wav = await convertToWav(rawBlob);
+    const form = new FormData();
+    form.append('audio', wav, 'audio.wav');
+    form.append('name', stem);
+    const res = await fetch(`${API}/recording/save-wav`, { method: 'POST', body: form });
+    if (res.ok) {
+      rec.audioSavedTo = (await res.json()).saved_to;
+      rec.status = 'saved';
+      await recDbSave(rec);
+      await loadHistory();
+    }
+  } catch (e) {
+    console.warn('[saveWavOnly]', e);
+  }
 }
 
 // --- Build filename stem from recording ---

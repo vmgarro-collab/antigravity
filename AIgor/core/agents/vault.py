@@ -5,7 +5,7 @@ from pathlib import Path
 
 from cryptography.fernet import Fernet
 
-VAULT_DIR = Path.home() / "Documents" / "AIgor"
+VAULT_DIR = Path.home() / "OneDrive - Accenture" / "Todos" / "AntiGravity" / "AIgor"
 _fernet_instance = None
 
 
