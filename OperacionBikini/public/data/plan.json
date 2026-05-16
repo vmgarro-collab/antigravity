@@ -1,0 +1,3102 @@
+{
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "days": [
+        {
+          "date": "2026-05-04",
+          "dayName": "Lunes",
+          "blocks": [
+            {
+              "id": "weighin-lun",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Pésate en ayunas antes de café o agua.",
+              "checked": false
+            },
+            {
+              "id": "workout-lun",
+              "type": "workout",
+              "title": "Entreno — Fuerza tren superior + core (45 min)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-1",
+                  "text": "Calentamiento 5 min (movilidad hombros, círculos de brazos)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-2",
+                  "text": "Dominadas: 4 series × máx reps (descanso 90 s)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3",
+                  "text": "Press militar mancuernas 4 kg: 4 × 12",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-4",
+                  "text": "Remo mancuerna 1 mano: 4 × 12 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-5",
+                  "text": "Curl bíceps + extensión tríceps superset: 3 × 12",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-6",
+                  "text": "Plancha frontal: 3 × 45 s",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7",
+                  "text": "Plancha lateral: 3 × 30 s por lado",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café solo o con leche desnatada. Ayuno hasta la comida.",
+              "checked": false
+            },
+            {
+              "id": "lunch-lun",
+              "type": "lunch",
+              "title": "Comida — FUERA",
+              "description": "Proteína magra + verdura/ensalada. Sin pan, sin postre. Bebida: 0,0 / agua con gas / máx 1 copa de vino.",
+              "checked": false
+            },
+            {
+              "id": "snack-lun",
+              "type": "snack",
+              "title": "Merienda (opcional)",
+              "description": "Café o infusión.",
+              "checked": false
+            },
+            {
+              "id": "dinner-lun",
+              "type": "dinner",
+              "title": "Cena",
+              "description": "Plancha caliente, mínimo aceite, sal al final. Alternativa si la comida fue copiosa: yogur 0% + fruta + 15 g frutos secos, o saltar cena.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-1",
+                  "text": "Filete de ternera 150-180 g",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-2",
+                  "text": "Ensalada verde o verduras a la plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3",
+                  "text": "Sin pan, sin patatas, sin salsas",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-05",
+          "dayName": "Martes",
+          "blocks": [
+            {
+              "id": "workout-mar",
+              "type": "workout",
+              "title": "Entreno — Rodaje suave (45 min)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mar-1",
+                  "text": "Calentamiento 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-2",
+                  "text": "Rodaje suave 35-40 min zona 2 (ritmo conversacional)",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-3",
+                  "text": "Vuelta a la calma 5 min + estiramientos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mar",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta las 13:00 (16:8).",
+              "checked": false
+            },
+            {
+              "id": "lunch-mar",
+              "type": "lunch",
+              "title": "Comida",
+              "description": "Romper ayuno hacia las 13:00-14:00. Proteína magra + verdura + ración pequeña de carbohidrato.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mar-1",
+                  "text": "150 g pollo/pavo/atún (a la plancha o lata al natural)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2",
+                  "text": "Ensalada grande o verdura",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3",
+                  "text": "1/2 patata, 50 g arroz, o 2 rebanadas pan integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-mar",
+              "type": "dinner",
+              "title": "Cena",
+              "description": "Mejillones al natural con ensalada. Reducir patata a 1/2 porque ya hay carbo en la comida.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mar-1",
+                  "text": "2 latas de mejillones al natural escurridos",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2",
+                  "text": "Ensalada grande (lechuga, tomate, pepino, cebolla)",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-3",
+                  "text": "1/2 patata mediana asada",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-4",
+                  "text": "1 cda aceite oliva + limón + pimentón",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-5",
+                  "text": "1 yogur natural 0% de postre",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-06",
+          "dayName": "Miércoles",
+          "blocks": [
+            {
+              "id": "workout-mie",
+              "type": "workout",
+              "title": "Entreno — Fuerza tren inferior + core (45 min)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mie-1",
+                  "text": "Calentamiento 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2",
+                  "text": "Sentadilla con mancuernas 4 kg: 4 × 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3",
+                  "text": "Zancadas alternas: 4 × 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-4",
+                  "text": "Sentadilla búlgara: 3 × 10 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5",
+                  "text": "Puente de glúteos: 4 × 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6",
+                  "text": "Elevaciones de gemelos: 3 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-7",
+                  "text": "Elevación de piernas en barra: 3 × 12",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-8",
+                  "text": "Plancha frontal: 3 × 60 s",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mie",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta las 13:00 (16:8).",
+              "checked": false
+            },
+            {
+              "id": "lunch-mie",
+              "type": "lunch",
+              "title": "Comida",
+              "description": "Romper ayuno hacia las 13:00-14:00.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mie-1",
+                  "text": "150 g proteína magra (pollo, pavo, atún o huevos)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2",
+                  "text": "Ensalada o verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3",
+                  "text": "1/2 patata o 50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-mie",
+              "type": "dinner",
+              "title": "Cena",
+              "description": "Pollo a la plancha con verdura asada. Reducir arroz porque ya hay carbo en la comida.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mie-1",
+                  "text": "200 g pechuga de pollo",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2",
+                  "text": "Verdura asada (calabacín, pimiento, berenjena, cebolla)",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-3",
+                  "text": "40 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-5",
+                  "text": "1 fruta de postre (manzana o kiwi)",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-07",
+          "dayName": "Jueves",
+          "blocks": [
+            {
+              "id": "weighin-jue",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Pésate en ayunas antes de café o agua.",
+              "checked": false
+            },
+            {
+              "id": "workout-jue",
+              "type": "workout",
+              "title": "Entreno: Series corriendo (sustituye al remo HIIT)",
+              "description": "Sesión de calidad realizada en pista/asfalto.",
+              "checked": true,
+              "subItems": [
+                {
+                  "id": "w-jue-1",
+                  "text": "5 min calentamiento trote suave",
+                  "checked": true
+                },
+                {
+                  "id": "w-jue-2",
+                  "text": "6 x 400m a ritmo 4'20-4'25/km, descanso 90s",
+                  "checked": true
+                },
+                {
+                  "id": "w-jue-3",
+                  "text": "5 min vuelta a la calma + estiramientos",
+                  "checked": true
+                }
+              ]
+            },
+            {
+              "id": "breakfast-jue",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta las 13:00 (16:8).",
+              "checked": false
+            },
+            {
+              "id": "lunch-jue",
+              "type": "lunch",
+              "title": "Comida",
+              "description": "Romper ayuno hacia las 13:00-14:00.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-jue-1",
+                  "text": "150 g proteína magra",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2",
+                  "text": "Ensalada o verdura",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-3",
+                  "text": "1/2 patata o 50 g arroz o 2 rebanadas pan integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-jue",
+              "type": "dinner",
+              "title": "Cena",
+              "description": "Pechuga de pollo a la plancha con verdura. (Salmón ya cenado el miércoles.)",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-jue-1",
+                  "text": "200 g pechuga de pollo a la plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2",
+                  "text": "Verdura a la plancha o ensalada grande",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-4",
+                  "text": "1 yogur natural 0% de postre",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-08",
+          "dayName": "Viernes",
+          "blocks": [
+            {
+              "id": "workout-vie",
+              "type": "workout",
+              "title": "Entreno: Rodaje suave (recuperación)",
+              "description": "Cambio respecto al plan original: las series se hicieron ayer jueves, hoy toca recuperación activa para no encadenar dos días de impacto en piernas antes del fútbol del domingo.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-vie-1",
+                  "text": "5 min calentamiento",
+                  "checked": false
+                },
+                {
+                  "id": "w-vie-2",
+                  "text": "Rodaje 35-40 min en zona 2 (ritmo conversacional)",
+                  "checked": false
+                },
+                {
+                  "id": "w-vie-3",
+                  "text": "5 min vuelta a la calma + estiramientos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vie",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta la comida.",
+              "checked": false
+            },
+            {
+              "id": "lunch-vie",
+              "type": "lunch",
+              "title": "Comida — FUERA",
+              "description": "Proteína magra + verdura/ensalada. Sin pan, sin postre. Bebida: 0,0 / agua con gas / máx 1 copa de vino.",
+              "checked": false
+            },
+            {
+              "id": "dinner-vie",
+              "type": "dinner",
+              "title": "Cena",
+              "description": "Muy ligera o saltarla.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vie-1",
+                  "text": "Si cenas: yogur 0% + fruta + 15 g frutos secos",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-2",
+                  "text": "Si la comida ha sido copiosa, saltar cena",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-09",
+          "dayName": "Sábado",
+          "blocks": [
+            {
+              "id": "workout-sab",
+              "type": "workout",
+              "title": "Entreno — Bici larga (60-90 min)",
+              "description": "Bici a ritmo moderado o rodaje largo 50-60 min. Flexible en horario.",
+              "checked": false
+            },
+            {
+              "id": "breakfast-sab",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Yogur natural 0% + muesli (30 g) + frutos secos (15 g) + fruta.",
+              "checked": false
+            },
+            {
+              "id": "lunch-sab",
+              "type": "lunch",
+              "title": "Comida (~700 kcal)",
+              "description": "Ensalada completa con proteína (atún, pollo o huevo) + 1 fruta. Alcohol: máx 2 copas de vino o cervezas 0,0 sin límite.",
+              "checked": false
+            },
+            {
+              "id": "snack-sab",
+              "type": "snack",
+              "title": "Merienda",
+              "description": "Café.",
+              "checked": false
+            },
+            {
+              "id": "dinner-sab",
+              "type": "dinner",
+              "title": "Cena (~600 kcal)",
+              "description": "Crema de verduras + pescado blanco a la plancha + ensalada.",
+              "checked": false
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-10",
+          "dayName": "Domingo",
+          "blocks": [
+            {
+              "id": "workout-dom",
+              "type": "workout",
+              "title": "Entreno — Partido de fútbol (50 min)",
+              "description": "Partido ya programado.",
+              "checked": false
+            },
+            {
+              "id": "breakfast-dom",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Yogur natural 0% + muesli + frutos secos + fruta + café.",
+              "checked": false
+            },
+            {
+              "id": "lunch-dom",
+              "type": "lunch",
+              "title": "Comida (~750 kcal)",
+              "description": "Proteína + verdura + ración pequeña de carbohidrato. Alcohol: máx 2 copas de vino o cervezas 0,0 sin límite.",
+              "checked": false
+            },
+            {
+              "id": "snack-dom",
+              "type": "snack",
+              "title": "Merienda",
+              "description": "Fruta o café.",
+              "checked": false
+            },
+            {
+              "id": "dinner-dom",
+              "type": "dinner",
+              "title": "Cena (~550 kcal)",
+              "description": "Ligera: tortilla, pescado o ensalada.",
+              "checked": false
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        }
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "days": [
+        {
+          "date": "2026-05-11",
+          "dayName": "Lunes",
+          "specialNote": "⚠️ Cervical contracturada — sin entreno, solo paseo + movilidad + calor",
+          "waterTarget": 14,
+          "alcoholQuota": 1,
+          "blocks": [
+            {
+              "id": "weighin-lun-2",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Pésate en ayunas antes de café o agua. Inicio semana 2.",
+              "checked": false
+            },
+            {
+              "id": "workout-lun-2",
+              "type": "workout",
+              "title": "Descanso activo (contractura cervical)",
+              "description": "Suspendemos fuerza superior por contractura. Recuperación priorizada.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-2-1",
+                  "text": "Paseo 30-45 min ritmo cómodo",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-2-2",
+                  "text": "Movilidad cervical suave: sí/no, oreja al hombro, barbilla al pecho (10 reps cada uno)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-2-3",
+                  "text": "Calor local 15-20 min en cervical/trapecios (2-3 veces al día)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-2-4",
+                  "text": "Sin pesas, sin impacto",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun-2",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta la comida.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-lun-2-1",
+                  "text": "Café",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-2-2",
+                  "text": "Leche desnatada (opcional)",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-lun-2",
+              "type": "lunch",
+              "title": "Comida FUERA con compañeros",
+              "description": "Proteína magra + verdura, sin pan, máx 1 copa vino.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-lun-2-1",
+                  "text": "Proteína magra (pescado o carne a la plancha)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-2-2",
+                  "text": "Verdura/ensalada como guarnición",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-2-3",
+                  "text": "Sin pan",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-2-4",
+                  "text": "Sin postre dulce (fruta sí)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-2-5",
+                  "text": "1 copa vino máximo o 0,0/agua con gas",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-lun-2",
+              "type": "dinner",
+              "title": "Cena ligera — Yogur potenciado",
+              "description": "Cena rápida sin cocinado.",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-2-1",
+                  "text": "1 yogur natural griego 0% (170 g)",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-2-2",
+                  "text": "1 manzana o pera troceada",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-2-3",
+                  "text": "15 g mezcla frutos secos sin sal (5 almendras, 3 nueces, 5 pistachos)",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-2-4",
+                  "text": "Canela molida por encima",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-2-5",
+                  "text": "Infusión de manzanilla o rooibos",
+                  "checked": false
+                }
+              ],
+              "alternatives": [
+                "Salada: 100 g pavo en lonchas + tomate en rodajas con orégano y unas gotas de aceite + 1 yogur 0%"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-12",
+          "dayName": "Martes",
+          "specialNote": "Solo entrenar si la cervical ha mejorado. Si igual o peor: descanso.",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "workout-mar-2",
+              "type": "workout",
+              "title": "Rodaje suave en zona 2 (condicionado a cervical)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mar-2-1",
+                  "text": "Si cervical mejor: 5 min calentamiento + 30 min rodaje zona 2 (~5'15-5'30/km) + 5 min vuelta a la calma",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-2-2",
+                  "text": "Si cervical igual/peor: paseo + movilidad",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-2-3",
+                  "text": "Sin pesas en ningún caso",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mar-2",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno hasta las 13:30-14:00.",
+              "checked": false
+            },
+            {
+              "id": "lunch-mar-2",
+              "type": "lunch",
+              "title": "Comida — Bowl de pollo y arroz",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mar-2-1",
+                  "text": "150 g pechuga de pollo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-2",
+                  "text": "40 g arroz integral en seco (~110 g cocido)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-3",
+                  "text": "Mix hojas verdes (lechuga, rúcula, canónigos)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-4",
+                  "text": "1 tomate maduro, 1/2 pepino, 1/4 cebolla morada",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-5",
+                  "text": "4-5 aceitunas verdes",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-6",
+                  "text": "1 cda aceite oliva virgen extra",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-7",
+                  "text": "Vinagre de Módena, sal, pimienta, orégano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-2-8",
+                  "text": "1 manzana de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Cocer arroz integral 25 min en agua hirviendo con sal",
+                "Salpimentar pollo y sellar en sartén antiadherente, 4-5 min por lado",
+                "Reposar 3 min y cortar en tiras",
+                "Montar bowl: cama de arroz, hojas verdes, verduras troceadas, pollo encima",
+                "Aliñar con aceite + vinagre + sal + pimienta + orégano"
+              ]
+            },
+            {
+              "id": "dinner-mar-2",
+              "type": "dinner",
+              "title": "Cena — Salmón al horno con ensalada y patata",
+              "estimatedKcal": 480,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mar-2-1",
+                  "text": "200 g salmón fresco",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-2",
+                  "text": "1/2 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-3",
+                  "text": "1 limón",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-4",
+                  "text": "Lechuga, tomate, pepino, zanahoria",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-5",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-6",
+                  "text": "Sal, pimienta, eneldo u orégano",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-2-7",
+                  "text": "1 yogur natural 0% de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Patata al microondas: pincha con tenedor, 5-6 min máx potencia",
+                "Precalentar horno 200°C",
+                "Salpimentar salmón, colocarlo sobre papel de horno con rodajas de limón encima",
+                "Hornear 12-14 min según grosor (no pasarse o se seca)",
+                "Montar ensalada al gusto, aliñar con aceite + limón + sal",
+                "Yogur de postre"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-13",
+          "dayName": "Miércoles",
+          "specialNote": "Fuerza inferior adaptada: sin trabajo de cuello/hombros.",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "workout-mie-2",
+              "type": "workout",
+              "title": "Fuerza tren inferior + core (sin cargar cervical)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mie-2-1",
+                  "text": "5 min calentamiento (movilidad caderas, NO cervical)",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-2",
+                  "text": "Sentadilla con mancuernas 4 kg A LOS LADOS (no en hombros): 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-3",
+                  "text": "Zancadas alternas con mancuernas a los lados: 4 × 14 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-4",
+                  "text": "Sentadilla búlgara sin peso: 4 × 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-5",
+                  "text": "Sentadilla isométrica contra pared: 3 × 45s",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-6",
+                  "text": "Puente glúteos: 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-7",
+                  "text": "Elevaciones gemelos: 4 × 25",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-8",
+                  "text": "Crunch en suelo (NO en barra): 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-2-9",
+                  "text": "Plancha frontal: 3 × 60s",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mie-2",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-mie-2",
+              "type": "lunch",
+              "title": "Comida — Pavo a la plancha con verdura y patata",
+              "estimatedKcal": 600,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mie-2-1",
+                  "text": "150 g pechuga de pavo (o pollo)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2-2",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2-3",
+                  "text": "1 calabacín, 1 pimiento, 1/2 cebolla, 1 diente ajo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2-5",
+                  "text": "Sal, pimienta, pimentón dulce, comino",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-2-6",
+                  "text": "1 fruta de postre (kiwi o naranja)",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Patata al microondas 6-7 min",
+                "Trocear verduras en dados, saltear con 1/2 cda aceite 8-10 min",
+                "Sal, pimienta, comino y pimentón al final",
+                "Pavo a la plancha con la otra 1/2 cda aceite, 3-4 min por lado",
+                "Servir todo junto + fruta"
+              ]
+            },
+            {
+              "id": "dinner-mie-2",
+              "type": "dinner",
+              "title": "Cena — Pollo con verdura asada y arroz",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mie-2-1",
+                  "text": "200 g pechuga de pollo",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2-2",
+                  "text": "1 calabacín, 1 pimiento rojo, 1/2 berenjena, 1/2 cebolla",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2-3",
+                  "text": "40 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2-5",
+                  "text": "Sal, pimienta, orégano",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-2-6",
+                  "text": "1 yogur natural 0% de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Precalentar horno 200°C",
+                "Trocear verduras en dados grandes, bandeja con sal y 1/2 cda aceite",
+                "Hornear 25-30 min, removiendo a mitad",
+                "Cocer arroz integral en paralelo (25 min)",
+                "Pollo a la plancha con 1/2 cda aceite, 4-5 min por lado. Reposar y filetear",
+                "Servir: arroz de base, verduras encima, pollo al lado. Yogur de postre",
+                "💡 Cocina doble ración para tener lista una comida reciclada otro día"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-14",
+          "dayName": "Jueves",
+          "specialNote": "Sustituimos remo por bici (el remo carga trapecios, mal para cervical)",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "weighin-jue-2",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas, después del baño.",
+              "checked": false
+            },
+            {
+              "id": "workout-jue-2",
+              "type": "workout",
+              "title": "Bici intervalos + core",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-jue-2-1",
+                  "text": "5 min calentamiento bici suave",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-2-2",
+                  "text": "20 min intervalos: 4 min fuerte / 1 min suave × 4",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-2-3",
+                  "text": "5 min vuelta a la calma",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-2-4",
+                  "text": "Crunch suelo: 3 × 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-2-5",
+                  "text": "Plancha frontal: 3 × 45s",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-2-6",
+                  "text": "Elevación piernas tumbado: 3 × 15",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-jue-2",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-jue-2",
+              "type": "lunch",
+              "title": "Comida — Tortilla de atún con ensalada y patata",
+              "estimatedKcal": 600,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-jue-2-1",
+                  "text": "2 huevos enteros + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-2",
+                  "text": "1 lata atún al natural (escurrido)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-3",
+                  "text": "1/2 cebolla picada fina",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-4",
+                  "text": "1/2 pimiento rojo en daditos",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-5",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-6",
+                  "text": "2 tomates en rodajas con orégano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-7",
+                  "text": "1/2 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-2-8",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Patata al microondas 6-7 min",
+                "Saltear cebolla y pimiento con unas gotas de aceite, 5 min",
+                "Batir huevos + claras con sal y pimienta. Añadir atún desmenuzado y verduras pochadas",
+                "Cuajar en sartén antiadherente con 1/2 cda aceite, 3 min por cada lado",
+                "Servir con la patata y la ensalada de tomate. Fruta de postre"
+              ]
+            },
+            {
+              "id": "dinner-jue-2",
+              "type": "dinner",
+              "title": "Cena — Tortilla de espinacas y champiñones",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-jue-2-1",
+                  "text": "3 huevos enteros + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-2",
+                  "text": "80 g espinacas frescas (1 puñado generoso)",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-3",
+                  "text": "6-8 champiñones laminados",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-4",
+                  "text": "1/2 cebolla, 1 diente ajo",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-5",
+                  "text": "1 rebanada pan integral con semillas",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-6",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-7",
+                  "text": "Sal, pimienta, pizca de nuez moscada",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-2-8",
+                  "text": "1 yogur natural 0% de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Saltear cebolla y ajo con 1/2 cda aceite, 3-4 min",
+                "Añadir champiñones laminados, saltear 5-6 min hasta que evapore el agua",
+                "Añadir espinacas, remover 2-3 min hasta que reduzcan",
+                "🔑 CLAVE: volcar todo en colador y escurrir bien (si no, sale aguada)",
+                "Batir huevos + claras con sal, pimienta y nuez moscada. Mezclar con verduras escurridas",
+                "Cuajar en sartén antiadherente con 1/2 cda aceite, 3-4 min por cada lado",
+                "Servir con el pan y yogur de postre"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-15",
+          "dayName": "Viernes",
+          "specialNote": "⚠️ Mañana es COMUNIÓN. Hoy especialmente controlado para crear margen.",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "workout-vie-2",
+              "type": "workout",
+              "title": "Tempo corto si cervical bien, bici si no",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-vie-2-1",
+                  "text": "Si OK: 10 min cal + 15 min tempo a ritmo umbral (~4'50-5'00/km) + 10 min vuelta a la calma",
+                  "checked": false
+                },
+                {
+                  "id": "w-vie-2-2",
+                  "text": "Si cervical aún tocada: bici 45 min ritmo moderado",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vie-2",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-vie-2",
+              "type": "lunch",
+              "title": "Comida FUERA con tu mujer",
+              "description": "⚠️ SIN VINO HOY (guardamos cupo para mañana)",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-vie-2-1",
+                  "text": "Proteína magra + verdura/ensalada",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-2-2",
+                  "text": "Sin pan",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-2-3",
+                  "text": "Sin postre dulce",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-2-4",
+                  "text": "Bebidas: agua, agua con gas, 0,0",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-vie-2",
+              "type": "dinner",
+              "title": "Cena MUY ligera (pre-comunión)",
+              "description": "Cena ligera adrede. Mañana comemos en la comunión.",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vie-2-1",
+                  "text": "Opción A: 1 yogur 0% + 1 fruta troceada + 10 g frutos secos + infusión",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-2-2",
+                  "text": "Opción B: 100 g pavo en lonchas + 1 tomate con orégano + 1 yogur 0% + infusión manzanilla",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-16",
+          "dayName": "Sábado",
+          "specialNote": "🎉 COMUNIÓN familiar. Estrategia detallada — abrir ficha del evento.",
+          "alcoholQuota": 5,
+          "blocks": [
+            {
+              "id": "workout-sab-2",
+              "type": "workout",
+              "title": "Cardio EN AYUNAS (antes de la comunión)",
+              "description": "Genera déficit de partida",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-sab-2-1",
+                  "text": "45-60 min carrera suave o bici",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-2-2",
+                  "text": "En ayunas",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-sab-2",
+              "type": "breakfast",
+              "title": "Desayuno post-entreno (ligero)",
+              "description": "No comer más. Llegar a la comunión con hambre razonable.",
+              "estimatedKcal": 250,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-sab-2-1",
+                  "text": "Café solo",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-2-2",
+                  "text": "1 plátano mediano",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-2-3",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "pre-event-sab-2",
+              "type": "pre_event",
+              "title": "Pre-comunión (30 min antes de salir)",
+              "description": "Ralentiza la absorción del alcohol.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "pre-ev-sab-2-1",
+                  "text": "500 ml de agua",
+                  "checked": false
+                },
+                {
+                  "id": "pre-ev-sab-2-2",
+                  "text": "15 g frutos secos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "event-sab-2",
+              "type": "eventStrategy",
+              "title": "ESTRATEGIA COMUNIÓN — paso a paso",
+              "description": "Cupo alcohol: máx 4-5 UBE en todo el evento.",
+              "checked": false,
+              "sections": [
+                {
+                  "name": "1. Cóctel / Aperitivo",
+                  "do": [
+                    "Jamón ibérico (poca cantidad)",
+                    "Gambas, langostinos, mejillones, pulpo",
+                    "Brochetas de pollo, ensaladilla pequeña"
+                  ],
+                  "dont": [
+                    "Croquetas, empanadas, fritos",
+                    "Hojaldres, embutidos grasos",
+                    "Quesos curados abundantes"
+                  ],
+                  "drink": "1 cerveza o copa de vino al llegar. Luego agua o vino muy aguado."
+                },
+                {
+                  "name": "2. Comida sentada",
+                  "do": [
+                    "Entrantes: media ración, no llenarte aquí",
+                    "Plato principal: completo (proteína)",
+                    "Verdura siempre"
+                  ],
+                  "dont": [
+                    "Pan: 0 o 1 trocito pequeño",
+                    "Llenarte de entrantes y luego no poder con el principal"
+                  ],
+                  "drink": "1-2 copas vino máximo, alternando con agua"
+                },
+                {
+                  "name": "3. Postre — TRAMPA PRINCIPAL",
+                  "do": [
+                    "ELEGIR UNO: tarta O helado, no ambos",
+                    "Compartir si puedes (mitad con tu mujer/sobrino)"
+                  ],
+                  "dont": [
+                    "Tarta + helado + dulces sumados (800-1200 kcal)",
+                    "Bandeja de mini-dulces (cada uno 100-150 kcal, caen 5-6)"
+                  ]
+                },
+                {
+                  "name": "4. Sobremesa",
+                  "do": [
+                    "Café solo o cortado"
+                  ],
+                  "dont": [
+                    "Destilados (chupitos, cubatas)",
+                    "Combinados (gin tonic, ron-cola, vodka-naranja)"
+                  ]
+                },
+                {
+                  "name": "5. Barra libre tarde",
+                  "do": [
+                    "Máximo 1 cerveza más, o cerveza 0,0",
+                    "Agua con gas y limón si quieres seguir social"
+                  ],
+                  "dont": [
+                    "Cubatas (300 kcal el vaso)",
+                    "Pasar de 4-5 UBE totales en el día"
+                  ],
+                  "phrase": "Frase preparada: 'Mañana tengo cosas, hoy me modero.'"
+                }
+              ]
+            },
+            {
+              "id": "dinner-sab-2",
+              "type": "dinner",
+              "title": "Cena — NO cenar si has comido hasta tarde",
+              "description": "Si llegas con hambre real a las 22h: infusión + 1 yogur 0%",
+              "checked": false
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-17",
+          "dayName": "Domingo",
+          "specialNote": "Día de recuperación. CERO alcohol. Hidratación brutal. Si cervical mal: SALTAR FÚTBOL.",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "workout-dom-2",
+              "type": "workout",
+              "title": "Fútbol 50 min (CONDICIONADO al estado)",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-dom-2-1",
+                  "text": "Si cervical bien: fútbol normal",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-2-2",
+                  "text": "Si cervical aún tocada: SALTAR partido esta semana",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-2-3",
+                  "text": "Pre: 500 ml agua + plátano + frutos secos 1,5h antes",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-2-4",
+                  "text": "Durante: botella de agua, sorbos cada 10 min",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-dom-2",
+              "type": "breakfast",
+              "title": "Desayuno post-comunión",
+              "description": "750 ml agua nada más despertar (acumulación del sábado)",
+              "estimatedKcal": 425,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-dom-2-1",
+                  "text": "Opción A (salado): 2 huevos revueltos + 1 reb pan integral + 1 tomate con orégano + 1 fruta + café",
+                  "checked": false
+                },
+                {
+                  "id": "des-dom-2-2",
+                  "text": "Opción B (dulce energético): 1 yogur 0% + 30 g muesli + 15 g frutos secos + 1 plátano + café",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "pre-match-dom-2",
+              "type": "pre_match",
+              "title": "Pre-fútbol (1,5h antes)",
+              "description": "Solo si han pasado 2-3h desde el desayuno.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "pre-m-dom-2-1",
+                  "text": "500 ml agua",
+                  "checked": false
+                },
+                {
+                  "id": "pre-m-dom-2-2",
+                  "text": "1 plátano + 5 almendras",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-dom-2",
+              "type": "lunch",
+              "title": "Comida post-fútbol — Pollo con arroz y verdura",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-dom-2-1",
+                  "text": "200 g pechuga de pollo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-2-2",
+                  "text": "70 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-2-3",
+                  "text": "Verdura salteada (calabacín + pimiento + cebolla) o ensalada grande",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-2-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-2-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Cocer arroz integral 25 min",
+                "Saltear verduras con 1/2 cda aceite, 8-10 min",
+                "Pollo a la plancha con 1/2 cda aceite, 4-5 min por lado",
+                "Servir todo junto + fruta"
+              ]
+            },
+            {
+              "id": "post-match-dom-2",
+              "type": "post_match_strategy",
+              "title": "ESTRATEGIA POST-PARTIDO",
+              "description": "Punto débil identificado en semana 1. Hoy estricto.",
+              "checked": false,
+              "do": [
+                "Ducha rápida + casa para comer en familia",
+                "Si te quedas: ÚNICAMENTE 0,0"
+              ],
+              "phrase": "Frase preparada: 'Ayer comunión, hoy recupero.'"
+            },
+            {
+              "id": "snack-dom-2",
+              "type": "snack",
+              "title": "Merienda opcional",
+              "description": "Solo si hambre real.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "snk-dom-2-1",
+                  "text": "Café + 1 yogur + 1 fruta",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-dom-2",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "description": "Cero alcohol.",
+              "estimatedKcal": 450,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-dom-2-1",
+                  "text": "Opción A: tortilla francesa 2 huevos + 2 claras + salteado espinacas/champiñones + ensalada tomate + 1 yogur 0%",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-2-2",
+                  "text": "Opción B: 150 g pescado blanco a la plancha con limón + ensalada grande + 1 yogur 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        }
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "days": [
+        {
+          "date": "2026-05-19",
+          "dayName": "Lunes",
+          "specialNote": "Semana de SOSTENIBILIDAD. Cumplir TODAS las raciones (1.250-1.400 kcal). Cero saltos de comida.",
+          "blocks": [
+            {
+              "id": "weighin-lun-3",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas, después del baño. Inicio semana 3.",
+              "checked": false
+            },
+            {
+              "id": "workout-lun-3",
+              "type": "workout",
+              "title": "Fuerza tren inferior + core (sin cargar AC)",
+              "description": "45 min",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-3-1",
+                  "text": "5 min calentamiento (movilidad caderas)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-2",
+                  "text": "Sentadilla mancuernas 4 kg A LOS LADOS: 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-3",
+                  "text": "Zancadas alternas con mancuernas a los lados: 4 × 14 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-4",
+                  "text": "Sentadilla búlgara sin peso: 4 × 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-5",
+                  "text": "Sentadilla isométrica pared: 3 × 50s",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-6",
+                  "text": "Puente glúteos con pausa 2s arriba: 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-7",
+                  "text": "Elevaciones gemelos: 4 × 25",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-8",
+                  "text": "Crunch suelo: 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-3-9",
+                  "text": "Plancha frontal: 3 × 60s",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café (ayuno hasta la comida).",
+              "checked": false
+            },
+            {
+              "id": "lunch-lun-3",
+              "type": "lunch",
+              "title": "Bowl de pollo y arroz",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-lun-3-1",
+                  "text": "150 g pechuga de pollo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-2",
+                  "text": "50 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-3",
+                  "text": "Mix hojas verdes (lechuga, rúcula, canónigos)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-4",
+                  "text": "1 tomate, 1/2 pepino, 1/4 cebolla morada",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-5",
+                  "text": "4-5 aceitunas verdes",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-6",
+                  "text": "1 cda aceite oliva, vinagre, sal, pimienta, orégano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-3-7",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Cocer arroz integral 25 min en agua hirviendo con sal",
+                "Salpimentar pollo y sellar en sartén antiadherente, 4-5 min por lado",
+                "Reposar 3 min y cortar en tiras",
+                "Montar bowl: arroz, hojas, verduras, pollo encima",
+                "Aliñar con aceite + vinagre + sal + pimienta + orégano"
+              ]
+            },
+            {
+              "id": "dinner-lun-3",
+              "type": "dinner",
+              "title": "Salmón al horno con ensalada y patata",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-3-1",
+                  "text": "200 g salmón fresco",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-2",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-3",
+                  "text": "1 limón",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-4",
+                  "text": "Lechuga, tomate, pepino, zanahoria",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-5",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-6",
+                  "text": "Sal, pimienta, eneldo u orégano",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-3-7",
+                  "text": "1 yogur natural 0% + 1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Patata al microondas pinchada, 6-7 min máx potencia",
+                "Precalentar horno 200°C",
+                "Salpimentar salmón, colocar sobre papel horno con rodajas limón",
+                "Hornear 12-14 min según grosor (no pasarse o se seca)",
+                "Ensalada al gusto, aliñar con aceite + limón + sal"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-20",
+          "dayName": "Martes",
+          "blocks": [
+            {
+              "id": "workout-mar-3",
+              "type": "workout",
+              "title": "Rodaje Z2 estricta",
+              "description": "45 min",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mar-3-1",
+                  "text": "5 min calentamiento trote suave",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-3-2",
+                  "text": "35 min Z2 (138-145 ppm, ~6:00/km)",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-3-3",
+                  "text": "5 min vuelta a la calma + estiramientos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mar-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-mar-3",
+              "type": "lunch",
+              "title": "Pavo con verdura y patata",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mar-3-1",
+                  "text": "150 g pechuga de pavo (o pollo)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3-2",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3-3",
+                  "text": "1 calabacín, 1 pimiento, 1/2 cebolla, 1 diente ajo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3-5",
+                  "text": "Sal, pimienta, pimentón dulce, comino",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-3-6",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Patata al microondas 6-7 min",
+                "Trocear verduras en dados, saltear con 1/2 cda aceite 8-10 min",
+                "Sal, pimienta, comino y pimentón al final",
+                "Pavo a la plancha con la otra 1/2 cda, 3-4 min por lado"
+              ]
+            },
+            {
+              "id": "dinner-mar-3",
+              "type": "dinner",
+              "title": "Pollo con verdura asada y arroz",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mar-3-1",
+                  "text": "200 g pechuga pollo",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-3-2",
+                  "text": "Verdura asada (calabacín, pimiento, berenjena, cebolla)",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-3-3",
+                  "text": "50 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-3-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Precalentar horno 200°C",
+                "Trocear verduras en dados grandes, bandeja con sal y 1/2 cda aceite",
+                "Hornear 25-30 min, removiendo a mitad",
+                "Cocer arroz en paralelo (25 min)",
+                "Pollo plancha 4-5 min por lado, reposar y filetear"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-21",
+          "dayName": "Miércoles",
+          "blocks": [
+            {
+              "id": "workout-mie-3",
+              "type": "workout",
+              "title": "Fuerza inferior progresiva",
+              "description": "45 min",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mie-3-1",
+                  "text": "5 min calentamiento",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-2",
+                  "text": "Sentadilla mancuernas 4 kg a los lados: 4 × 22",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-3",
+                  "text": "Zancadas alternas: 4 × 16 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-4",
+                  "text": "Sentadilla búlgara sin peso: 4 × 14 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-5",
+                  "text": "Saltos cajón bajo (banco): 3 × 10 [solo si AC bien]",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-6",
+                  "text": "Sentadilla isométrica pared: 3 × 60s",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-7",
+                  "text": "Puente glúteos a una pierna: 3 × 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-8",
+                  "text": "Crunch suelo: 4 × 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-3-9",
+                  "text": "Plancha lateral: 3 × 30s por lado [cuidado con AC en lado afectado]",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mie-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-mie-3",
+              "type": "lunch",
+              "title": "Tortilla atún con patata y ensalada",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mie-3-1",
+                  "text": "2 huevos + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-2",
+                  "text": "1 lata atún al natural escurrido",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-3",
+                  "text": "1/2 cebolla picada, 1/2 pimiento rojo en daditos",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-4",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-5",
+                  "text": "2 tomates en rodajas con orégano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-6",
+                  "text": "1/2 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-3-7",
+                  "text": "1 fruta + 1 yogur 0% de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-mie-3",
+              "type": "dinner",
+              "title": "Pescado blanco con verdura y patata",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mie-3-1",
+                  "text": "200 g merluza o lubina",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-3-2",
+                  "text": "Verdura al vapor o salteada (judías verdes, brócoli)",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-3-3",
+                  "text": "1 patata pequeña",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-3-4",
+                  "text": "1 cda aceite oliva + limón",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-3-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-22",
+          "dayName": "Jueves",
+          "specialNote": "🎯 Pesaje. Semana de calidad: tempo + intervalos para preparar el torneo del 31.",
+          "blocks": [
+            {
+              "id": "weighin-jue-3",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas, después del baño.",
+              "checked": false
+            },
+            {
+              "id": "workout-jue-3",
+              "type": "workout",
+              "title": "Tempo + intervalos cortos (calidad pre-torneo)",
+              "description": "45 min",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-jue-3-1",
+                  "text": "10 min calentamiento (trote + skipping + talones al culo)",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-3-2",
+                  "text": "2 × 1.000m a ritmo umbral (5:00-5:10/km), descanso 90s",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-3-3",
+                  "text": "4 × 200m progresivos (NO sprint)",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-3-4",
+                  "text": "5-10 min vuelta a la calma",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-jue-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-jue-3",
+              "type": "lunch",
+              "title": "Comida — Día algo más cargado por sesión de calidad",
+              "estimatedKcal": 750,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-jue-3-1",
+                  "text": "180 g proteína (pollo o ternera magra)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-3-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-3-3",
+                  "text": "70 g arroz integral o 1 patata grande",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-3-5",
+                  "text": "1 fruta + 1 yogur 0% de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-jue-3",
+              "type": "dinner",
+              "title": "Tortilla espinacas y champiñones",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-jue-3-1",
+                  "text": "3 huevos + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3-2",
+                  "text": "Espinacas frescas, champiñones, cebolla, ajo",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3-3",
+                  "text": "2 rebanadas pan integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3-5",
+                  "text": "Sal, pimienta, nuez moscada",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-3-6",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Saltear cebolla y ajo con 1/2 cda aceite, 3-4 min",
+                "Añadir champiñones laminados, saltear 5-6 min hasta que evapore el agua",
+                "Añadir espinacas, remover 2-3 min hasta que reduzcan",
+                "🔑 CLAVE: volcar todo en colador y escurrir bien",
+                "Batir huevos + claras con sal, pimienta y nuez moscada. Mezclar con verduras escurridas",
+                "Cuajar en sartén antiadherente con 1/2 cda aceite, 3-4 min por cada lado"
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-23",
+          "dayName": "Viernes",
+          "specialNote": "Pre-fin de semana: descanso o muy suave. Reservar energía para sábado largo.",
+          "blocks": [
+            {
+              "id": "workout-vie-3",
+              "type": "workout",
+              "title": "Descanso o muy suave",
+              "description": "",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-vie-3-1",
+                  "text": "Si piernas tocadas: descanso o paseo 45 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-vie-3-2",
+                  "text": "Si bien: bici suave 30 min o rodaje muy suave 25 min Z2",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vie-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Café. Ayuno.",
+              "checked": false
+            },
+            {
+              "id": "lunch-vie-3",
+              "type": "lunch",
+              "title": "Comida FUERA con tu mujer",
+              "description": "Proteína magra + verdura, 1 copa vino máx, sin pan abundante, sin postre dulce.",
+              "checked": false
+            },
+            {
+              "id": "dinner-vie-3",
+              "type": "dinner",
+              "title": "Cena equilibrada",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vie-3-1",
+                  "text": "150 g pescado o pollo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-3-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-3-3",
+                  "text": "1 rebanada pan integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-3-4",
+                  "text": "1 cda aceite",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-3-5",
+                  "text": "1 yogur 0% + 1 fruta",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-24",
+          "dayName": "Sábado",
+          "specialNote": "Rodaje largo Z2 — semana de volumen aeróbico. Post: hielo en AC.",
+          "alcoholQuota": 3,
+          "blocks": [
+            {
+              "id": "workout-sab-3",
+              "type": "workout",
+              "title": "Rodaje largo Z2",
+              "description": "60-70 min — Si AC molesta: para y vuelves caminando.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-sab-3-1",
+                  "text": "60-70 min carrera continua Z2 (138-145 ppm)",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-3-2",
+                  "text": "Ritmo ~6:00/km (mejor por sensación que por reloj)",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-3-3",
+                  "text": "Pre: 1 plátano + agua",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-3-4",
+                  "text": "Post: estiramientos completos + hielo AC",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-3-5",
+                  "text": "Si AC molesta: para y vuelves caminando",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-sab-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "",
+              "estimatedKcal": 400,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-sab-3-1",
+                  "text": "Yogur 0% + 30 g muesli + 15 g frutos secos + 1 fruta + café",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-sab-3",
+              "type": "lunch",
+              "title": "Comida",
+              "estimatedKcal": 750,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-sab-3-1",
+                  "text": "200 g proteína (pollo o pescado)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-3-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-3-3",
+                  "text": "80 g arroz integral o 1 patata grande",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-3-5",
+                  "text": "1 fruta",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-sab-3",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-sab-3-1",
+                  "text": "200 g pescado blanco a la plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-3-2",
+                  "text": "Crema de verduras o ensalada",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-3-3",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-05-25",
+          "dayName": "Domingo",
+          "specialNote": "⚽ Fútbol solo si AC al 100%. CERO alcohol.",
+          "alcoholQuota": 0,
+          "blocks": [
+            {
+              "id": "breakfast-dom-3",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "",
+              "estimatedKcal": 400,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-dom-3-1",
+                  "text": "Opción A: 2 huevos revueltos + pan integral + tomate + fruta + café",
+                  "checked": false
+                },
+                {
+                  "id": "des-dom-3-2",
+                  "text": "Opción B: yogur + muesli + plátano + frutos secos + café",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "pre-match-dom-3",
+              "type": "pre_match",
+              "title": "Pre-fútbol (1,5h antes)",
+              "description": "Solo si AC al 100%. Si tocada: saltar partido.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "pre-m-dom-3-1",
+                  "text": "500 ml agua + 1 plátano + 5 almendras + café",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "workout-dom-3",
+              "type": "workout",
+              "title": "Fútbol 50 min (si AC 100%)",
+              "description": "Si AC tocada: rodaje suave 30 min o descanso.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-dom-3-1",
+                  "text": "Si AC OK: fútbol normal",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-3-2",
+                  "text": "Si AC no al 100%: rodaje 30 min suave Z2 o descanso completo",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "post-match-dom-3",
+              "type": "post_match_strategy",
+              "title": "ESTRATEGIA POST-PARTIDO",
+              "description": "Mantener lo aprendido. Hoy igual de estricto.",
+              "checked": false,
+              "do": [
+                "Ducha rápida + casa para comer en familia",
+                "Si te quedas: ÚNICAMENTE 0,0"
+              ],
+              "phrase": "Frase preparada: 'Tengo torneo en 6 días, hoy no toca.'"
+            },
+            {
+              "id": "lunch-dom-3",
+              "type": "lunch",
+              "title": "Comida post-fútbol",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-dom-3-1",
+                  "text": "200 g proteína (pollo o ternera)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-3-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-3-3",
+                  "text": "70 g arroz o 1 patata",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-3-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-3-5",
+                  "text": "1 fruta",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-dom-3",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "estimatedKcal": 450,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-dom-3-1",
+                  "text": "Opción A: tortilla francesa 2 huevos + 2 claras + verdura + 1 yogur 0%",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-3-2",
+                  "text": "Opción B: 150 g pescado a la plancha + ensalada + 1 yogur 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        }
+      ]
+    }
+  ],
+  "shoppingList": [
+    {
+      "week": 1,
+      "items": [
+        {
+          "id": "p1",
+          "category": "proteinas",
+          "name": "Salmón fresco (200 g)",
+          "checked": false
+        },
+        {
+          "id": "p2",
+          "category": "proteinas",
+          "name": "Pechugas de pollo (500 g)",
+          "checked": false
+        },
+        {
+          "id": "p3",
+          "category": "proteinas",
+          "name": "Pescado blanco — merluza o lubina (300 g)",
+          "checked": false
+        },
+        {
+          "id": "p4",
+          "category": "proteinas",
+          "name": "Huevos (media docena)",
+          "checked": false
+        },
+        {
+          "id": "p8",
+          "category": "proteinas",
+          "name": "Mejillones al natural Aguinamar — 2 latas (ya en despensa)",
+          "checked": false
+        },
+        {
+          "id": "p5",
+          "category": "proteinas",
+          "name": "Atún en lata al natural (6 latas)",
+          "checked": false
+        },
+        {
+          "id": "p6",
+          "category": "proteinas",
+          "name": "Pavo o jamón cocido bajo en sal",
+          "checked": false
+        },
+        {
+          "id": "p9",
+          "category": "proteinas",
+          "name": "Pavo en lonchas o pechuga extra (200 g — comidas mar/jue)",
+          "checked": false
+        },
+        {
+          "id": "p7",
+          "category": "proteinas",
+          "name": "Filete de ternera (cadera/tapa/babilla) — 180 g",
+          "checked": false
+        },
+        {
+          "id": "v1",
+          "category": "verduras-frutas",
+          "name": "Lechuga, tomate, pepino, zanahoria",
+          "checked": false
+        },
+        {
+          "id": "v2",
+          "category": "verduras-frutas",
+          "name": "Calabacín, pimiento rojo y verde, berenjena, cebolla",
+          "checked": false
+        },
+        {
+          "id": "v5",
+          "category": "verduras-frutas",
+          "name": "Verduras para crema (puerro, calabacín, zanahoria)",
+          "checked": false
+        },
+        {
+          "id": "v6",
+          "category": "verduras-frutas",
+          "name": "Limones",
+          "checked": false
+        },
+        {
+          "id": "v7",
+          "category": "verduras-frutas",
+          "name": "Fruta variada: manzanas, plátanos, fresas, kiwis (10-12 piezas)",
+          "checked": false
+        },
+        {
+          "id": "v8",
+          "category": "verduras-frutas",
+          "name": "Espárragos verdes (1 manojo) o champiñones (1 bandeja)",
+          "checked": false
+        },
+        {
+          "id": "c1",
+          "category": "carbohidratos",
+          "name": "Arroz integral (paquete)",
+          "checked": false
+        },
+        {
+          "id": "c2",
+          "category": "carbohidratos",
+          "name": "Patatas (6-7 unidades medianas)",
+          "checked": false
+        },
+        {
+          "id": "c3",
+          "category": "carbohidratos",
+          "name": "Pan integral (barra o molde)",
+          "checked": false
+        },
+        {
+          "id": "c4",
+          "category": "carbohidratos",
+          "name": "Muesli sin azúcar añadido (paquete)",
+          "checked": false
+        },
+        {
+          "id": "l1",
+          "category": "lacteos-huevos",
+          "name": "Yogur natural 0% (pack de 8)",
+          "checked": false
+        },
+        {
+          "id": "l2",
+          "category": "lacteos-huevos",
+          "name": "Leche desnatada (1 L)",
+          "checked": false
+        },
+        {
+          "id": "d1",
+          "category": "despensa",
+          "name": "Aceite de oliva virgen extra",
+          "checked": false
+        },
+        {
+          "id": "d2",
+          "category": "despensa",
+          "name": "Frutos secos sin sal (200 g) — almendras, nueces, pistachos",
+          "checked": false
+        },
+        {
+          "id": "d3",
+          "category": "despensa",
+          "name": "Café",
+          "checked": false
+        },
+        {
+          "id": "d4",
+          "category": "despensa",
+          "name": "Infusiones (rooibos, té verde, manzanilla)",
+          "checked": false
+        },
+        {
+          "id": "d5",
+          "category": "despensa",
+          "name": "Agua con gas",
+          "checked": false
+        },
+        {
+          "id": "d6",
+          "category": "despensa",
+          "name": "Cerveza 0,0 (pack)",
+          "checked": false
+        },
+        {
+          "id": "d7",
+          "category": "despensa",
+          "name": "Vino tinto (1 botella)",
+          "checked": false
+        },
+        {
+          "id": "d8",
+          "category": "despensa",
+          "name": "Especias: pimienta, comino, pimentón, orégano",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "items": [
+        {
+          "id": "w2-p1",
+          "category": "proteinas",
+          "name": "Salmón fresco 200 g (martes)",
+          "checked": false
+        },
+        {
+          "id": "w2-p2",
+          "category": "proteinas",
+          "name": "Pechugas de pollo 600 g (miércoles + domingo)",
+          "checked": false
+        },
+        {
+          "id": "w2-p3",
+          "category": "proteinas",
+          "name": "Pechuga de pavo 150 g (miércoles)",
+          "checked": false
+        },
+        {
+          "id": "w2-p4",
+          "category": "proteinas",
+          "name": "Pavo en lonchas (lunes alt, viernes)",
+          "checked": false
+        },
+        {
+          "id": "w2-p5",
+          "category": "proteinas",
+          "name": "Pescado blanco 150 g (domingo opcional)",
+          "checked": false
+        },
+        {
+          "id": "w2-p6",
+          "category": "proteinas",
+          "name": "Atún en lata al natural (3 latas)",
+          "checked": false
+        },
+        {
+          "id": "w2-p7",
+          "category": "proteinas",
+          "name": "Huevos (1 docena)",
+          "checked": false
+        },
+        {
+          "id": "w2-v1",
+          "category": "verduras-frutas",
+          "name": "Lechuga, rúcula, canónigos",
+          "checked": false
+        },
+        {
+          "id": "w2-v2",
+          "category": "verduras-frutas",
+          "name": "Tomates (5-6)",
+          "checked": false
+        },
+        {
+          "id": "w2-v3",
+          "category": "verduras-frutas",
+          "name": "Pepino (1-2)",
+          "checked": false
+        },
+        {
+          "id": "w2-v4",
+          "category": "verduras-frutas",
+          "name": "Cebolla (4) + cebolla morada (1)",
+          "checked": false
+        },
+        {
+          "id": "w2-v5",
+          "category": "verduras-frutas",
+          "name": "Calabacín (2)",
+          "checked": false
+        },
+        {
+          "id": "w2-v6",
+          "category": "verduras-frutas",
+          "name": "Pimiento rojo (2) + pimiento verde (2)",
+          "checked": false
+        },
+        {
+          "id": "w2-v7",
+          "category": "verduras-frutas",
+          "name": "Berenjena (1)",
+          "checked": false
+        },
+        {
+          "id": "w2-v8",
+          "category": "verduras-frutas",
+          "name": "Espinacas frescas (1 bolsa)",
+          "checked": false
+        },
+        {
+          "id": "w2-v9",
+          "category": "verduras-frutas",
+          "name": "Champiñones (1 bandeja)",
+          "checked": false
+        },
+        {
+          "id": "w2-v10",
+          "category": "verduras-frutas",
+          "name": "Limones (2)",
+          "checked": false
+        },
+        {
+          "id": "w2-v11",
+          "category": "verduras-frutas",
+          "name": "Ajos (1 cabeza)",
+          "checked": false
+        },
+        {
+          "id": "w2-v12",
+          "category": "verduras-frutas",
+          "name": "Fruta variada: manzanas, kiwis, plátanos, naranjas (8-10 piezas)",
+          "checked": false
+        },
+        {
+          "id": "w2-c1",
+          "category": "carbohidratos",
+          "name": "Patatas (6 medianas)",
+          "checked": false
+        },
+        {
+          "id": "w2-c2",
+          "category": "carbohidratos",
+          "name": "Pan integral con semillas",
+          "checked": false
+        },
+        {
+          "id": "w2-c3",
+          "category": "carbohidratos",
+          "name": "Arroz integral (si no queda)",
+          "checked": false
+        },
+        {
+          "id": "w2-c4",
+          "category": "carbohidratos",
+          "name": "Muesli sin azúcar",
+          "checked": false
+        },
+        {
+          "id": "w2-l1",
+          "category": "lacteos-huevos",
+          "name": "Yogur natural 0% (pack 8)",
+          "checked": false
+        },
+        {
+          "id": "w2-d1",
+          "category": "despensa",
+          "name": "Frutos secos sin sal (200 g)",
+          "checked": false
+        },
+        {
+          "id": "w2-d2",
+          "category": "despensa",
+          "name": "Aceitunas verdes (bote pequeño)",
+          "checked": false
+        },
+        {
+          "id": "w2-d3",
+          "category": "despensa",
+          "name": "Ibuprofeno 600 mg o paracetamol 1 g (farmacia, para cervical)",
+          "checked": false
+        },
+        {
+          "id": "w2-d4",
+          "category": "despensa",
+          "name": "Crema antiinflamatoria — Voltarén o RadioSalil (farmacia)",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "items": [
+        {
+          "id": "w3-p1",
+          "category": "proteinas",
+          "name": "Salmón fresco 200 g (lunes)",
+          "checked": false
+        },
+        {
+          "id": "w3-p2",
+          "category": "proteinas",
+          "name": "Pechugas de pollo 700 g (martes, sábado, domingo)",
+          "checked": false
+        },
+        {
+          "id": "w3-p3",
+          "category": "proteinas",
+          "name": "Pechuga de pavo 150 g (martes)",
+          "checked": false
+        },
+        {
+          "id": "w3-p4",
+          "category": "proteinas",
+          "name": "Merluza o lubina 200 g (miércoles)",
+          "checked": false
+        },
+        {
+          "id": "w3-p5",
+          "category": "proteinas",
+          "name": "Pescado blanco 200 g (viernes o sábado cena)",
+          "checked": false
+        },
+        {
+          "id": "w3-p6",
+          "category": "proteinas",
+          "name": "Ternera magra 180 g (jueves)",
+          "checked": false
+        },
+        {
+          "id": "w3-p7",
+          "category": "proteinas",
+          "name": "Atún en lata al natural (3 latas)",
+          "checked": false
+        },
+        {
+          "id": "w3-p8",
+          "category": "proteinas",
+          "name": "Huevos (1 docena)",
+          "checked": false
+        },
+        {
+          "id": "w3-v1",
+          "category": "verduras-frutas",
+          "name": "Lechuga, rúcula, canónigos",
+          "checked": false
+        },
+        {
+          "id": "w3-v2",
+          "category": "verduras-frutas",
+          "name": "Tomates (6)",
+          "checked": false
+        },
+        {
+          "id": "w3-v3",
+          "category": "verduras-frutas",
+          "name": "Pepino (2)",
+          "checked": false
+        },
+        {
+          "id": "w3-v4",
+          "category": "verduras-frutas",
+          "name": "Cebolla (4) + cebolla morada (1)",
+          "checked": false
+        },
+        {
+          "id": "w3-v5",
+          "category": "verduras-frutas",
+          "name": "Calabacín (2)",
+          "checked": false
+        },
+        {
+          "id": "w3-v6",
+          "category": "verduras-frutas",
+          "name": "Pimiento rojo (2) + pimiento verde (1)",
+          "checked": false
+        },
+        {
+          "id": "w3-v7",
+          "category": "verduras-frutas",
+          "name": "Berenjena (1)",
+          "checked": false
+        },
+        {
+          "id": "w3-v8",
+          "category": "verduras-frutas",
+          "name": "Espinacas frescas (1 bolsa)",
+          "checked": false
+        },
+        {
+          "id": "w3-v9",
+          "category": "verduras-frutas",
+          "name": "Champiñones (1 bandeja)",
+          "checked": false
+        },
+        {
+          "id": "w3-v10",
+          "category": "verduras-frutas",
+          "name": "Judías verdes o brócoli (200 g)",
+          "checked": false
+        },
+        {
+          "id": "w3-v11",
+          "category": "verduras-frutas",
+          "name": "Limones (2)",
+          "checked": false
+        },
+        {
+          "id": "w3-v12",
+          "category": "verduras-frutas",
+          "name": "Ajos (1 cabeza)",
+          "checked": false
+        },
+        {
+          "id": "w3-v13",
+          "category": "verduras-frutas",
+          "name": "Fruta variada: manzanas, kiwis, plátanos (8-10 piezas)",
+          "checked": false
+        },
+        {
+          "id": "w3-c1",
+          "category": "carbohidratos",
+          "name": "Patatas (6 medianas)",
+          "checked": false
+        },
+        {
+          "id": "w3-c2",
+          "category": "carbohidratos",
+          "name": "Pan integral con semillas",
+          "checked": false
+        },
+        {
+          "id": "w3-c3",
+          "category": "carbohidratos",
+          "name": "Arroz integral (si no queda)",
+          "checked": false
+        },
+        {
+          "id": "w3-c4",
+          "category": "carbohidratos",
+          "name": "Muesli sin azúcar",
+          "checked": false
+        },
+        {
+          "id": "w3-l1",
+          "category": "lacteos-huevos",
+          "name": "Yogur natural 0% (pack 8)",
+          "checked": false
+        },
+        {
+          "id": "w3-d1",
+          "category": "despensa",
+          "name": "Frutos secos sin sal (200 g)",
+          "checked": false
+        },
+        {
+          "id": "w3-d2",
+          "category": "despensa",
+          "name": "Aceitunas verdes (bote pequeño)",
+          "checked": false
+        }
+      ]
+    }
+  ]
+}
