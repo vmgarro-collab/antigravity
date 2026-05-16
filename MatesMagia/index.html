@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff2d78" />
+  <meta name="description" content="Practica matemáticas: sumas, fracciones, monomios y polinomios" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>MatesMagia</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SCREEN: HOME
+       ============================================================ -->
+  <div id="screen-home" class="screen active">
+    <div class="home-header">
+      <div class="home-title" id="home-title"><!-- filled by JS --></div>
+      <div class="home-subtitle" id="home-subtitle"><!-- filled by JS --></div>
+    </div>
+
+    <div class="stats-row">
+      <div class="streak-badge">
+        <span id="home-streak-icon">🔥</span>
+        <span id="home-streak-count">0</span>
+        <span id="home-streak-label"><!-- filled by JS --></span>
+      </div>
+      <div class="stars-badge">
+        <span>⭐</span>
+        <span id="home-stars-total">0</span>
+        <span id="home-stars-label"><!-- filled by JS --></span>
+      </div>
+    </div>
+
+    <div class="trophies-row" id="home-trophies" style="display:none;"></div>
+
+    <div class="mode-buttons">
+      <button class="btn-mode mode-quiz" id="btn-start-quiz" onclick="startQuiz()">
+        <span class="mode-icon">⚡</span>
+        <span class="mode-label">
+          <div id="mode-quiz-name"><!-- filled by JS --></div>
+          <div class="mode-sub" id="mode-quiz-sub"><!-- filled by JS --></div>
+        </span>
+        <span>›</span>
+      </button>
+      <button class="btn-mode mode-adventure" id="btn-adventure" onclick="showAdventure()">
+        <span class="mode-icon">🗺️</span>
+        <span class="mode-label">
+          <div id="mode-adv-name"><!-- filled by JS --></div>
+          <div class="mode-sub" id="mode-adv-sub"><!-- filled by JS --></div>
+        </span>
+        <span>›</span>
+      </button>
+      <button class="btn-mode mode-weak" id="btn-weak" onclick="startWeak()">
+        <span class="mode-icon">🎯</span>
+        <span class="mode-label">
+          <div id="mode-weak-name"><!-- filled by JS --></div>
+          <div class="mode-sub" id="mode-weak-sub"><!-- filled by JS --></div>
+        </span>
+        <span>›</span>
+      </button>
+    </div>
+
+    <div class="area-cards-heading" id="area-progress-heading"><!-- filled by JS --></div>
+    <div class="area-cards-grid" id="home-area-cards">
+      <!-- filled by renderHome() -->
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: QUIZ
+       ============================================================ -->
+  <div id="screen-quiz" class="screen">
+    <button class="back-btn" onclick="goHome()">‹</button>
+
+    <div class="quiz-header">
+      <span class="area-badge" id="qz-area-badge"></span>
+      <span class="quiz-score">
+        <span id="qz-score">0</span>/<span id="qz-score-total"></span>
+      </span>
+    </div>
+
+    <div class="quiz-counter">
+      <span id="home-question-label"><!-- filled by JS --></span>
+      <span id="qz-num">1</span>/<span id="qz-total"></span>
+    </div>
+
+    <div class="timer-bar-wrap">
+      <div class="timer-bar" id="qz-timer-bar"></div>
+    </div>
+
+    <div class="question-card" id="qz-question-card">
+      <div class="question-text" id="qz-question-text"></div>
+    </div>
+
+    <!-- Numpad input display -->
+    <div id="qz-numpad-section" style="display:none;">
+      <div class="numpad-input-display" id="qz-numpad-display">—</div>
+      <div class="numpad">
+        <button class="np-btn" data-val="7" onclick="numpadPress('qz','7')">7</button>
+        <button class="np-btn" data-val="8" onclick="numpadPress('qz','8')">8</button>
+        <button class="np-btn" data-val="9" onclick="numpadPress('qz','9')">9</button>
+        <button class="np-btn" data-val="/" onclick="numpadPress('qz','/')">÷</button>
+
+        <button class="np-btn" data-val="4" onclick="numpadPress('qz','4')">4</button>
+        <button class="np-btn" data-val="5" onclick="numpadPress('qz','5')">5</button>
+        <button class="np-btn" data-val="6" onclick="numpadPress('qz','6')">6</button>
+        <button class="np-btn minus-btn" onclick="numpadPress('qz','-')">−</button>
+
+        <button class="np-btn" data-val="1" onclick="numpadPress('qz','1')">1</button>
+        <button class="np-btn" data-val="2" onclick="numpadPress('qz','2')">2</button>
+        <button class="np-btn" data-val="3" onclick="numpadPress('qz','3')">3</button>
+        <button class="np-btn backspace-btn" onclick="numpadPress('qz','back')">⌫</button>
+
+        <button class="np-btn" style="grid-column:1" onclick="numpadPress('qz','0')">0</button>
+        <button class="np-btn" style="grid-column:2" onclick="numpadPress('qz','/')">.</button>
+        <button class="np-btn submit" style="grid-column:3/span 2" onclick="numpadPress('qz','submit')">✓</button>
+      </div>
+    </div>
+
+    <!-- Test options -->
+    <div id="qz-test-section" style="display:none;">
+      <div class="test-options" id="qz-options"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: QUIZ RESULT
+       ============================================================ -->
+  <div id="screen-quiz-result" class="screen">
+    <div class="result-title" id="qz-res-title"><!-- filled by JS --></div>
+    <div class="result-big-score" id="qz-res-score"></div>
+    <div class="result-stats-row">
+      <div class="result-stat">
+        <div class="result-stat-val" id="qz-res-accuracy"></div>
+        <div class="result-stat-label" id="qz-res-accuracy-label"><!-- filled by JS --></div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-val" id="qz-res-time"></div>
+        <div class="result-stat-label" id="qz-res-time-label"><!-- filled by JS --></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="area-breakdown" id="qz-breakdown"></div>
+    <button class="btn-primary" onclick="goHome()" id="qz-res-home-btn"><!-- filled by JS --></button>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: ADVENTURE (zone selection)
+       ============================================================ -->
+  <div id="screen-adventure" class="screen">
+    <button class="back-btn" onclick="goHome()">‹</button>
+    <div class="adventure-heading" id="adv-heading"><!-- filled by JS --></div>
+    <div class="adventure-sub" id="adv-sub"><!-- filled by JS --></div>
+    <div id="adv-zone-list">
+      <!-- filled by showAdventure() -->
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: ADVENTURE ZONE (level list)
+       ============================================================ -->
+  <div id="screen-adv-zone" class="screen">
+    <button class="back-btn" onclick="showAdventure()">‹</button>
+    <div class="zone-title" id="adv-zone-title"></div>
+    <div class="level-list" id="adv-level-list">
+      <!-- filled by showZone() -->
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: ADVENTURE QUIZ
+       ============================================================ -->
+  <div id="screen-adv-quiz" class="screen">
+    <button class="back-btn" onclick="showAdventure()">‹</button>
+
+    <div class="quiz-header">
+      <span class="area-badge" id="adq-area-badge"></span>
+      <span class="quiz-score">
+        <span id="adq-score">0</span>/<span id="adq-score-total"></span>
+      </span>
+    </div>
+
+    <div class="quiz-counter">
+      <span id="adq-question-label"><!-- filled by JS --></span>
+      <span id="adq-num">1</span>/<span id="adq-total"></span>
+    </div>
+
+    <div class="timer-bar-wrap">
+      <div class="timer-bar" id="adq-timer-bar"></div>
+    </div>
+
+    <div class="question-card" id="adq-question-card">
+      <div class="question-text" id="adq-question-text"></div>
+    </div>
+
+    <div id="adq-numpad-section" style="display:none;">
+      <div class="numpad-input-display" id="adq-numpad-display">—</div>
+      <div class="numpad">
+        <button class="np-btn" onclick="numpadPress('adq','7')">7</button>
+        <button class="np-btn" onclick="numpadPress('adq','8')">8</button>
+        <button class="np-btn" onclick="numpadPress('adq','9')">9</button>
+        <button class="np-btn" onclick="numpadPress('adq','/')">÷</button>
+
+        <button class="np-btn" onclick="numpadPress('adq','4')">4</button>
+        <button class="np-btn" onclick="numpadPress('adq','5')">5</button>
+        <button class="np-btn" onclick="numpadPress('adq','6')">6</button>
+        <button class="np-btn minus-btn" onclick="numpadPress('adq','-')">−</button>
+
+        <button class="np-btn" onclick="numpadPress('adq','1')">1</button>
+        <button class="np-btn" onclick="numpadPress('adq','2')">2</button>
+        <button class="np-btn" onclick="numpadPress('adq','3')">3</button>
+        <button class="np-btn backspace-btn" onclick="numpadPress('adq','back')">⌫</button>
+
+        <button class="np-btn" style="grid-column:1" onclick="numpadPress('adq','0')">0</button>
+        <button class="np-btn" style="grid-column:2" onclick="numpadPress('adq','/')">.</button>
+        <button class="np-btn submit" style="grid-column:3/span 2" onclick="numpadPress('adq','submit')">✓</button>
+      </div>
+    </div>
+
+    <div id="adq-test-section" style="display:none;">
+      <div class="test-options" id="adq-options"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: ADVENTURE RESULT
+       ============================================================ -->
+  <div id="screen-adv-result" class="screen">
+    <div class="three-stars" id="adv-res-stars"></div>
+    <div class="adv-result-score" id="adv-res-score"></div>
+    <div class="adv-result-msg" id="adv-res-msg"></div>
+    <button class="btn-primary" onclick="showZone(adventureZone)" id="adv-res-retry"><!-- filled by JS --></button>
+    <button class="btn-secondary" onclick="showAdventure()" id="adv-res-zones"><!-- filled by JS --></button>
+    <button class="btn-secondary" onclick="goHome()" id="adv-res-home"><!-- filled by JS --></button>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: WEAK TRAINING
+       ============================================================ -->
+  <div id="screen-weak" class="screen">
+    <button class="back-btn" onclick="goHome()">‹</button>
+    <div class="weak-heading" id="weak-heading"><!-- filled by JS --></div>
+    <div class="weak-sub" id="weak-sub"><!-- filled by JS --></div>
+
+    <div class="quiz-header" style="margin-bottom:4px;">
+      <span class="quiz-counter">
+        <span id="wk-question-label"><!-- filled by JS --></span>
+        <span id="wk-num">1</span>/<span id="wk-total"></span>
+      </span>
+      <span class="quiz-score"><span id="wk-score">0</span>/<span id="wk-score-total"></span></span>
+    </div>
+
+    <div class="question-card" id="wk-question-card">
+      <div class="question-text" id="wk-question-text"></div>
+    </div>
+
+    <div id="wk-numpad-section" style="display:none;">
+      <div class="numpad-input-display" id="wk-numpad-display">—</div>
+      <div class="numpad">
+        <button class="np-btn" onclick="numpadPress('wk','7')">7</button>
+        <button class="np-btn" onclick="numpadPress('wk','8')">8</button>
+        <button class="np-btn" onclick="numpadPress('wk','9')">9</button>
+        <button class="np-btn" onclick="numpadPress('wk','/')">÷</button>
+
+        <button class="np-btn" onclick="numpadPress('wk','4')">4</button>
+        <button class="np-btn" onclick="numpadPress('wk','5')">5</button>
+        <button class="np-btn" onclick="numpadPress('wk','6')">6</button>
+        <button class="np-btn minus-btn" onclick="numpadPress('wk','-')">−</button>
+
+        <button class="np-btn" onclick="numpadPress('wk','1')">1</button>
+        <button class="np-btn" onclick="numpadPress('wk','2')">2</button>
+        <button class="np-btn" onclick="numpadPress('wk','3')">3</button>
+        <button class="np-btn backspace-btn" onclick="numpadPress('wk','back')">⌫</button>
+
+        <button class="np-btn" style="grid-column:1" onclick="numpadPress('wk','0')">0</button>
+        <button class="np-btn" style="grid-column:2" onclick="numpadPress('wk','/')">.</button>
+        <button class="np-btn submit" style="grid-column:3/span 2" onclick="numpadPress('wk','submit')">✓</button>
+      </div>
+    </div>
+
+    <div id="wk-test-section" style="display:none;">
+      <div class="test-options" id="wk-options"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: WEAK RESULT
+       ============================================================ -->
+  <div id="screen-weak-result" class="screen">
+    <button class="back-btn" onclick="goHome()">‹</button>
+    <div class="result-title" id="wk-res-title"><!-- filled by JS --></div>
+    <div class="result-big-score" id="wk-res-score"></div>
+    <div class="divider"></div>
+    <div class="weak-result-list" id="wk-breakdown"></div>
+    <button class="btn-primary" onclick="startWeak()" id="wk-res-again"><!-- filled by JS --></button>
+    <button class="btn-secondary" onclick="goHome()" id="wk-res-home"><!-- filled by JS --></button>
+  </div>
+
+  <script src="generators.js?v=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
