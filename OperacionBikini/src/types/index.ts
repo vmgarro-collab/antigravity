@@ -32,7 +32,8 @@ export interface Block {
   subItems?: SubItem[]
   checked: boolean
   estimatedKcal?: number
-  recipe?: string
+  recipe?: string[]
+  do?: string[]
 }
 
 export interface Day {
@@ -42,6 +43,7 @@ export interface Day {
   notes: string
   waterGlasses: number
   closed: boolean
+  specialNote?: string
 }
 
 export interface Week {
