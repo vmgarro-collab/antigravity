@@ -45,7 +45,7 @@ export interface Day {
   waterGlasses: number
   closed: boolean
   specialNote?: string
-  alcoholQuota?: string
+  alcoholQuota?: string | number
 }
 
 export interface Week {
