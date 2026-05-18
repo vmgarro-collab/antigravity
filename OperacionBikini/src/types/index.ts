@@ -34,6 +34,7 @@ export interface Block {
   estimatedKcal?: number
   recipe?: string[]
   do?: string[]
+  phrase?: string
 }
 
 export interface Day {
@@ -44,6 +45,7 @@ export interface Day {
   waterGlasses: number
   closed: boolean
   specialNote?: string
+  alcoholQuota?: string
 }
 
 export interface Week {
