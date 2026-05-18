@@ -31,6 +31,7 @@ export interface Block {
   description: string
   subItems?: SubItem[]
   checked: boolean
+  estimatedKcal?: number
 }
 
 export interface Day {
