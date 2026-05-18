@@ -26,12 +26,13 @@ export interface SubItem {
 
 export interface Block {
   id: string
-  type: 'workout' | 'breakfast' | 'lunch' | 'snack' | 'dinner' | 'weighIn'
+  type: 'workout' | 'breakfast' | 'lunch' | 'snack' | 'dinner' | 'weighIn' | 'pre_match' | 'post_match_strategy'
   title: string
-  description: string
+  description?: string
   subItems?: SubItem[]
   checked: boolean
   estimatedKcal?: number
+  recipe?: string
 }
 
 export interface Day {
