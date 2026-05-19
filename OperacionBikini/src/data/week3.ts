@@ -4,7 +4,7 @@ export const week3: Week = {
   weekNumber: 3,
   days: [
     {
-      date: '2026-05-19',
+      date: '2026-05-18',
       dayName: 'Lunes',
       specialNote: 'Semana de SOSTENIBILIDAD. Cumplir TODAS las raciones (1.250-1.400 kcal). Cero saltos de comida.',
       blocks: [
@@ -86,7 +86,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-20',
+      date: '2026-05-19',
       dayName: 'Martes',
       blocks: [
         {
@@ -151,7 +151,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-21',
+      date: '2026-05-20',
       dayName: 'Miércoles',
       blocks: [
         {
@@ -210,7 +210,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-22',
+      date: '2026-05-21',
       dayName: 'Jueves',
       specialNote: '🎯 Pesaje. Semana de calidad: tempo + intervalos para preparar el torneo del 31.',
       blocks: [
@@ -278,7 +278,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-23',
+      date: '2026-05-22',
       dayName: 'Viernes',
       specialNote: 'Pre-fin de semana: descanso o muy suave. Reservar energía para sábado largo.',
       blocks: [
@@ -322,7 +322,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-24',
+      date: '2026-05-23',
       dayName: 'Sábado',
       specialNote: 'Rodaje largo Z2 — semana de volumen aeróbico. Post: hielo en AC.',
       alcoholQuota: 3,
@@ -379,7 +379,7 @@ export const week3: Week = {
     },
 
     {
-      date: '2026-05-25',
+      date: '2026-05-24',
       dayName: 'Domingo',
       specialNote: '⚽ Fútbol solo si AC al 100%. CERO alcohol.',
       alcoholQuota: 0,
