@@ -3,6 +3,11 @@ import type { AppState } from '../types'
 export const STORAGE_KEY = 'plan2meses:v1'
 export const DATA_VERSION = 3
 
+/** Fecha local en formato YYYY-MM-DD (evita el desfase UTC en zonas +N) */
+export function localDateStr(date = new Date()): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+}
+
 export function loadState(): AppState | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)

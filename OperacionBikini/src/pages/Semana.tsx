@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CheckCircle2, Circle } from 'lucide-react'
 import { useAppContext } from '../context/AppContext'
+import { localDateStr } from '../utils/storage'
 import type { Day } from '../types'
 import DayDrawer from '../components/layout/DayDrawer'
 
@@ -16,7 +17,7 @@ const DAY_TYPES: Record<string, { label: string; color: string }> = {
 
 function DayCard({ day, onClick }: { day: Day; onClick: () => void }) {
   const { state } = useAppContext()
-  const today = new Date().toISOString().slice(0, 10)
+  const today = localDateStr()
   const isToday = day.date === today
   const isPast = day.date < today
   const weight = state.weights.find(w => w.date === day.date)

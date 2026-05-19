@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { CheckCircle2, Moon, AlertTriangle } from 'lucide-react'
 import { useDay } from '../hooks/useDay'
 import { useAppContext } from '../context/AppContext'
+import { localDateStr } from '../utils/storage'
 import WorkoutBlock from '../components/blocks/WorkoutBlock'
 import MealBlock from '../components/blocks/MealBlock'
 import WaterBlock from '../components/blocks/WaterBlock'
@@ -13,7 +14,7 @@ const DAYS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes'
 const MONTHS_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
 export default function Hoy() {
-  const today = new Date().toISOString().slice(0, 10)
+  const today = localDateStr()
   const day = useDay(today)
   const { state, dispatch } = useAppContext()
   const notesDebounce = useRef<ReturnType<typeof setTimeout> | null>(null)

@@ -2,6 +2,7 @@ import { X, AlertTriangle } from 'lucide-react'
 import { useEffect } from 'react'
 import type { Day, Block } from '../../types'
 import { useAppContext } from '../../context/AppContext'
+import { localDateStr } from '../../utils/storage'
 import WorkoutBlock from '../blocks/WorkoutBlock'
 import MealBlock from '../blocks/MealBlock'
 import WaterBlock from '../blocks/WaterBlock'
@@ -22,7 +23,7 @@ export default function DayDrawer({ day, onClose }: Props) {
     return () => { document.body.style.overflow = '' }
   }, [day])
 
-  const isReadOnly = day ? day.closed && day.date < new Date().toISOString().slice(0, 10) : true
+  const isReadOnly = day ? day.closed && day.date < localDateStr() : true
   const weight = day ? state.weights.find(w => w.date === day.date) : undefined
 
   const renderBlock = (block: Block) => {

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Download, Upload, Sun, Moon, ChevronDown, ChevronUp, Target, Flame, BarChart2, Trophy } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
 import { useAppContext } from '../context/AppContext'
-import { exportJSON, importJSON } from '../utils/storage'
+import { exportJSON, importJSON, localDateStr } from '../utils/storage'
 import type { AppState } from '../types'
 
 export default function Progreso() {
@@ -11,7 +11,7 @@ export default function Progreso() {
 
   const { user, weights, weeks } = state
   const allDays = weeks.flatMap(w => w.days)
-  const today = new Date().toISOString().slice(0, 10)
+  const today = localDateStr()
 
   // Peso actual = último pesaje
   const sortedWeights = [...weights].sort((a, b) => a.date.localeCompare(b.date))
