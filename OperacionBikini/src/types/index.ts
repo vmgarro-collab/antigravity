@@ -33,6 +33,8 @@ export interface Block {
   checked: boolean
   estimatedKcal?: number
   recipe?: string[]
+  alternatives?: string[]
+  cookingMethod?: 'plancha' | 'horno' | 'microondas' | 'airfryer' | 'vapor' | 'crudo' | 'salteado'
   do?: string[]
   phrase?: string
 }
@@ -43,9 +45,11 @@ export interface Day {
   blocks: Block[]
   notes: string
   waterGlasses: number
+  waterTarget?: number
   closed: boolean
   specialNote?: string
-  alcoholQuota?: string | number
+  alcoholQuota?: number
+  estimatedDailyKcal?: number
 }
 
 export interface Week {

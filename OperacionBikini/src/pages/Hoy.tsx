@@ -1,11 +1,12 @@
 import { useRef } from 'react'
-import { CheckCircle2, Moon } from 'lucide-react'
+import { CheckCircle2, Moon, AlertTriangle } from 'lucide-react'
 import { useDay } from '../hooks/useDay'
 import { useAppContext } from '../context/AppContext'
 import WorkoutBlock from '../components/blocks/WorkoutBlock'
 import MealBlock from '../components/blocks/MealBlock'
 import WaterBlock from '../components/blocks/WaterBlock'
 import WeighInBlock from '../components/blocks/WeighInBlock'
+import SimpleStrategyBlock from '../components/blocks/SimpleStrategyBlock'
 import type { Block } from '../types'
 
 const DAYS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
@@ -47,6 +48,9 @@ export default function Hoy() {
   const renderBlock = (block: Block) => {
     if (block.type === 'workout') return <WorkoutBlock key={block.id} block={block} date={today} />
     if (block.type === 'weighIn') return <WeighInBlock key={block.id} date={today} currentKg={weight?.kg} />
+    if (block.type === 'pre_match' || block.type === 'post_match_strategy') {
+      return <SimpleStrategyBlock key={block.id} block={block} date={today} />
+    }
     return <MealBlock key={block.id} block={block} date={today} />
   }
 
@@ -69,6 +73,14 @@ export default function Hoy() {
           <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">{progress}%</span>
         </div>
       </div>
+
+      {/* Nota especial del día */}
+      {day.specialNote && (
+        <div className="flex items-start gap-2 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-3">
+          <AlertTriangle size={16} className="text-amber-500 mt-0.5 shrink-0" />
+          <p className="text-sm text-amber-800 dark:text-amber-300">{day.specialNote}</p>
+        </div>
+      )}
 
       {/* Bloques */}
       {day.blocks.map(renderBlock)}

@@ -1,4 +1,4 @@
-import { X } from 'lucide-react'
+import { X, AlertTriangle } from 'lucide-react'
 import { useEffect } from 'react'
 import type { Day, Block } from '../../types'
 import { useAppContext } from '../../context/AppContext'
@@ -6,6 +6,7 @@ import WorkoutBlock from '../blocks/WorkoutBlock'
 import MealBlock from '../blocks/MealBlock'
 import WaterBlock from '../blocks/WaterBlock'
 import WeighInBlock from '../blocks/WeighInBlock'
+import SimpleStrategyBlock from '../blocks/SimpleStrategyBlock'
 
 interface Props {
   day: Day | null
@@ -28,6 +29,9 @@ export default function DayDrawer({ day, onClose }: Props) {
     if (!day) return null
     if (block.type === 'workout') return <WorkoutBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
     if (block.type === 'weighIn') return <WeighInBlock key={block.id} date={day.date} currentKg={weight?.kg} readOnly={isReadOnly} />
+    if (block.type === 'pre_match' || block.type === 'post_match_strategy') {
+      return <SimpleStrategyBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
+    }
     return <MealBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
   }
 
@@ -51,6 +55,12 @@ export default function DayDrawer({ day, onClose }: Props) {
           </button>
         </div>
         <div className="overflow-y-auto p-4 space-y-3" style={{ maxHeight: 'calc(85vh - 70px)' }}>
+          {day?.specialNote && (
+            <div className="flex items-start gap-2 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-3">
+              <AlertTriangle size={14} className="text-amber-500 mt-0.5 shrink-0" />
+              <p className="text-xs text-amber-800 dark:text-amber-300">{day.specialNote}</p>
+            </div>
+          )}
           {day?.blocks.map(renderBlock)}
           {day && <WaterBlock date={day.date} glasses={day.waterGlasses} readOnly={isReadOnly} />}
           {day?.notes && (

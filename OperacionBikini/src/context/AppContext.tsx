@@ -1,19 +1,49 @@
 import { createContext, useContext, useEffect, useReducer, useRef, type ReactNode } from 'react'
-import type { AppState, ShoppingCategory } from '../types'
+import type { AppState, Week, ShoppingCategory } from '../types'
 import { week1, week1ShoppingList } from '../data/week1'
+import { week3, week3ShoppingList } from '../data/week3'
 import { loadState, saveState } from '../utils/storage'
 
-const initialState: AppState = {
+const fallbackState: AppState = {
   user: {
     startWeight: 79,
     targetWeight: 72.5,
     height: 1.72,
     startDate: '2026-05-04',
   },
-  weeks: [week1],
+  weeks: [week1, week3],
   weights: [],
-  shoppingList: [week1ShoppingList],
+  shoppingList: [week1ShoppingList, week3ShoppingList],
   darkMode: null,
+}
+
+function applyPlanData(planWeeks: Week[], saved: AppState): Week[] {
+  const blockChecked: Record<string, boolean> = {}
+  const subChecked: Record<string, boolean> = {}
+  const dayMeta: Record<string, { waterGlasses: number; notes: string; closed: boolean }> = {}
+
+  for (const w of saved.weeks) {
+    for (const d of w.days) {
+      dayMeta[d.date] = { waterGlasses: d.waterGlasses, notes: d.notes, closed: d.closed }
+      for (const b of d.blocks) {
+        blockChecked[b.id] = b.checked
+        for (const s of b.subItems ?? []) subChecked[s.id] = s.checked
+      }
+    }
+  }
+
+  return planWeeks.map(w => ({
+    ...w,
+    days: w.days.map(d => ({
+      ...d,
+      ...(dayMeta[d.date] ?? {}),
+      blocks: d.blocks.map(b => ({
+        ...b,
+        checked: blockChecked[b.id] ?? b.checked,
+        subItems: b.subItems?.map(s => ({ ...s, checked: subChecked[s.id] ?? s.checked })),
+      })),
+    })),
+  }))
 }
 
 type Action =
@@ -28,6 +58,7 @@ type Action =
   | { type: 'RESET_SHOPPING'; week: number }
   | { type: 'SET_DARK_MODE'; value: boolean | null }
   | { type: 'IMPORT_STATE'; state: AppState }
+  | { type: 'LOAD_PLAN'; weeks: Week[] }
 
 function updateDay(state: AppState, date: string, updater: (day: AppState['weeks'][0]['days'][0]) => AppState['weeks'][0]['days'][0]): AppState {
   return {
@@ -126,6 +157,9 @@ function reducer(state: AppState, action: Action): AppState {
     case 'IMPORT_STATE':
       return action.state
 
+    case 'LOAD_PLAN':
+      return { ...state, weeks: applyPlanData(action.weeks, state) }
+
     default:
       return state
   }
@@ -138,8 +172,10 @@ interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | null>(null)
 
+const PLAN_URL = 'https://raw.githubusercontent.com/vmgarro-collab/antigravity/main/OperacionBikini/public/data/plan.json'
+
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, null, () => loadState() ?? initialState)
+  const [state, dispatch] = useReducer(reducer, null, () => loadState() ?? fallbackState)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -147,6 +183,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     debounceRef.current = setTimeout(() => saveState(state), 300)
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
   }, [state])
+
+  // Cargar plan remoto para tener datos siempre actualizados sin rebuild
+  useEffect(() => {
+    fetch(`${PLAN_URL}?t=${Date.now()}`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data.weeks)) {
+          dispatch({ type: 'LOAD_PLAN', weeks: data.weeks })
+        }
+      })
+      .catch(() => { /* sin red — usar datos locales */ })
+  }, [])
 
   // Aplicar clase dark al <html>
   useEffect(() => {
@@ -156,7 +204,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     } else if (state.darkMode === false) {
       root.classList.remove('dark')
     } else {
-      // seguir preferencia del sistema
       const mq = window.matchMedia('(prefers-color-scheme: dark)')
       root.classList.toggle('dark', mq.matches)
       const handler = (e: MediaQueryListEvent) => root.classList.toggle('dark', e.matches)
