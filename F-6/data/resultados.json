@@ -766,5 +766,29 @@
     "golesLocal": 0,
     "golesVisitante": 9,
     "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 39,
+    "fecha": "17/05/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 2,
+    "golesVisitante": 13,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 39,
+    "fecha": "17/05/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 39,
+    "fecha": "17/05/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "SPORTING SARRIA"
   }
 ]
