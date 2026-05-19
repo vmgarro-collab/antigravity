@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CheckCircle2, Circle } from 'lucide-react'
 import { useAppContext } from '../context/AppContext'
 import { localDateStr } from '../utils/storage'
@@ -32,6 +32,8 @@ function DayCard({ day, onClick }: { day: Day; onClick: () => void }) {
       className={`w-full rounded-xl border p-4 text-left transition-all active:scale-95 ${
         isToday
           ? 'border-green-400 dark:border-green-600 bg-green-50 dark:bg-green-950/20'
+          : isPast
+          ? 'border-gray-100 dark:border-gray-800/60 bg-gray-50/50 dark:bg-gray-900/40 opacity-70'
           : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900'
       }`}
     >
@@ -66,16 +68,51 @@ function DayCard({ day, onClick }: { day: Day; onClick: () => void }) {
 export default function Semana() {
   const { state } = useAppContext()
   const [selectedDay, setSelectedDay] = useState<Day | null>(null)
-  const allDays = state.weeks.flatMap(w => w.days)
+  const today = localDateStr()
+  const currentWeekRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    currentWeekRef.current?.scrollIntoView({ behavior: 'instant', block: 'start' })
+  }, [])
 
   return (
-    <div className="p-4">
+    <div className="p-4 pb-8">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 pt-2">Semana</h1>
-      <div className="space-y-2">
-        {allDays.map(day => (
-          <DayCard key={day.date} day={day} onClick={() => setSelectedDay(day)} />
-        ))}
+
+      <div className="space-y-6">
+        {state.weeks.map(week => {
+          const isCurrentWeek = week.days.some(d => d.date === today)
+          const isPastWeek = week.days.every(d => d.date < today)
+
+          return (
+            <div
+              key={week.weekNumber}
+              ref={isCurrentWeek ? currentWeekRef : null}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                  isCurrentWeek
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                    : isPastWeek
+                    ? 'bg-gray-100 dark:bg-gray-800 text-gray-400'
+                    : 'bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400'
+                }`}>
+                  Semana {week.weekNumber}
+                  {isCurrentWeek ? ' · Actual' : isPastWeek ? ' · Cerrada' : ''}
+                </span>
+                <div className="flex-1 h-px bg-gray-100 dark:bg-gray-800" />
+              </div>
+
+              <div className="space-y-2">
+                {week.days.map(day => (
+                  <DayCard key={day.date} day={day} onClick={() => setSelectedDay(day)} />
+                ))}
+              </div>
+            </div>
+          )
+        })}
       </div>
+
       <DayDrawer day={selectedDay} onClose={() => setSelectedDay(null)} />
     </div>
   )
