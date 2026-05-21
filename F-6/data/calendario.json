@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "hora": "10:00",
+    "local": "CHAOX F.C",
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "hora": "11:00",
+    "local": "TROPICAL",
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "hora": "12:00",
+    "local": "BOCA SENIOR",
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "hora": "13:00",
+    "local": "SACONIA 2.0",
+    "visitante": "EL PARAGUAS"
+  }
+]

@@ -736,6 +736,38 @@
     "visitante": "SACONIA 2.0"
   },
   {
+    "jornada": 37,
+    "fecha": "26/04/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 0,
+    "golesVisitante": 7,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 37,
+    "fecha": "26/04/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 37,
+    "fecha": "26/04/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 37,
+    "fecha": "26/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 3,
+    "golesVisitante": 12,
+    "visitante": "PREVISEGUR"
+  },
+  {
     "jornada": 38,
     "fecha": "10/05/2026",
     "local": "CHAOX F.C",
