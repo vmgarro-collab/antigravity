@@ -3,9 +3,9 @@ import type { Week, ShoppingList } from '../types'
 export const week4: Week = {
   weekNumber: 4,
   days: [
-    // DÍA 1 — LUNES 26 MAYO
+    // DÍA 1 — LUNES 25 MAYO
     {
-      date: '2026-05-26',
+      date: '2026-05-25',
       dayName: 'Lunes',
       estimatedDailyKcal: 1300,
       specialNote: 'Recuperación post-partido domingo. Fuerza LIGERA, no construir. SEMANA PRE-TORNEO: menos es más.',
@@ -76,9 +76,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 2 — MARTES 27 MAYO
+    // DÍA 2 — MARTES 26 MAYO
     {
-      date: '2026-05-27',
+      date: '2026-05-25',
       dayName: 'Martes',
       estimatedDailyKcal: 1300,
       blocks: [
@@ -140,9 +140,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 3 — MIÉRCOLES 28 MAYO
+    // DÍA 3 — MIÉRCOLES 27 MAYO
     {
-      date: '2026-05-28',
+      date: '2026-05-25',
       dayName: 'Miércoles',
       estimatedDailyKcal: 1200,
       specialNote: 'DESCANSO TOTAL OBLIGATORIO. Día clave para bajar fatiga antes del torneo.',
@@ -196,9 +196,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 4 — JUEVES 29 MAYO
+    // DÍA 4 — JUEVES 28 MAYO
     {
-      date: '2026-05-29',
+      date: '2026-05-25',
       dayName: 'Jueves',
       estimatedDailyKcal: 1400,
       specialNote: 'Activación pre-torneo. Acelerones cortos para despertar fibras rápidas. NO es sesión de carga.',
@@ -259,9 +259,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 5 — VIERNES 30 MAYO — CARGA DE GLUCÓGENO
+    // DÍA 5 — VIERNES 29 MAYO — CARGA DE GLUCÓGENO
     {
-      date: '2026-05-30',
+      date: '2026-05-25',
       dayName: 'Viernes',
       estimatedDailyKcal: 2500,
       specialNote: '⚠️ DÍA DE CARGA CARBOHIDRATO. Comerás más que cualquier otro día. La báscula SUBIRÁ mañana: es CORRECTO, no error. Glucógeno + agua = energía para el torneo. Hidratación 3,5 L mínimo. Cenar antes de las 21:30 sí o sí.',
@@ -349,9 +349,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, waterTarget: 14, closed: false,
     },
 
-    // DÍA 6 — SÁBADO 31 MAYO — TORNEO
+    // DÍA 6 — SÁBADO 30 MAYO — TORNEO
     {
-      date: '2026-05-31',
+      date: '2026-05-25',
       dayName: 'Sábado',
       alcoholQuota: 3,
       specialNote: '🎯 DÍA DEL TORNEO (9-12h). Pon 2 alarmas. Ropa, calzado y bolsa preparados la noche anterior. Llevar: 2 plátanos, frutos secos, 2 botellas agua. Calentamiento: 10 min movilidad + trote + 4-5 acelerones. NO experimentar con nada nuevo.',
@@ -430,9 +430,9 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 7 — DOMINGO 1 JUNIO — Recuperación post-torneo
+    // DÍA 7 — DOMINGO 31 MAYO — Recuperación post-torneo
     {
-      date: '2026-06-01',
+      date: '2026-05-25',
       dayName: 'Domingo',
       estimatedDailyKcal: 1500,
       specialNote: 'Día de recuperación post-torneo. Hidratación + descanso. Hielo en zonas tocadas si las hay.',

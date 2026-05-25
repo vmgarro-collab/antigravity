@@ -2575,7 +2575,7 @@
       "weekNumber": 4,
       "days": [
         {
-          "date": "2026-05-26",
+          "date": "2026-05-25",
           "dayName": "Lunes",
           "estimatedDailyKcal": 1300,
           "specialNote": "Recuperación post-partido domingo. Fuerza LIGERA, no construir. SEMANA PRE-TORNEO: menos es más.",
@@ -2721,7 +2721,7 @@
           "closed": false
         },
         {
-          "date": "2026-05-27",
+          "date": "2026-05-26",
           "dayName": "Martes",
           "estimatedDailyKcal": 1300,
           "blocks": [
@@ -2849,7 +2849,7 @@
           "closed": false
         },
         {
-          "date": "2026-05-28",
+          "date": "2026-05-27",
           "dayName": "Miércoles",
           "estimatedDailyKcal": 1200,
           "specialNote": "DESCANSO TOTAL OBLIGATORIO. Día clave para bajar fatiga antes del torneo.",
@@ -2961,7 +2961,7 @@
           "closed": false
         },
         {
-          "date": "2026-05-29",
+          "date": "2026-05-28",
           "dayName": "Jueves",
           "estimatedDailyKcal": 1400,
           "specialNote": "Activación pre-torneo. Acelerones cortos para despertar fibras rápidas. NO es sesión de carga.",
@@ -3089,7 +3089,7 @@
           "closed": false
         },
         {
-          "date": "2026-05-30",
+          "date": "2026-05-29",
           "dayName": "Viernes",
           "estimatedDailyKcal": 2500,
           "specialNote": "⚠️ DÍA DE CARGA CARBOHIDRATO. Comerás más que cualquier otro día. La báscula SUBIRÁ mañana: es CORRECTO, no error. Glucógeno + agua = energía para el torneo. Hidratación 3,5 L mínimo. Cenar antes de las 21:30 sí o sí.",
@@ -3282,7 +3282,7 @@
           "closed": false
         },
         {
-          "date": "2026-05-31",
+          "date": "2026-05-30",
           "dayName": "Sábado",
           "alcoholQuota": 3,
           "specialNote": "🎯 DÍA DEL TORNEO (9-12h). Pon 2 alarmas. Ropa, calzado y bolsa preparados la noche anterior. Llevar: 2 plátanos, frutos secos, 2 botellas agua. Calentamiento: 10 min movilidad + trote + 4-5 acelerones. NO experimentar con nada nuevo.",
@@ -3449,7 +3449,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-01",
+          "date": "2026-05-31",
           "dayName": "Domingo",
           "estimatedDailyKcal": 1500,
           "specialNote": "Día de recuperación post-torneo. Hidratación + descanso. Hielo en zonas tocadas si las hay.",
