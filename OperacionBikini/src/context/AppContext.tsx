@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useReducer, useRef, type ReactNod
 import type { AppState, Week, ShoppingCategory } from '../types'
 import { week1, week1ShoppingList } from '../data/week1'
 import { week3, week3ShoppingList } from '../data/week3'
+import { week4, week4ShoppingList } from '../data/week4'
 import { loadState, saveState } from '../utils/storage'
 
 const fallbackState: AppState = {
@@ -11,9 +12,9 @@ const fallbackState: AppState = {
     height: 1.72,
     startDate: '2026-05-04',
   },
-  weeks: [week1, week3],
+  weeks: [week1, week3, week4],
   weights: [],
-  shoppingList: [week1ShoppingList, week3ShoppingList],
+  shoppingList: [week1ShoppingList, week3ShoppingList, week4ShoppingList],
   darkMode: null,
 }
 

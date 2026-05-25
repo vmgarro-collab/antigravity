@@ -127,9 +127,30 @@ export default function Progreso() {
         <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
           <div className="flex items-center gap-2 mb-1">
             <BarChart2 size={16} className="text-green-500" />
-            <span className="text-xs text-gray-500 dark:text-gray-400">Adherencia S3</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Adherencia S4</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{adherencia}<span className="text-sm font-normal text-gray-400">%</span></p>
+        </div>
+      </div>
+
+      {/* Estado de preparación torneo */}
+      <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/30 p-4 space-y-2">
+        <p className="text-sm font-semibold text-violet-800 dark:text-violet-300">Estado de preparación</p>
+        {[
+          'Peso bajando a buen ritmo',
+          'AC al 100% (probada en partido del 25/05)',
+          'Cervical 100%',
+          'VO2max 50.2 (excelente para 46 años)',
+          'Forma física subiendo desde −10 hacia 0',
+          'Sueño OK',
+        ].map(item => (
+          <div key={item} className="flex items-center gap-2">
+            <span className="text-green-500 text-sm">✓</span>
+            <span className="text-xs text-violet-700 dark:text-violet-300">{item}</span>
+          </div>
+        ))}
+        <div className="mt-2 pt-2 border-t border-violet-200 dark:border-violet-800">
+          <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">⚠️ Aviso viernes: la báscula SUBIRÁ por carga de carbohidrato. Es el plan, no un error.</p>
         </div>
       </div>
 
@@ -156,12 +177,22 @@ export default function Progreso() {
           <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">Cerrada</span>
         </div>
 
-        {/* S3 en curso */}
+        {/* S3 cerrada */}
+        <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S3 — 19-25 mayo ✓</p>
+            <p className="text-xs text-gray-400">77.8 → 76.0 kg · −1.8 kg · Adherencia alta</p>
+            <p className="text-xs text-gray-400">Eventos sociales sin descarrilar si días previos limpios</p>
+          </div>
+          <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">Cerrada</span>
+        </div>
+
+        {/* S4 en curso */}
         <div className="flex items-center justify-between py-2">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S3 — 19-25 mayo</p>
-            <p className="text-xs text-gray-400">Inicio: 77.8 kg · Objetivo: 75.8-76.3 kg</p>
-            <p className="text-xs text-violet-400">Semana de sostenibilidad · Pre-torneo</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S4 — 26-31 mayo 🎯</p>
+            <p className="text-xs text-gray-400">Inicio: ~75.5-76.0 kg · Objetivo: ≤75 kg torneo</p>
+            <p className="text-xs text-violet-400">Semana pre-torneo · Descarga + carga carbo viernes</p>
           </div>
           <span className="text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 px-2 py-0.5 rounded-full">En curso</span>
         </div>
