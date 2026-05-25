@@ -822,5 +822,29 @@
     "golesLocal": 4,
     "golesVisitante": 5,
     "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "local": "TROPICAL",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 5,
+    "golesVisitante": 11,
+    "visitante": "EL PARAGUAS"
   }
 ]
