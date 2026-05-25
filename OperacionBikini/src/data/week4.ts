@@ -19,7 +19,7 @@ export const week4: Week = {
         {
           id: 'workout-lun-4', type: 'workout',
           title: 'Fuerza inferior LIGERA (35 min)',
-          description: 'Versión reducida — 3 series en lugar de 4. Mantener tono sin fatigar. Sin saltos, sin isométrica larga, sin gemelos, sin series adicionales.',
+          description: 'Versión reducida — 3 series en lugar de 4. Mantener tono sin fatigar. Sin saltos, sin isométrica larga, sin gemelos.',
           checked: false,
           subItems: [
             { id: 'w-lun-4-1', text: '5 min calentamiento (movilidad caderas)', checked: false },
@@ -78,14 +78,14 @@ export const week4: Week = {
 
     // DÍA 2 — MARTES 26 MAYO
     {
-      date: '2026-05-25',
+      date: '2026-05-26',
       dayName: 'Martes',
       estimatedDailyKcal: 1300,
       blocks: [
         {
           id: 'workout-mar-4', type: 'workout',
           title: 'Rodaje Z2 bajo (35 min)',
-          description: 'FC < 140 ppm, ritmo libre, terreno llano. Sin series, sin acelerones, sin desnivel, sin FC sobre 140.',
+          description: 'FC < 140 ppm, ritmo libre, terreno llano. Sin series, sin acelerones, sin desnivel.',
           checked: false,
           subItems: [
             { id: 'w-mar-4-1', text: '5 min calentamiento trote suave', checked: false },
@@ -142,7 +142,7 @@ export const week4: Week = {
 
     // DÍA 3 — MIÉRCOLES 27 MAYO
     {
-      date: '2026-05-25',
+      date: '2026-05-27',
       dayName: 'Miércoles',
       estimatedDailyKcal: 1200,
       specialNote: 'DESCANSO TOTAL OBLIGATORIO. Día clave para bajar fatiga antes del torneo.',
@@ -198,7 +198,7 @@ export const week4: Week = {
 
     // DÍA 4 — JUEVES 28 MAYO
     {
-      date: '2026-05-25',
+      date: '2026-05-28',
       dayName: 'Jueves',
       estimatedDailyKcal: 1400,
       specialNote: 'Activación pre-torneo. Acelerones cortos para despertar fibras rápidas. NO es sesión de carga.',
@@ -259,17 +259,17 @@ export const week4: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // DÍA 5 — VIERNES 29 MAYO — CARGA DE GLUCÓGENO
+    // DÍA 5 — VIERNES 29 MAYO — Descanso pre-carga
     {
-      date: '2026-05-25',
+      date: '2026-05-29',
       dayName: 'Viernes',
-      estimatedDailyKcal: 2500,
-      specialNote: '⚠️ DÍA DE CARGA CARBOHIDRATO. Comerás más que cualquier otro día. La báscula SUBIRÁ mañana: es CORRECTO, no error. Glucógeno + agua = energía para el torneo. Hidratación 3,5 L mínimo. Cenar antes de las 21:30 sí o sí.',
+      estimatedDailyKcal: 1300,
+      specialNote: 'Descanso total. Mañana sábado es la carga de carbohidrato. Hoy come normal y descansa bien.',
       blocks: [
         {
           id: 'workout-vie-4', type: 'workout',
-          title: 'DESCANSO TOTAL — Reposo de piernas',
-          description: 'Sin entreno, sin caminatas extensas. Estiramientos suaves opcionales.',
+          title: 'DESCANSO TOTAL',
+          description: 'Sin entreno, sin caminatas largas. Conserva las piernas para el torneo.',
           checked: false,
           subItems: [
             { id: 'w-vie-4-1', text: 'Sin entreno', checked: false },
@@ -279,39 +279,93 @@ export const week4: Week = {
         },
         {
           id: 'breakfast-vie-4', type: 'breakfast',
+          title: 'Desayuno',
+          description: 'Café (ayuno hasta la comida).',
+          checked: false,
+        },
+        {
+          id: 'lunch-vie-4', type: 'lunch',
+          title: 'Comida normal',
+          estimatedKcal: 700,
+          checked: false,
+          subItems: [
+            { id: 'lun-vie-4-1', text: '150 g proteína (pollo, pavo o pescado)', checked: false },
+            { id: 'lun-vie-4-2', text: 'Verdura abundante', checked: false },
+            { id: 'lun-vie-4-3', text: '50 g arroz integral o 1 patata mediana', checked: false },
+            { id: 'lun-vie-4-4', text: '1 cda aceite oliva', checked: false },
+            { id: 'lun-vie-4-5', text: '1 fruta de postre', checked: false },
+          ],
+        },
+        {
+          id: 'dinner-vie-4', type: 'dinner',
+          title: 'Cena equilibrada',
+          estimatedKcal: 550,
+          checked: false,
+          subItems: [
+            { id: 'din-vie-4-1', text: '200 g pescado o pollo plancha', checked: false },
+            { id: 'din-vie-4-2', text: 'Verdura al vapor o ensalada', checked: false },
+            { id: 'din-vie-4-3', text: '50 g arroz integral', checked: false },
+            { id: 'din-vie-4-4', text: '1 cda aceite oliva', checked: false },
+            { id: 'din-vie-4-5', text: '1 yogur natural 0% + 1 fruta', checked: false },
+          ],
+        },
+      ],
+      notes: '', waterGlasses: 0, closed: false,
+    },
+
+    // DÍA 6 — SÁBADO 30 MAYO — CARGA DE GLUCÓGENO
+    {
+      date: '2026-05-30',
+      dayName: 'Sábado',
+      estimatedDailyKcal: 2500,
+      specialNote: '⚠️ DÍA DE CARGA CARBOHIDRATO. Comerás más que cualquier otro día. La báscula SUBIRÁ mañana: es CORRECTO, no error. Glucógeno + agua = energía para el torneo. Hidratación 3,5 L mínimo. Cenar antes de las 21:30.',
+      blocks: [
+        {
+          id: 'workout-sab-4', type: 'workout',
+          title: 'DESCANSO TOTAL — Reposo de piernas',
+          description: 'Sin entreno, sin caminatas extensas. Estiramientos suaves opcionales.',
+          checked: false,
+          subItems: [
+            { id: 'w-sab-4-1', text: 'Sin entreno', checked: false },
+            { id: 'w-sab-4-2', text: 'Sin caminatas extensas', checked: false },
+            { id: 'w-sab-4-3', text: 'Estiramientos suaves opcionales', checked: false },
+          ],
+        },
+        {
+          id: 'breakfast-sab-4', type: 'breakfast',
           title: 'Desayuno cargado',
           estimatedKcal: 450,
           checked: false,
           subItems: [
-            { id: 'des-vie-4-1', text: '1 yogur 0%', checked: false },
-            { id: 'des-vie-4-2', text: '50 g muesli sin azúcar (MÁS que de costumbre)', checked: false },
-            { id: 'des-vie-4-3', text: '15 g frutos secos', checked: false },
-            { id: 'des-vie-4-4', text: '1 plátano + 1 fruta extra (kiwi o naranja)', checked: false },
-            { id: 'des-vie-4-5', text: 'Café', checked: false },
+            { id: 'des-sab-4-1', text: '1 yogur 0%', checked: false },
+            { id: 'des-sab-4-2', text: '50 g muesli sin azúcar (MÁS que de costumbre)', checked: false },
+            { id: 'des-sab-4-3', text: '15 g frutos secos', checked: false },
+            { id: 'des-sab-4-4', text: '1 plátano + 1 fruta extra (kiwi o naranja)', checked: false },
+            { id: 'des-sab-4-5', text: 'Café', checked: false },
           ],
         },
         {
-          id: 'snack-vie-4', type: 'snack',
+          id: 'snack-sab-4', type: 'snack',
           title: 'Media mañana (~11h)',
           estimatedKcal: 150,
           checked: false,
           subItems: [
-            { id: 'snk-vie-4-1', text: '1 fruta + 5 almendras', checked: false },
-            { id: 'snk-vie-4-2', text: 'O: 1 yogur 0%', checked: false },
+            { id: 'snk-sab-4-1', text: '1 fruta + 5 almendras', checked: false },
+            { id: 'snk-sab-4-2', text: 'O: 1 yogur 0%', checked: false },
           ],
         },
         {
-          id: 'lunch-vie-4', type: 'lunch',
+          id: 'lunch-sab-4', type: 'lunch',
           title: 'Comida centrada en carbo limpio (~14h)',
           cookingMethod: 'plancha',
           estimatedKcal: 900,
           checked: false,
           subItems: [
-            { id: 'lun-vie-4-1', text: '150 g pechuga pollo plancha', checked: false },
-            { id: 'lun-vie-4-2', text: '120 g pasta integral o arroz integral en seco ← MÁS que de costumbre', checked: false },
-            { id: 'lun-vie-4-3', text: 'Verdura ligera salteada (calabacín, pimiento, cebolla)', checked: false },
-            { id: 'lun-vie-4-4', text: '1 cda aceite oliva', checked: false },
-            { id: 'lun-vie-4-5', text: '1 fruta de postre (manzana o pera)', checked: false },
+            { id: 'lun-sab-4-1', text: '150 g pechuga pollo plancha', checked: false },
+            { id: 'lun-sab-4-2', text: '120 g pasta integral o arroz integral en seco ← MÁS que de costumbre', checked: false },
+            { id: 'lun-sab-4-3', text: 'Verdura ligera salteada (calabacín, pimiento, cebolla)', checked: false },
+            { id: 'lun-sab-4-4', text: '1 cda aceite oliva', checked: false },
+            { id: 'lun-sab-4-5', text: '1 fruta de postre (manzana o pera)', checked: false },
           ],
           recipe: [
             'Cocer pasta o arroz integral con poca sal',
@@ -321,78 +375,78 @@ export const week4: Week = {
           ],
         },
         {
-          id: 'snack2-vie-4', type: 'snack',
+          id: 'snack2-sab-4', type: 'snack',
           title: 'Merienda (17-18h)',
           estimatedKcal: 300,
           checked: false,
           subItems: [
-            { id: 'snk2-vie-4-1', text: '2 rebanadas pan integral con semillas', checked: false },
-            { id: 'snk2-vie-4-2', text: '50 g pavo cocido o jamón cocido bajo en sal', checked: false },
-            { id: 'snk2-vie-4-3', text: '1 plátano', checked: false },
-            { id: 'snk2-vie-4-4', text: 'Agua', checked: false },
+            { id: 'snk2-sab-4-1', text: '2 rebanadas pan integral con semillas', checked: false },
+            { id: 'snk2-sab-4-2', text: '50 g pavo cocido o jamón cocido bajo en sal', checked: false },
+            { id: 'snk2-sab-4-3', text: '1 plátano', checked: false },
+            { id: 'snk2-sab-4-4', text: 'Agua', checked: false },
           ],
         },
         {
-          id: 'dinner-vie-4', type: 'dinner',
+          id: 'dinner-sab-4', type: 'dinner',
           title: 'Cena — última carga antes del torneo (antes de las 21:30)',
           estimatedKcal: 700,
           checked: false,
           subItems: [
-            { id: 'din-vie-4-1', text: '120 g pollo o pescado magro (merluza o lubina)', checked: false },
-            { id: 'din-vie-4-2', text: '100 g arroz integral o pasta integral en seco', checked: false },
-            { id: 'din-vie-4-3', text: 'Verdura suave (calabacín cocido o ensalada de hojas)', checked: false },
-            { id: 'din-vie-4-4', text: '1 cda aceite oliva', checked: false },
-            { id: 'din-vie-4-5', text: '1 yogur natural 0% + 1 fruta', checked: false },
+            { id: 'din-sab-4-1', text: '120 g pollo o pescado magro (merluza o lubina)', checked: false },
+            { id: 'din-sab-4-2', text: '100 g arroz integral o pasta integral en seco', checked: false },
+            { id: 'din-sab-4-3', text: 'Verdura suave (calabacín cocido o ensalada de hojas)', checked: false },
+            { id: 'din-sab-4-4', text: '1 cda aceite oliva', checked: false },
+            { id: 'din-sab-4-5', text: '1 yogur natural 0% + 1 fruta', checked: false },
           ],
         },
       ],
       notes: '', waterGlasses: 0, waterTarget: 14, closed: false,
     },
 
-    // DÍA 6 — SÁBADO 30 MAYO — TORNEO
+    // DÍA 7 — DOMINGO 31 MAYO — TORNEO 🎯
     {
-      date: '2026-05-25',
-      dayName: 'Sábado',
+      date: '2026-05-31',
+      dayName: 'Domingo',
       alcoholQuota: 3,
       specialNote: '🎯 DÍA DEL TORNEO (9-12h). Pon 2 alarmas. Ropa, calzado y bolsa preparados la noche anterior. Llevar: 2 plátanos, frutos secos, 2 botellas agua. Calentamiento: 10 min movilidad + trote + 4-5 acelerones. NO experimentar con nada nuevo.',
       blocks: [
         {
-          id: 'breakfast-sab-4', type: 'breakfast',
+          id: 'breakfast-dom-4', type: 'breakfast',
           title: 'Desayuno torneo (3h antes del partido, ~07:00)',
           estimatedKcal: 400,
           checked: false,
           subItems: [
-            { id: 'des-sab-4-1', text: '06:30-07:00: Despertar + 500 ml agua inmediato + visita baño', checked: false },
-            { id: 'des-sab-4-2', text: '1 yogur 0%', checked: false },
-            { id: 'des-sab-4-3', text: '30 g muesli sin azúcar', checked: false },
-            { id: 'des-sab-4-4', text: '1 plátano (potasio + carbo absorción media-rápida)', checked: false },
-            { id: 'des-sab-4-5', text: '1 fruta extra (manzana o naranja)', checked: false },
-            { id: 'des-sab-4-6', text: 'Café', checked: false },
+            { id: 'des-dom-4-1', text: '06:30-07:00: Despertar + 500 ml agua inmediato + visita baño', checked: false },
+            { id: 'des-dom-4-2', text: '1 yogur 0%', checked: false },
+            { id: 'des-dom-4-3', text: '30 g muesli sin azúcar', checked: false },
+            { id: 'des-dom-4-4', text: '1 plátano (potasio + carbo absorción media-rápida)', checked: false },
+            { id: 'des-dom-4-5', text: '1 fruta extra (manzana o naranja)', checked: false },
+            { id: 'des-dom-4-6', text: 'Café', checked: false },
           ],
         },
         {
-          id: 'pre-match-sab-4', type: 'pre_match',
+          id: 'pre-match-dom-4', type: 'pre_match',
           title: 'Hidratación y snack pre-partido',
           checked: false,
           subItems: [
-            { id: 'pre-sab-4-1', text: '08:00: 500 ml agua a sorbos (no de golpe)', checked: false },
-            { id: 'pre-sab-4-2', text: '~08:30 (1,5h antes): 1 plátano + 5 almendras + 300 ml agua', checked: false },
-            { id: 'pre-sab-4-3', text: '30 min antes del partido: 200-300 ml agua a sorbos (o 150 ml isotónica baja en azúcar)', checked: false },
+            { id: 'pre-dom-4-1', text: '08:00: 500 ml agua a sorbos (no de golpe)', checked: false },
+            { id: 'pre-dom-4-2', text: '~08:30 (1,5h antes): 1 plátano + 5 almendras + 300 ml agua', checked: false },
+            { id: 'pre-dom-4-3', text: '30 min antes del partido: 200-300 ml agua a sorbos (o 150 ml isotónica baja en azúcar)', checked: false },
           ],
         },
         {
-          id: 'workout-sab-4', type: 'workout',
+          id: 'workout-dom-4', type: 'workout',
           title: '🏆 TORNEO DE FÚTBOL 5x5 (9-12h)',
           description: 'VO2max 50.2 + AC al 100% + 4 semanas de preparación. Confía en el plan.',
           checked: false,
           subItems: [
-            { id: 'w-sab-4-1', text: 'Durante el torneo: sorbos de agua en cada parada y al descanso', checked: false },
-            { id: 'w-sab-4-2', text: 'Entre partidos: 500 ml agua + 1 plátano + 5 almendras', checked: false },
-            { id: 'w-sab-4-3', text: 'Si espera > 1,5h: añadir 1 yogur 0% o 1 rebanada pan con jamón cocido', checked: false },
+            { id: 'w-dom-4-1', text: 'Durante el torneo: sorbos de agua en cada parada y al descanso', checked: false },
+            { id: 'w-dom-4-2', text: 'Entre partidos: 500 ml agua + 1 plátano + 5 almendras', checked: false },
+            { id: 'w-dom-4-3', text: 'Si espera > 1,5h: añadir 1 yogur 0% o 1 rebanada pan con jamón cocido', checked: false },
           ],
         },
         {
-          id: 'post-match-sab-4', type: 'post_match_strategy',
+          id: 'post-match-dom-4', type: 'post_match_strategy',
           title: 'Post-torneo — Ventana de recuperación (comer en 2h)',
           description: '1 L agua en los próximos 90 min (pizca de sal si has sudado mucho).',
           checked: false,
@@ -403,84 +457,27 @@ export const week4: Week = {
           phrase: "Alcohol: 2-3 UBE permitidas tras el último partido. Cerveza o vino con la comida. Sin destilados ni cubatas.",
         },
         {
-          id: 'lunch-sab-4', type: 'lunch',
+          id: 'lunch-dom-4', type: 'lunch',
           title: 'Comida post-torneo — Recuperación',
           estimatedKcal: 750,
           checked: false,
           subItems: [
-            { id: 'lun-sab-4-1', text: '200 g proteína (pollo, ternera o pescado)', checked: false },
-            { id: 'lun-sab-4-2', text: '80 g arroz o pasta o 1 patata grande', checked: false },
-            { id: 'lun-sab-4-3', text: 'Verdura', checked: false },
-            { id: 'lun-sab-4-4', text: '1 cda aceite oliva', checked: false },
-            { id: 'lun-sab-4-5', text: '1 fruta', checked: false },
-          ],
-        },
-        {
-          id: 'dinner-sab-4', type: 'dinner',
-          title: 'Cena ligera',
-          estimatedKcal: 500,
-          checked: false,
-          subItems: [
-            { id: 'din-sab-4-1', text: '150 g pescado o tortilla francesa con verdura', checked: false },
-            { id: 'din-sab-4-2', text: '1 yogur natural 0%', checked: false },
-            { id: 'din-sab-4-3', text: '1 fruta', checked: false },
-          ],
-        },
-      ],
-      notes: '', waterGlasses: 0, closed: false,
-    },
-
-    // DÍA 7 — DOMINGO 31 MAYO — Recuperación post-torneo
-    {
-      date: '2026-05-25',
-      dayName: 'Domingo',
-      estimatedDailyKcal: 1500,
-      specialNote: 'Día de recuperación post-torneo. Hidratación + descanso. Hielo en zonas tocadas si las hay.',
-      blocks: [
-        {
-          id: 'workout-dom-4', type: 'workout',
-          title: 'DESCANSO o paseo suave',
-          description: 'Descanso preferente. Estiramientos amplios suaves.',
-          checked: false,
-          subItems: [
-            { id: 'w-dom-4-1', text: 'Descanso preferente', checked: false },
-            { id: 'w-dom-4-2', text: 'O paseo 45-60 min ritmo cómodo', checked: false },
-            { id: 'w-dom-4-3', text: 'Estiramientos amplios suaves', checked: false },
-            { id: 'w-dom-4-4', text: 'Hielo en zonas tocadas si las hay', checked: false },
-          ],
-        },
-        {
-          id: 'breakfast-dom-4', type: 'breakfast',
-          title: 'Desayuno reparador',
-          estimatedKcal: 400,
-          checked: false,
-          subItems: [
-            { id: 'des-dom-4-1', text: '2 huevos revueltos + 1 rebanada pan integral', checked: false },
-            { id: 'des-dom-4-2', text: '1 fruta + café', checked: false },
-          ],
-        },
-        {
-          id: 'lunch-dom-4', type: 'lunch',
-          title: 'Comida equilibrada',
-          estimatedKcal: 650,
-          checked: false,
-          subItems: [
-            { id: 'lun-dom-4-1', text: '180 g proteína', checked: false },
-            { id: 'lun-dom-4-2', text: 'Verdura abundante', checked: false },
-            { id: 'lun-dom-4-3', text: '60 g arroz integral o 1 patata mediana', checked: false },
-            { id: 'lun-dom-4-4', text: '1 cda aceite', checked: false },
+            { id: 'lun-dom-4-1', text: '200 g proteína (pollo, ternera o pescado)', checked: false },
+            { id: 'lun-dom-4-2', text: '80 g arroz o pasta o 1 patata grande', checked: false },
+            { id: 'lun-dom-4-3', text: 'Verdura', checked: false },
+            { id: 'lun-dom-4-4', text: '1 cda aceite oliva', checked: false },
             { id: 'lun-dom-4-5', text: '1 fruta', checked: false },
           ],
         },
         {
           id: 'dinner-dom-4', type: 'dinner',
           title: 'Cena ligera',
-          estimatedKcal: 450,
+          estimatedKcal: 500,
           checked: false,
           subItems: [
-            { id: 'din-dom-4-1', text: 'Tortilla francesa con verdura', checked: false },
-            { id: 'din-dom-4-2', text: 'O 150 g pescado plancha + ensalada', checked: false },
-            { id: 'din-dom-4-3', text: '1 yogur 0%', checked: false },
+            { id: 'din-dom-4-1', text: '150 g pescado o tortilla francesa con verdura', checked: false },
+            { id: 'din-dom-4-2', text: '1 yogur natural 0%', checked: false },
+            { id: 'din-dom-4-3', text: '1 fruta', checked: false },
           ],
         },
       ],
@@ -495,7 +492,7 @@ export const week4ShoppingList: ShoppingList = {
     { id: 'w4-p1', category: 'proteinas', name: 'Salmón fresco 200 g (lunes cena)', checked: false },
     { id: 'w4-p2', category: 'proteinas', name: 'Pechuga pollo 700 g', checked: false },
     { id: 'w4-p3', category: 'proteinas', name: 'Pechuga pavo 200 g', checked: false },
-    { id: 'w4-p4', category: 'proteinas', name: 'Pescado blanco 200 g (merluza o lubina)', checked: false },
+    { id: 'w4-p4', category: 'proteinas', name: 'Pescado blanco 400 g (merluza o lubina)', checked: false },
     { id: 'w4-p5', category: 'proteinas', name: 'Ternera magra 200 g', checked: false },
     { id: 'w4-p6', category: 'proteinas', name: 'Atún en lata al natural (3 latas)', checked: false },
     { id: 'w4-p7', category: 'proteinas', name: 'Huevos (1 docena)', checked: false },
@@ -505,7 +502,7 @@ export const week4ShoppingList: ShoppingList = {
     { id: 'w4-v3', category: 'verduras-frutas', name: 'Plátanos (6-7) ← clave esta semana', checked: false },
     { id: 'w4-v4', category: 'verduras-frutas', name: 'Fruta variada (manzanas, kiwis, naranjas, fresas)', checked: false },
     { id: 'w4-v5', category: 'verduras-frutas', name: 'Limones y ajos', checked: false },
-    { id: 'w4-c1', category: 'carbohidratos', name: 'Pasta integral (paquete entero) ← clave viernes', checked: false },
+    { id: 'w4-c1', category: 'carbohidratos', name: 'Pasta integral (paquete entero) ← clave sábado', checked: false },
     { id: 'w4-c2', category: 'carbohidratos', name: 'Arroz integral', checked: false },
     { id: 'w4-c3', category: 'carbohidratos', name: 'Patatas (8-10)', checked: false },
     { id: 'w4-c4', category: 'carbohidratos', name: 'Pan integral con semillas', checked: false },

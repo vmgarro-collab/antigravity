@@ -48,7 +48,7 @@ export default function Progreso() {
   const notes = allDays.filter(d => d.notes.trim()).sort((a, b) => b.date.localeCompare(a.date))
 
   // Countdown torneo 31 mayo
-  const torneoDate = new Date('2026-05-30T00:00:00')
+  const torneoDate = new Date('2026-05-31T00:00:00')
   const todayDate = new Date(today + 'T00:00:00')
   const diasTorneo = Math.max(0, Math.round((torneoDate.getTime() - todayDate.getTime()) / 86400000))
 
@@ -82,7 +82,7 @@ export default function Progreso() {
         <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/30 p-4">
           <div className="flex items-center gap-2 mb-2">
             <Trophy size={18} className="text-violet-500" />
-            <span className="font-semibold text-violet-800 dark:text-violet-300">Torneo 5x5 — 30 mayo</span>
+            <span className="font-semibold text-violet-800 dark:text-violet-300">Torneo 5x5 — 31 mayo</span>
           </div>
           {diasTorneo === 0 ? (
             <p className="text-sm text-violet-700 dark:text-violet-300 font-semibold">¡Hoy es el día! Suerte.</p>
@@ -190,7 +190,7 @@ export default function Progreso() {
         {/* S4 en curso */}
         <div className="flex items-center justify-between py-2">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S4 — 25-31 mayo 🎯</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S4 — 25 mayo–1 jun 🎯</p>
             <p className="text-xs text-gray-400">Inicio: ~75.5-76.0 kg · Objetivo: ≤75 kg torneo</p>
             <p className="text-xs text-violet-400">Semana pre-torneo · Descarga + carga carbo viernes</p>
           </div>
