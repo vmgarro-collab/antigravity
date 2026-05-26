@@ -826,6 +826,14 @@
   {
     "jornada": 40,
     "fecha": "24/05/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 3,
+    "golesVisitante": 0,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 40,
+    "fecha": "24/05/2026",
     "local": "TROPICAL",
     "golesLocal": 4,
     "golesVisitante": 5,
