@@ -19,7 +19,7 @@ export default function Compra() {
     proteinas: '', 'verduras-frutas': '', carbohidratos: '', 'lacteos-huevos': '', despensa: '',
   })
 
-  const currentWeek = 4
+  const currentWeek = 5
   const list = state.shoppingList.find(sl => sl.week === currentWeek)
   const items = list?.items ?? []
 

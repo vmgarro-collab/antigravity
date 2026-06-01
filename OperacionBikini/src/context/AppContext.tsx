@@ -3,6 +3,8 @@ import type { AppState, Week, ShoppingCategory } from '../types'
 import { week1, week1ShoppingList } from '../data/week1'
 import { week3, week3ShoppingList } from '../data/week3'
 import { week4, week4ShoppingList } from '../data/week4'
+import { week5, week5ShoppingList } from '../data/week5'
+import { week6, week6ShoppingList } from '../data/week6'
 import { loadState, saveState } from '../utils/storage'
 
 const fallbackState: AppState = {
@@ -12,9 +14,9 @@ const fallbackState: AppState = {
     height: 1.72,
     startDate: '2026-05-04',
   },
-  weeks: [week1, week3, week4],
+  weeks: [week1, week3, week4, week5, week6],
   weights: [],
-  shoppingList: [week1ShoppingList, week3ShoppingList, week4ShoppingList],
+  shoppingList: [week1ShoppingList, week3ShoppingList, week4ShoppingList, week5ShoppingList, week6ShoppingList],
   darkMode: null,
 }
 

@@ -47,10 +47,10 @@ export default function Progreso() {
   // Notas históricas
   const notes = allDays.filter(d => d.notes.trim()).sort((a, b) => b.date.localeCompare(a.date))
 
-  // Countdown torneo 31 mayo
-  const torneoDate = new Date('2026-05-31T00:00:00')
+  // Countdown Roquetas 18 junio
+  const roquetasDate = new Date('2026-06-18T00:00:00')
   const todayDate = new Date(today + 'T00:00:00')
-  const diasTorneo = Math.max(0, Math.round((torneoDate.getTime() - todayDate.getTime()) / 86400000))
+  const diasRoquetas = Math.max(0, Math.round((roquetasDate.getTime() - todayDate.getTime()) / 86400000))
 
   const handleImport = async () => {
     try {
@@ -77,22 +77,22 @@ export default function Progreso() {
         </button>
       </div>
 
-      {/* Torneo countdown */}
-      {diasTorneo >= 0 && (
-        <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/30 p-4">
+      {/* Roquetas countdown */}
+      {diasRoquetas >= 0 && (
+        <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <Trophy size={18} className="text-violet-500" />
-            <span className="font-semibold text-violet-800 dark:text-violet-300">Torneo 5x5 — 31 mayo</span>
+            <Trophy size={18} className="text-amber-500" />
+            <span className="font-semibold text-amber-800 dark:text-amber-300">🏖️ Roquetas — 18 junio</span>
           </div>
-          {diasTorneo === 0 ? (
-            <p className="text-sm text-violet-700 dark:text-violet-300 font-semibold">¡Hoy es el día! Suerte.</p>
+          {diasRoquetas === 0 ? (
+            <p className="text-sm text-amber-700 dark:text-amber-300 font-semibold">¡Hoy es Roquetas! Lo has conseguido 🎉</p>
           ) : (
             <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-bold text-violet-700 dark:text-violet-300">{diasTorneo}</span>
-              <span className="text-sm text-violet-500">{diasTorneo === 1 ? 'día' : 'días'} para el torneo</span>
+              <span className="text-3xl font-bold text-amber-700 dark:text-amber-300">{diasRoquetas}</span>
+              <span className="text-sm text-amber-500">{diasRoquetas === 1 ? 'día' : 'días'} para Roquetas</span>
             </div>
           )}
-          <p className="text-xs text-violet-400 mt-1">Objetivo: llegar a tope físico y mental.</p>
+          <p className="text-xs text-amber-400 mt-1">Objetivo: 73-73.5 kg · tren superior definido · base sub-45</p>
         </div>
       )}
 
@@ -127,30 +127,30 @@ export default function Progreso() {
         <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
           <div className="flex items-center gap-2 mb-1">
             <BarChart2 size={16} className="text-green-500" />
-            <span className="text-xs text-gray-500 dark:text-gray-400">Adherencia S4</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Adherencia S5</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{adherencia}<span className="text-sm font-normal text-gray-400">%</span></p>
         </div>
       </div>
 
-      {/* Estado de preparación torneo */}
-      <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/30 p-4 space-y-2">
-        <p className="text-sm font-semibold text-violet-800 dark:text-violet-300">Estado de preparación</p>
+      {/* Estado de preparación Roquetas */}
+      <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-4 space-y-2">
+        <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">Estado Roquetas + Sub-45</p>
         {[
-          'Peso bajando a buen ritmo',
-          'AC al 100% (probada en partido del 25/05)',
-          'Cervical 100%',
-          'VO2max 50.2 (excelente para 46 años)',
-          'Forma física subiendo desde −10 hacia 0',
-          'Sueño OK',
+          '🏆 CAMPEONES torneo 31 may — gol de la final',
+          'Peso post-torneo: 75.0 kg (−4.2 kg desde el inicio)',
+          'AC al 100% — tren superior reintroducido',
+          'VO2max 50.2 — base aeróbica sólida',
+          'Test 10K: pendiente (jueves 13 jun)',
         ].map(item => (
-          <div key={item} className="flex items-center gap-2">
-            <span className="text-green-500 text-sm">✓</span>
-            <span className="text-xs text-violet-700 dark:text-violet-300">{item}</span>
+          <div key={item} className="flex items-start gap-2">
+            <span className="text-green-500 text-sm mt-0.5">✓</span>
+            <span className="text-xs text-amber-700 dark:text-amber-300">{item}</span>
           </div>
         ))}
-        <div className="mt-2 pt-2 border-t border-violet-200 dark:border-violet-800">
-          <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">⚠️ Aviso viernes: la báscula SUBIRÁ por carga de carbohidrato. Es el plan, no un error.</p>
+        <div className="mt-2 pt-2 border-t border-amber-200 dark:border-amber-800 space-y-0.5">
+          <p className="text-xs text-amber-600 dark:text-amber-400 font-medium">Protocolo verse seco: 15-17 jun (sin sal, verduras diuréticas)</p>
+          <p className="text-xs text-amber-500">Objetivo peso Roquetas: 73-73.5 kg</p>
         </div>
       </div>
 
@@ -187,14 +187,34 @@ export default function Progreso() {
           <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">Cerrada</span>
         </div>
 
-        {/* S4 en curso */}
+        {/* S4 cerrada */}
+        <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S4 — 25-31 mayo ✓ 🏆</p>
+            <p className="text-xs text-gray-400">76.0 → 75.0 kg · CAMPEONES + gol de la final</p>
+            <p className="text-xs text-gray-400">−4.2 kg totales desde el inicio</p>
+          </div>
+          <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">Cerrada</span>
+        </div>
+
+        {/* S5 en curso */}
+        <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S5 — 3-9 jun 🏖️</p>
+            <p className="text-xs text-gray-400">Inicio: 75.0 kg · Objetivo: 74.2-74.6 kg</p>
+            <p className="text-xs text-amber-400">Roquetas + sub-45 · Tren superior reintroducido</p>
+          </div>
+          <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">En curso</span>
+        </div>
+
+        {/* S6 próxima */}
         <div className="flex items-center justify-between py-2">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S4 — 25 mayo–1 jun 🎯</p>
-            <p className="text-xs text-gray-400">Inicio: ~75.5-76.0 kg · Objetivo: ≤75 kg torneo</p>
-            <p className="text-xs text-violet-400">Semana pre-torneo · Descarga + carga carbo viernes</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S6 — 10-18 jun 🎯</p>
+            <p className="text-xs text-gray-400">Test 10K · Verse seco 15-17 jun · Roquetas 18 jun</p>
+            <p className="text-xs text-amber-400">Objetivo: 73-73.5 kg</p>
           </div>
-          <span className="text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 px-2 py-0.5 rounded-full">En curso</span>
+          <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">Próxima</span>
         </div>
       </div>
 

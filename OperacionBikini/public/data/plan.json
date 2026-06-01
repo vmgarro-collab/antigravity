@@ -3558,6 +3558,2219 @@
           "closed": false
         }
       ]
+    },
+    {
+      "weekNumber": 5,
+      "days": [
+        {
+          "date": "2026-06-03",
+          "dayName": "Lunes",
+          "estimatedDailyKcal": 1500,
+          "specialNote": "Primer dia del nuevo bloque. Tren superior al 70%. Objetivo: verse bien en Roquetas el 18 jun.",
+          "blocks": [
+            {
+              "id": "workout-lun-5",
+              "type": "workout",
+              "title": "Fuerza tren superior + core S1 al 70% (40-45 min)",
+              "description": "Reintroduccion progresiva. Rangos controlados, tempo lento. Sin press militar.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-lun-5-1",
+                  "text": "Calentamiento hombros 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-2",
+                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-5",
+                  "text": "Remo mancuerna a una mano: 4 x 15 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-8",
+                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-5-9",
+                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun-5",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-lun-5-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-5-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-5-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-5-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-lun-5",
+              "type": "lunch",
+              "title": "Pavo plancha con arroz y verdura",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-lun-5-1",
+                  "text": "160 g pechuga pavo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-5-2",
+                  "text": "50 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-5-3",
+                  "text": "Esparragos verdes + pimiento + cebolla salteados",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-5-4",
+                  "text": "1 cda aceite oliva + ajo + pimenton",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-5-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-lun-5",
+              "type": "dinner",
+              "title": "Merluza al vapor con verdura",
+              "cookingMethod": "vapor",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-5-1",
+                  "text": "200 g merluza al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-5-2",
+                  "text": "Brocoli + judias verdes al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-5-3",
+                  "text": "1 patata pequena cocida",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-5-4",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-5-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-04",
+          "dayName": "Martes",
+          "estimatedDailyKcal": 1300,
+          "blocks": [
+            {
+              "id": "workout-mar-5",
+              "type": "workout",
+              "title": "Carrera Z2 — 40 min",
+              "description": "FC < 145 ppm, ritmo libre ~5:40-5:50/km.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mar-5-1",
+                  "text": "5 min calentamiento trote suave",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-5-2",
+                  "text": "30 min Z2 (FC < 145 ppm)",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-5-3",
+                  "text": "5 min vuelta a la calma + estiramientos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mar-5",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Cafe (ayuno hasta la comida).",
+              "checked": false
+            },
+            {
+              "id": "lunch-mar-5",
+              "type": "lunch",
+              "title": "Bowl de pollo y arroz",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mar-5-1",
+                  "text": "150 g pechuga pollo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-5-2",
+                  "text": "50 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-5-3",
+                  "text": "Mix hojas verdes + tomate + pepino + cebolla",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-5-4",
+                  "text": "1 cda aceite oliva + vinagre + oregano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-5-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Cocer arroz 25 min",
+                "Pollo plancha 4-5 min por lado",
+                "Montar bowl",
+                "Alinar con aceite + vinagre + oregano"
+              ]
+            },
+            {
+              "id": "dinner-mar-5",
+              "type": "dinner",
+              "title": "Pollo con verdura asada y arroz",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mar-5-1",
+                  "text": "200 g proteina plancha o horno",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-5-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-5-3",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-5-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-5-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-05",
+          "dayName": "Miercoles",
+          "estimatedDailyKcal": 1500,
+          "blocks": [
+            {
+              "id": "workout-mie-5",
+              "type": "workout",
+              "title": "Fuerza tren inferior + core (45 min)",
+              "description": "Mantener musculo en deficit.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mie-5-1",
+                  "text": "Calentamiento caderas 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-2",
+                  "text": "Sentadilla mancuernas 4 kg: 4 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-3",
+                  "text": "Zancadas alternas: 4 x 14 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-4",
+                  "text": "Sentadilla bulgara: 4 x 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-5",
+                  "text": "Puente gluteos a una pierna: 3 x 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-6",
+                  "text": "Elevaciones gemelos: 4 x 25",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-7",
+                  "text": "Russian twists 3x20 + plancha lateral 3x40s",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-5-8",
+                  "text": "Crunch 3 x 20",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mie-5",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-mie-5-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-5-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-5-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-5-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-mie-5",
+              "type": "lunch",
+              "title": "Tortilla de atun con patata y ensalada",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mie-5-1",
+                  "text": "2 huevos + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5-2",
+                  "text": "1 lata atun al natural escurrido",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5-3",
+                  "text": "1 patata mediana (microondas 6-7 min)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5-4",
+                  "text": "Tomates en rodajas + oregano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5-5",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-5-6",
+                  "text": "1 fruta + 1 yogur 0% de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-mie-5",
+              "type": "dinner",
+              "title": "Lubina al horno con esparragos",
+              "cookingMethod": "horno",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mie-5-1",
+                  "text": "200 g lubina o merluza",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-5-2",
+                  "text": "Esparragos verdes al horno",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-5-3",
+                  "text": "1 patata pequena",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-5-4",
+                  "text": "1 cda aceite oliva + limon + ajo",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-5-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-06",
+          "dayName": "Jueves",
+          "estimatedDailyKcal": 1600,
+          "specialNote": "Dia de calidad. El tempo a 5:00-5:10/km es el trabajo clave para la base sub-45.",
+          "blocks": [
+            {
+              "id": "workout-jue-5",
+              "type": "workout",
+              "title": "Carrera calidad — Tempo (40 min)",
+              "description": "Clave para base sub-45.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-jue-5-1",
+                  "text": "10 min calentamiento trote suave + skipping",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-5-2",
+                  "text": "20 min a ritmo umbral (5:00-5:10/km, esfuerzo 7/10)",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-5-3",
+                  "text": "10 min vuelta a la calma trote suave",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-jue-5",
+              "type": "breakfast",
+              "title": "Desayuno pre-calidad",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-jue-5-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-5-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-5-3",
+                  "text": "1 platano",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-5-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-jue-5",
+              "type": "lunch",
+              "title": "Ternera magra con arroz y verdura",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 750,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-jue-5-1",
+                  "text": "180 g ternera magra plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-5-2",
+                  "text": "70 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-5-3",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-5-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-5-5",
+                  "text": "1 fruta + 1 yogur 0%",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-jue-5",
+              "type": "dinner",
+              "title": "Salmon al horno con ensalada",
+              "cookingMethod": "horno",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-jue-5-1",
+                  "text": "200 g salmon fresco",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-5-2",
+                  "text": "Lechuga + tomate + pepino + zanahoria",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-5-3",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-5-4",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-5-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-07",
+          "dayName": "Viernes",
+          "estimatedDailyKcal": 1500,
+          "blocks": [
+            {
+              "id": "workout-vie-5",
+              "type": "workout",
+              "title": "Fuerza tren superior + core S1 al 70% (40-45 min)",
+              "description": "Reintroduccion progresiva. Rangos controlados, tempo lento. Sin press militar.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-vie-5-1",
+                  "text": "Calentamiento hombros 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-2",
+                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-5",
+                  "text": "Remo mancuerna a una mano: 4 x 15 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-8",
+                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-5-9",
+                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vie-5",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-vie-5-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-5-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-5-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-5-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-vie-5",
+              "type": "lunch",
+              "title": "Pechuga de pollo con patata y esparragos",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-vie-5-1",
+                  "text": "160 g pechuga pollo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-5-2",
+                  "text": "1 patata mediana cocida",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-5-3",
+                  "text": "Esparragos verdes plancha + cebolla",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-5-4",
+                  "text": "1 cda aceite oliva + limon + ajo",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-5-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-vie-5",
+              "type": "dinner",
+              "title": "Lubina plancha con judias verdes",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vie-5-1",
+                  "text": "200 g lubina plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-5-2",
+                  "text": "Judias verdes + brocoli al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-5-3",
+                  "text": "1 patata pequena",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-5-4",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-5-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-08",
+          "dayName": "Sabado",
+          "estimatedDailyKcal": 1600,
+          "alcoholQuota": 2,
+          "specialNote": "Rodaje largo de la semana. Pre-carrera: platano + agua. Post: estiramientos completos.",
+          "blocks": [
+            {
+              "id": "workout-sab-5",
+              "type": "workout",
+              "title": "Rodaje largo Z2 — 50-55 min",
+              "description": "FC < 145 ppm, ritmo libre. No hay numero de km objetivo — solo tiempo y FC.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-sab-5-1",
+                  "text": "Pre: 1 platano + 500 ml agua 30 min antes",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-5-2",
+                  "text": "50-55 min carrera continua Z2 (FC < 145 ppm)",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-5-3",
+                  "text": "Post: estiramientos completos 10 min",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-sab-5",
+              "type": "breakfast",
+              "title": "Desayuno pre-largo",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-sab-5-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-5-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-5-3",
+                  "text": "1 platano",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-5-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-sab-5",
+              "type": "lunch",
+              "title": "Comida post-largo — recuperacion",
+              "estimatedKcal": 750,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-sab-5-1",
+                  "text": "180 g pollo o pescado",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-5-2",
+                  "text": "70 g arroz integral o 1 patata grande",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-5-3",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-5-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-5-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-sab-5",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-sab-5-1",
+                  "text": "150 g pescado blanco plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-5-2",
+                  "text": "Ensalada o crema de verduras",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-5-3",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-09",
+          "dayName": "Domingo",
+          "estimatedDailyKcal": 1300,
+          "alcoholQuota": 1,
+          "specialNote": "Descanso activo. Semana 1 completada.",
+          "blocks": [
+            {
+              "id": "workout-dom-5",
+              "type": "workout",
+              "title": "Descanso activo / futbol / paseo",
+              "description": "Sin entreno estructurado. Cuerpo recupera.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-dom-5-1",
+                  "text": "Opcion A: futbol (si hay partido)",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-5-2",
+                  "text": "Opcion B: paseo 45-60 min ritmo comodo",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-5-3",
+                  "text": "Estiramientos suaves",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-dom-5",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Cafe (ayuno hasta la comida).",
+              "checked": false
+            },
+            {
+              "id": "lunch-dom-5",
+              "type": "lunch",
+              "title": "Comida equilibrada",
+              "estimatedKcal": 650,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-dom-5-1",
+                  "text": "180 g proteina (pollo, ternera o pescado)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-5-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-5-3",
+                  "text": "50 g arroz integral o 1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-5-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-5-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-dom-5",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "estimatedKcal": 450,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-dom-5-1",
+                  "text": "Tortilla francesa 2 huevos + 2 claras con verdura",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-5-2",
+                  "text": "O: 150 g pescado plancha + ensalada",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-5-3",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        }
+      ]
+    },
+    {
+      "weekNumber": 6,
+      "days": [
+        {
+          "date": "2026-06-10",
+          "dayName": "Lunes",
+          "estimatedDailyKcal": 1500,
+          "specialNote": "Semana 2 al 85%. Si el hombro/AC responde bien, anadir press militar al final.",
+          "blocks": [
+            {
+              "id": "workout-lun-6",
+              "type": "workout",
+              "title": "Fuerza tren superior + core S2 al 85% (40-45 min)",
+              "description": "Subir intensidad. Press militar: solo si AC sin molestias.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-lun-6-1",
+                  "text": "Calentamiento hombros 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-2",
+                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-5",
+                  "text": "Remo mancuerna a una mano: 4 x 15 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-8",
+                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-9",
+                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-lun-6-10",
+                  "text": "Press militar (SOLO si AC OK): 3 x 12, rango corto",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun-6",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-lun-6-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-6-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-6-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-6-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-lun-6",
+              "type": "lunch",
+              "title": "Pollo plancha con patata y verdura",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-lun-6-1",
+                  "text": "160 g pechuga pollo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-6-2",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-6-3",
+                  "text": "Esparragos + cebolla + tomate salteados",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-6-4",
+                  "text": "1 cda aceite oliva + ajo + limon",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-lun-6",
+              "type": "dinner",
+              "title": "Merluza al vapor con brocoli",
+              "cookingMethod": "vapor",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-6-1",
+                  "text": "200 g merluza al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-6-2",
+                  "text": "Brocoli + judias verdes al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-6-3",
+                  "text": "1 patata pequena",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-6-4",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-11",
+          "dayName": "Martes",
+          "estimatedDailyKcal": 1300,
+          "blocks": [
+            {
+              "id": "workout-mar-6",
+              "type": "workout",
+              "title": "Carrera Z2 — 45 min",
+              "description": "FC < 145 ppm, ritmo libre ~5:40-5:50/km.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mar-6-1",
+                  "text": "5 min calentamiento trote suave",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-6-2",
+                  "text": "35 min Z2 (FC < 145 ppm)",
+                  "checked": false
+                },
+                {
+                  "id": "w-mar-6-3",
+                  "text": "5 min vuelta a la calma + estiramientos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mar-6",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Cafe (ayuno hasta la comida).",
+              "checked": false
+            },
+            {
+              "id": "lunch-mar-6",
+              "type": "lunch",
+              "title": "Bowl de pollo y arroz",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mar-6-1",
+                  "text": "150 g pechuga pollo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-6-2",
+                  "text": "50 g arroz integral en seco",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-6-3",
+                  "text": "Mix hojas verdes + tomate + pepino + cebolla",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-6-4",
+                  "text": "1 cda aceite oliva + vinagre + oregano",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mar-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ],
+              "recipe": [
+                "Cocer arroz 25 min",
+                "Pollo plancha 4-5 min por lado",
+                "Montar bowl",
+                "Alinar con aceite + vinagre + oregano"
+              ]
+            },
+            {
+              "id": "dinner-mar-6",
+              "type": "dinner",
+              "title": "Pavo asado con verdura",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mar-6-1",
+                  "text": "200 g proteina plancha o horno",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-6-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-6-3",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-mar-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-12",
+          "dayName": "Miercoles",
+          "estimatedDailyKcal": 1500,
+          "blocks": [
+            {
+              "id": "workout-mie-6",
+              "type": "workout",
+              "title": "Fuerza tren inferior + core (45 min)",
+              "description": "Mantener musculo en deficit.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-mie-6-1",
+                  "text": "Calentamiento caderas 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-2",
+                  "text": "Sentadilla mancuernas 4 kg: 4 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-3",
+                  "text": "Zancadas alternas: 4 x 14 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-4",
+                  "text": "Sentadilla bulgara: 4 x 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-5",
+                  "text": "Puente gluteos a una pierna: 3 x 12 por pierna",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-6",
+                  "text": "Elevaciones gemelos: 4 x 25",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-7",
+                  "text": "Russian twists 3x20 + plancha lateral 3x40s",
+                  "checked": false
+                },
+                {
+                  "id": "w-mie-6-8",
+                  "text": "Crunch 3 x 20",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-mie-6",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-mie-6-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-6-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-6-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-mie-6-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-mie-6",
+              "type": "lunch",
+              "title": "Ternera magra con patata y verdura",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-mie-6-1",
+                  "text": "180 g ternera magra plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-6-2",
+                  "text": "1 patata mediana",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-6-3",
+                  "text": "Verdura abundante salteada",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-mie-6-5",
+                  "text": "1 fruta + 1 yogur 0%",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-mie-6",
+              "type": "dinner",
+              "title": "Tortilla de espinacas y champinones",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-mie-6-1",
+                  "text": "3 huevos + 2 claras",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-6-2",
+                  "text": "Espinacas + champinones + cebolla + ajo",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-6-3",
+                  "text": "2 rebanadas pan integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-6-4",
+                  "text": "1 cda aceite oliva + nuez moscada",
+                  "checked": false
+                },
+                {
+                  "id": "din-mie-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-13",
+          "dayName": "Jueves",
+          "estimatedDailyKcal": 1600,
+          "specialNote": "DIA DEL TEST 10K. Sal fresco. El resultado calibra tu trabajo para sub-45.",
+          "blocks": [
+            {
+              "id": "weighin-jue-6",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas.",
+              "checked": false
+            },
+            {
+              "id": "pre-match-jue-6",
+              "type": "pre_match",
+              "title": "Protocolo pre-test 10K",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "pre-jue-6-1",
+                  "text": "2-2,5h antes: desayuno completo",
+                  "checked": false
+                },
+                {
+                  "id": "pre-jue-6-2",
+                  "text": "30 min antes: 300-400 ml agua a sorbos",
+                  "checked": false
+                },
+                {
+                  "id": "pre-jue-6-3",
+                  "text": "Calentamiento: 10 min trote suave + 4-5 acelerones de 20s",
+                  "checked": false
+                },
+                {
+                  "id": "pre-jue-6-4",
+                  "text": "Objetivo ritmo: 4:30/km = sub-45 | 4:35 = ~45:50 | 4:40 = ~46:40",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-jue-6",
+              "type": "breakfast",
+              "title": "Desayuno pre-test (2-2,5h antes)",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-jue-6-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-6-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-6-3",
+                  "text": "1 platano",
+                  "checked": false
+                },
+                {
+                  "id": "des-jue-6-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "workout-jue-6",
+              "type": "workout",
+              "title": "TEST 10K CRONOMETRADO",
+              "description": "A tope. Ritmo constante desde km 1. Anotar tiempo y ritmo por km.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-jue-6-1",
+                  "text": "10 min calentamiento trote + acelerones",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-6-2",
+                  "text": "TEST 10K a tope — anotar tiempo final y ritmo por km",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-6-3",
+                  "text": "10 min trote suave + estiramientos completos",
+                  "checked": false
+                },
+                {
+                  "id": "w-jue-6-4",
+                  "text": "Anotar el tiempo en las notas del dia",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "post-match-jue-6",
+              "type": "post_match_strategy",
+              "title": "Post-test — Ventana de recuperacion",
+              "description": "Comer en los 60 min post-test.",
+              "checked": false,
+              "do": [
+                "500 ml agua en los proximos 30 min",
+                "Comer dentro de 60 min del test"
+              ]
+            },
+            {
+              "id": "lunch-jue-6",
+              "type": "lunch",
+              "title": "Comida post-test — Recuperacion",
+              "estimatedKcal": 750,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-jue-6-1",
+                  "text": "180 g pollo o ternera (proteina recuperacion)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-6-2",
+                  "text": "70 g arroz integral o 1 patata grande",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-6-3",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-jue-6-5",
+                  "text": "1 fruta + 1 yogur 0%",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-jue-6",
+              "type": "dinner",
+              "title": "Cena ligera post-esfuerzo",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-jue-6-1",
+                  "text": "200 g salmon o merluza plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-6-2",
+                  "text": "Ensalada + pepino + apio",
+                  "checked": false
+                },
+                {
+                  "id": "din-jue-6-3",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-14",
+          "dayName": "Viernes",
+          "estimatedDailyKcal": 1500,
+          "blocks": [
+            {
+              "id": "workout-vie-6",
+              "type": "workout",
+              "title": "Fuerza tren superior + core S2 al 85% (40-45 min)",
+              "description": "Subir intensidad. Press militar: solo si AC sin molestias.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-vie-6-1",
+                  "text": "Calentamiento hombros 5 min",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-2",
+                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-5",
+                  "text": "Remo mancuerna a una mano: 4 x 15 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-8",
+                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-9",
+                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-vie-6-10",
+                  "text": "Press militar (SOLO si AC OK): 3 x 12, rango corto",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vie-6",
+              "type": "breakfast",
+              "title": "Desayuno pre-entreno",
+              "estimatedKcal": 300,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-vie-6-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-6-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-6-3",
+                  "text": "1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-vie-6-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-vie-6",
+              "type": "lunch",
+              "title": "Pavo con esparragos y arroz",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-vie-6-1",
+                  "text": "160 g pechuga pavo plancha",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-6-2",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-6-3",
+                  "text": "Esparragos verdes + cebolla",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-6-4",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vie-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-vie-6",
+              "type": "dinner",
+              "title": "Merluza plancha con ensalada diuretica",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vie-6-1",
+                  "text": "200 g merluza plancha",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-6-2",
+                  "text": "Ensalada: lechuga + pepino + apio + tomate (sin sal o poca)",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-6-3",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-6-4",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-15",
+          "dayName": "Sabado",
+          "estimatedDailyKcal": 1550,
+          "alcoholQuota": 0,
+          "specialNote": "INICIO PROTOCOLO VERSE SECO. Desde hoy: sin sal anadida, sin embutidos. Hidratacion 3-3,5 L. Cero alcohol estos 3 dias.",
+          "blocks": [
+            {
+              "id": "workout-sab-6",
+              "type": "workout",
+              "title": "Rodaje largo Z2 suave — 55-60 min (post-test)",
+              "description": "Suave. FC < 145 ppm, ritmo comodo.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-sab-6-1",
+                  "text": "Pre: 1 platano + 500 ml agua",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-6-2",
+                  "text": "55-60 min Z2 suave (FC < 145 ppm)",
+                  "checked": false
+                },
+                {
+                  "id": "w-sab-6-3",
+                  "text": "Post: estiramientos completos",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-sab-6",
+              "type": "breakfast",
+              "title": "Desayuno pre-largo (sin sal anadida)",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-sab-6-1",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-6-2",
+                  "text": "30 g muesli sin azucar",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-6-3",
+                  "text": "1 platano",
+                  "checked": false
+                },
+                {
+                  "id": "des-sab-6-4",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-sab-6",
+              "type": "lunch",
+              "title": "Pollo con arroz y esparragos — SIN sal anadida",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 700,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-sab-6-1",
+                  "text": "160 g pollo plancha (sin sal o minima)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-6-2",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-6-3",
+                  "text": "Esparragos + pepino + tomate (diureticos)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-6-4",
+                  "text": "1 cda aceite oliva + limon + especias sin sal",
+                  "checked": false
+                },
+                {
+                  "id": "lun-sab-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-sab-6",
+              "type": "dinner",
+              "title": "Lubina al vapor con verdura diuretica — SIN sal",
+              "cookingMethod": "vapor",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-sab-6-1",
+                  "text": "200 g lubina al vapor (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-6-2",
+                  "text": "Esparragos + brocoli + apio al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-6-3",
+                  "text": "1 patata pequena",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-6-4",
+                  "text": "1 cda aceite oliva + limon (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "din-sab-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "waterTarget": 14,
+          "closed": false
+        },
+        {
+          "date": "2026-06-16",
+          "dayName": "Domingo",
+          "estimatedDailyKcal": 1250,
+          "alcoholQuota": 0,
+          "specialNote": "VERSE SECO dia 2. Sin sal, sin embutidos, sin alcohol. Verduras diureticas. Beber 3+ litros.",
+          "blocks": [
+            {
+              "id": "workout-dom-6",
+              "type": "workout",
+              "title": "Descanso activo",
+              "description": "Sin entrenamiento. Paseo suave si apetece.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-dom-6-1",
+                  "text": "Paseo opcional 30-40 min muy suave",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-6-2",
+                  "text": "Estiramientos suaves",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-dom-6",
+              "type": "breakfast",
+              "title": "Desayuno ligero proteico — SIN sal",
+              "estimatedKcal": 250,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-dom-6-1",
+                  "text": "2 huevos revueltos (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "des-dom-6-2",
+                  "text": "1 fruta (manzana o kiwi)",
+                  "checked": false
+                },
+                {
+                  "id": "des-dom-6-3",
+                  "text": "Cafe",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-dom-6",
+              "type": "lunch",
+              "title": "Proteina + verdura diuretica — SIN sal anadida",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 600,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-dom-6-1",
+                  "text": "160 g pechuga pollo o merluza plancha (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-2",
+                  "text": "Esparragos + pepino + apio (crudos o al vapor)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-3",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-4",
+                  "text": "1 cda aceite oliva + limon + hierbas sin sal",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-dom-6",
+              "type": "dinner",
+              "title": "Cena ligera — SIN sal",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 400,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-dom-6-1",
+                  "text": "150 g pechuga pollo o pescado blanco (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-2",
+                  "text": "Ensalada diuretica: lechuga + pepino + apio + tomate",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-3",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-4",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "waterTarget": 13,
+          "closed": false
+        },
+        {
+          "date": "2026-06-17",
+          "dayName": "Lunes",
+          "estimatedDailyKcal": 1200,
+          "alcoholQuota": 0,
+          "specialNote": "VERSE SECO dia 3 — CERO SAL. Ultima sesion fuerza tren superior (ligera, congestion final). El pump de hoy + baja retencion = mejor version estetica manana en Roquetas.",
+          "blocks": [
+            {
+              "id": "workout-lun-7",
+              "type": "workout",
+              "title": "Fuerza tren superior LIGERA — congestion final (30 min)",
+              "description": "No buscar fallo muscular. Objetivo: activar el musculo para congestion visible manana.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-lun-7-1",
+                  "text": "Dominadas: 3 series (no al fallo)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-2",
+                  "text": "Press pecho mancuernas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-3",
+                  "text": "Aperturas 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-4",
+                  "text": "Remo mancuerna: 3 x 12 por lado",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-5",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-6",
+                  "text": "Curl biceps: 3 x 15 (congestion brazo)",
+                  "checked": false
+                },
+                {
+                  "id": "w-lun-7-7",
+                  "text": "Plancha frontal: 3 x 45s",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-lun-7",
+              "type": "breakfast",
+              "title": "Desayuno minimo — SIN sal",
+              "estimatedKcal": 200,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-lun-7-1",
+                  "text": "Cafe",
+                  "checked": false
+                },
+                {
+                  "id": "des-lun-7-2",
+                  "text": "1 fruta (manzana o kiwi)",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "lunch-lun-7",
+              "type": "lunch",
+              "title": "Proteina magra + esparragos — CERO SAL",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 550,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-lun-7-1",
+                  "text": "160 g pechuga pavo o merluza plancha (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-7-2",
+                  "text": "Esparragos verdes + apio + pepino al vapor",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-7-3",
+                  "text": "40 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-7-4",
+                  "text": "1 cda aceite oliva + limon + ajo (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-lun-7-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-lun-7",
+              "type": "dinner",
+              "title": "Cena muy ligera — CERO SAL",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 400,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-lun-7-1",
+                  "text": "150 g merluza plancha (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-7-2",
+                  "text": "Ensalada diuretica: pepino + apio + lechuga",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-7-3",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-lun-7-4",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "waterTarget": 13,
+          "closed": false
+        },
+        {
+          "date": "2026-06-18",
+          "dayName": "Martes",
+          "specialNote": "DIA DE ROQUETAS. Llegaste. 4 semanas de trabajo. Disfruta.",
+          "blocks": [
+            {
+              "id": "workout-roquetas",
+              "type": "workout",
+              "title": "Roquetas — Dia objetivo",
+              "description": "75.0 → ~73.0 kg. Tren superior definido. Base sub-45 en marcha.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-roq-1",
+                  "text": "Hidratacion normal — el protocolo de ayer da resultado hoy",
+                  "checked": false
+                },
+                {
+                  "id": "w-roq-2",
+                  "text": "Desayuno ligero proteico (no hinchar el estomago)",
+                  "checked": false
+                },
+                {
+                  "id": "w-roq-3",
+                  "text": "Banarse, pasear, disfrutar",
+                  "checked": false
+                },
+                {
+                  "id": "w-roq-4",
+                  "text": "Esta noche: celebrar con mesura. Lo has ganado",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-roquetas",
+              "type": "breakfast",
+              "title": "Desayuno ligero proteico",
+              "estimatedKcal": 350,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "des-roq-1",
+                  "text": "1 yogur natural 0% + 1 fruta",
+                  "checked": false
+                },
+                {
+                  "id": "des-roq-2",
+                  "text": "Cafe",
+                  "checked": false
+                },
+                {
+                  "id": "des-roq-3",
+                  "text": "Hidratacion normal desde el primer momento",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        }
+      ]
     }
   ],
   "shoppingList": [
