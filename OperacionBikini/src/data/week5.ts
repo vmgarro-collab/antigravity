@@ -10,7 +10,7 @@ export const week5: Week = {
   days: [
     // LUNES 3 JUNIO — Fuerza tren superior S1 (70%)
     {
-      date: '2026-06-03',
+      date: '2026-06-01',
       dayName: 'Lunes',
       estimatedDailyKcal: 1500,
       specialNote: 'Primer día del nuevo bloque. Tren superior al 70% — rangos controlados, sin forzar AC. Objetivo: verse bien en Roquetas el 18 jun.',
@@ -84,7 +84,7 @@ export const week5: Week = {
 
     // MARTES 4 JUNIO — Carrera Z2 40 min
     {
-      date: '2026-06-04',
+      date: '2026-06-02',
       dayName: 'Martes',
       estimatedDailyKcal: 1300,
       blocks: [
@@ -145,7 +145,7 @@ export const week5: Week = {
 
     // MIÉRCOLES 5 JUNIO — Fuerza tren inferior + core
     {
-      date: '2026-06-05',
+      date: '2026-06-01',
       dayName: 'Miércoles',
       estimatedDailyKcal: 1500,
       blocks: [
@@ -219,7 +219,7 @@ export const week5: Week = {
 
     // JUEVES 6 JUNIO — Carrera calidad (Tempo)
     {
-      date: '2026-06-06',
+      date: '2026-06-02',
       dayName: 'Jueves',
       estimatedDailyKcal: 1600,
       specialNote: 'Día de calidad. Desayuno antes del tempo para tener energía. El tempo a 5:00-5:10/km es el trabajo clave para la base sub-45.',
@@ -287,7 +287,7 @@ export const week5: Week = {
 
     // VIERNES 7 JUNIO — Fuerza tren superior S1 (70%)
     {
-      date: '2026-06-07',
+      date: '2026-06-01',
       dayName: 'Viernes',
       estimatedDailyKcal: 1500,
       blocks: [
@@ -354,7 +354,7 @@ export const week5: Week = {
 
     // SÁBADO 8 JUNIO — Rodaje largo Z2 50-55 min
     {
-      date: '2026-06-08',
+      date: '2026-06-02',
       dayName: 'Sábado',
       estimatedDailyKcal: 1600,
       alcoholQuota: 2,
@@ -414,7 +414,7 @@ export const week5: Week = {
 
     // DOMINGO 9 JUNIO — Descanso / Fútbol / Paseo
     {
-      date: '2026-06-09',
+      date: '2026-06-01',
       dayName: 'Domingo',
       estimatedDailyKcal: 1300,
       alcoholQuota: 1,

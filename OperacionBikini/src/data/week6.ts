@@ -1,24 +1,25 @@
 import type { Week, ShoppingList } from '../types'
 
-// SEMANA 2 — 10-18 JUNIO 2026
+// SEMANA 2 — 8-18 JUNIO 2026
 // Intensidad tren superior: 85% (incluye press militar con cuidado)
-// TEST 10K jueves 13
-// Protocolo "verse seco" desde sábado 15 hasta Roquetas 18 jun
+// TEST 10K jueves 11 junio
+// Protocolo "verse seco": lunes 15 – miércoles 17 (cero sal, diuréticos, cero alcohol)
+// 🏖️ ROQUETAS: jueves 18 junio
 
 export const week6: Week = {
   weekNumber: 6,
   days: [
-    // LUNES 10 JUNIO — Fuerza tren superior S2 (85%)
+    // LUNES 8 JUNIO — Fuerza tren superior S2 (85%)
     {
-      date: '2026-06-10',
+      date: '2026-06-08',
       dayName: 'Lunes',
       estimatedDailyKcal: 1500,
-      specialNote: 'Semana 2 al 85%. Si el hombro/AC responde bien, añadir press militar al final con rangos controlados.',
+      specialNote: 'Semana 2 al 85%. Si el hombro/AC responde bien esta semana, añadir press militar con rango controlado.',
       blocks: [
         {
           id: 'workout-lun-6', type: 'workout',
           title: 'Fuerza tren superior + core — S2 al 85% (40-45 min)',
-          description: 'Subir intensidad. Press militar: añadir solo si AC sin molestias, con rango corto y peso ligero.',
+          description: 'Subir intensidad. Press militar: añadir solo si AC sin molestias, rango corto y peso ligero.',
           checked: false,
           subItems: [
             { id: 'w-lun-6-1', text: 'Calentamiento hombros 5 min', checked: false },
@@ -77,9 +78,9 @@ export const week6: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // MARTES 11 JUNIO — Z2 45 min
+    // MARTES 9 JUNIO — Z2 45 min
     {
-      date: '2026-06-11',
+      date: '2026-06-09',
       dayName: 'Martes',
       estimatedDailyKcal: 1300,
       blocks: [
@@ -90,7 +91,7 @@ export const week6: Week = {
           checked: false,
           subItems: [
             { id: 'w-mar-6-1', text: '5 min calentamiento trote suave', checked: false },
-            { id: 'w-mar-6-2', text: '35 min Z2 (FC < 145 ppm, ritmo libre ~5:40/km)', checked: false },
+            { id: 'w-mar-6-2', text: '35 min Z2 (FC < 145 ppm, ~5:40/km)', checked: false },
             { id: 'w-mar-6-3', text: '5 min vuelta a la calma + estiramientos', checked: false },
           ],
         },
@@ -117,7 +118,7 @@ export const week6: Week = {
         },
         {
           id: 'dinner-mar-6', type: 'dinner',
-          title: 'Pavo asado con verdura',
+          title: 'Pavo asado con verdura y arroz',
           cookingMethod: 'horno',
           estimatedKcal: 550,
           checked: false,
@@ -133,16 +134,17 @@ export const week6: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // MIÉRCOLES 12 JUNIO — Fuerza tren inferior S2
+    // MIÉRCOLES 10 JUNIO — Fuerza tren inferior S2
     {
-      date: '2026-06-12',
+      date: '2026-06-10',
       dayName: 'Miércoles',
       estimatedDailyKcal: 1500,
+      specialNote: 'Mañana test 10K. No agotarte hoy con el tren inferior.',
       blocks: [
         {
           id: 'workout-mie-6', type: 'workout',
           title: 'Fuerza tren inferior + core S2 (45 min)',
-          description: 'Progresión vs semana 1. Mañana test 10K: no agotarte hoy.',
+          description: 'Progresión vs semana 1. Mañana test 10K: no agotar las piernas.',
           checked: false,
           subItems: [
             { id: 'w-mie-6-1', text: 'Calentamiento caderas 5 min', checked: false },
@@ -205,12 +207,12 @@ export const week6: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // JUEVES 13 JUNIO — TEST 10K CRONOMETRADO
+    // JUEVES 11 JUNIO — TEST 10K CRONOMETRADO
     {
-      date: '2026-06-13',
+      date: '2026-06-11',
       dayName: 'Jueves',
       estimatedDailyKcal: 1600,
-      specialNote: '🎯 DÍA DEL TEST 10K. Sal fresco: mínimo 24h sin fuerza ni carrera intensa. Protocolo desayuno 2-2,5h antes. El resultado calibra tu trabajo para sub-45.',
+      specialNote: '🎯 DÍA DEL TEST 10K. Sal fresco. Desayuno 2-2,5h antes. El resultado calibra el trabajo para sub-45.',
       blocks: [
         {
           id: 'weighin-jue-6', type: 'weighIn',
@@ -223,10 +225,10 @@ export const week6: Week = {
           title: 'Protocolo pre-test 10K',
           checked: false,
           subItems: [
-            { id: 'pre-jue-6-1', text: '2-2,5h antes: desayuno (ver bloque desayuno)', checked: false },
+            { id: 'pre-jue-6-1', text: '2-2,5h antes: desayuno completo (ver bloque desayuno)', checked: false },
             { id: 'pre-jue-6-2', text: '30 min antes: 300-400 ml agua a sorbos', checked: false },
             { id: 'pre-jue-6-3', text: 'Calentamiento: 10 min trote suave + 4-5 acelerones de 20s', checked: false },
-            { id: 'pre-jue-6-4', text: 'Objetivo ritmo: 4:30/km = sub-45 · 4:35/km = ~45:50 · 4:40/km = ~46:40', checked: false },
+            { id: 'pre-jue-6-4', text: 'Referencia: 4:30/km = sub-45 · 4:35/km ≈ 45:50 · 4:40/km ≈ 46:40', checked: false },
           ],
         },
         {
@@ -244,24 +246,23 @@ export const week6: Week = {
         {
           id: 'workout-jue-6', type: 'workout',
           title: '🏃 TEST 10K CRONOMETRADO',
-          description: 'A tope. Ritmo constante desde el km 1. Si tienes GPS: divide en km 1-3 (conservador), km 4-7 (ritmo objetivo), km 8-10 (vaciar).',
+          description: 'A tope. Ritmo constante desde el km 1. Km 1-3 conservador, km 4-7 objetivo, km 8-10 vaciar.',
           checked: false,
           subItems: [
             { id: 'w-jue-6-1', text: '10 min calentamiento trote + acelerones', checked: false },
             { id: 'w-jue-6-2', text: 'TEST 10K a tope — anotar tiempo y ritmo por km', checked: false },
-            { id: 'w-jue-6-3', text: 'Post-test: 10 min trote suave + estiramientos completos', checked: false },
-            { id: 'w-jue-6-4', text: 'Anotar el tiempo en las notas del día', checked: false },
+            { id: 'w-jue-6-3', text: '10 min trote suave + estiramientos completos post-test', checked: false },
+            { id: 'w-jue-6-4', text: '→ Anotar el tiempo en las notas del día', checked: false },
           ],
         },
         {
           id: 'post-match-jue-6', type: 'post_match_strategy',
           title: 'Post-test — Ventana de recuperación',
-          description: 'Comer en los 60 min post-test para recuperar.',
+          description: 'Comer dentro de 60 min del test para recuperar.',
           checked: false,
           do: [
-            'Hidratarse: 500 ml agua en los próximos 30 min',
-            'Comer dentro de 60 min del test',
-            'Proteína + carbo para recuperar',
+            '500 ml agua en los próximos 30 min',
+            'Comer dentro de 60 min post-test',
           ],
         },
         {
@@ -292,16 +293,16 @@ export const week6: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // VIERNES 14 JUNIO — Fuerza tren superior S2 (85%)
+    // VIERNES 12 JUNIO — Fuerza tren superior S2 (85%)
     {
-      date: '2026-06-14',
+      date: '2026-06-12',
       dayName: 'Viernes',
       estimatedDailyKcal: 1500,
       blocks: [
         {
           id: 'workout-vie-6', type: 'workout',
           title: 'Fuerza tren superior + core — S2 al 85% (40-45 min)',
-          description: 'Última sesión de fuerza "normal" antes del protocolo verse seco.',
+          description: 'Segunda sesión de la semana. Última sesión de fuerza "normal" antes del protocolo.',
           checked: false,
           subItems: [
             { id: 'w-vie-6-1', text: 'Calentamiento hombros 5 min', checked: false },
@@ -344,13 +345,13 @@ export const week6: Week = {
         },
         {
           id: 'dinner-vie-6', type: 'dinner',
-          title: 'Merluza plancha con ensalada diurética',
+          title: 'Merluza plancha con ensalada',
           cookingMethod: 'plancha',
           estimatedKcal: 500,
           checked: false,
           subItems: [
             { id: 'din-vie-6-1', text: '200 g merluza plancha', checked: false },
-            { id: 'din-vie-6-2', text: 'Ensalada: lechuga + pepino + apio + tomate (sin sal o poca)', checked: false },
+            { id: 'din-vie-6-2', text: 'Ensalada: lechuga + pepino + apio + tomate', checked: false },
             { id: 'din-vie-6-3', text: '1 cda aceite oliva + limón', checked: false },
             { id: 'din-vie-6-4', text: '1 yogur natural 0%', checked: false },
           ],
@@ -359,18 +360,18 @@ export const week6: Week = {
       notes: '', waterGlasses: 0, closed: false,
     },
 
-    // SÁBADO 15 JUNIO — Rodaje largo Z2 + inicio protocolo verse seco
+    // SÁBADO 13 JUNIO — Rodaje largo Z2 55-60 min
     {
-      date: '2026-06-15',
+      date: '2026-06-13',
       dayName: 'Sábado',
-      estimatedDailyKcal: 1550,
-      alcoholQuota: 0,
-      specialNote: '🧂 INICIO PROTOCOLO VERSE SECO. Desde hoy: cocinar sin sal añadida, sin embutidos/conservas. Hidratación alta (3-3,5 L) paradójicamente reduce retención. Cero alcohol estos 3 días.',
+      estimatedDailyKcal: 1600,
+      alcoholQuota: 2,
+      specialNote: 'Rodaje largo de la semana 2. Suave por recuperación del test. Pre: plátano + agua.',
       blocks: [
         {
           id: 'workout-sab-6', type: 'workout',
           title: 'Rodaje largo Z2 suave — 55-60 min (post-test)',
-          description: 'Suave por recuperación del test del jueves. Aeróbico base, no competitivo.',
+          description: 'Suave por recuperación del test del jueves. FC < 145 ppm, ritmo cómodo.',
           checked: false,
           subItems: [
             { id: 'w-sab-6-1', text: 'Pre: 1 plátano + 500 ml agua', checked: false },
@@ -380,7 +381,7 @@ export const week6: Week = {
         },
         {
           id: 'breakfast-sab-6', type: 'breakfast',
-          title: 'Desayuno pre-largo (sin sal añadida)',
+          title: 'Desayuno pre-largo',
           estimatedKcal: 350,
           checked: false,
           subItems: [
@@ -392,175 +393,283 @@ export const week6: Week = {
         },
         {
           id: 'lunch-sab-6', type: 'lunch',
-          title: 'Pollo con arroz y espárragos — SIN sal añadida',
-          cookingMethod: 'plancha',
-          estimatedKcal: 700,
+          title: 'Comida post-largo — recuperación',
+          estimatedKcal: 750,
           checked: false,
           subItems: [
-            { id: 'lun-sab-6-1', text: '160 g pollo plancha (sin sal o mínima)', checked: false },
-            { id: 'lun-sab-6-2', text: '50 g arroz integral', checked: false },
-            { id: 'lun-sab-6-3', text: 'Espárragos + pepino + tomate (diuréticos)', checked: false },
-            { id: 'lun-sab-6-4', text: '1 cda aceite oliva + limón + ajo + especias sin sal', checked: false },
+            { id: 'lun-sab-6-1', text: '180 g pollo o pescado', checked: false },
+            { id: 'lun-sab-6-2', text: '70 g arroz integral o 1 patata grande', checked: false },
+            { id: 'lun-sab-6-3', text: 'Verdura abundante', checked: false },
+            { id: 'lun-sab-6-4', text: '1 cda aceite oliva', checked: false },
             { id: 'lun-sab-6-5', text: '1 fruta de postre', checked: false },
           ],
         },
         {
           id: 'dinner-sab-6', type: 'dinner',
-          title: 'Lubina al vapor con verdura diurética — SIN sal',
-          cookingMethod: 'vapor',
+          title: 'Cena ligera',
           estimatedKcal: 500,
           checked: false,
           subItems: [
-            { id: 'din-sab-6-1', text: '200 g lubina o merluza al vapor (sin sal)', checked: false },
-            { id: 'din-sab-6-2', text: 'Espárragos + brócoli + apio al vapor', checked: false },
-            { id: 'din-sab-6-3', text: '1 patata pequeña', checked: false },
-            { id: 'din-sab-6-4', text: '1 cda aceite oliva + limón (sin sal)', checked: false },
-            { id: 'din-sab-6-5', text: '1 yogur natural 0%', checked: false },
+            { id: 'din-sab-6-1', text: '150 g pescado blanco plancha', checked: false },
+            { id: 'din-sab-6-2', text: 'Ensalada o crema de verduras', checked: false },
+            { id: 'din-sab-6-3', text: '1 yogur natural 0%', checked: false },
+          ],
+        },
+      ],
+      notes: '', waterGlasses: 0, closed: false,
+    },
+
+    // DOMINGO 14 JUNIO — Descanso activo
+    {
+      date: '2026-06-14',
+      dayName: 'Domingo',
+      estimatedDailyKcal: 1300,
+      alcoholQuota: 1,
+      specialNote: 'Descanso. Mañana empieza el protocolo verse seco (lunes 15). Última noche con copa permitida si quieres.',
+      blocks: [
+        {
+          id: 'workout-dom-6', type: 'workout',
+          title: 'Descanso activo / fútbol / paseo',
+          description: 'Sin entreno estructurado. Paseo o fútbol si apetece.',
+          checked: false,
+          subItems: [
+            { id: 'w-dom-6-1', text: 'Opción A: fútbol (si hay partido)', checked: false },
+            { id: 'w-dom-6-2', text: 'Opción B: paseo 45-60 min ritmo cómodo', checked: false },
+            { id: 'w-dom-6-3', text: 'Estiramientos suaves', checked: false },
+          ],
+        },
+        {
+          id: 'breakfast-dom-6', type: 'breakfast',
+          title: 'Desayuno',
+          description: 'Café o huevos revueltos + fruta.',
+          estimatedKcal: 300,
+          checked: false,
+          subItems: [
+            { id: 'des-dom-6-1', text: 'Opción A: 2 huevos revueltos + 1 rebanada pan + fruta + café', checked: false },
+            { id: 'des-dom-6-2', text: 'Opción B: yogur + muesli + fruta + café', checked: false },
+          ],
+        },
+        {
+          id: 'lunch-dom-6', type: 'lunch',
+          title: 'Comida equilibrada',
+          estimatedKcal: 650,
+          checked: false,
+          subItems: [
+            { id: 'lun-dom-6-1', text: '180 g proteína (pollo, ternera o pescado)', checked: false },
+            { id: 'lun-dom-6-2', text: 'Verdura abundante', checked: false },
+            { id: 'lun-dom-6-3', text: '50 g arroz integral o 1 patata mediana', checked: false },
+            { id: 'lun-dom-6-4', text: '1 cda aceite oliva', checked: false },
+            { id: 'lun-dom-6-5', text: '1 fruta de postre', checked: false },
+          ],
+        },
+        {
+          id: 'dinner-dom-6', type: 'dinner',
+          title: 'Cena ligera',
+          estimatedKcal: 450,
+          checked: false,
+          subItems: [
+            { id: 'din-dom-6-1', text: 'Tortilla francesa + verdura o ensalada', checked: false },
+            { id: 'din-dom-6-2', text: '1 yogur natural 0%', checked: false },
+          ],
+        },
+      ],
+      notes: '', waterGlasses: 0, closed: false,
+    },
+
+    // LUNES 15 JUNIO — VERSE SECO día 1
+    {
+      date: '2026-06-15',
+      dayName: 'Lunes',
+      estimatedDailyKcal: 1300,
+      alcoholQuota: 0,
+      specialNote: '🧂 INICIO PROTOCOLO VERSE SECO (3 días). Sin sal añadida, sin embutidos ni conservas. Hidratación 3-3,5 L paradójicamente reduce retención. Cero alcohol hasta Roquetas.',
+      blocks: [
+        {
+          id: 'workout-vs1', type: 'workout',
+          title: 'Descanso / paseo suave',
+          description: 'Sin entreno estructurado. Conservar energía y dejar que el protocolo actúe.',
+          checked: false,
+          subItems: [
+            { id: 'w-vs1-1', text: 'Paseo suave 30-40 min (opcional)', checked: false },
+            { id: 'w-vs1-2', text: 'Estiramientos suaves', checked: false },
+          ],
+        },
+        {
+          id: 'breakfast-vs1', type: 'breakfast',
+          title: 'Desayuno',
+          description: 'Café (ayuno hasta la comida).',
+          checked: false,
+        },
+        {
+          id: 'lunch-vs1', type: 'lunch',
+          title: 'Proteína + verduras diuréticas — SIN sal añadida',
+          cookingMethod: 'plancha',
+          estimatedKcal: 650,
+          checked: false,
+          subItems: [
+            { id: 'lun-vs1-1', text: '160 g pollo o merluza plancha (sin sal o mínima)', checked: false },
+            { id: 'lun-vs1-2', text: 'Espárragos + pepino + apio (crudos o al vapor)', checked: false },
+            { id: 'lun-vs1-3', text: '50 g arroz integral', checked: false },
+            { id: 'lun-vs1-4', text: '1 cda aceite oliva + limón + ajo + especias sin sal', checked: false },
+            { id: 'lun-vs1-5', text: '1 fruta de postre', checked: false },
+          ],
+        },
+        {
+          id: 'dinner-vs1', type: 'dinner',
+          title: 'Cena ligera — SIN sal',
+          cookingMethod: 'plancha',
+          estimatedKcal: 500,
+          checked: false,
+          subItems: [
+            { id: 'din-vs1-1', text: '200 g pescado blanco plancha (sin sal)', checked: false },
+            { id: 'din-vs1-2', text: 'Ensalada diurética: lechuga + pepino + apio + tomate', checked: false },
+            { id: 'din-vs1-3', text: '1 cda aceite oliva + limón', checked: false },
+            { id: 'din-vs1-4', text: '1 yogur natural 0%', checked: false },
           ],
         },
       ],
       notes: '', waterGlasses: 0, waterTarget: 14, closed: false,
     },
 
-    // DOMINGO 16 JUNIO — Verse seco día 2 / descanso
+    // MARTES 16 JUNIO — VERSE SECO día 2
     {
       date: '2026-06-16',
-      dayName: 'Domingo',
+      dayName: 'Martes',
       estimatedDailyKcal: 1250,
       alcoholQuota: 0,
-      specialNote: '🧂 VERSE SECO día 2. Sin sal añadida, sin embutidos, sin procesados, sin alcohol. Verduras diuréticas: espárragos, pepino, apio, pepino. Beber 3+ litros.',
+      specialNote: '🧂 VERSE SECO día 2. Seguir sin sal, sin embutidos, sin alcohol. Aumentar verduras diuréticas. Hidratación 3+ L.',
       blocks: [
         {
-          id: 'workout-dom-6', type: 'workout',
+          id: 'workout-vs2', type: 'workout',
           title: 'Descanso activo',
-          description: 'Sin entrenamiento. Paseo suave si apetece.',
+          description: 'Sin entrenamiento.',
           checked: false,
           subItems: [
-            { id: 'w-dom-6-1', text: 'Paseo opcional 30-40 min ritmo muy suave', checked: false },
-            { id: 'w-dom-6-2', text: 'Estiramientos suaves', checked: false },
+            { id: 'w-vs2-1', text: 'Paseo muy suave 20-30 min (opcional)', checked: false },
+            { id: 'w-vs2-2', text: 'Estiramientos suaves', checked: false },
           ],
         },
         {
-          id: 'breakfast-dom-6', type: 'breakfast',
-          title: 'Desayuno ligero proteico — SIN sal',
+          id: 'breakfast-vs2', type: 'breakfast',
+          title: 'Desayuno ligero — SIN sal',
           estimatedKcal: 250,
           checked: false,
           subItems: [
-            { id: 'des-dom-6-1', text: '2 huevos revueltos (sin sal)', checked: false },
-            { id: 'des-dom-6-2', text: '1 fruta (manzana o kiwi)', checked: false },
-            { id: 'des-dom-6-3', text: 'Café', checked: false },
+            { id: 'des-vs2-1', text: '2 huevos revueltos (sin sal)', checked: false },
+            { id: 'des-vs2-2', text: '1 fruta (manzana o kiwi)', checked: false },
+            { id: 'des-vs2-3', text: 'Café', checked: false },
           ],
         },
         {
-          id: 'lunch-dom-6', type: 'lunch',
-          title: 'Proteína + verdura diurética — SIN sal añadida',
+          id: 'lunch-vs2', type: 'lunch',
+          title: 'Proteína + verduras diuréticas — SIN sal',
           cookingMethod: 'plancha',
           estimatedKcal: 600,
           checked: false,
           subItems: [
-            { id: 'lun-dom-6-1', text: '160 g pechuga pollo o merluza plancha (sin sal)', checked: false },
-            { id: 'lun-dom-6-2', text: 'Espárragos + pepino + apio (crudos o al vapor)', checked: false },
-            { id: 'lun-dom-6-3', text: '50 g arroz integral (reducir carbos vs días anteriores)', checked: false },
-            { id: 'lun-dom-6-4', text: '1 cda aceite oliva + limón + hierbas sin sal', checked: false },
-            { id: 'lun-dom-6-5', text: '1 fruta de postre', checked: false },
+            { id: 'lun-vs2-1', text: '160 g pechuga pollo o lubina plancha (sin sal)', checked: false },
+            { id: 'lun-vs2-2', text: 'Espárragos + apio + pepino al vapor', checked: false },
+            { id: 'lun-vs2-3', text: '40 g arroz integral (reducir carbos)', checked: false },
+            { id: 'lun-vs2-4', text: '1 cda aceite oliva + limón + hierbas sin sal', checked: false },
+            { id: 'lun-vs2-5', text: '1 fruta de postre', checked: false },
           ],
         },
         {
-          id: 'dinner-dom-6', type: 'dinner',
+          id: 'dinner-vs2', type: 'dinner',
           title: 'Cena ligera — SIN sal',
           cookingMethod: 'plancha',
           estimatedKcal: 400,
           checked: false,
           subItems: [
-            { id: 'din-dom-6-1', text: '150 g pechuga pollo o pescado blanco plancha (sin sal)', checked: false },
-            { id: 'din-dom-6-2', text: 'Ensalada diurética: lechuga + pepino + apio + tomate', checked: false },
-            { id: 'din-dom-6-3', text: '1 cda aceite oliva + limón', checked: false },
-            { id: 'din-dom-6-4', text: '1 yogur natural 0%', checked: false },
+            { id: 'din-vs2-1', text: '150 g merluza o pechuga pavo plancha (sin sal)', checked: false },
+            { id: 'din-vs2-2', text: 'Ensalada diurética: lechuga + pepino + apio + tomate', checked: false },
+            { id: 'din-vs2-3', text: '1 cda aceite oliva + limón', checked: false },
+            { id: 'din-vs2-4', text: '1 yogur natural 0%', checked: false },
           ],
         },
       ],
       notes: '', waterGlasses: 0, waterTarget: 13, closed: false,
     },
 
-    // LUNES 17 JUNIO — Verse seco día 3 + última fuerza tren superior (congestión)
+    // MIÉRCOLES 17 JUNIO — VERSE SECO día 3 + última fuerza (congestión)
     {
       date: '2026-06-17',
-      dayName: 'Lunes',
+      dayName: 'Miércoles',
       estimatedDailyKcal: 1200,
       alcoholQuota: 0,
-      specialNote: '🧂 VERSE SECO día 3 — CERO SAL. Última sesión fuerza tren superior (ligera, congestión final). El pump de hoy + baja retención = mejor versión estética mañana en Roquetas.',
+      specialNote: '🧂 VERSE SECO día 3 — CERO SAL. Última sesión fuerza tren superior (ligera, congestión). El pump de hoy + baja retención = mejor versión estética mañana en Roquetas.',
       blocks: [
         {
-          id: 'workout-lun-7', type: 'workout',
+          id: 'workout-vs3', type: 'workout',
           title: 'Fuerza tren superior LIGERA — congestión final (30 min)',
-          description: 'No buscar fallo muscular ni peso máximo. Objetivo: activar el músculo y conseguir congestión visible mañana.',
+          description: 'No buscar fallo ni peso máximo. Objetivo: activar músculo para congestión visible mañana.',
           checked: false,
           subItems: [
-            { id: 'w-lun-7-1', text: 'Dominadas: 3 series (no al fallo)', checked: false },
-            { id: 'w-lun-7-2', text: 'Press pecho mancuernas 4 kg: 3 × 15', checked: false },
-            { id: 'w-lun-7-3', text: 'Aperturas 4 kg: 3 × 15', checked: false },
-            { id: 'w-lun-7-4', text: 'Remo mancuerna: 3 × 12 por lado', checked: false },
-            { id: 'w-lun-7-5', text: 'Elevaciones laterales 4 kg: 3 × 15', checked: false },
-            { id: 'w-lun-7-6', text: 'Curl bíceps: 3 × 15 (congestión brazo)', checked: false },
-            { id: 'w-lun-7-7', text: 'Plancha frontal: 3 × 45s', checked: false },
+            { id: 'w-vs3-1', text: 'Dominadas: 3 series (no al fallo)', checked: false },
+            { id: 'w-vs3-2', text: 'Press pecho mancuernas 4 kg: 3 × 15', checked: false },
+            { id: 'w-vs3-3', text: 'Aperturas 4 kg: 3 × 15', checked: false },
+            { id: 'w-vs3-4', text: 'Remo mancuerna: 3 × 12 por lado', checked: false },
+            { id: 'w-vs3-5', text: 'Elevaciones laterales 4 kg: 3 × 15', checked: false },
+            { id: 'w-vs3-6', text: 'Curl bíceps: 3 × 15 (congestión brazos)', checked: false },
+            { id: 'w-vs3-7', text: 'Plancha frontal: 3 × 45s', checked: false },
           ],
         },
         {
-          id: 'breakfast-lun-7', type: 'breakfast',
-          title: 'Desayuno mínimo — SIN sal',
+          id: 'breakfast-vs3', type: 'breakfast',
+          title: 'Desayuno mínimo — CERO SAL',
           estimatedKcal: 200,
           checked: false,
           subItems: [
-            { id: 'des-lun-7-1', text: 'Café', checked: false },
-            { id: 'des-lun-7-2', text: '1 fruta (manzana o kiwi)', checked: false },
+            { id: 'des-vs3-1', text: 'Café', checked: false },
+            { id: 'des-vs3-2', text: '1 fruta (manzana o kiwi)', checked: false },
           ],
         },
         {
-          id: 'lunch-lun-7', type: 'lunch',
+          id: 'lunch-vs3', type: 'lunch',
           title: 'Proteína magra + espárragos — CERO SAL',
           cookingMethod: 'plancha',
           estimatedKcal: 550,
           checked: false,
           subItems: [
-            { id: 'lun-lun-7-1', text: '160 g pechuga pavo o merluza plancha (sin sal)', checked: false },
-            { id: 'lun-lun-7-2', text: 'Espárragos verdes + apio + pepino al vapor', checked: false },
-            { id: 'lun-lun-7-3', text: '40 g arroz integral (reducir carbo hoy)', checked: false },
-            { id: 'lun-lun-7-4', text: '1 cda aceite oliva + limón + ajo (sin sal)', checked: false },
-            { id: 'lun-lun-7-5', text: '1 fruta de postre', checked: false },
+            { id: 'lun-vs3-1', text: '160 g pechuga pavo o merluza plancha (sin sal)', checked: false },
+            { id: 'lun-vs3-2', text: 'Espárragos + apio + pepino al vapor', checked: false },
+            { id: 'lun-vs3-3', text: '40 g arroz integral', checked: false },
+            { id: 'lun-vs3-4', text: '1 cda aceite oliva + limón + ajo (sin sal)', checked: false },
+            { id: 'lun-vs3-5', text: '1 fruta de postre', checked: false },
           ],
         },
         {
-          id: 'dinner-lun-7', type: 'dinner',
+          id: 'dinner-vs3', type: 'dinner',
           title: 'Cena muy ligera — CERO SAL',
           cookingMethod: 'plancha',
           estimatedKcal: 400,
           checked: false,
           subItems: [
-            { id: 'din-lun-7-1', text: '150 g merluza o clara de huevo plancha (sin sal)', checked: false },
-            { id: 'din-lun-7-2', text: 'Ensalada diurética: pepino + apio + lechuga', checked: false },
-            { id: 'din-lun-7-3', text: '1 cda aceite oliva + limón', checked: false },
-            { id: 'din-lun-7-4', text: '1 yogur natural 0%', checked: false },
+            { id: 'din-vs3-1', text: '150 g merluza plancha (sin sal)', checked: false },
+            { id: 'din-vs3-2', text: 'Ensalada diurética: pepino + apio + lechuga', checked: false },
+            { id: 'din-vs3-3', text: '1 cda aceite oliva + limón', checked: false },
+            { id: 'din-vs3-4', text: '1 yogur natural 0%', checked: false },
           ],
         },
       ],
       notes: '', waterGlasses: 0, waterTarget: 13, closed: false,
     },
 
-    // MARTES 18 JUNIO — 🏖️ ROQUETAS
+    // JUEVES 18 JUNIO — 🏖️ ROQUETAS
     {
       date: '2026-06-18',
-      dayName: 'Martes',
-      specialNote: '🏖️ DÍA DE ROQUETAS. Llegaste. 4 semanas de trabajo. Disfruta.',
+      dayName: 'Jueves',
+      specialNote: '🏖️ DÍA DE ROQUETAS. Llegaste. 6 semanas de trabajo. Disfruta.',
       blocks: [
         {
           id: 'workout-roquetas', type: 'workout',
           title: '🏖️ Roquetas — Día objetivo',
-          description: '75.0 → ~73.0 kg. Tren superior definido. Base sub-45 en marcha.',
+          description: '75.0 → ~73.0 kg · Tren superior definido · Base sub-45 en marcha',
           checked: false,
           subItems: [
             { id: 'w-roq-1', text: 'Hidratación normal — el protocolo de ayer da resultado hoy', checked: false },
-            { id: 'w-roq-2', text: 'Desayuno ligero proteico (no hinchar el estómago)', checked: false },
-            { id: 'w-roq-3', text: 'Bañarse, pasear, disfrutar', checked: false },
+            { id: 'w-roq-2', text: 'Desayuno ligero (no hinchar el estómago)', checked: false },
+            { id: 'w-roq-3', text: 'Bañarse, pasear, disfrutar 🌊', checked: false },
             { id: 'w-roq-4', text: 'Esta noche: celebrar con mesura. Lo has ganado 🎉', checked: false },
           ],
         },

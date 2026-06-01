@@ -3563,7 +3563,7 @@
       "weekNumber": 5,
       "days": [
         {
-          "date": "2026-06-03",
+          "date": "2026-06-01",
           "dayName": "Lunes",
           "estimatedDailyKcal": 1500,
           "specialNote": "Primer dia del nuevo bloque. Tren superior al 70%. Objetivo: verse bien en Roquetas el 18 jun.",
@@ -3727,7 +3727,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-04",
+          "date": "2026-06-02",
           "dayName": "Martes",
           "estimatedDailyKcal": 1300,
           "blocks": [
@@ -3843,7 +3843,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-05",
+          "date": "2026-06-03",
           "dayName": "Miercoles",
           "estimatedDailyKcal": 1500,
           "blocks": [
@@ -4005,7 +4005,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-06",
+          "date": "2026-06-04",
           "dayName": "Jueves",
           "estimatedDailyKcal": 1600,
           "specialNote": "Dia de calidad. El tempo a 5:00-5:10/km es el trabajo clave para la base sub-45.",
@@ -4139,7 +4139,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-07",
+          "date": "2026-06-05",
           "dayName": "Viernes",
           "estimatedDailyKcal": 1500,
           "blocks": [
@@ -4302,7 +4302,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-08",
+          "date": "2026-06-06",
           "dayName": "Sabado",
           "estimatedDailyKcal": 1600,
           "alcoholQuota": 2,
@@ -4425,7 +4425,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-09",
+          "date": "2026-06-07",
           "dayName": "Domingo",
           "estimatedDailyKcal": 1300,
           "alcoholQuota": 1,
@@ -4531,66 +4531,66 @@
       "weekNumber": 6,
       "days": [
         {
-          "date": "2026-06-10",
+          "date": "2026-06-08",
           "dayName": "Lunes",
           "estimatedDailyKcal": 1500,
-          "specialNote": "Semana 2 al 85%. Si el hombro/AC responde bien, anadir press militar al final.",
+          "specialNote": "Semana 2 al 85%. Press militar si AC OK.",
           "blocks": [
             {
               "id": "workout-lun-6",
               "type": "workout",
               "title": "Fuerza tren superior + core S2 al 85% (40-45 min)",
-              "description": "Subir intensidad. Press militar: solo si AC sin molestias.",
+              "description": "Semana 2. Press militar solo si AC OK.",
               "checked": false,
               "subItems": [
                 {
-                  "id": "w-lun-lun-6-1",
+                  "id": "w-lun-6-1",
                   "text": "Calentamiento hombros 5 min",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-2",
-                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "id": "w-lun-6-2",
+                  "text": "Dominadas: 4 series max reps",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-3",
-                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "id": "w-lun-6-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 20 (tempo 3s)",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-4",
-                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "id": "w-lun-6-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15-20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-5",
+                  "id": "w-lun-6-5",
                   "text": "Remo mancuerna a una mano: 4 x 15 por lado",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-6",
-                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "id": "w-lun-6-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15-20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-7",
-                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "id": "w-lun-6-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-8",
-                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "id": "w-lun-6-8",
+                  "text": "Face pulls: 3 x 20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-9",
-                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "id": "w-lun-6-9",
+                  "text": "Press militar (SOLO si AC OK): 3 x 12",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-lun-6-10",
-                  "text": "Press militar (SOLO si AC OK): 3 x 12, rango corto",
+                  "id": "w-lun-6-10",
+                  "text": "Core: plancha 3x60s + plancha lat 3x40s + crunch 3x20",
                   "checked": false
                 }
               ]
@@ -4700,7 +4700,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-11",
+          "date": "2026-06-09",
           "dayName": "Martes",
           "estimatedDailyKcal": 1300,
           "blocks": [
@@ -4708,12 +4708,12 @@
               "id": "workout-mar-6",
               "type": "workout",
               "title": "Carrera Z2 — 45 min",
-              "description": "FC < 145 ppm, ritmo libre ~5:40-5:50/km.",
+              "description": "FC < 145 ppm, ritmo libre.",
               "checked": false,
               "subItems": [
                 {
                   "id": "w-mar-6-1",
-                  "text": "5 min calentamiento trote suave",
+                  "text": "5 min calentamiento",
                   "checked": false
                 },
                 {
@@ -4768,18 +4768,12 @@
                   "text": "1 fruta de postre",
                   "checked": false
                 }
-              ],
-              "recipe": [
-                "Cocer arroz 25 min",
-                "Pollo plancha 4-5 min por lado",
-                "Montar bowl",
-                "Alinar con aceite + vinagre + oregano"
               ]
             },
             {
               "id": "dinner-mar-6",
               "type": "dinner",
-              "title": "Pavo asado con verdura",
+              "title": "Pavo asado con verdura y arroz",
               "estimatedKcal": 550,
               "checked": false,
               "subItems": [
@@ -4816,15 +4810,16 @@
           "closed": false
         },
         {
-          "date": "2026-06-12",
+          "date": "2026-06-10",
           "dayName": "Miercoles",
           "estimatedDailyKcal": 1500,
+          "specialNote": "Manana test 10K. No agotarte con el tren inferior hoy.",
           "blocks": [
             {
               "id": "workout-mie-6",
               "type": "workout",
-              "title": "Fuerza tren inferior + core (45 min)",
-              "description": "Mantener musculo en deficit.",
+              "title": "Fuerza tren inferior + core S2 (45 min)",
+              "description": "Manana test 10K: no agotar las piernas.",
               "checked": false,
               "subItems": [
                 {
@@ -4849,7 +4844,7 @@
                 },
                 {
                   "id": "w-mie-6-5",
-                  "text": "Puente gluteos a una pierna: 3 x 12 por pierna",
+                  "text": "Puente gluteos a una pierna: 3 x 12",
                   "checked": false
                 },
                 {
@@ -4859,7 +4854,7 @@
                 },
                 {
                   "id": "w-mie-6-7",
-                  "text": "Russian twists 3x20 + plancha lateral 3x40s",
+                  "text": "Russian twists 3x20 + plancha lat 3x40s",
                   "checked": false
                 },
                 {
@@ -4974,10 +4969,10 @@
           "closed": false
         },
         {
-          "date": "2026-06-13",
+          "date": "2026-06-11",
           "dayName": "Jueves",
           "estimatedDailyKcal": 1600,
-          "specialNote": "DIA DEL TEST 10K. Sal fresco. El resultado calibra tu trabajo para sub-45.",
+          "specialNote": "DIA DEL TEST 10K. Sal fresco. El resultado calibra el trabajo para sub-45.",
           "blocks": [
             {
               "id": "weighin-jue-6",
@@ -5004,12 +4999,12 @@
                 },
                 {
                   "id": "pre-jue-6-3",
-                  "text": "Calentamiento: 10 min trote suave + 4-5 acelerones de 20s",
+                  "text": "Calentamiento: 10 min trote + 4-5 acelerones de 20s",
                   "checked": false
                 },
                 {
                   "id": "pre-jue-6-4",
-                  "text": "Objetivo ritmo: 4:30/km = sub-45 | 4:35 = ~45:50 | 4:40 = ~46:40",
+                  "text": "Referencia: 4:30/km = sub-45 | 4:35 = ~45:50",
                   "checked": false
                 }
               ]
@@ -5057,12 +5052,12 @@
                 },
                 {
                   "id": "w-jue-6-2",
-                  "text": "TEST 10K a tope — anotar tiempo final y ritmo por km",
+                  "text": "TEST 10K a tope — anotar tiempo final",
                   "checked": false
                 },
                 {
                   "id": "w-jue-6-3",
-                  "text": "10 min trote suave + estiramientos completos",
+                  "text": "10 min trote suave + estiramientos",
                   "checked": false
                 },
                 {
@@ -5075,12 +5070,12 @@
             {
               "id": "post-match-jue-6",
               "type": "post_match_strategy",
-              "title": "Post-test — Ventana de recuperacion",
-              "description": "Comer en los 60 min post-test.",
+              "title": "Post-test — Recuperacion",
+              "description": "Comer dentro de 60 min.",
               "checked": false,
               "do": [
-                "500 ml agua en los proximos 30 min",
-                "Comer dentro de 60 min del test"
+                "500 ml agua en 30 min",
+                "Comer dentro de 60 min post-test"
               ]
             },
             {
@@ -5092,7 +5087,7 @@
               "subItems": [
                 {
                   "id": "lun-jue-6-1",
-                  "text": "180 g pollo o ternera (proteina recuperacion)",
+                  "text": "180 g pollo o ternera",
                   "checked": false
                 },
                 {
@@ -5147,7 +5142,7 @@
           "closed": false
         },
         {
-          "date": "2026-06-14",
+          "date": "2026-06-12",
           "dayName": "Viernes",
           "estimatedDailyKcal": 1500,
           "blocks": [
@@ -5155,57 +5150,57 @@
               "id": "workout-vie-6",
               "type": "workout",
               "title": "Fuerza tren superior + core S2 al 85% (40-45 min)",
-              "description": "Subir intensidad. Press militar: solo si AC sin molestias.",
+              "description": "Semana 2. Press militar solo si AC OK.",
               "checked": false,
               "subItems": [
                 {
-                  "id": "w-lun-vie-6-1",
+                  "id": "w-vie-6-1",
                   "text": "Calentamiento hombros 5 min",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-2",
-                  "text": "Dominadas: 4 series max reps (o negativas)",
+                  "id": "w-vie-6-2",
+                  "text": "Dominadas: 4 series max reps",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-3",
-                  "text": "Press pecho mancuernas 4 kg: 4 x 15-20 (tempo 3s bajada)",
+                  "id": "w-vie-6-3",
+                  "text": "Press pecho mancuernas 4 kg: 4 x 20 (tempo 3s)",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-4",
-                  "text": "Aperturas mancuernas 4 kg: 3 x 15",
+                  "id": "w-vie-6-4",
+                  "text": "Aperturas mancuernas 4 kg: 3 x 15-20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-5",
+                  "id": "w-vie-6-5",
                   "text": "Remo mancuerna a una mano: 4 x 15 por lado",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-6",
-                  "text": "Elevaciones laterales 4 kg: 3 x 15",
+                  "id": "w-vie-6-6",
+                  "text": "Elevaciones laterales 4 kg: 3 x 15-20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-7",
-                  "text": "Superset: curl biceps + extension triceps: 3 x 15 cada uno",
+                  "id": "w-vie-6-7",
+                  "text": "Superset: curl biceps + extension triceps: 3 x 15",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-8",
-                  "text": "Face pulls con banda o remo ligero: 3 x 20",
+                  "id": "w-vie-6-8",
+                  "text": "Face pulls: 3 x 20",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-9",
-                  "text": "Core: plancha 3x60s + plancha lateral 3x40s + crunch 3x20",
+                  "id": "w-vie-6-9",
+                  "text": "Press militar (SOLO si AC OK): 3 x 12",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-vie-6-10",
-                  "text": "Press militar (SOLO si AC OK): 3 x 12, rango corto",
+                  "id": "w-vie-6-10",
+                  "text": "Core: plancha 3x60s + plancha lat 3x40s + crunch 3x20",
                   "checked": false
                 }
               ]
@@ -5277,28 +5272,32 @@
             {
               "id": "dinner-vie-6",
               "type": "dinner",
-              "title": "Merluza plancha con ensalada diuretica",
-              "cookingMethod": "plancha",
+              "title": "Merluza plancha con ensalada",
               "estimatedKcal": 500,
               "checked": false,
               "subItems": [
                 {
                   "id": "din-vie-6-1",
-                  "text": "200 g merluza plancha",
+                  "text": "200 g proteina plancha o horno",
                   "checked": false
                 },
                 {
                   "id": "din-vie-6-2",
-                  "text": "Ensalada: lechuga + pepino + apio + tomate (sin sal o poca)",
+                  "text": "Verdura abundante",
                   "checked": false
                 },
                 {
                   "id": "din-vie-6-3",
-                  "text": "1 cda aceite oliva + limon",
+                  "text": "50 g arroz integral",
                   "checked": false
                 },
                 {
                   "id": "din-vie-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-vie-6-5",
                   "text": "1 yogur natural 0%",
                   "checked": false
                 }
@@ -5310,17 +5309,17 @@
           "closed": false
         },
         {
-          "date": "2026-06-15",
+          "date": "2026-06-13",
           "dayName": "Sabado",
-          "estimatedDailyKcal": 1550,
-          "alcoholQuota": 0,
-          "specialNote": "INICIO PROTOCOLO VERSE SECO. Desde hoy: sin sal anadida, sin embutidos. Hidratacion 3-3,5 L. Cero alcohol estos 3 dias.",
+          "estimatedDailyKcal": 1600,
+          "alcoholQuota": 2,
+          "specialNote": "Rodaje largo semana 2. Suave por recuperacion del test.",
           "blocks": [
             {
               "id": "workout-sab-6",
               "type": "workout",
-              "title": "Rodaje largo Z2 suave — 55-60 min (post-test)",
-              "description": "Suave. FC < 145 ppm, ritmo comodo.",
+              "title": "Rodaje largo Z2 suave — 55-60 min",
+              "description": "Suave. FC < 145 ppm.",
               "checked": false,
               "subItems": [
                 {
@@ -5343,7 +5342,7 @@
             {
               "id": "breakfast-sab-6",
               "type": "breakfast",
-              "title": "Desayuno pre-largo (sin sal anadida)",
+              "title": "Desayuno pre-largo",
               "estimatedKcal": 350,
               "checked": false,
               "subItems": [
@@ -5372,29 +5371,28 @@
             {
               "id": "lunch-sab-6",
               "type": "lunch",
-              "title": "Pollo con arroz y esparragos — SIN sal anadida",
-              "cookingMethod": "plancha",
-              "estimatedKcal": 700,
+              "title": "Comida post-largo — recuperacion",
+              "estimatedKcal": 750,
               "checked": false,
               "subItems": [
                 {
                   "id": "lun-sab-6-1",
-                  "text": "160 g pollo plancha (sin sal o minima)",
+                  "text": "180 g pollo o pescado",
                   "checked": false
                 },
                 {
                   "id": "lun-sab-6-2",
-                  "text": "50 g arroz integral",
+                  "text": "70 g arroz integral o 1 patata grande",
                   "checked": false
                 },
                 {
                   "id": "lun-sab-6-3",
-                  "text": "Esparragos + pepino + tomate (diureticos)",
+                  "text": "Verdura abundante",
                   "checked": false
                 },
                 {
                   "id": "lun-sab-6-4",
-                  "text": "1 cda aceite oliva + limon + especias sin sal",
+                  "text": "1 cda aceite oliva",
                   "checked": false
                 },
                 {
@@ -5407,33 +5405,242 @@
             {
               "id": "dinner-sab-6",
               "type": "dinner",
-              "title": "Lubina al vapor con verdura diuretica — SIN sal",
-              "cookingMethod": "vapor",
+              "title": "Cena ligera",
               "estimatedKcal": 500,
               "checked": false,
               "subItems": [
                 {
                   "id": "din-sab-6-1",
-                  "text": "200 g lubina al vapor (sin sal)",
+                  "text": "200 g proteina plancha o horno",
                   "checked": false
                 },
                 {
                   "id": "din-sab-6-2",
-                  "text": "Esparragos + brocoli + apio al vapor",
+                  "text": "Verdura abundante",
                   "checked": false
                 },
                 {
                   "id": "din-sab-6-3",
-                  "text": "1 patata pequena",
+                  "text": "50 g arroz integral",
                   "checked": false
                 },
                 {
                   "id": "din-sab-6-4",
-                  "text": "1 cda aceite oliva + limon (sin sal)",
+                  "text": "1 cda aceite oliva",
                   "checked": false
                 },
                 {
                   "id": "din-sab-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-14",
+          "dayName": "Domingo",
+          "estimatedDailyKcal": 1300,
+          "alcoholQuota": 1,
+          "specialNote": "Descanso. Manana empieza el protocolo verse seco (lunes 15).",
+          "blocks": [
+            {
+              "id": "workout-dom-6",
+              "type": "workout",
+              "title": "Descanso activo / futbol / paseo",
+              "description": "Sin entreno estructurado.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-dom-6-1",
+                  "text": "Opcion A: futbol",
+                  "checked": false
+                },
+                {
+                  "id": "w-dom-6-2",
+                  "text": "Opcion B: paseo 45-60 min ritmo comodo",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-dom-6",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Cafe o huevos + fruta.",
+              "estimatedKcal": 300,
+              "checked": false
+            },
+            {
+              "id": "lunch-dom-6",
+              "type": "lunch",
+              "title": "Comida equilibrada",
+              "estimatedKcal": 650,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-dom-6-1",
+                  "text": "180 g proteina",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-3",
+                  "text": "50 g arroz integral o 1 patata",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "lun-dom-6-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-dom-6",
+              "type": "dinner",
+              "title": "Cena ligera",
+              "estimatedKcal": 450,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-dom-6-1",
+                  "text": "200 g proteina plancha o horno",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-2",
+                  "text": "Verdura abundante",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-3",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-4",
+                  "text": "1 cda aceite oliva",
+                  "checked": false
+                },
+                {
+                  "id": "din-dom-6-5",
+                  "text": "1 yogur natural 0%",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "notes": "",
+          "waterGlasses": 0,
+          "closed": false
+        },
+        {
+          "date": "2026-06-15",
+          "dayName": "Lunes",
+          "estimatedDailyKcal": 1300,
+          "alcoholQuota": 0,
+          "specialNote": "INICIO PROTOCOLO VERSE SECO. Sin sal anadida, sin embutidos. Hidratacion 3-3,5 L. Cero alcohol hasta Roquetas.",
+          "blocks": [
+            {
+              "id": "workout-vs1",
+              "type": "workout",
+              "title": "Descanso / paseo suave",
+              "description": "Sin entreno. Dejar que el protocolo actue.",
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "w-vs1-1",
+                  "text": "Paseo suave 30-40 min (opcional)",
+                  "checked": false
+                },
+                {
+                  "id": "w-vs1-2",
+                  "text": "Estiramientos suaves",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "breakfast-vs1",
+              "type": "breakfast",
+              "title": "Desayuno",
+              "description": "Cafe (ayuno hasta la comida).",
+              "checked": false
+            },
+            {
+              "id": "lunch-vs1",
+              "type": "lunch",
+              "title": "Proteina + verduras diureticas — SIN sal",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 650,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "lun-vs1-1",
+                  "text": "160 g pollo o merluza plancha (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vs1-2",
+                  "text": "Esparragos + pepino + apio",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vs1-3",
+                  "text": "50 g arroz integral",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vs1-4",
+                  "text": "1 cda aceite oliva + limon + especias sin sal",
+                  "checked": false
+                },
+                {
+                  "id": "lun-vs1-5",
+                  "text": "1 fruta de postre",
+                  "checked": false
+                }
+              ]
+            },
+            {
+              "id": "dinner-vs1",
+              "type": "dinner",
+              "title": "Cena ligera — SIN sal",
+              "cookingMethod": "plancha",
+              "estimatedKcal": 500,
+              "checked": false,
+              "subItems": [
+                {
+                  "id": "din-vs1-1",
+                  "text": "200 g pescado blanco plancha (sin sal)",
+                  "checked": false
+                },
+                {
+                  "id": "din-vs1-2",
+                  "text": "Ensalada diuretica: lechuga + pepino + apio",
+                  "checked": false
+                },
+                {
+                  "id": "din-vs1-3",
+                  "text": "1 cda aceite oliva + limon",
+                  "checked": false
+                },
+                {
+                  "id": "din-vs1-4",
                   "text": "1 yogur natural 0%",
                   "checked": false
                 }
@@ -5447,91 +5654,91 @@
         },
         {
           "date": "2026-06-16",
-          "dayName": "Domingo",
+          "dayName": "Martes",
           "estimatedDailyKcal": 1250,
           "alcoholQuota": 0,
           "specialNote": "VERSE SECO dia 2. Sin sal, sin embutidos, sin alcohol. Verduras diureticas. Beber 3+ litros.",
           "blocks": [
             {
-              "id": "workout-dom-6",
+              "id": "workout-vs2",
               "type": "workout",
               "title": "Descanso activo",
-              "description": "Sin entrenamiento. Paseo suave si apetece.",
+              "description": "Sin entrenamiento.",
               "checked": false,
               "subItems": [
                 {
-                  "id": "w-dom-6-1",
-                  "text": "Paseo opcional 30-40 min muy suave",
+                  "id": "w-vs2-1",
+                  "text": "Paseo muy suave 20-30 min (opcional)",
                   "checked": false
                 },
                 {
-                  "id": "w-dom-6-2",
+                  "id": "w-vs2-2",
                   "text": "Estiramientos suaves",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "breakfast-dom-6",
+              "id": "breakfast-vs2",
               "type": "breakfast",
-              "title": "Desayuno ligero proteico — SIN sal",
+              "title": "Desayuno ligero — SIN sal",
               "estimatedKcal": 250,
               "checked": false,
               "subItems": [
                 {
-                  "id": "des-dom-6-1",
+                  "id": "des-vs2-1",
                   "text": "2 huevos revueltos (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "des-dom-6-2",
+                  "id": "des-vs2-2",
                   "text": "1 fruta (manzana o kiwi)",
                   "checked": false
                 },
                 {
-                  "id": "des-dom-6-3",
+                  "id": "des-vs2-3",
                   "text": "Cafe",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "lunch-dom-6",
+              "id": "lunch-vs2",
               "type": "lunch",
-              "title": "Proteina + verdura diuretica — SIN sal anadida",
+              "title": "Proteina + verduras diureticas — SIN sal",
               "cookingMethod": "plancha",
               "estimatedKcal": 600,
               "checked": false,
               "subItems": [
                 {
-                  "id": "lun-dom-6-1",
-                  "text": "160 g pechuga pollo o merluza plancha (sin sal)",
+                  "id": "lun-vs2-1",
+                  "text": "160 g pollo o lubina plancha (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "lun-dom-6-2",
-                  "text": "Esparragos + pepino + apio (crudos o al vapor)",
+                  "id": "lun-vs2-2",
+                  "text": "Esparragos + apio + pepino al vapor",
                   "checked": false
                 },
                 {
-                  "id": "lun-dom-6-3",
-                  "text": "50 g arroz integral",
+                  "id": "lun-vs2-3",
+                  "text": "40 g arroz integral",
                   "checked": false
                 },
                 {
-                  "id": "lun-dom-6-4",
-                  "text": "1 cda aceite oliva + limon + hierbas sin sal",
+                  "id": "lun-vs2-4",
+                  "text": "1 cda aceite oliva + limon + hierbas",
                   "checked": false
                 },
                 {
-                  "id": "lun-dom-6-5",
+                  "id": "lun-vs2-5",
                   "text": "1 fruta de postre",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "dinner-dom-6",
+              "id": "dinner-vs2",
               "type": "dinner",
               "title": "Cena ligera — SIN sal",
               "cookingMethod": "plancha",
@@ -5539,22 +5746,22 @@
               "checked": false,
               "subItems": [
                 {
-                  "id": "din-dom-6-1",
-                  "text": "150 g pechuga pollo o pescado blanco (sin sal)",
+                  "id": "din-vs2-1",
+                  "text": "150 g merluza o pavo plancha (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "din-dom-6-2",
-                  "text": "Ensalada diuretica: lechuga + pepino + apio + tomate",
+                  "id": "din-vs2-2",
+                  "text": "Ensalada diuretica: lechuga + pepino + apio",
                   "checked": false
                 },
                 {
-                  "id": "din-dom-6-3",
+                  "id": "din-vs2-3",
                   "text": "1 cda aceite oliva + limon",
                   "checked": false
                 },
                 {
-                  "id": "din-dom-6-4",
+                  "id": "din-vs2-4",
                   "text": "1 yogur natural 0%",
                   "checked": false
                 }
@@ -5568,76 +5775,76 @@
         },
         {
           "date": "2026-06-17",
-          "dayName": "Lunes",
+          "dayName": "Miercoles",
           "estimatedDailyKcal": 1200,
           "alcoholQuota": 0,
-          "specialNote": "VERSE SECO dia 3 — CERO SAL. Ultima sesion fuerza tren superior (ligera, congestion final). El pump de hoy + baja retencion = mejor version estetica manana en Roquetas.",
+          "specialNote": "VERSE SECO dia 3 — CERO SAL. Ultima sesion fuerza tren superior (ligera, congestion). El pump de hoy + baja retencion = mejor version estetica manana.",
           "blocks": [
             {
-              "id": "workout-lun-7",
+              "id": "workout-vs3",
               "type": "workout",
               "title": "Fuerza tren superior LIGERA — congestion final (30 min)",
-              "description": "No buscar fallo muscular. Objetivo: activar el musculo para congestion visible manana.",
+              "description": "No al fallo. Objetivo: activar musculo para congestion visible manana.",
               "checked": false,
               "subItems": [
                 {
-                  "id": "w-lun-7-1",
+                  "id": "w-vs3-1",
                   "text": "Dominadas: 3 series (no al fallo)",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-2",
+                  "id": "w-vs3-2",
                   "text": "Press pecho mancuernas 4 kg: 3 x 15",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-3",
+                  "id": "w-vs3-3",
                   "text": "Aperturas 4 kg: 3 x 15",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-4",
+                  "id": "w-vs3-4",
                   "text": "Remo mancuerna: 3 x 12 por lado",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-5",
+                  "id": "w-vs3-5",
                   "text": "Elevaciones laterales 4 kg: 3 x 15",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-6",
-                  "text": "Curl biceps: 3 x 15 (congestion brazo)",
+                  "id": "w-vs3-6",
+                  "text": "Curl biceps: 3 x 15 (congestion brazos)",
                   "checked": false
                 },
                 {
-                  "id": "w-lun-7-7",
+                  "id": "w-vs3-7",
                   "text": "Plancha frontal: 3 x 45s",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "breakfast-lun-7",
+              "id": "breakfast-vs3",
               "type": "breakfast",
-              "title": "Desayuno minimo — SIN sal",
+              "title": "Desayuno minimo — CERO SAL",
               "estimatedKcal": 200,
               "checked": false,
               "subItems": [
                 {
-                  "id": "des-lun-7-1",
+                  "id": "des-vs3-1",
                   "text": "Cafe",
                   "checked": false
                 },
                 {
-                  "id": "des-lun-7-2",
-                  "text": "1 fruta (manzana o kiwi)",
+                  "id": "des-vs3-2",
+                  "text": "1 fruta",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "lunch-lun-7",
+              "id": "lunch-vs3",
               "type": "lunch",
               "title": "Proteina magra + esparragos — CERO SAL",
               "cookingMethod": "plancha",
@@ -5645,34 +5852,34 @@
               "checked": false,
               "subItems": [
                 {
-                  "id": "lun-lun-7-1",
+                  "id": "lun-vs3-1",
                   "text": "160 g pechuga pavo o merluza plancha (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "lun-lun-7-2",
-                  "text": "Esparragos verdes + apio + pepino al vapor",
+                  "id": "lun-vs3-2",
+                  "text": "Esparragos + apio + pepino al vapor",
                   "checked": false
                 },
                 {
-                  "id": "lun-lun-7-3",
+                  "id": "lun-vs3-3",
                   "text": "40 g arroz integral",
                   "checked": false
                 },
                 {
-                  "id": "lun-lun-7-4",
+                  "id": "lun-vs3-4",
                   "text": "1 cda aceite oliva + limon + ajo (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "lun-lun-7-5",
+                  "id": "lun-vs3-5",
                   "text": "1 fruta de postre",
                   "checked": false
                 }
               ]
             },
             {
-              "id": "dinner-lun-7",
+              "id": "dinner-vs3",
               "type": "dinner",
               "title": "Cena muy ligera — CERO SAL",
               "cookingMethod": "plancha",
@@ -5680,22 +5887,22 @@
               "checked": false,
               "subItems": [
                 {
-                  "id": "din-lun-7-1",
+                  "id": "din-vs3-1",
                   "text": "150 g merluza plancha (sin sal)",
                   "checked": false
                 },
                 {
-                  "id": "din-lun-7-2",
+                  "id": "din-vs3-2",
                   "text": "Ensalada diuretica: pepino + apio + lechuga",
                   "checked": false
                 },
                 {
-                  "id": "din-lun-7-3",
+                  "id": "din-vs3-3",
                   "text": "1 cda aceite oliva + limon",
                   "checked": false
                 },
                 {
-                  "id": "din-lun-7-4",
+                  "id": "din-vs3-4",
                   "text": "1 yogur natural 0%",
                   "checked": false
                 }
@@ -5709,24 +5916,24 @@
         },
         {
           "date": "2026-06-18",
-          "dayName": "Martes",
-          "specialNote": "DIA DE ROQUETAS. Llegaste. 4 semanas de trabajo. Disfruta.",
+          "dayName": "Jueves",
+          "specialNote": "DIA DE ROQUETAS. Llegaste. 6 semanas de trabajo. Disfruta.",
           "blocks": [
             {
               "id": "workout-roquetas",
               "type": "workout",
               "title": "Roquetas — Dia objetivo",
-              "description": "75.0 → ~73.0 kg. Tren superior definido. Base sub-45 en marcha.",
+              "description": "75.0 a ~73.0 kg. Tren superior definido. Base sub-45 en marcha.",
               "checked": false,
               "subItems": [
                 {
                   "id": "w-roq-1",
-                  "text": "Hidratacion normal — el protocolo de ayer da resultado hoy",
+                  "text": "Hidratacion normal",
                   "checked": false
                 },
                 {
                   "id": "w-roq-2",
-                  "text": "Desayuno ligero proteico (no hinchar el estomago)",
+                  "text": "Desayuno ligero proteico",
                   "checked": false
                 },
                 {
@@ -5736,7 +5943,7 @@
                 },
                 {
                   "id": "w-roq-4",
-                  "text": "Esta noche: celebrar con mesura. Lo has ganado",
+                  "text": "Esta noche: celebrar. Lo has ganado",
                   "checked": false
                 }
               ]

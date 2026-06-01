@@ -200,7 +200,7 @@ export default function Progreso() {
         {/* S5 en curso */}
         <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S5 — 3-9 jun 🏖️</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S5 — 1-7 jun 🏖️</p>
             <p className="text-xs text-gray-400">Inicio: 75.0 kg · Objetivo: 74.2-74.6 kg</p>
             <p className="text-xs text-amber-400">Roquetas + sub-45 · Tren superior reintroducido</p>
           </div>
@@ -210,8 +210,8 @@ export default function Progreso() {
         {/* S6 próxima */}
         <div className="flex items-center justify-between py-2">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S6 — 10-18 jun 🎯</p>
-            <p className="text-xs text-gray-400">Test 10K · Verse seco 15-17 jun · Roquetas 18 jun</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">S6 — 8-18 jun 🎯</p>
+            <p className="text-xs text-gray-400">Test 10K (jue 11) · Verse seco lun-mié 15-17 · Roquetas jue 18</p>
             <p className="text-xs text-amber-400">Objetivo: 73-73.5 kg</p>
           </div>
           <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">Próxima</span>
