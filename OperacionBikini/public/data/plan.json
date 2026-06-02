@@ -3688,6 +3688,13 @@
           "alcoholQuota": 0,
           "blocks": [
             {
+              "id": "weighin-mar-5",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas. Inicio bloque Roquetas.",
+              "checked": false
+            },
+            {
               "id": "workout-mar-5",
               "type": "workout",
               "title": "Carrera Z2 reactivacion — 30-40 min",
@@ -3974,6 +3981,13 @@
           "alcoholQuota": 0,
           "specialNote": "Dia de calidad. Tempo a 5:00-5:10/km = trabajo clave para base sub-45.",
           "blocks": [
+            {
+              "id": "weighin-jue-5",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas.",
+              "checked": false
+            },
             {
               "id": "workout-jue-5",
               "type": "workout",
@@ -4677,6 +4691,13 @@
           "estimatedDailyKcal": 1300,
           "alcoholQuota": 0,
           "blocks": [
+            {
+              "id": "weighin-mar-6",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas. Inicio semana 2.",
+              "checked": false
+            },
             {
               "id": "workout-mar-6",
               "type": "workout",
@@ -5699,6 +5720,13 @@
           "waterTarget": 14,
           "specialNote": "VERSE SECO dia 2. Sin sal, sin embutidos, sin alcohol. HOY: tren inferior ligero + core (flotadores).",
           "blocks": [
+            {
+              "id": "weighin-vs2",
+              "type": "weighIn",
+              "title": "Pesaje matutino",
+              "description": "Primera hora, en ayunas. Referencia antes del protocolo verse seco.",
+              "checked": false
+            },
             {
               "id": "workout-vs2",
               "type": "workout",

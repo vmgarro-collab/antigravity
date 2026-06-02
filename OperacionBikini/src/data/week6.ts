@@ -91,6 +91,12 @@ export const week6: Week = {
       alcoholQuota: 0,
       blocks: [
         {
+          id: 'weighin-mar-6', type: 'weighIn',
+          title: 'Pesaje matutino',
+          description: 'Primera hora, en ayunas. Inicio semana 2.',
+          checked: false,
+        },
+        {
           id: 'workout-mar-6', type: 'workout',
           title: 'Carrera Z2 — 45 min',
           description: 'FC < 145 ppm, ritmo libre ~5:40/km. 5 min más que semana 1.',
@@ -556,6 +562,12 @@ export const week6: Week = {
       waterTarget: 14,
       specialNote: '🧂 VERSE SECO día 2. Sin sal, sin embutidos, sin alcohol. Verduras diuréticas. HOY: tren inferior ligero + core (flotadores).',
       blocks: [
+        {
+          id: 'weighin-vs2', type: 'weighIn',
+          title: 'Pesaje matutino',
+          description: 'Primera hora, en ayunas. Referencia antes del protocolo verse seco.',
+          checked: false,
+        },
         {
           id: 'workout-vs2', type: 'workout',
           title: 'Fuerza tren inferior ligero + core (35 min)',

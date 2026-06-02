@@ -75,6 +75,12 @@ export const week5: Week = {
       alcoholQuota: 0,
       blocks: [
         {
+          id: 'weighin-mar-5', type: 'weighIn',
+          title: 'Pesaje matutino',
+          description: 'Primera hora, en ayunas. Inicio del nuevo bloque Roquetas.',
+          checked: false,
+        },
+        {
           id: 'workout-mar-5', type: 'workout',
           title: 'Carrera Z2 reactivación — 30-40 min',
           description: 'Si piernas muy cargadas: acortar a 25 min o bici suave. Sin intensidad.',
@@ -207,6 +213,12 @@ export const week5: Week = {
       alcoholQuota: 0,
       specialNote: 'Día de calidad. Tempo a 5:00-5:10/km = trabajo clave para base sub-45.',
       blocks: [
+        {
+          id: 'weighin-jue-5', type: 'weighIn',
+          title: 'Pesaje matutino',
+          description: 'Primera hora, en ayunas.',
+          checked: false,
+        },
         {
           id: 'workout-jue-5', type: 'workout',
           title: 'Carrera calidad — Tempo (40 min)',
