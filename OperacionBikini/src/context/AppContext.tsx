@@ -1,22 +1,24 @@
 import { createContext, useContext, useEffect, useReducer, useRef, type ReactNode } from 'react'
-import type { AppState, Week, ShoppingCategory } from '../types'
-import { week1, week1ShoppingList } from '../data/week1'
-import { week3, week3ShoppingList } from '../data/week3'
-import { week4, week4ShoppingList } from '../data/week4'
-import { week5, week5ShoppingList } from '../data/week5'
-import { week6, week6ShoppingList } from '../data/week6'
+import type { AppState, Week, AeroSession } from '../types'
+import { week1 } from '../data/week1'
+import { week3 } from '../data/week3'
+import { week4 } from '../data/week4'
+import { week5 } from '../data/week5'
+import { week6 } from '../data/week6'
 import { loadState, saveState } from '../utils/storage'
 
+// Sesiones aeróbicas históricas (pre-cargadas)
+const INITIAL_AERO: AeroSession[] = [
+  { id: 'aero-1', date: '2026-05-17', paceMinKm: 6.0,   heartRate: 138, type: 'z2',     durationMin: 48, distanceKm: 8,   notes: '8 km Z2' },
+  { id: 'aero-2', date: '2026-05-20', paceMinKm: 5.75,  heartRate: 138, type: 'z2',     durationMin: 35, distanceKm: 6,   notes: '6 km Z2' },
+  { id: 'aero-3', date: '2026-06-02', paceMinKm: 5.867, heartRate: 141, type: 'z2',     durationMin: 35, distanceKm: 6,   notes: 'Z2 reactivación' },
+  { id: 'aero-4', date: '2026-06-04', paceMinKm: 5.05,  heartRate: 153, type: 'quality', durationMin: 40, distanceKm: 7.2, notes: 'Tempo 7.2km, bloque 20\' a 5:03/km @153' },
+]
+
 const fallbackState: AppState = {
-  user: {
-    startWeight: 79,
-    targetWeight: 72.5,
-    height: 1.72,
-    startDate: '2026-05-04',
-  },
   weeks: [week1, week3, week4, week5, week6],
   weights: [],
-  shoppingList: [week1ShoppingList, week3ShoppingList, week4ShoppingList, week5ShoppingList, week6ShoppingList],
+  aeroSessions: INITIAL_AERO,
   darkMode: null,
 }
 
@@ -56,9 +58,7 @@ type Action =
   | { type: 'SET_WEIGHT'; date: string; kg: number }
   | { type: 'SET_NOTES'; date: string; notes: string }
   | { type: 'CLOSE_DAY'; date: string }
-  | { type: 'TOGGLE_SHOPPING_ITEM'; week: number; itemId: string }
-  | { type: 'ADD_SHOPPING_ITEM'; week: number; name: string; category: ShoppingCategory }
-  | { type: 'RESET_SHOPPING'; week: number }
+  | { type: 'ADD_AERO_SESSION'; session: AeroSession }
   | { type: 'SET_DARK_MODE'; value: boolean | null }
   | { type: 'IMPORT_STATE'; state: AppState }
   | { type: 'LOAD_PLAN'; weeks: Week[] }
@@ -115,43 +115,11 @@ function reducer(state: AppState, action: Action): AppState {
     case 'CLOSE_DAY':
       return updateDay(state, action.date, d => ({ ...d, closed: true }))
 
-    case 'TOGGLE_SHOPPING_ITEM':
+    case 'ADD_AERO_SESSION':
       return {
         ...state,
-        shoppingList: state.shoppingList.map(sl =>
-          sl.week === action.week
-            ? { ...sl, items: sl.items.map(i => i.id === action.itemId ? { ...i, checked: !i.checked } : i) }
-            : sl
-        ),
-      }
-
-    case 'ADD_SHOPPING_ITEM':
-      return {
-        ...state,
-        shoppingList: state.shoppingList.map(sl =>
-          sl.week === action.week
-            ? {
-                ...sl,
-                items: [...sl.items, {
-                  id: `custom-${Date.now()}`,
-                  category: action.category,
-                  name: action.name,
-                  checked: false,
-                  custom: true,
-                }],
-              }
-            : sl
-        ),
-      }
-
-    case 'RESET_SHOPPING':
-      return {
-        ...state,
-        shoppingList: state.shoppingList.map(sl =>
-          sl.week === action.week
-            ? { ...sl, items: sl.items.filter(i => !i.custom).map(i => ({ ...i, checked: false })) }
-            : sl
-        ),
+        aeroSessions: [...state.aeroSessions.filter(s => s.id !== action.session.id), action.session]
+          .sort((a, b) => a.date.localeCompare(b.date)),
       }
 
     case 'SET_DARK_MODE':
@@ -178,7 +146,16 @@ const AppContext = createContext<AppContextValue | null>(null)
 const PLAN_URL = 'https://raw.githubusercontent.com/vmgarro-collab/antigravity/main/OperacionBikini/public/data/plan.json'
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, null, () => loadState() ?? fallbackState)
+  const [state, dispatch] = useReducer(reducer, null, () => {
+    const saved = loadState()
+    if (!saved) return fallbackState
+    // Migrar estado antiguo que podría no tener aeroSessions
+    return {
+      ...fallbackState,
+      ...saved,
+      aeroSessions: saved.aeroSessions?.length ? saved.aeroSessions : INITIAL_AERO,
+    } as AppState
+  })
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -187,7 +164,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
   }, [state])
 
-  // Cargar plan remoto para tener datos siempre actualizados sin rebuild
+  // Cargar plan remoto
   useEffect(() => {
     fetch(`${PLAN_URL}?t=${Date.now()}`)
       .then(r => r.json())

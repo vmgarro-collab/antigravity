@@ -4,11 +4,11 @@ import { useDay } from '../hooks/useDay'
 import { useAppContext } from '../context/AppContext'
 import { localDateStr } from '../utils/storage'
 import WorkoutBlock from '../components/blocks/WorkoutBlock'
-import MealBlock from '../components/blocks/MealBlock'
-import WaterBlock from '../components/blocks/WaterBlock'
 import WeighInBlock from '../components/blocks/WeighInBlock'
 import SimpleStrategyBlock from '../components/blocks/SimpleStrategyBlock'
 import type { Block } from '../types'
+
+const MEAL_TYPES = new Set(['breakfast', 'lunch', 'dinner', 'snack'])
 
 const DAYS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
 const MONTHS_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -47,16 +47,18 @@ export default function Hoy() {
   }
 
   const renderBlock = (block: Block) => {
+    if (MEAL_TYPES.has(block.type)) return null   // comidas eliminadas
     if (block.type === 'workout') return <WorkoutBlock key={block.id} block={block} date={today} />
     if (block.type === 'weighIn') return <WeighInBlock key={block.id} date={today} currentKg={weight?.kg} />
     if (block.type === 'pre_match' || block.type === 'post_match_strategy') {
       return <SimpleStrategyBlock key={block.id} block={block} date={today} />
     }
-    return <MealBlock key={block.id} block={block} date={today} />
+    return null
   }
 
-  const totalBlocks = day.blocks.length
-  const checkedBlocks = day.blocks.filter(b => b.checked).length
+  const trainingBlocks = day.blocks.filter(b => !MEAL_TYPES.has(b.type))
+  const totalBlocks = trainingBlocks.length
+  const checkedBlocks = trainingBlocks.filter(b => b.checked).length
   const progress = totalBlocks > 0 ? Math.round((checkedBlocks / totalBlocks) * 100) : 0
 
   return (
@@ -83,11 +85,15 @@ export default function Hoy() {
         </div>
       )}
 
-      {/* Bloques */}
+      {/* Bloques de entreno */}
       {day.blocks.map(renderBlock)}
 
-      {/* Agua */}
-      <WaterBlock date={today} glasses={day.waterGlasses} />
+      {/* Nota fija de nutrición */}
+      <div className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 p-4">
+        <p className="text-xs text-gray-400 dark:text-gray-500 italic leading-relaxed">
+          Come suficiente para sostener los entrenos. Comidas completas, hidratación, 7-8h de sueño. En carrera, el combustible es lo que permite mejorar.
+        </p>
+      </div>
 
       {/* Notas */}
       <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">

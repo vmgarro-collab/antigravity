@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import { Calendar, ShoppingCart, TrendingUp, Sun } from 'lucide-react'
+import { Calendar, TrendingUp, Sun } from 'lucide-react'
 import Hoy from './pages/Hoy'
 import Semana from './pages/Semana'
-import Compra from './pages/Compra'
 import Progreso from './pages/Progreso'
 
-type Tab = 'hoy' | 'semana' | 'compra' | 'progreso'
+type Tab = 'hoy' | 'semana' | 'progreso'
 
 const tabs: { id: Tab; label: string; icon: typeof Sun }[] = [
-  { id: 'hoy', label: 'Hoy', icon: Sun },
-  { id: 'semana', label: 'Semana', icon: Calendar },
-  { id: 'compra', label: 'Compra', icon: ShoppingCart },
+  { id: 'hoy',     label: 'Hoy',     icon: Sun },
+  { id: 'semana',  label: 'Semana',  icon: Calendar },
   { id: 'progreso', label: 'Progreso', icon: TrendingUp },
 ]
 
@@ -20,9 +18,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col max-w-lg mx-auto">
       <main className="flex-1 overflow-y-auto pb-20">
-        {activeTab === 'hoy' && <Hoy />}
-        {activeTab === 'semana' && <Semana />}
-        {activeTab === 'compra' && <Compra />}
+        {activeTab === 'hoy'      && <Hoy />}
+        {activeTab === 'semana'   && <Semana />}
         {activeTab === 'progreso' && <Progreso />}
       </main>
 

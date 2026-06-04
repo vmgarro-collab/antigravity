@@ -1,21 +1,13 @@
-export type ShoppingCategory =
-  | 'proteinas'
-  | 'verduras-frutas'
-  | 'carbohidratos'
-  | 'lacteos-huevos'
-  | 'despensa'
-
-export interface ShoppingItem {
+// Sesión aeróbica registrada manualmente (Z2 o calidad)
+export interface AeroSession {
   id: string
-  category: ShoppingCategory
-  name: string
-  checked: boolean
-  custom?: boolean
-}
-
-export interface ShoppingList {
-  week: number
-  items: ShoppingItem[]
+  date: string           // "2026-05-17"
+  paceMinKm: number      // minutos decimales, e.g. 5.75 = 5:45/km
+  heartRate: number      // ppm media
+  type: 'z2' | 'quality' | 'long'
+  durationMin?: number
+  distanceKm?: number
+  notes?: string         // e.g. "tempo 7.2km bloque 20' a 5:03"
 }
 
 export interface SubItem {
@@ -58,14 +50,8 @@ export interface Week {
 }
 
 export interface AppState {
-  user: {
-    startWeight: number
-    targetWeight: number
-    height: number
-    startDate: string
-  }
   weeks: Week[]
-  weights: { date: string; kg: number }[]
-  shoppingList: ShoppingList[]
+  weights: { date: string; kg: number }[]   // pesajes opcionales, sin objetivo
+  aeroSessions: AeroSession[]               // historial eficiencia aeróbica
   darkMode: boolean | null
 }

@@ -4,10 +4,10 @@ import type { Day, Block } from '../../types'
 import { useAppContext } from '../../context/AppContext'
 import { localDateStr } from '../../utils/storage'
 import WorkoutBlock from '../blocks/WorkoutBlock'
-import MealBlock from '../blocks/MealBlock'
-import WaterBlock from '../blocks/WaterBlock'
 import WeighInBlock from '../blocks/WeighInBlock'
 import SimpleStrategyBlock from '../blocks/SimpleStrategyBlock'
+
+const MEAL_TYPES = new Set(['breakfast', 'lunch', 'dinner', 'snack'])
 
 interface Props {
   day: Day | null
@@ -28,12 +28,13 @@ export default function DayDrawer({ day, onClose }: Props) {
 
   const renderBlock = (block: Block) => {
     if (!day) return null
+    if (MEAL_TYPES.has(block.type)) return null   // comidas eliminadas
     if (block.type === 'workout') return <WorkoutBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
     if (block.type === 'weighIn') return <WeighInBlock key={block.id} date={day.date} currentKg={weight?.kg} readOnly={isReadOnly} />
     if (block.type === 'pre_match' || block.type === 'post_match_strategy') {
       return <SimpleStrategyBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
     }
-    return <MealBlock key={block.id} block={block} date={day.date} readOnly={isReadOnly} />
+    return null
   }
 
   return (
@@ -63,7 +64,6 @@ export default function DayDrawer({ day, onClose }: Props) {
             </div>
           )}
           {day?.blocks.map(renderBlock)}
-          {day && <WaterBlock date={day.date} glasses={day.waterGlasses} readOnly={isReadOnly} />}
           {day?.notes && (
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4">
               <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Notas</p>
