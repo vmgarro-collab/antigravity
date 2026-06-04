@@ -355,7 +355,7 @@ export const week1: Week = {
   ],
 }
 
-export const week1ShoppingList: ShoppingList = {
+export const week1ShoppingList = {
   week: 1,
   items: [
     { id: 'p1', category: 'proteinas', name: 'Salmón fresco (200 g)', checked: false },

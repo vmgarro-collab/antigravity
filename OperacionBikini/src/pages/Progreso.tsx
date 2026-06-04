@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Download, Upload, Sun, Moon, TrendingUp, Zap, Flame, Activity } from 'lucide-react'
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  ReferenceLine, CartesianGrid, Legend,
+  ReferenceLine, CartesianGrid,
 } from 'recharts'
 import { useAppContext } from '../context/AppContext'
 import { exportJSON, importJSON, localDateStr } from '../utils/storage'
@@ -164,10 +164,7 @@ export default function Progreso() {
               <Tooltip
                 contentStyle={{ background: '#1f2937', border: 'none', borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: '#9ca3af' }}
-                formatter={(v: number, _: string, entry: { payload?: { hr?: number } }) => [
-                  `${fmtPace(v)}/km @ ${entry.payload?.hr ?? '?'} ppm`,
-                  'Ritmo'
-                ]}
+                formatter={(v: number) => [`${fmtPace(v)}/km`, 'Ritmo']}
               />
               <ReferenceLine y={5.75} stroke="#22c55e" strokeDasharray="4 2" strokeWidth={1} label={{ value: 'sub-45 target', fill: '#22c55e', fontSize: 10, position: 'insideTopRight' }} />
               <Line type="monotone" dataKey="pace" stroke="#22c55e" strokeWidth={2.5} dot={{ fill: '#22c55e', r: 4 }} />
