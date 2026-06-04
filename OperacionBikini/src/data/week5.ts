@@ -80,7 +80,7 @@ export const week5: Week = {
     {
       date: '2026-06-04',
       dayName: 'Jueves',
-      specialNote: '✅ Sesión de calidad completada. Tempo 7.2 km, bloque 20' a 5:03/km @153 ppm.',
+      specialNote: '✅ Sesión de calidad completada. Tempo 7.2 km, bloque 20 min a 5:03/km @153 ppm.',
       blocks: [
         {
           id: 'weighin-jue-5', type: 'weighIn',
@@ -91,7 +91,7 @@ export const week5: Week = {
         {
           id: 'workout-jue-5', type: 'workout',
           title: '✅ Calidad — Tempo 7.2 km (HECHO)',
-          description: 'Bloque 20' a 5:03/km @153 ppm. Sesión registrada.',
+          description: 'Bloque 20 min a 5:03/km @153 ppm. Sesión registrada.',
           checked: true,
           subItems: [
             { id: 'w-jue-5-1', text: '10 min calentamiento trote suave', checked: true },
@@ -100,7 +100,7 @@ export const week5: Week = {
           ],
         },
       ],
-      notes: 'Tempo completado. 7.2km, bloque 20' a 5:03/km, FC 153 ppm.', waterGlasses: 0, closed: true,
+      notes: 'Tempo completado. 7.2km, bloque 20 min a 5:03/km, FC 153 ppm.', waterGlasses: 0, closed: true,
     },
 
     {

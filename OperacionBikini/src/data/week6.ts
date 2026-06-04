@@ -105,7 +105,7 @@ export const week6: Week = {
         {
           id: 'workout-jue-6', type: 'workout',
           title: 'Series 5×1000m @ ~4:30/km',
-          description: '15' calentamiento + 5×1000m a 4:25-4:35/km con 2' trote entre + 10' suave.',
+          description: '15 min calentamiento + 5×1000m a 4:25-4:35/km con 2 min trote entre + 10 min suave.',
           checked: false,
           subItems: [
             { id: 'w-jue-6-1', text: '15 min calentamiento trote suave + movilidad + 3-4 acelerones 20s', checked: false },
