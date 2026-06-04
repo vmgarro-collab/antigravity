@@ -164,7 +164,8 @@ export default function Progreso() {
               <Tooltip
                 contentStyle={{ background: '#1f2937', border: 'none', borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: '#9ca3af' }}
-                formatter={(v: number) => [`${fmtPace(v)}/km`, 'Ritmo']}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                formatter={(v: any) => `${fmtPace(Number(v))}/km`}
               />
               <ReferenceLine y={5.75} stroke="#22c55e" strokeDasharray="4 2" strokeWidth={1} label={{ value: 'sub-45 target', fill: '#22c55e', fontSize: 10, position: 'insideTopRight' }} />
               <Line type="monotone" dataKey="pace" stroke="#22c55e" strokeWidth={2.5} dot={{ fill: '#22c55e', r: 4 }} />
