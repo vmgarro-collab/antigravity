@@ -1,4 +1,4 @@
-import type { Week, ShoppingList } from '../types'
+import type { Week } from '../types'
 
 export const week1: Week = {
   weekNumber: 1,
