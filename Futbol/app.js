@@ -63,7 +63,7 @@ async function getClasificacion(jornada) {
     return res.json();
   }
   const file = jornada ? `data/resultados_j${jornada}.json` : 'data/clasificacion.json';
-  const res = await fetch(file);
+  const res = await fetch(`${file}?t=${Date.now()}`);
   if (!res.ok) throw new Error(`HTTP ${res.status} (${file})`);
   return res.json();
 }
@@ -76,7 +76,7 @@ async function getResultados(jornada) {
     return res.json();
   }
   const file = jornada ? `data/resultados_j${jornada}.json` : 'data/resultados.json';
-  const res = await fetch(file);
+  const res = await fetch(`${file}?t=${Date.now()}`);
   if (!res.ok) throw new Error(`HTTP ${res.status} (${file})`);
   return res.json();
 }
@@ -88,7 +88,7 @@ async function getGoleadores() {
     const data = await res.json();
     return data.goleadores || [];
   }
-  const res = await fetch('data/goleadores.json');
+  const res = await fetch(`data/goleadores.json?t=${Date.now()}`);
   if (!res.ok) throw new Error(`HTTP ${res.status} (data/goleadores.json)`);
   const data = await res.json();
   return data.goleadores || [];
@@ -97,6 +97,20 @@ async function getGoleadores() {
 // ─── State ────────────────────────────────────────────────────────────────────
 let jornadas   = [];
 let jornadaIdx = 0;
+
+// ─── Refresh button ───────────────────────────────────────────────────────────
+function setRefreshing(on) {
+  const btn = document.getElementById('btn-refresh');
+  if (!btn) return;
+  btn.disabled = on;
+  btn.classList.toggle('spinning', on);
+}
+
+async function refreshData() {
+  setRefreshing(true);
+  await loadAll();
+  setRefreshing(false);
+}
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 async function init() {
@@ -122,7 +136,7 @@ async function loadAll() {
       getGoleadores(),
       LOCAL
         ? fetch(`/api/resultados?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}`).then(r => r.json()).then(d => d.partidos || [])
-        : fetch('data/todos_partidos.json').then(r => r.ok ? r.json() : []),
+        : fetch(`data/todos_partidos.json?t=${Date.now()}`).then(r => r.ok ? r.json() : []),
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
