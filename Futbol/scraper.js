@@ -2,11 +2,11 @@
 'use strict';
 
 const BASE_URL = 'https://www.rffm.es';
-const TEMPORADA = '21';   // 2025-2026 season
+const TEMPORADA = '22';   // 2026-2027 season
 const TIPOJUEGO = '2';    // Fútbol-7
 
 // Names to match from /api/competitions list (case-insensitive substring match)
-const BENJAMIN_KEYWORDS = ['BENJAM'];
+const ALEVIN_KEYWORDS = ['PRIMERA ALEV'];
 
 const _cache = new Map();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
@@ -23,7 +23,7 @@ function cached(key, fn) {
 async function fetchJson(path) {
   const url = `${BASE_URL}${path}`;
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BenjaminesApp/1.0)' }
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AlevinesApp/1.0)' }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   return res.json();
@@ -32,7 +32,7 @@ async function fetchJson(path) {
 async function fetchNextData(path) {
   const url = `${BASE_URL}${path}`;
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BenjaminesApp/1.0)' }
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AlevinesApp/1.0)' }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   const html = await res.text();
@@ -41,7 +41,7 @@ async function fetchNextData(path) {
   return JSON.parse(match[1]).props.pageProps;
 }
 
-// Returns all Benjamin F7 grupos across all competitions
+// Returns all Primera Alevín F7 grupos across all competitions
 async function getGrupos() {
   return cached('grupos', async () => {
     // 1. Fetch all F7 competitions
@@ -49,15 +49,15 @@ async function getGrupos() {
       `/api/competitions?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}`
     );
 
-    // 2. Filter to Benjamin competitions only (excluding Prebenjamin)
-    const benjComps = allComps.filter(c => {
+    // 2. Filter to Primera Alevín competitions only
+    const alevinComps = allComps.filter(c => {
       const upper = c.nombre.toUpperCase();
-      return BENJAMIN_KEYWORDS.some(kw => upper.includes(kw)) && !upper.includes('PREBENJAM');
+      return ALEVIN_KEYWORDS.some(kw => upper.includes(kw)) && !upper.includes('FEMENINO') && !upper.includes('AUTONOMICA');
     });
 
     // 3. For each competition, fetch its groups
     const results = await Promise.all(
-      benjComps.map(async (comp) => {
+      alevinComps.map(async (comp) => {
         try {
           const groups = await fetchJson(
             `/api/groups?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${comp.codigo}`
