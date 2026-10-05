@@ -1,11 +1,11 @@
-// Futbol/app.js — Preferente Benjamín F7, Grupo 12
+// Futbol/app.js — Primera Alevín F-7, Grupo 15
 'use strict';
 
 // ─── Config ───────────────────────────────────────────────────────────────────
-const COMPETICION_ID  = '24037779';
-const GRUPO_ID        = '24037790';
+const COMPETICION_ID  = '26738141';
+const GRUPO_ID        = '26738150';
 const LIBERTAD_ID     = '851121';
-const TEMPORADA       = '21';
+const TEMPORADA       = '22';
 const TIPOJUEGO       = '2';
 
 // ─── Head-to-head modal ───────────────────────────────────────────────────────
