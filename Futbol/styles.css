@@ -296,3 +296,25 @@ tr.h2h-draw td { color: var(--text-muted); }
   font-weight: 600;
 }
 .tabla-clasificacion tr.libertad-clasif td.pts { color: var(--accent-green); }
+
+/* Refresh button */
+.btn-refresh {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-refresh:hover { color: var(--accent-blue); }
+.btn-refresh:disabled { cursor: not-allowed; opacity: 0.4; }
+.refresh-icon { width: 16px; height: 16px; }
+.btn-refresh.spinning .refresh-icon {
+  animation: spin 0.7s linear infinite;
+}
