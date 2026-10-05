@@ -5,8 +5,8 @@ const fs   = require('fs');
 const path = require('path');
 const { getClasificacion, getResultados, getGoleadores } = require('./scraper.js');
 
-const COMPETICION_ID = '24037779';
-const GRUPO_ID       = '24037790';
+const COMPETICION_ID = '26738141';
+const GRUPO_ID       = '26738150';
 const DATA_DIR       = path.join(__dirname, 'data');
 
 async function retry(fn, label, attempts = 3) {
