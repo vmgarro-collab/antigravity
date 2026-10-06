@@ -1,7 +1,7 @@
 // Futbol/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'libertad-v4';
+const CACHE = 'libertad-v5';
 const PRECACHE = [
   '/antigravity/Futbol/',
   '/antigravity/Futbol/index.html',
@@ -30,9 +30,12 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Network first para los JSON de datos, cache first para el resto
   const url = new URL(e.request.url);
-  if (url.pathname.includes('/data/')) {
+  const isData = url.pathname.includes('/data/');
+  const isShell = url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+
+  // Network first para datos y archivos de la app (HTML/JS/CSS), cache como fallback
+  if (isData || isShell) {
     e.respondWith(
       fetch(e.request)
         .then(res => {
