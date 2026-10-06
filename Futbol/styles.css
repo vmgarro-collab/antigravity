@@ -301,20 +301,21 @@ tr.h2h-draw td { color: var(--text-muted); }
 .btn-refresh {
   background: none;
   border: none;
-  padding: 6px;
+  padding: 8px;
   cursor: pointer;
   color: var(--text-muted);
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: color 0.2s;
+  min-width: 40px;
+  min-height: 40px;
+  transition: color 0.2s, background 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
-.btn-refresh:hover { color: var(--accent-blue); }
-.btn-refresh:disabled { cursor: not-allowed; opacity: 0.4; }
-.refresh-icon { width: 16px; height: 16px; }
-.btn-refresh.spinning .refresh-icon {
-  animation: spin 0.7s linear infinite;
-}
+.btn-refresh:hover,
+.btn-refresh:active { color: var(--accent-blue); background: rgba(79,172,254,0.1); }
+.btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
+.refresh-icon { width: 20px; height: 20px; }
+.btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
