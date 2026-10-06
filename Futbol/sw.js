@@ -1,7 +1,7 @@
 // Futbol/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'libertad-v3';
+const CACHE = 'libertad-v4';
 const PRECACHE = [
   '/antigravity/Futbol/',
   '/antigravity/Futbol/index.html',
