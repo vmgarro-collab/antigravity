@@ -1,3 +1,148 @@
 {
-  "tabla": []
+  "tabla": [
+    {
+      "pos": 1,
+      "equipo": "ANCORA GALAPAGAR   ",
+      "pj": 1,
+      "pg": 1,
+      "pp": 0,
+      "sg": 3,
+      "sp": null,
+      "pf": 75,
+      "pc": 32,
+      "pts": 3
+    },
+    {
+      "pos": 2,
+      "equipo": "CD KOLBE ",
+      "pj": 1,
+      "pg": 1,
+      "pp": 0,
+      "sg": 3,
+      "sp": null,
+      "pf": 75,
+      "pc": 52,
+      "pts": 3
+    },
+    {
+      "pos": 3,
+      "equipo": "CLUB VOLEIBOL TORRELODONES C",
+      "pj": 1,
+      "pg": 1,
+      "pp": 0,
+      "sg": 3,
+      "sp": null,
+      "pf": 75,
+      "pc": 53,
+      "pts": 3
+    },
+    {
+      "pos": 4,
+      "equipo": "CV GUADARRAMA ",
+      "pj": 1,
+      "pg": 1,
+      "pp": 0,
+      "sg": 3,
+      "sp": 1,
+      "pf": 102,
+      "pc": 85,
+      "pts": 3
+    },
+    {
+      "pos": 5,
+      "equipo": "CV SAN IGNACIO A",
+      "pj": 1,
+      "pg": 1,
+      "pp": 0,
+      "sg": 3,
+      "sp": 1,
+      "pf": 91,
+      "pc": 79,
+      "pts": 3
+    },
+    {
+      "pos": 6,
+      "equipo": "CV COLLADO VILLALBA C ",
+      "pj": 1,
+      "pg": 0,
+      "pp": 1,
+      "sg": 1,
+      "sp": 3,
+      "pf": 79,
+      "pc": 91,
+      "pts": 0
+    },
+    {
+      "pos": 7,
+      "equipo": "B. M. 2 DE MAYO ",
+      "pj": 1,
+      "pg": 0,
+      "pp": 1,
+      "sg": 1,
+      "sp": 3,
+      "pf": 85,
+      "pc": 102,
+      "pts": 0
+    },
+    {
+      "pos": 8,
+      "equipo": "CLUB VOLEIBOL TORRELODONES D",
+      "pj": 1,
+      "pg": 0,
+      "pp": 1,
+      "sg": null,
+      "sp": 3,
+      "pf": 53,
+      "pc": 75,
+      "pts": 0
+    },
+    {
+      "pos": 9,
+      "equipo": "ABV BOADILLA B B ",
+      "pj": 1,
+      "pg": 0,
+      "pp": 1,
+      "sg": null,
+      "sp": 3,
+      "pf": 52,
+      "pc": 75,
+      "pts": 0
+    },
+    {
+      "pos": 10,
+      "equipo": "CV BULLDOGS B B ",
+      "pj": 1,
+      "pg": 0,
+      "pp": 1,
+      "sg": null,
+      "sp": 3,
+      "pf": 32,
+      "pc": 75,
+      "pts": 0
+    },
+    {
+      "pos": 11,
+      "equipo": "BERNADETTE A",
+      "pj": 1,
+      "pg": 0,
+      "pp": 0,
+      "sg": null,
+      "sp": null,
+      "pf": null,
+      "pc": null,
+      "pts": 0
+    },
+    {
+      "pos": 12,
+      "equipo": "BERNADETTE B",
+      "pj": 1,
+      "pg": 0,
+      "pp": 0,
+      "sg": null,
+      "sp": null,
+      "pf": null,
+      "pc": null,
+      "pts": 0
+    }
+  ]
 }

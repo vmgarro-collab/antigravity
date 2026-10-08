@@ -1,79 +1,9 @@
 [
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=undefined",
-    "keys": [
-      "Message",
-      "MessageDetail"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getTiposCompeticion",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticionesTemporada?competicionId=1134",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticionesTemporada?competicionId=1134",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getFasesCompeticion?competicionTemporadaId=23539",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getFasesCompeticion?competicionTemporadaId=23539",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getGruposCompeticion?faseId=14973",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  },
-  {
-    "url": "https://intranet.fmvoley.com/api/competiciones/getGruposCompeticion?faseId=14973",
-    "keys": [
-      "content",
-      "Error"
-    ]
-  }
+  "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=undefined",
+  "https://intranet.fmvoley.com/api/competiciones/getTiposCompeticion",
+  "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
+  "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
+  "https://intranet.fmvoley.com/api/competiciones/getCompeticionesTemporada?competicionId=1134",
+  "https://intranet.fmvoley.com/api/competiciones/getFasesCompeticion?competicionTemporadaId=23547",
+  "https://intranet.fmvoley.com/api/competiciones/getGruposCompeticion?faseId=14998"
 ]
