@@ -1,7 +1,7 @@
 // Voley/app.js — B. 2 de Mayo, Infantil Femenino 2ª Div. Aut. Zonal Liga A
 'use strict';
 
-const MAYO_KEYWORDS = ['2 DE MAYO', '2DE MAYO', 'DOS DE MAYO'];
+const MAYO_KEYWORDS = ['2 DE MAYO', '2DE MAYO', 'DOS DE MAYO', 'B. M. 2', 'B.M. 2'];
 
 let _todosPartidos = [];
 
