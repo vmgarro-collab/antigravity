@@ -4,12 +4,30 @@
 const fs   = require('fs');
 const path = require('path');
 
-const TIMEOUT    = 40_000;
-const DATA_DIR   = path.join(__dirname, 'data');
+const TIMEOUT  = 45_000;
+const DATA_DIR = path.join(__dirname, 'data');
+
+// Known IDs from API discovery
+const TIPO_FEDERADAS     = '1';
+const COMP_INF_FEM       = '1134';
+const MAYO_KEYWORDS      = ['2 DE MAYO', '2DE MAYO', 'DOS DE MAYO'];
 
 async function getBrowser() {
   const { chromium } = require('playwright');
   return chromium.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+}
+
+// Wait until a <select> has more than one real option
+async function waitForOptions(page, selector, timeout = 12000) {
+  const end = Date.now() + timeout;
+  while (Date.now() < end) {
+    const count = await page.$$eval(`${selector} option`, opts =>
+      opts.filter(o => o.value && o.value !== '').length
+    ).catch(() => 0);
+    if (count > 0) return true;
+    await page.waitForTimeout(500);
+  }
+  return false;
 }
 
 async function captureCompetitionData() {
@@ -17,170 +35,201 @@ async function captureCompetitionData() {
   const context = await browser.newContext({ locale: 'es-ES', viewport: { width: 1280, height: 900 } });
   const page    = await context.newPage();
 
-  const captured   = { clasificacion: null, resultados: null, partidos: [] };
-  const allRequests = [];
+  const captured  = { clasificacion: null, resultados: null, partidos: [] };
+  const apiLog    = [];
 
-  // Log EVERY response for debug
   page.on('response', async (res) => {
     const url = res.url();
-    const status = res.status();
-    const ct = res.headers()['content-type'] || '';
-    allRequests.push({ url, status, ct });
-
+    const ct  = res.headers()['content-type'] || '';
     if (!ct.includes('json')) return;
     try {
       const data = await res.json();
-      console.log(`[net] JSON ${status} ${url.slice(0, 120)}`);
+      apiLog.push({ url, keys: Object.keys(data).slice(0, 8) });
+      console.log(`[net] ${url.replace('https://intranet.fmvoley.com','').slice(0,100)}`);
 
-      if (data?.clasificacion || data?.standings || data?.tabla) {
+      // Clasificacion: array of teams with puntos
+      if (data?.clasificacion || (data?.content && Array.isArray(data.content) && data.content[0]?.puntos !== undefined)) {
         captured.clasificacion = data;
-        console.log('[scraper] ✓ clasificacion capturada');
+        console.log('[scraper] ✓ clasificacion');
       }
-      if (data?.partidos || data?.jornadas || data?.results || data?.matches) {
+      // Resultados: has partidos or jornadas
+      if (data?.partidos || data?.jornadas || (data?.content && Array.isArray(data.content) && data.content[0]?.local !== undefined)) {
         captured.resultados = data;
         if (Array.isArray(data?.partidos)) captured.partidos.push(...data.partidos);
-        console.log('[scraper] ✓ resultados capturados');
+        if (Array.isArray(data?.content)) captured.partidos.push(...data.content);
+        console.log('[scraper] ✓ resultados');
       }
     } catch (_) {}
   });
 
-  console.log('[scraper] Navegando a fmvoley.com...');
+  console.log('[scraper] Navegando...');
   await page.goto('https://fmvoley.com/clasificaciones-y-resultados', {
     waitUntil: 'networkidle',
     timeout: TIMEOUT,
   });
 
-  // Screenshot for debug
-  const ssPath = path.join(DATA_DIR, 'debug_screenshot.png');
-  await page.screenshot({ path: ssPath, fullPage: true });
-  console.log('[scraper] Screenshot guardado en data/debug_screenshot.png');
+  // Accept cookies if banner present
+  try {
+    const acceptBtn = await page.$('button:has-text("Aceptar"), button:has-text("Accept"), #accept-cookies, .accept-cookies');
+    if (acceptBtn) { await acceptBtn.click(); await page.waitForTimeout(800); }
+  } catch (_) {}
 
-  // Dump page structure for debug
-  const structure = await page.evaluate(() => {
-    const selects  = [...document.querySelectorAll('select')].map(s => ({
-      tag: 'select', id: s.id, name: s.name, options: [...s.options].map(o => o.text).slice(0, 10)
-    }));
-    const buttons  = [...document.querySelectorAll('button')].map(b => b.textContent.trim()).filter(Boolean).slice(0, 20);
-    const divRoles = [...document.querySelectorAll('[role=listbox],[role=combobox],[role=option]')].map(e => ({
-      role: e.getAttribute('role'), text: e.textContent.trim().slice(0, 60)
-    })).slice(0, 20);
-    const inputs   = [...document.querySelectorAll('input')].map(i => ({ type: i.type, placeholder: i.placeholder })).slice(0, 10);
-    return { selects, buttons, divRoles, inputs };
-  });
-  const debugPath = path.join(DATA_DIR, 'debug_structure.json');
-  fs.writeFileSync(debugPath, JSON.stringify({ structure, allRequests }, null, 2));
-  console.log('[scraper] Estructura del DOM:', JSON.stringify(structure, null, 2));
+  // ── Step 1: Select "Federadas" in comboTipoCompeticion ───────────────────
+  console.log('[scraper] Step 1: Seleccionando tipo Federadas...');
+  try {
+    await page.selectOption('#comboTipoCompeticion', TIPO_FEDERADAS);
+    // Also trigger change via jQuery for bootstrap-select
+    await page.evaluate(() => {
+      const el = document.getElementById('comboTipoCompeticion');
+      if (el && window.$) window.$(el).trigger('change');
+    });
+    await page.waitForTimeout(1500);
+  } catch (e) { console.warn('[scraper] Step 1 error:', e.message); }
 
-  // Try to interact with custom dropdowns if no standard selects
-  if (!structure.selects.length) {
-    console.log('[scraper] No hay <select> nativos, probando dropdowns personalizados...');
-    await tryCustomDropdowns(page, captured);
-  } else {
-    await tryNativeSelects(page, structure.selects, captured);
+  // ── Step 2: Wait for comboCompeticiones and select INFANTIL FEMENINO ────
+  console.log('[scraper] Step 2: Esperando competiciones...');
+  await waitForOptions(page, '#comboCompeticiones');
+  try {
+    // Try by value (the competition ID)
+    const options = await page.$$eval('#comboCompeticiones option', opts =>
+      opts.map(o => ({ v: o.value, t: o.textContent.trim() }))
+    );
+    console.log('[scraper] Competiciones:', options.map(o => `${o.v}:${o.t}`).join(', '));
+
+    const infantilOpt = options.find(o =>
+      /infantil.*fem/i.test(o.t) && !o.t.includes('undefined')
+    );
+    if (infantilOpt) {
+      await page.selectOption('#comboCompeticiones', infantilOpt.v);
+      await page.evaluate((v) => {
+        const el = document.getElementById('comboCompeticiones');
+        if (el) { el.value = v; if (window.$) window.$(el).trigger('change'); }
+      }, infantilOpt.v);
+      console.log('[scraper] ✓ Seleccionado:', infantilOpt.t);
+    } else {
+      // Fallback: use known ID
+      await page.selectOption('#comboCompeticiones', COMP_INF_FEM).catch(() => {});
+      await page.evaluate(() => {
+        const el = document.getElementById('comboCompeticiones');
+        if (el && window.$) window.$(el).trigger('change');
+      });
+    }
+    await page.waitForTimeout(2000);
+  } catch (e) { console.warn('[scraper] Step 2 error:', e.message); }
+
+  // ── Step 3: Select division (2ª / Zonal) ─────────────────────────────────
+  console.log('[scraper] Step 3: División...');
+  await waitForOptions(page, '#comboDivisiones');
+  try {
+    const options = await page.$$eval('#comboDivisiones option', opts =>
+      opts.map(o => ({ v: o.value, t: o.textContent.trim() }))
+    );
+    console.log('[scraper] Divisiones:', options.map(o => `${o.v}:${o.t}`).join(', '));
+    const divOpt = options.find(o => /2.*div|zonal|auton/i.test(o.t)) || options.find(o => o.v && o.v !== '');
+    if (divOpt) {
+      await page.selectOption('#comboDivisiones', divOpt.v);
+      await page.evaluate((v) => {
+        const el = document.getElementById('comboDivisiones');
+        if (el) { el.value = v; if (window.$) window.$(el).trigger('change'); }
+      }, divOpt.v);
+      console.log('[scraper] ✓ División:', divOpt.t);
+      await page.waitForTimeout(2000);
+    }
+  } catch (e) { console.warn('[scraper] Step 3 error:', e.message); }
+
+  // ── Step 4: Select fase ───────────────────────────────────────────────────
+  console.log('[scraper] Step 4: Fase...');
+  const hasFase = await waitForOptions(page, '#comboFases', 5000);
+  if (hasFase) {
+    try {
+      const options = await page.$$eval('#comboFases option', opts =>
+        opts.map(o => ({ v: o.value, t: o.textContent.trim() }))
+      );
+      console.log('[scraper] Fases:', options.map(o => `${o.v}:${o.t}`).join(', '));
+      const faseOpt = options.find(o => o.v && o.v !== '');
+      if (faseOpt) {
+        await page.selectOption('#comboFases', faseOpt.v);
+        await page.evaluate((v) => {
+          const el = document.getElementById('comboFases');
+          if (el) { el.value = v; if (window.$) window.$(el).trigger('change'); }
+        }, faseOpt.v);
+        console.log('[scraper] ✓ Fase:', faseOpt.t);
+        await page.waitForTimeout(2000);
+      }
+    } catch (e) { console.warn('[scraper] Step 4 error:', e.message); }
   }
+
+  // ── Step 5: Select grupo "Liga A" ─────────────────────────────────────────
+  console.log('[scraper] Step 5: Grupo Liga A...');
+  await waitForOptions(page, '#comboGrupos');
+  try {
+    const options = await page.$$eval('#comboGrupos option', opts =>
+      opts.map(o => ({ v: o.value, t: o.textContent.trim() }))
+    );
+    console.log('[scraper] Grupos:', options.map(o => `${o.v}:${o.t}`).join(', '));
+    const grupoOpt = options.find(o => /liga\s*a\b/i.test(o.t))
+                  || options.find(o => /liga/i.test(o.t))
+                  || options.find(o => o.v && o.v !== '');
+    if (grupoOpt) {
+      await page.selectOption('#comboGrupos', grupoOpt.v);
+      await page.evaluate((v) => {
+        const el = document.getElementById('comboGrupos');
+        if (el) { el.value = v; if (window.$) window.$(el).trigger('change'); }
+      }, grupoOpt.v);
+      console.log('[scraper] ✓ Grupo:', grupoOpt.t);
+      await page.waitForTimeout(1000);
+    }
+  } catch (e) { console.warn('[scraper] Step 5 error:', e.message); }
+
+  // ── Step 6: Click "Buscar" ────────────────────────────────────────────────
+  console.log('[scraper] Step 6: Buscar...');
+  try {
+    const btn = await page.$('button:has-text("Buscar"), input[value="Buscar"], .btn-buscar');
+    if (btn) {
+      await btn.click();
+      await page.waitForNetworkIdle({ timeout: 15000 }).catch(() => {});
+    }
+  } catch (e) { console.warn('[scraper] Step 6 error:', e.message); }
 
   await page.waitForTimeout(4000);
 
-  // DOM fallback
+  // Save debug info
+  const ss = path.join(DATA_DIR, 'debug_screenshot_after.png');
+  await page.screenshot({ path: ss, fullPage: true });
+  fs.writeFileSync(path.join(DATA_DIR, 'debug_api_log.json'), JSON.stringify(apiLog, null, 2));
+  console.log('[scraper] API calls:', JSON.stringify(apiLog, null, 2));
+
+  // DOM fallback if needed
   if (!captured.clasificacion) {
     captured.clasificacion = await extractClasificacionFromDOM(page);
-    if (captured.clasificacion) console.log('[scraper] ✓ clasificacion extraída del DOM');
+    if (captured.clasificacion) console.log('[scraper] ✓ clasificacion (DOM)');
   }
   if (!captured.resultados) {
     captured.resultados = await extractResultadosFromDOM(page);
-    if (captured.resultados) console.log('[scraper] ✓ resultados extraídos del DOM');
+    if (captured.resultados) console.log('[scraper] ✓ resultados (DOM)');
   }
-
-  // Final screenshot
-  const ss2Path = path.join(DATA_DIR, 'debug_screenshot_after.png');
-  await page.screenshot({ path: ss2Path, fullPage: true });
 
   await browser.close();
   return captured;
 }
 
-async function tryNativeSelects(page, selects, captured) {
-  for (const sel of selects) {
-    const tipoOpt = sel.options.find(o => /liga|compet|regular/i.test(o) && !/cup|copa/i.test(o));
-    if (tipoOpt) {
-      await page.selectOption(`select[id="${sel.id}"], select[name="${sel.name}"]`, { label: tipoOpt });
-      await page.waitForTimeout(2000);
-      break;
-    }
-  }
-  await page.waitForTimeout(1000);
-  const selects2 = await page.$$('select');
-  for (const s of selects2) {
-    const opts = await s.$$eval('option', os => os.map(o => o.textContent.trim()));
-    const compOpt = opts.find(o => /infantil.*fem|fem.*infantil/i.test(o));
-    if (compOpt) {
-      await s.selectOption({ label: compOpt });
-      await page.waitForTimeout(2000);
-      break;
-    }
-  }
-  await page.waitForTimeout(1000);
-  const selects3 = await page.$$('select');
-  for (const s of selects3) {
-    const opts = await s.$$eval('option', os => os.map(o => o.textContent.trim()));
-    const grupoOpt = opts.find(o => /liga\s*a\b/i.test(o));
-    if (grupoOpt) {
-      await s.selectOption({ label: grupoOpt });
-      await page.waitForNetworkIdle({ timeout: 15000 }).catch(() => {});
-      break;
-    }
-  }
-}
-
-async function tryCustomDropdowns(page, captured) {
-  // Try clicking on elements that look like competition selectors
-  try {
-    // Look for "Tipo de competición" or similar labels and click the associated control
-    const clickables = await page.$$('[class*="select"],[class*="dropdown"],[class*="combo"],[class*="picker"]');
-    console.log(`[scraper] Encontrados ${clickables.length} elementos tipo dropdown`);
-
-    for (const el of clickables.slice(0, 5)) {
-      const txt = await el.textContent();
-      console.log(`[scraper] Dropdown: "${txt?.trim().slice(0, 60)}"`);
-    }
-
-    // Try clicking the first custom dropdown
-    if (clickables.length > 0) {
-      await clickables[0].click();
-      await page.waitForTimeout(1000);
-
-      // Look for "Liga" option
-      const ligaOpt = await page.$('text=/liga/i');
-      if (ligaOpt) {
-        await ligaOpt.click();
-        await page.waitForTimeout(2000);
-      }
-    }
-  } catch (e) {
-    console.warn('[scraper] tryCustomDropdowns error:', e.message);
-  }
-}
-
 async function extractClasificacionFromDOM(page) {
   return page.evaluate(() => {
-    const tables = document.querySelectorAll('table');
-    for (const t of tables) {
-      const rows    = t.querySelectorAll('tbody tr');
+    for (const t of document.querySelectorAll('table')) {
+      const rows = t.querySelectorAll('tbody tr');
       if (rows.length < 2) continue;
-      const headers = [...t.querySelectorAll('thead th, thead td')].map(h => h.textContent.trim().toUpperCase());
+      const headers = [...t.querySelectorAll('thead th,thead td')].map(h => h.textContent.trim().toUpperCase());
       if (!headers.some(h => /PTS|PUNTOS/i.test(h))) continue;
       const tabla = [];
       rows.forEach((row, i) => {
         const cells = [...row.querySelectorAll('td')];
         if (cells.length < 4) return;
-        const t = cells.map(c => c.textContent.trim());
-        tabla.push({
-          pos: i + 1, equipo: t[1] || t[0] || '',
-          pj: parseInt(t[2])||0, pg: parseInt(t[3])||0, pp: parseInt(t[4])||0,
-          sg: parseInt(t[5])||null, sp: parseInt(t[6])||null,
-          pf: parseInt(t[7])||null, pc: parseInt(t[8])||null,
-          pts: parseInt(t[t.length-1])||0,
-        });
+        const t2 = cells.map(c => c.textContent.trim());
+        tabla.push({ pos: i+1, equipo: t2[1]||t2[0]||'',
+          pj: parseInt(t2[2])||0, pg: parseInt(t2[3])||0, pp: parseInt(t2[4])||0,
+          sg: parseInt(t2[5])||null, sp: parseInt(t2[6])||null,
+          pf: parseInt(t2[7])||null, pc: parseInt(t2[8])||null,
+          pts: parseInt(t2[t2.length-1])||0 });
       });
       if (tabla.length) return { tabla };
     }
@@ -191,9 +240,9 @@ async function extractClasificacionFromDOM(page) {
 async function extractResultadosFromDOM(page) {
   return page.evaluate(() => {
     const partidos = [];
-    document.querySelectorAll('.partido,.match,.resultado,[class*="partido"],[class*="match"]').forEach(row => {
+    document.querySelectorAll('.partido,.match,[class*="partido"],[class*="match"]').forEach(row => {
       const teams = row.querySelectorAll('.equipo,.team,[class*="equipo"],[class*="team"]');
-      const score = row.querySelector('.resultado,.score,[class*="resultado"],[class*="score"]');
+      const score = row.querySelector('.resultado,.score,[class*="score"]');
       if (teams.length >= 2) {
         const resultado = score ? score.textContent.trim() : '';
         partidos.push({ local: teams[0].textContent.trim(), visitante: teams[1].textContent.trim(),
@@ -208,37 +257,46 @@ async function extractResultadosFromDOM(page) {
 function normalizeClasificacion(raw) {
   if (!raw) return { tabla: [] };
   if (raw.tabla) return raw;
-  const src = raw.clasificacion || raw.standings || raw.data || [];
-  const tabla = (Array.isArray(src) ? src : []).map((r, i) => ({
-    pos: r.pos || r.posicion || r.position || (i+1),
-    equipo: r.equipo || r.nombre || r.team || r.name || '',
-    pj: parseInt(r.pj || r.jugados || r.played || 0),
-    pg: parseInt(r.pg || r.ganados || r.won || 0),
-    pp: parseInt(r.pp || r.perdidos || r.lost || 0),
-    sg: parseInt(r.sg || r.sets_favor || 0) || null,
-    sp: parseInt(r.sp || r.sets_contra || 0) || null,
-    pf: parseInt(r.pf || r.puntos_favor || 0) || null,
-    pc: parseInt(r.pc || r.puntos_contra || 0) || null,
-    pts: parseInt(r.pts || r.puntos || r.points || 0),
-  }));
-  return { tabla };
+  const src = raw.clasificacion || raw.content || raw.standings || raw.data || [];
+  return {
+    tabla: (Array.isArray(src) ? src : []).map((r, i) => ({
+      pos:    r.pos || r.posicion || r.position || (i+1),
+      equipo: r.equipo || r.nombre || r.club || r.nombre_club || r.team || '',
+      pj:     parseInt(r.pj || r.jugados || r.played || 0),
+      pg:     parseInt(r.pg || r.ganados || r.won || 0),
+      pp:     parseInt(r.pp || r.perdidos || r.lost || 0),
+      sg:     parseInt(r.sg || r.sets_favor || r.sets_a_favor || 0) || null,
+      sp:     parseInt(r.sp || r.sets_contra || r.sets_en_contra || 0) || null,
+      pf:     parseInt(r.pf || r.puntos_favor || r.puntos_a_favor || 0) || null,
+      pc:     parseInt(r.pc || r.puntos_contra || r.puntos_en_contra || 0) || null,
+      pts:    parseInt(r.pts || r.puntos || r.points || 0),
+    })),
+  };
 }
 
 function normalizeResultados(raw) {
   if (!raw) return { partidos: [], jornadas: [], jornada_actual: null };
   if (raw.partidos) return raw;
+  const src = raw.partidos || raw.content || raw.matches || raw.results || [];
   const jornadas = (raw.jornadas || raw.rounds || []).map(j => ({
     num: j.num || j.id || '', label: j.label || `Jornada ${j.num||''}`, fecha: j.fecha || '',
   }));
-  const partidos = (raw.partidos || raw.matches || raw.results || []).map(p => {
-    const resultado = p.resultado || (p.jugado ? `${p.sets_local||0}-${p.sets_visitante||0}` : (p.hora||'–'));
-    return {
-      local: p.local || p.home || '', visitante: p.visitante || p.away || '',
-      resultado, jugado: p.jugado ?? /^\d-\d$/.test(resultado),
-      fecha: p.fecha||'', hora: p.hora||'', campo: p.campo||'',
-    };
-  });
-  return { partidos, jornadas, jornada_actual: raw.jornada_actual || null };
+  return {
+    partidos: (Array.isArray(src) ? src : []).map(p => {
+      const resultado = p.resultado || (p.jugado ? `${p.sets_local||p.sets_casa||0}-${p.sets_visitante||0}` : (p.hora||'–'));
+      return {
+        local:     p.local || p.equipo_local || p.home || p.nombre_equipo_local || '',
+        visitante: p.visitante || p.equipo_visitante || p.away || p.nombre_equipo_visitante || '',
+        resultado,
+        jugado: p.jugado ?? /^\d-\d$/.test(resultado),
+        fecha:  p.fecha || '',
+        hora:   p.hora || '',
+        campo:  p.campo || p.pabellon || '',
+      };
+    }),
+    jornadas,
+    jornada_actual: raw.jornada_actual || null,
+  };
 }
 
 module.exports = { captureCompetitionData, normalizeClasificacion, normalizeResultados };
