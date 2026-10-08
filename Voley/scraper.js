@@ -124,11 +124,91 @@ async function getPartidosViaPlaywright() {
     }
   } catch (e) { console.warn('[scraper] Buscar:', e.message); }
 
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(3000);
+
+  // Try clicking "Resultados" radio/tab/button to show match results
+  try {
+    const resultadosBtn = await page.$(
+      'input[type=radio][value*="result" i], input[type=radio][value*="partido" i], ' +
+      'button:has-text("Resultados"), a:has-text("Resultados"), ' +
+      'label:has-text("Resultados"), [data-tab*="result" i]'
+    );
+    if (resultadosBtn) {
+      console.log('[scraper] Encontrado botón Resultados, haciendo click...');
+      await resultadosBtn.click();
+      await page.waitForNetworkIdle({ timeout: 10000 }).catch(() => {});
+      await page.waitForTimeout(2000);
+    }
+
+    // Also try radio buttons (the page has 2 radio inputs)
+    const radios = await page.$$('input[type=radio]');
+    for (const radio of radios) {
+      const val   = await radio.getAttribute('value') || '';
+      const label = await page.evaluate(el => {
+        const lbl = document.querySelector(`label[for="${el.id}"]`);
+        return lbl ? lbl.textContent.trim() : '';
+      }, radio);
+      console.log(`[scraper] Radio: value="${val}" label="${label}"`);
+      if (/result|partido|calend/i.test(val + label)) {
+        await radio.click();
+        await page.waitForTimeout(2000);
+        break;
+      }
+    }
+  } catch (e) { console.warn('[scraper] Resultados tab:', e.message); }
+
+  await page.waitForTimeout(2000);
+
+  // Extract partidos from DOM tables
+  const domPartidos = await page.evaluate(() => {
+    const partidos = [];
+    // Look for match/result rows
+    document.querySelectorAll('table').forEach(table => {
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const cells = [...row.querySelectorAll('td')].map(c => c.textContent.trim());
+        // A partido row typically has: fecha, local, resultado (X-X), visitante, pabellon
+        if (cells.length >= 3) {
+          const scoreCell = cells.find(c => /^\d-\d$|^\d\s*-\s*\d$/.test(c.trim()));
+          if (scoreCell) {
+            const scoreIdx = cells.indexOf(scoreCell);
+            partidos.push({
+              local:     cells[scoreIdx - 1] || '',
+              resultado: scoreCell.replace(/\s/g, ''),
+              visitante: cells[scoreIdx + 1] || '',
+              jugado:    true,
+              fecha:     cells[0] || '',
+            });
+          }
+        }
+      });
+    });
+    // Also try div-based layouts
+    document.querySelectorAll('.partido, .match, .encuentro, .resultado-row, [class*="partido"], [class*="encuentro"]').forEach(el => {
+      const teams = el.querySelectorAll('.equipo, .team, [class*="equipo"], [class*="local"], [class*="visitante"]');
+      const score = el.querySelector('.resultado, .score, [class*="resultado"], [class*="score"]');
+      if (teams.length >= 2 && score) {
+        partidos.push({
+          local:     teams[0].textContent.trim(),
+          resultado: score.textContent.trim().replace(/\s/g, ''),
+          visitante: teams[teams.length - 1].textContent.trim(),
+          jugado:    /\d-\d/.test(score.textContent),
+        });
+      }
+    });
+    return partidos;
+  });
+
+  if (domPartidos.length > 0) {
+    console.log(`[scraper] ✓ ${domPartidos.length} partidos extraídos del DOM`);
+    partidosData.push(...domPartidos);
+  }
 
   // Save all JSON URLs for debug
   fs.writeFileSync(path.join(DATA_DIR, 'debug_api_log.json'), JSON.stringify(allJsonUrls, null, 2));
   console.log('[scraper] URLs JSON capturadas:', allJsonUrls.join('\n'));
+  console.log('[scraper] Partidos capturados vía API:', partidosData.filter(p => !p._fromDOM).length);
+  console.log('[scraper] Partidos capturados vía DOM:', domPartidos.length);
 
   // Screenshot
   await page.screenshot({ path: path.join(DATA_DIR, 'debug_screenshot_after.png'), fullPage: true });
