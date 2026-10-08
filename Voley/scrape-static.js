@@ -36,20 +36,13 @@ async function main() {
   write('clasificacion.json', clasif);
   write('resultados.json', resultados);
 
-  // Per-jornada files (best effort from what we captured)
-  const todosPartidos = resultados.partidos || [];
-  const jornadaMap = new Map();
-  for (const j of resultados.jornadas || []) {
-    jornadaMap.set(j.num, { ...resultados, partidos: [], jornadas: resultados.jornadas });
-  }
   // Write all-parties file for H2H
-  write('todos_partidos.json', todosPartidos);
+  write('todos_partidos.json', resultados.partidos || []);
 
-  // Per-jornada stubs (empty placeholder files that will be filled when scraper runs next)
+  // Per-jornada stubs
   for (const j of resultados.jornadas || []) {
     const file = `resultados_j${j.num}.json`;
-    const filePath = path.join(DATA_DIR, file);
-    if (!fs.existsSync(filePath)) {
+    if (!fs.existsSync(path.join(DATA_DIR, file))) {
       write(file, { ...resultados, partidos: [] });
     }
   }
