@@ -77,12 +77,12 @@ async function tryFetchPartidosPorJornada(jornadas) {
   const firstJornada = jornadas[0];
   const jornadaId = firstJornada.id || firstJornada.num || firstJornada.jornadaId;
   const patterns = [
+    id => `${API}/getPartidosByJornada?jornadaId=${id}`,   // ← endpoint real descubierto
     id => `${API}/getPartidosJornada?jornadaId=${id}`,
     id => `${API}/getEncuentrosJornada?jornadaId=${id}`,
     id => `${API}/getPartidos?jornadaId=${id}`,
     id => `${API}/getResultadosJornada?jornadaId=${id}`,
     id => `${API}/getJornadaPartidos?jornadaId=${id}`,
-    id => `${API}/getPartidosJornada?jornada_id=${id}&grupoId=${GRUPO_ID}`,
   ];
 
   let workingPattern = null;
@@ -93,7 +93,8 @@ async function tryFetchPartidosPorJornada(jornadas) {
       if (!res.ok) { console.log(`[api-j] ${res.status} ${url}`); continue; }
       const data = await res.json();
       const arr = data.content || data.partidos || data.encuentros || [];
-      if (Array.isArray(arr)) { workingPattern = pat; console.log(`[api-j] ✓ Patrón: ${url}`); break; }
+      if (Array.isArray(arr) && arr.length > 0) { workingPattern = pat; console.log(`[api-j] ✓ Patrón: ${url}`); break; }
+      if (Array.isArray(arr)) console.log(`[api-j] Vacío: ${url}`);
     } catch (_) {}
   }
   if (!workingPattern) return null;
@@ -361,19 +362,19 @@ function normalizeClasificacion(raw) {
 }
 
 function normalizeResultados(raw) {
-  const jornadas = (raw.jornadas || []).map(j => ({
+  const jornadas = (raw.jornadas || []).map((j, i) => ({
     num:   j.id    || j.num || '',
-    label: `Jornada ${j.numero || j.num || ''}`,
+    label: `Jornada ${j.numero || j.num || (i + 1)}`,
     fecha: j.fecha || '',
   }));
   const partidos = (raw.partidos || []).map(p => {
     const sLocal = p.sets_local ?? p.setsLocal ?? p.setsEquipoLocal ?? null;
     const sVis   = p.sets_visitante ?? p.setsVisitante ?? p.setsEquipoVisitante ?? null;
-    const jugado = sLocal !== null && sVis !== null;
+    const jugado = p.finalizado === true || (sLocal !== null && sVis !== null && (Number(sLocal) + Number(sVis)) > 0);
     const resultado = jugado ? `${sLocal}-${sVis}` : (p.hora || '–');
     return {
-      local:     p.equipoLocalNombre || p.nombreEquipoLocal || p.equipo_local || p.local || '',
-      visitante: p.equipoVisitanteNombre || p.nombreEquipoVisitante || p.equipo_visitante || p.visitante || '',
+      local:     p.equipo_local || p.equipoLocalNombre || p.nombreEquipoLocal || p.local || '',
+      visitante: p.equipo_visitante || p.equipoVisitanteNombre || p.nombreEquipoVisitante || p.visitante || '',
       resultado,
       jugado,
       fecha: p.fecha || '',
