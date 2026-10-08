@@ -1,7 +1,7 @@
 // Voley/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'voley-mayo-v1';
+const CACHE = 'voley-mayo-v3';
 const PRECACHE = [
   '/antigravity/Voley/',
   '/antigravity/Voley/index.html',
