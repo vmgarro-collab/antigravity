@@ -190,28 +190,45 @@ function renderResultados(data) {
   updateJornadaNav();
   const body = document.getElementById('resultados-body');
   if (!data.partidos?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin partidos</p>'; return; }
-  body.innerHTML = data.partidos.map(p => {
-    let resCls = '';
-    if (p.jugado) {
-      const mayoLocal = esMayo(p.local), mayoVis = esMayo(p.visitante);
-      if (mayoLocal || mayoVis) {
-        const [a, b] = p.resultado.split('-').map(Number);
-        const mayoGana = (mayoLocal && a > b) || (mayoVis && b > a);
-        resCls = mayoGana ? ' resultado-win' : ' resultado-loss';
+
+  // Group by date
+  const byDate = [];
+  let lastFecha = null;
+  for (const p of data.partidos) {
+    if (p.fecha !== lastFecha) { byDate.push({ fecha: p.fecha, partidos: [] }); lastFecha = p.fecha; }
+    byDate[byDate.length - 1].partidos.push(p);
+  }
+
+  body.innerHTML = byDate.map(group => {
+    const dayLabel = group.fecha ? formatFecha(group.fecha) : '';
+    const rows = group.partidos.map(p => {
+      let resCls = '';
+      if (p.jugado) {
+        const mayoLocal = esMayo(p.local), mayoVis = esMayo(p.visitante);
+        if (mayoLocal || mayoVis) {
+          const [a, b] = p.resultado.split('-').map(Number);
+          resCls = ((mayoLocal && a > b) || (mayoVis && b > a)) ? ' resultado-win' : ' resultado-loss';
+        }
       }
-    }
-    return `<div class="partido-wrap">
-      <div class="partido">
-        <span class="equipo-local">${p.local}</span>
-        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${p.jugado ? p.resultado : (p.resultado && p.resultado !== '0:00' ? p.resultado : '–')}</span>
-        <span class="equipo-visitante">${p.visitante}</span>
-      </div>
-      ${(p.hora && p.hora !== '0:00') || p.campo ? `<div class="partido-detalle">
-        ${p.hora && p.hora !== '0:00' ? `<span>🕐 ${p.hora}</span>` : ''}
-        ${p.campo ? `<span>📍 ${p.campo}</span>` : ''}
-      </div>` : ''}
-    </div>`;
+      const marcador = p.jugado ? p.resultado : (p.hora && p.hora !== '0:00' ? p.hora : '–');
+      return `<div class="partido-wrap">
+        <div class="partido">
+          <span class="equipo-local">${p.local}</span>
+          <span class="resultado${p.jugado ? resCls : ' pendiente'}">${marcador}</span>
+          <span class="equipo-visitante">${p.visitante}</span>
+        </div>
+        ${p.campo ? `<div class="partido-detalle"><span>📍 ${p.campo}</span></div>` : ''}
+      </div>`;
+    }).join('');
+    return `${dayLabel ? `<div class="fecha-sep">${dayLabel}</div>` : ''}${rows}`;
   }).join('');
+}
+
+function formatFecha(str) {
+  // "03/10/2026" → "Sáb 3 Oct"
+  const [d, m, y] = str.split('/');
+  const date = new Date(`${y}-${m}-${d}`);
+  return date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
 }
 
 function updateJornadaNav() {
