@@ -111,18 +111,31 @@ async function loadAll() {
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
-    jornadaIdx = result.jornada_actual
-      ? Math.max(0, jornadas.findIndex(j => j.num === result.jornada_actual))
-      : Math.max(0, jornadas.length - 1);
     _todosPartidos = todos;
-    renderResultados(result);
+
+    // Find best starting jornada: last played, or first upcoming
+    const today = new Date();
+    let bestIdx = 0;
+    for (let i = 0; i < jornadas.length; i++) {
+      const jFecha = jornadas[i].fecha ? parseDate(jornadas[i].fecha) : null;
+      if (jFecha && jFecha <= today) bestIdx = i;
+    }
+    jornadaIdx = bestIdx;
+
     document.getElementById('panels').style.display = '';
     lucide.createIcons();
+    await loadJornada();
   } catch (e) {
     showError(`No se pudieron cargar los datos.<br><small>${e.message}</small>`);
   } finally {
     setLoading(false);
   }
+}
+
+function parseDate(str) {
+  // "03/10/2026" → Date
+  const [d, m, y] = str.split('/');
+  return new Date(`${y}-${m}-${d}`);
 }
 
 async function loadJornada() {
