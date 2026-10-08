@@ -2,7 +2,7 @@
   "name": "voley-2demayo",
   "version": "1.0.0",
   "private": true,
-  "description": "App de voley para B.M. 2 de Mayo — Infantil Femenino",
+  "description": "App de voley para B. 2 de Mayo — Infantil Femenino",
   "scripts": {
     "scrape": "node scrape-static.js"
   },

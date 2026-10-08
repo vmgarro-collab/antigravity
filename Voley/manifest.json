@@ -1,7 +1,7 @@
 {
-  "name": "2 de Mayo Voley",
+  "name": "B. 2 de Mayo Voley",
   "short_name": "2deMayo",
-  "description": "App de voley para B.M. 2 de Mayo",
+  "description": "App de voley para B. 2 de Mayo",
   "start_url": "/antigravity/Voley/",
   "display": "standalone",
   "background_color": "#0a0a0f",
