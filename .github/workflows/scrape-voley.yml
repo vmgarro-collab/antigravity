@@ -21,7 +21,7 @@ jobs:
 
       - name: Instalar dependencias
         working-directory: Voley
-        run: npm ci
+        run: npm install
 
       - name: Instalar navegador Playwright
         working-directory: Voley
