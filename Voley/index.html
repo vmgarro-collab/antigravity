@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.M. 2 de Mayo — Infantil Femenino</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="apple-touch-icon" href="icons/icon-512.jpg">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-content">
+        <i data-lucide="volleyball" class="header-icon"></i>
+        <div class="header-text">
+          <h1>2 de Mayo</h1>
+          <p class="header-sub">Infantil Femenino 2ª Div. Aut. Zonal · Liga A · 2025-2026</p>
+        </div>
+        <span class="season-badge">FMVoley</span>
+        <button id="btn-refresh" class="btn-refresh" onclick="refreshData()" aria-label="Actualizar datos" title="Actualizar">
+          <i data-lucide="refresh-cw" class="refresh-icon"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="panels" id="panels" style="display:none">
+        <section class="panel glass" id="panel-clasificacion">
+          <h2><i data-lucide="list-ordered"></i> Clasificación</h2>
+          <div class="table-scroll" id="clasificacion-body"></div>
+          <p class="h2h-tip">Toca un equipo para ver sus partidos contra el 2 de Mayo</p>
+        </section>
+
+        <section class="panel glass" id="panel-resultados">
+          <h2><i data-lucide="calendar-days"></i> Resultados</h2>
+          <div class="jornada-nav">
+            <button id="jornada-prev" class="btn-nav" aria-label="Jornada anterior">&#8592;</button>
+            <span id="jornada-label">Jornada 1</span>
+            <button id="jornada-next" class="btn-nav" aria-label="Jornada siguiente">&#8594;</button>
+          </div>
+          <div id="resultados-body"></div>
+        </section>
+      </div>
+
+      <div id="loading" class="loading-msg"><span class="spinner"></span> Cargando datos...</div>
+      <div id="error-msg" class="error-msg" style="display:none"></div>
+    </main>
+  </div>
+
+  <!-- Head-to-head modal -->
+  <div id="h2h-modal" style="display:none" class="h2h-overlay" onclick="if(event.target===this)closeH2H()">
+    <div class="h2h-box">
+      <div class="h2h-header">
+        <span id="h2h-title"></span>
+        <button class="h2h-close" onclick="closeH2H()">✕</button>
+      </div>
+      <div class="table-scroll">
+        <table class="tabla-h2h">
+          <thead><tr><th>Fecha</th><th>Rival</th><th>Resultado</th><th>Campo</th></tr></thead>
+          <tbody id="h2h-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/antigravity/Voley/sw.js');
+    }
+  </script>
+</body>
+</html>

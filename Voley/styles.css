@@ -1,0 +1,280 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --accent: #a78bfa;
+  --accent-blue: #60a5fa;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --radius: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+
+.app { max-width: 1200px; margin: 0 auto; padding: 16px 12px 32px; }
+
+/* Header */
+.header { margin-bottom: 20px; }
+.header-content { display: flex; align-items: center; gap: 12px; }
+.header-icon { color: var(--accent); width: 28px; height: 28px; flex-shrink: 0; }
+.header-text { flex: 1; min-width: 0; }
+h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+.header-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.season-badge {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--accent-blue);
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Glass panel */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+/* Panels layout */
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media (max-width: 680px) { .panels { grid-template-columns: 1fr; } }
+
+.panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Horizontal scroll wrapper */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Clasificacion table */
+.tabla-clasificacion { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 360px; }
+.tabla-clasificacion th {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 5px 4px;
+  border-bottom: 1px solid var(--glass-border);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tabla-clasificacion th:nth-child(2) { text-align: left; }
+.tabla-clasificacion td {
+  padding: 7px 4px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  white-space: nowrap;
+}
+.tabla-clasificacion td:nth-child(2) {
+  text-align: left;
+  white-space: normal;
+  word-break: break-word;
+  min-width: 100px;
+}
+.tabla-clasificacion td.pts { font-weight: 700; color: var(--accent); }
+.tabla-clasificacion tbody tr:first-child td { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 400px) {
+  .col-pf, .col-pc { display: none; }
+}
+
+/* Resultados */
+.jornada-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.btn-nav {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-nav:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+#jornada-label { flex: 1; text-align: center; color: var(--text-muted); font-size: 0.82rem; line-height: 1.3; }
+
+.partido-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.partido-wrap:last-child { border-bottom: none; }
+
+.partido {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+.partido .equipo-local  { flex: 1; text-align: right; line-height: 1.3; word-break: break-word; }
+.partido .equipo-visitante { flex: 1; line-height: 1.3; word-break: break-word; }
+.partido .resultado {
+  min-width: 50px;
+  flex-shrink: 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: rgba(167,139,250,0.1);
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+.partido .resultado.pendiente {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  font-weight: 400;
+  font-size: 0.78rem;
+}
+
+.partido-detalle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: flex;
+  gap: 10px;
+  padding-left: 4px;
+  flex-wrap: wrap;
+}
+
+/* Outcome indicator for 2 de Mayo results */
+.resultado-win  { color: #4ade80 !important; background: rgba(74,222,128,0.1) !important; }
+.resultado-loss { color: #f87171 !important; background: rgba(248,113,113,0.1) !important; }
+
+/* Loading / error */
+.loading-msg { text-align: center; padding: 48px 16px; color: var(--text-muted); }
+.error-msg { text-align: center; padding: 32px 16px; color: #ff6b6b; }
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Skeleton */
+.skeleton {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 4px;
+  height: 13px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* H2H tip */
+.h2h-tip { font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 8px; }
+
+/* H2H modal */
+.h2h-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.h2h-box {
+  background: #13131f;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  width: 100%; max-width: 480px;
+  max-height: 80vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.h2h-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  font-weight: 600; color: var(--accent-blue);
+}
+.h2h-close {
+  background: none; border: none; color: var(--text-muted);
+  font-size: 1.1rem; cursor: pointer; padding: 4px 8px;
+}
+.tabla-h2h { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.tabla-h2h th { padding: 8px 12px; color: var(--text-muted); text-align: left; }
+.tabla-h2h td { padding: 8px 12px; border-top: 1px solid rgba(255,255,255,0.05); }
+.h2h-score { font-weight: 700; text-align: center; }
+tr.h2h-win  td { color: #4ade80; }
+tr.h2h-loss td { color: #f87171; }
+
+/* Mayo row in clasificacion */
+.tabla-clasificacion tr.mayo-clasif td {
+  background: rgba(167,139,250,0.06);
+  color: var(--accent);
+  font-weight: 600;
+}
+.tabla-clasificacion tr.mayo-clasif td.pts { color: var(--accent); }
+.mayo-badge {
+  display: inline-block;
+  background: rgba(167,139,250,0.18);
+  color: var(--accent);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 5px;
+  vertical-align: middle;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Clickable rows */
+.tabla-clasificacion tr:not(.mayo-clasif) { cursor: pointer; }
+.tabla-clasificacion tr:not(.mayo-clasif):hover td,
+.tabla-clasificacion tr:not(.mayo-clasif):active td { background: rgba(96,165,250,0.1); }
+
+/* Refresh button */
+.btn-refresh {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 40px;
+  min-height: 40px;
+  transition: color 0.2s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-refresh:hover,
+.btn-refresh:active { color: var(--accent-blue); background: rgba(96,165,250,0.1); }
+.btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
+.refresh-icon { width: 20px; height: 20px; }
+.btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
