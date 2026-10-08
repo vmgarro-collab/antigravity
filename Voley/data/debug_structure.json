@@ -1,0 +1,404 @@
+{
+  "structure": {
+    "selects": [
+      {
+        "tag": "select",
+        "id": "comboTipoCompeticion",
+        "name": "",
+        "options": [
+          "",
+          "Federadas",
+          "Universitaria",
+          "Copa CAM",
+          "LM Los Molinos",
+          "Copa Federación"
+        ]
+      },
+      {
+        "tag": "select",
+        "id": "comboCompeticiones",
+        "name": "",
+        "options": [
+          ""
+        ]
+      },
+      {
+        "tag": "select",
+        "id": "comboDivisiones",
+        "name": "",
+        "options": [
+          ""
+        ]
+      },
+      {
+        "tag": "select",
+        "id": "comboFases",
+        "name": "",
+        "options": [
+          ""
+        ]
+      },
+      {
+        "tag": "select",
+        "id": "comboGrupos",
+        "name": "",
+        "options": [
+          ""
+        ]
+      }
+    ],
+    "buttons": [
+      "Aceptar",
+      "Rechazar todo",
+      "Configurar",
+      "Buscar",
+      "Buscador de resultados",
+      "Tipo de Competición",
+      "Competición",
+      "División",
+      "Fase",
+      "Grupo",
+      "Buscar",
+      "Limpiar",
+      "Imprimir",
+      "Cerrar"
+    ],
+    "divRoles": [
+      {
+        "role": "combobox",
+        "text": "Tipo de Competición"
+      },
+      {
+        "role": "listbox",
+        "text": ""
+      },
+      {
+        "role": "combobox",
+        "text": "Competición"
+      },
+      {
+        "role": "listbox",
+        "text": ""
+      },
+      {
+        "role": "combobox",
+        "text": "División"
+      },
+      {
+        "role": "listbox",
+        "text": ""
+      },
+      {
+        "role": "combobox",
+        "text": "Fase"
+      },
+      {
+        "role": "listbox",
+        "text": ""
+      },
+      {
+        "role": "combobox",
+        "text": "Grupo"
+      },
+      {
+        "role": "listbox",
+        "text": ""
+      }
+    ],
+    "inputs": [
+      {
+        "type": "text",
+        "placeholder": "¿Qué estás buscando? ..."
+      },
+      {
+        "type": "radio",
+        "placeholder": ""
+      },
+      {
+        "type": "radio",
+        "placeholder": ""
+      },
+      {
+        "type": "number",
+        "placeholder": ""
+      }
+    ]
+  },
+  "allRequests": [
+    {
+      "url": "https://fmvoley.com/clasificaciones-y-resultados",
+      "status": 200,
+      "ct": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://fmvoley.com/css/aos.css",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-balon-voley.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/css/swiper-bundle.min.css",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/css/bootstrap-select.min.css",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/css/bootstrap.min.css",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/images/logo-negativo.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/css/cookies-consent.css?v=2",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/images/logo.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/css/fa5.min.css",
+      "status": 200,
+      "ct": "text/css"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-balon-voley_black.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/linea-vertical.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-balon-voley-playa.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-formacion_black.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-formacion.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-federacion.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/logos-clubes/Logo_club_88.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-balon-voley-playa_black.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/media/utam5arn/oferta-especial-inicio-de-temporada-2627-caja-20-balones-molten-modelo-v5m1300-v5m-1500.jpg",
+      "status": 200,
+      "ct": "image/jpeg"
+    },
+    {
+      "url": "https://fmvoley.com/images/patrocinadores/ayto-madrid.svg?v=2",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/patrocinadores/UFEDEMA.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/webfonts/fa-brands-400.woff2",
+      "status": 200,
+      "ct": "font/woff2"
+    },
+    {
+      "url": "https://fmvoley.com/images/bg-clasificacion-enmascarado.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js",
+      "status": 200,
+      "ct": "application/javascript"
+    },
+    {
+      "url": "https://fmvoley.com/images/logos-clubes/Logo_club_86.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/images/patrocinadores/comunidad-madrid.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-burger-menu.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-escuelas.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/corner-footer.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/images/patrocinadores/mercury.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-escuelas_black.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/logos-clubes/Logo_club_14.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/images/logos-clubes/Logo_club_143.png",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://fmvoley.com/images/patrocinadores/howden.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fmvoley.com/images/ico-tv.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+      "status": 200,
+      "ct": "font/woff2"
+    },
+    {
+      "url": "https://fmvoley.com/webfonts/fa-regular-400.woff2",
+      "status": 200,
+      "ct": "font/woff2"
+    },
+    {
+      "url": "https://fmvoley.com/webfonts/fa-solid-900.woff2",
+      "status": 200,
+      "ct": "font/woff2"
+    },
+    {
+      "url": "https://fmvoley.com/webfonts/fa-light-300.woff2",
+      "status": 200,
+      "ct": "font/woff2"
+    },
+    {
+      "url": "https://fmvoley.com/scripts/bootstrap-select.min.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://fmvoley.com/scripts/funciones.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://fmvoley.com/scripts/scrollPosStyler.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://fmvoley.com/scripts/aos.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://fmvoley.com/scripts/cookie-consent.js?v=2",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://code.jquery.com/jquery-3.6.0.min.js",
+      "status": 200,
+      "ct": "application/javascript; charset=utf-8"
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-7ZM70Q75JT",
+      "status": 200,
+      "ct": "application/javascript; charset=UTF-8"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js",
+      "status": 200,
+      "ct": "application/javascript; charset=utf-8"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js",
+      "status": 200,
+      "ct": "application/javascript; charset=utf-8"
+    },
+    {
+      "url": "https://www.googletagmanager.com/td?id=G-7ZM70Q75JT&v=3&t=t&pid=420272654&gtm=45je6a70v9177562877za200zd9177562877xf1&seq=1&exp=115616986~115938466~115938469~118897920~118897930~120213116~120385423~120469145~120469153~121046263~121046271&dl=fmvoley.com%2Fclasificaciones-y-resultados&tdp=G-7ZM70Q75JT;177562877;0;0;0&frm=0&bt=0&ct=3&z=0",
+      "status": 204,
+      "ct": "text/plain"
+    },
+    {
+      "url": "https://tracker.metricool.com/resources/be.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "https://tracker.metricool.com/c3po.jpg?hash=9c15ee3af23fa0ddc62ec2866597e62b&u=https%3A%2F%2Ffmvoley.com%2Fclasificaciones-y-resultados&bw=1280&bh=900",
+      "status": 200,
+      "ct": "image/png"
+    },
+    {
+      "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=undefined",
+      "status": 400,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "url": "https://intranet.fmvoley.com/api/competiciones/getTiposCompeticion",
+      "status": 200,
+      "ct": "application/json"
+    },
+    {
+      "url": "https://intranet.fmvoley.com/api/competiciones/getCompeticiones?tipoCompeticionId=1",
+      "status": 200,
+      "ct": "application/json"
+    }
+  ]
+}
