@@ -203,11 +203,11 @@ function renderResultados(data) {
     return `<div class="partido-wrap">
       <div class="partido">
         <span class="equipo-local">${p.local}</span>
-        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${p.resultado}</span>
+        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${p.jugado ? p.resultado : (p.resultado && p.resultado !== '0:00' ? p.resultado : '–')}</span>
         <span class="equipo-visitante">${p.visitante}</span>
       </div>
-      ${p.hora || p.campo ? `<div class="partido-detalle">
-        ${p.hora ? `<span>🕐 ${p.hora}</span>` : ''}
+      ${(p.hora && p.hora !== '0:00') || p.campo ? `<div class="partido-detalle">
+        ${p.hora && p.hora !== '0:00' ? `<span>🕐 ${p.hora}</span>` : ''}
         ${p.campo ? `<span>📍 ${p.campo}</span>` : ''}
       </div>` : ''}
     </div>`;
