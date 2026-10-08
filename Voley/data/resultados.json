@@ -1,5 +1,23 @@
 {
-  "partidos": [],
-  "jornadas": [],
-  "jornada_actual": null
+  "partidos": [
+    {
+      "local": "MANZANARES VOLEY A A",
+      "visitante": "TORREJÓN A A",
+      "resultado": "–",
+      "jugado": false
+    },
+    {
+      "local": "MANZANARES VOLEY A A",
+      "visitante": "TORREJÓN A A",
+      "resultado": "–",
+      "jugado": false
+    },
+    {
+      "local": "CVLEGANES.COM A A",
+      "visitante": "FEEL ALCOBENDAS A A",
+      "resultado": "–",
+      "jugado": false
+    }
+  ],
+  "jornadas": []
 }
