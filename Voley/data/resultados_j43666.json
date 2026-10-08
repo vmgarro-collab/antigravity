@@ -1,5 +1,66 @@
 {
-  "partidos": [],
+  "partidos": [
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES D",
+      "visitante": "ABV BOADILLA B B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    },
+    {
+      "local": "BERNADETTE A",
+      "visitante": "CV BULLDOGS B B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    },
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES C",
+      "visitante": "CV COLLADO VILLALBA C",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    },
+    {
+      "local": "BERNADETTE B",
+      "visitante": "CV GUADARRAMA",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    },
+    {
+      "local": "CD KOLBE",
+      "visitante": "B. M. 2 DE MAYO",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    },
+    {
+      "local": "ANCORA GALAPAGAR",
+      "visitante": "CV SAN IGNACIO A",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "21/02/2027",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43666
+    }
+  ],
   "jornadas": [
     {
       "num": 43651,

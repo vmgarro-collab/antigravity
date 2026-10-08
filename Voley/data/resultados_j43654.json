@@ -1,5 +1,66 @@
 {
-  "partidos": [],
+  "partidos": [
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES D",
+      "visitante": "CV SAN IGNACIO A",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43654
+    },
+    {
+      "local": "ANCORA GALAPAGAR",
+      "visitante": "B. M. 2 DE MAYO",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43654
+    },
+    {
+      "local": "BERNADETTE B",
+      "visitante": "CV COLLADO VILLALBA C",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43654
+    },
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES C",
+      "visitante": "CV BULLDOGS B B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43654
+    },
+    {
+      "local": "BERNADETTE A",
+      "visitante": "ABV BOADILLA B B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43654
+    },
+    {
+      "local": "CD KOLBE",
+      "visitante": "CV GUADARRAMA",
+      "resultado": "12:00",
+      "jugado": false,
+      "fecha": "25/10/2026",
+      "hora": "12:00",
+      "campo": "KOLBE, COLEGIO",
+      "jornada": 43654
+    }
+  ],
   "jornadas": [
     {
       "num": 43651,

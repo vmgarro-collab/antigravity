@@ -1,5 +1,66 @@
 {
-  "partidos": [],
+  "partidos": [
+    {
+      "local": "CV SAN IGNACIO A",
+      "visitante": "CV GUADARRAMA",
+      "resultado": "9:30",
+      "jugado": false,
+      "fecha": "10/10/2026",
+      "hora": "9:30",
+      "campo": "MARIA DE VILLOTA",
+      "jornada": 43652
+    },
+    {
+      "local": "ANCORA GALAPAGAR",
+      "visitante": "CV COLLADO VILLALBA C",
+      "resultado": "9:45",
+      "jugado": false,
+      "fecha": "10/10/2026",
+      "hora": "9:45",
+      "campo": "POLIDEPORTIVO MUNICIPAL DE GALAPAGAR",
+      "jornada": 43652
+    },
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES D",
+      "visitante": "B. M. 2 DE MAYO",
+      "resultado": "10:00",
+      "jugado": false,
+      "fecha": "10/10/2026",
+      "hora": "10:00",
+      "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
+      "jornada": 43652
+    },
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES C",
+      "visitante": "BERNADETTE A",
+      "resultado": "10:00",
+      "jugado": false,
+      "fecha": "10/10/2026",
+      "hora": "10:00",
+      "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
+      "jornada": 43652
+    },
+    {
+      "local": "BERNADETTE B",
+      "visitante": "ABV BOADILLA B B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "11/10/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43652
+    },
+    {
+      "local": "CD KOLBE",
+      "visitante": "CV BULLDOGS B B",
+      "resultado": "12:00",
+      "jugado": false,
+      "fecha": "11/10/2026",
+      "hora": "12:00",
+      "campo": "KOLBE, COLEGIO",
+      "jornada": 43652
+    }
+  ],
   "jornadas": [
     {
       "num": 43651,

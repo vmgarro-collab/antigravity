@@ -1,5 +1,66 @@
 {
-  "partidos": [],
+  "partidos": [
+    {
+      "local": "ABV BOADILLA B B",
+      "visitante": "CLUB VOLEIBOL TORRELODONES D",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    },
+    {
+      "local": "CV BULLDOGS B B",
+      "visitante": "BERNADETTE A",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    },
+    {
+      "local": "CV COLLADO VILLALBA C",
+      "visitante": "CLUB VOLEIBOL TORRELODONES C",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    },
+    {
+      "local": "CV GUADARRAMA",
+      "visitante": "BERNADETTE B",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    },
+    {
+      "local": "B. M. 2 DE MAYO",
+      "visitante": "CD KOLBE",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    },
+    {
+      "local": "CV SAN IGNACIO A",
+      "visitante": "ANCORA GALAPAGAR",
+      "resultado": "0:00",
+      "jugado": false,
+      "fecha": "08/11/2026",
+      "hora": "0:00",
+      "campo": "",
+      "jornada": 43655
+    }
+  ],
   "jornadas": [
     {
       "num": 43651,
