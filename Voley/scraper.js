@@ -32,6 +32,86 @@ async function getJornadas() {
   return data.content || [];
 }
 
+// ─── Try direct API calls first (faster) ─────────────────────────────────────
+const FASE_ID  = '14998';
+const COMP_TEMP_ID = '23547';
+const COMP_ID  = '1134';
+
+async function tryFetchPartidos() {
+  const candidateUrls = [
+    `${API}/getPartidosGrupo?grupoId=${GRUPO_ID}`,
+    `${API}/getPartidosGrupo?grupoId=${GRUPO_ID}&faseId=${FASE_ID}`,
+    `${API}/getEncuentrosGrupo?grupoId=${GRUPO_ID}`,
+    `${API}/getResultadosGrupo?grupoId=${GRUPO_ID}`,
+    `${API}/getCalendarioGrupo?grupoId=${GRUPO_ID}`,
+    `${API}/getJornadaPartidos?grupoId=${GRUPO_ID}`,
+    `${API}/getPartidosFase?faseId=${FASE_ID}`,
+    `${API}/getPartidos?grupoId=${GRUPO_ID}`,
+    `${API}/getPartidos?faseId=${FASE_ID}&grupoId=${GRUPO_ID}`,
+    `${API}/getPartidosCompeticion?competicionTemporadaId=${COMP_TEMP_ID}&grupoId=${GRUPO_ID}`,
+    `${API}/getEncuentros?grupoId=${GRUPO_ID}`,
+    `${API}/getCalendario?grupoId=${GRUPO_ID}`,
+    `${API}/getResultados?grupoId=${GRUPO_ID}`,
+  ];
+  for (const url of candidateUrls) {
+    try {
+      const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; VoleyApp/1.0)' } });
+      if (!res.ok) { console.log(`[api] ${res.status} ${url}`); continue; }
+      const data = await res.json();
+      const arr = data.content || data.partidos || data.encuentros || data.matches || data.calendario || [];
+      if (Array.isArray(arr) && arr.length > 0) {
+        console.log(`[api] ✓ FOUND partidos en: ${url} (${arr.length} registros)`);
+        return arr;
+      }
+      console.log(`[api] 200 pero vacío: ${url}`, JSON.stringify(data).slice(0, 120));
+    } catch (e) {
+      console.log(`[api] Error ${url}: ${e.message}`);
+    }
+  }
+  return null; // no luck, fall through to Playwright
+}
+
+async function tryFetchPartidosPorJornada(jornadas) {
+  const all = [];
+  // Try first jornada to find the right endpoint pattern
+  const firstJornada = jornadas[0];
+  const jornadaId = firstJornada.id || firstJornada.num || firstJornada.jornadaId;
+  const patterns = [
+    id => `${API}/getPartidosJornada?jornadaId=${id}`,
+    id => `${API}/getEncuentrosJornada?jornadaId=${id}`,
+    id => `${API}/getPartidos?jornadaId=${id}`,
+    id => `${API}/getResultadosJornada?jornadaId=${id}`,
+    id => `${API}/getJornadaPartidos?jornadaId=${id}`,
+    id => `${API}/getPartidosJornada?jornada_id=${id}&grupoId=${GRUPO_ID}`,
+  ];
+
+  let workingPattern = null;
+  for (const pat of patterns) {
+    const url = pat(jornadaId);
+    try {
+      const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      if (!res.ok) { console.log(`[api-j] ${res.status} ${url}`); continue; }
+      const data = await res.json();
+      const arr = data.content || data.partidos || data.encuentros || [];
+      if (Array.isArray(arr)) { workingPattern = pat; console.log(`[api-j] ✓ Patrón: ${url}`); break; }
+    } catch (_) {}
+  }
+  if (!workingPattern) return null;
+
+  // Fetch all jornadas using the working pattern
+  for (const j of jornadas) {
+    const jid = j.id || j.num || j.jornadaId;
+    try {
+      const res = await fetch(workingPattern(jid), { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const arr = (data.content || data.partidos || data.encuentros || []).map(p => ({ ...p, jornadaId: jid }));
+      all.push(...arr);
+    } catch (_) {}
+  }
+  return all.length > 0 ? all : null;
+}
+
 // ─── Playwright: discover partidos endpoint by interacting with the page ──────
 async function getBrowser() {
   const { chromium } = require('playwright');
@@ -80,49 +160,61 @@ async function getPartidosViaPlaywright() {
     if (btn) { await btn.click(); await page.waitForTimeout(600); }
   } catch (_) {}
 
-  // Select Federadas (tipoCompeticionId=1)
-  await page.evaluate(() => {
-    const el = document.getElementById('comboTipoCompeticion');
-    if (el) { el.value = '1'; if (window.$) window.$(el).trigger('change'); }
-  });
-  await page.waitForTimeout(2000);
+  // Helper: select a value in a bootstrap-select or native select, wait for API call
+  async function selectAndWait(id, value, waitMs = 2500) {
+    await page.evaluate(([id, value]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = value;
+      // bootstrap-select API
+      if (window.$ && window.$(el).selectpicker) {
+        window.$(el).selectpicker('val', value);
+      }
+      // fire both native and jQuery change events
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+      if (window.$) window.$(el).trigger('change');
+    }, [id, value]);
+    await page.waitForTimeout(waitMs);
+  }
 
-  // Select Infantil Femenino (competicionId=1134)
-  await page.evaluate(() => {
-    const el = document.getElementById('comboCompeticiones');
-    if (el) { el.value = '1134'; if (window.$) window.$(el).trigger('change'); }
-  });
-  await page.waitForTimeout(2000);
+  // Step-by-step selection with correct IDs
+  console.log('[scraper] Seleccionando Federadas...');
+  await selectAndWait('comboTipoCompeticion', '1', 2000);
 
-  // Select 2ª Div. Aut. Zonal (competicionTemporadaId=23547)
-  await page.evaluate(() => {
-    const el = document.getElementById('comboDivisiones');
-    if (el) { el.value = '23547'; if (window.$) window.$(el).trigger('change'); }
-  });
-  await page.waitForTimeout(2000);
+  console.log('[scraper] Seleccionando Infantil Femenino...');
+  await selectAndWait('comboCompeticiones', '1134', 2000);
 
-  // Select Fase Liga (faseId=14998)
-  await page.evaluate(() => {
-    const el = document.getElementById('comboFases');
-    if (el) { el.value = '14998'; if (window.$) window.$(el).trigger('change'); }
-  });
-  await page.waitForTimeout(2000);
+  console.log('[scraper] Seleccionando 2ª Div. Aut. Zonal...');
+  await selectAndWait('comboDivisiones', '23547', 2000);
 
-  // Select Grupo A (grupoId=34097)
-  await page.evaluate(() => {
-    const el = document.getElementById('comboGrupos');
-    if (el) { el.value = '34097'; if (window.$) window.$(el).trigger('change'); }
-  });
-  await page.waitForTimeout(1000);
+  console.log('[scraper] Seleccionando Fase Liga...');
+  await selectAndWait('comboFases', '14998', 2000);
 
-  // Click Buscar
+  console.log('[scraper] Seleccionando Grupo A...');
+  await selectAndWait('comboGrupos', '34097', 2000);
+
+  // Click Buscar — handle both AJAX and full-page-reload cases
   try {
-    const buscar = await page.$('button:has-text("Buscar"), input[value="Buscar"], .btn-buscar, #btn-buscar');
+    // Get all "Buscar" buttons and click the last (real search one)
+    const buscarBtns = await page.$$('button:has-text("Buscar"), input[type=submit][value="Buscar"]');
+    console.log(`[scraper] Encontrados ${buscarBtns.length} botones Buscar`);
+    const buscar = buscarBtns[buscarBtns.length - 1];
     if (buscar) {
-      await buscar.click();
-      await page.waitForNetworkIdle({ timeout: 15000 }).catch(() => {});
+      // Wait for either navigation or network idle
+      await Promise.race([
+        buscar.click().then(() => page.waitForNavigation({ waitUntil: 'networkidle', timeout: 15000 })),
+        buscar.click().then(() => page.waitForNetworkIdle({ timeout: 15000 })),
+      ]).catch(() => {});
     }
   } catch (e) { console.warn('[scraper] Buscar:', e.message); }
+  // Also try submitting the form directly
+  try {
+    await page.evaluate(() => {
+      const form = document.querySelector('form');
+      if (form) form.submit();
+    });
+    await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 10000 }).catch(() => {});
+  } catch (_) {}
 
   await page.waitForTimeout(3000);
 
@@ -219,16 +311,33 @@ async function getPartidosViaPlaywright() {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 async function captureCompetitionData() {
-  const [clasifRaw, jornadasRaw, partidos] = await Promise.allSettled([
+  // Run clasificacion + jornadas in parallel; try direct API for partidos first
+  const [clasifRaw, jornadasRaw] = await Promise.allSettled([
     getClasificacion(),
     getJornadas(),
-    getPartidosViaPlaywright(),
   ]);
+
+  console.log('[scraper] Intentando endpoints directos para partidos...');
+  let partidos = await tryFetchPartidos();
+
+  if (!partidos) {
+    // Try fetching partidos per jornada (since we have jornadas)
+    const jornadas = jornadasRaw.status === 'fulfilled' ? jornadasRaw.value : [];
+    if (jornadas.length > 0) {
+      console.log(`[scraper] Intentando partidos por jornada (${jornadas.length} jornadas)...`);
+      partidos = await tryFetchPartidosPorJornada(jornadas);
+    }
+  }
+
+  if (!partidos) {
+    console.log('[scraper] Sin datos directos. Lanzando Playwright...');
+    try { partidos = await getPartidosViaPlaywright(); } catch (e) { partidos = []; }
+  }
 
   return {
     clasificacion: clasifRaw.status === 'fulfilled' ? clasifRaw.value : [],
     jornadas:      jornadasRaw.status === 'fulfilled' ? jornadasRaw.value : [],
-    partidos:      partidos.status === 'fulfilled' ? partidos.value : [],
+    partidos:      partidos || [],
   };
 }
 
