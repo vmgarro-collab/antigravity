@@ -171,10 +171,11 @@ function renderClasificacion(data) {
       </tr></thead>
       <tbody>${data.tabla.map(r => {
         const mayo = esMayo(r.equipo);
-        const click = mayo ? '' : ` onclick="showH2H('${r.equipo.replace(/'/g, "\\'")}')" title="Ver enfrentamientos vs 2 de Mayo"`;
+        const equipo = (r.equipo || '').trim();
+        const click = mayo ? '' : ` onclick="showH2H('${equipo.replace(/'/g, "\\'")}')" title="Ver enfrentamientos vs 2 de Mayo"`;
         return `<tr${mayo ? ' class="mayo-clasif"' : ''}${click}>
           <td>${r.pos}</td>
-          <td>${r.equipo}${mayo ? '<span class="mayo-badge">★</span>' : ''}</td>
+          <td>${equipo}${mayo ? '<span class="mayo-badge">★</span>' : ''}</td>
           <td>${r.pj}</td><td>${r.pg}</td><td>${r.pp}</td>
           <td>${r.sg ?? '–'}</td><td>${r.sp ?? '–'}</td>
           <td class="col-pf">${r.pf ?? '–'}</td>

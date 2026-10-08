@@ -348,7 +348,7 @@ function normalizeClasificacion(raw) {
   return {
     tabla: src.map((r, i) => ({
       pos:    parseInt(r.posicion || r.pos) || (i + 1),
-      equipo: r.nombre || r.equipo || '',
+      equipo: (r.nombre || r.equipo || '').trim(),
       pj:     parseInt(r.jugados  || r.pj)  || 0,
       pg:     parseInt(r.ganados  || r.pg)  || 0,
       pp:     parseInt(r.perdidos || r.pp)  || 0,
