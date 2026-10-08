@@ -371,14 +371,15 @@ function normalizeResultados(raw) {
     const sLocal = p.sets_local ?? p.setsLocal ?? p.setsEquipoLocal ?? null;
     const sVis   = p.sets_visitante ?? p.setsVisitante ?? p.setsEquipoVisitante ?? null;
     const jugado = p.finalizado === true || (sLocal !== null && sVis !== null && (Number(sLocal) + Number(sVis)) > 0);
-    const resultado = jugado ? `${sLocal}-${sVis}` : (p.hora || '–');
+    const hora = (p.hora && p.hora !== '0:00') ? p.hora : '';
+    const resultado = jugado ? `${sLocal}-${sVis}` : (hora || '–');
     return {
       local:     p.equipo_local || p.equipoLocalNombre || p.nombreEquipoLocal || p.local || '',
       visitante: p.equipo_visitante || p.equipoVisitanteNombre || p.nombreEquipoVisitante || p.visitante || '',
       resultado,
       jugado,
       fecha: p.fecha || '',
-      hora:  p.hora  || '',
+      hora:  hora,
       campo: p.pabellon || p.campo || '',
       jornada: p.jornadaId || p.jornada_id || '',
     };
