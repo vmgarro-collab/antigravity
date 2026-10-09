@@ -212,11 +212,13 @@ function renderResultados(data) {
         }
       }
       const marcador = p.jugado ? p.resultado : (p.hora && p.hora !== '0:00' ? p.hora : '–');
+      const localCls  = esMayo(p.local)      ? ' mayo-name' : '';
+      const visitCls  = esMayo(p.visitante)  ? ' mayo-name' : '';
       return `<div class="partido-wrap">
         <div class="partido">
-          <span class="equipo-local">${p.local}</span>
+          <span class="equipo-local${localCls}">${p.local}</span>
           <span class="resultado${p.jugado ? resCls : ' pendiente'}">${marcador}</span>
-          <span class="equipo-visitante">${p.visitante}</span>
+          <span class="equipo-visitante${visitCls}">${p.visitante}</span>
         </div>
         ${p.campo ? `<div class="partido-detalle"><span>📍 ${p.campo}</span></div>` : ''}
       </div>`;
