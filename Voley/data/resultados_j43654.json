@@ -3,11 +3,21 @@
     {
       "local": "CLUB VOLEIBOL TORRELODONES D",
       "visitante": "CV SAN IGNACIO A",
-      "resultado": "–",
+      "resultado": "9:30",
       "jugado": false,
-      "fecha": "25/10/2026",
-      "hora": "",
-      "campo": "",
+      "fecha": "24/10/2026",
+      "hora": "9:30",
+      "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
+      "jornada": 43654
+    },
+    {
+      "local": "CLUB VOLEIBOL TORRELODONES C",
+      "visitante": "CV BULLDOGS B B",
+      "resultado": "9:30",
+      "jugado": false,
+      "fecha": "24/10/2026",
+      "hora": "9:30",
+      "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
       "jornada": 43654
     },
     {
@@ -23,16 +33,6 @@
     {
       "local": "BERNADETTE B",
       "visitante": "CV COLLADO VILLALBA C",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "25/10/2026",
-      "hora": "",
-      "campo": "",
-      "jornada": 43654
-    },
-    {
-      "local": "CLUB VOLEIBOL TORRELODONES C",
-      "visitante": "CV BULLDOGS B B",
       "resultado": "–",
       "jugado": false,
       "fecha": "25/10/2026",
