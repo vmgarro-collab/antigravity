@@ -1,7 +1,7 @@
 // FutbolFemenino/sw.js — Service Worker
 'use strict';
 
-const CACHE = 'mcf-femenino-v1';
+const CACHE = 'mcf-femenino-v2';
 const PRECACHE = [
   '/antigravity/FutbolFemenino/',
   '/antigravity/FutbolFemenino/index.html',
