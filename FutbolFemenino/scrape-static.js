@@ -1,0 +1,69 @@
+// FutbolFemenino/scrape-static.js — run by GitHub Actions
+'use strict';
+
+const fs   = require('fs');
+const path = require('path');
+const { getClasificacion, getResultados, getGoleadores } = require('./scraper.js');
+
+const COMPETICION_ID = '26737919';
+const GRUPO_ID       = '26737922';
+const DATA_DIR       = path.join(__dirname, 'data');
+
+async function retry(fn, label, attempts = 3) {
+  for (let i = 1; i <= attempts; i++) {
+    try { return await fn(); }
+    catch (e) {
+      console.warn(`  ${label} intento ${i} fallido: ${e.message}`);
+      if (i < attempts) await new Promise(r => setTimeout(r, 3000));
+      else throw e;
+    }
+  }
+}
+
+async function main() {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+
+  console.log('Fetching clasificacion...');
+  const clasif = await retry(() => getClasificacion(GRUPO_ID, COMPETICION_ID), 'clasificacion');
+  fs.writeFileSync(path.join(DATA_DIR, 'clasificacion.json'), JSON.stringify(clasif));
+
+  console.log('Fetching resultados (all jornadas)...');
+  const result = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID), 'resultados');
+  fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(result));
+
+  const todosPartidos = [];
+  for (const j of result.jornadas || []) {
+    const filePath = path.join(DATA_DIR, `resultados_j${j.num}.json`);
+    let ok = false;
+    for (let attempt = 1; attempt <= 3 && !ok; attempt++) {
+      try {
+        const jResult = await getResultados(GRUPO_ID, COMPETICION_ID, j.num);
+        fs.writeFileSync(filePath, JSON.stringify(jResult));
+        todosPartidos.push(...(jResult.partidos || []));
+        console.log(`  Jornada ${j.num} OK (${jResult.partidos?.length || 0} partidos)`);
+        ok = true;
+      } catch (e) {
+        console.warn(`  Jornada ${j.num} intento ${attempt} fallido: ${e.message}`);
+        if (attempt < 3) await new Promise(r => setTimeout(r, 3000));
+      }
+    }
+    if (!ok) {
+      if (fs.existsSync(filePath)) {
+        try {
+          const existing = JSON.parse(fs.readFileSync(filePath));
+          todosPartidos.push(...(existing.partidos || []));
+        } catch (_) {}
+      }
+      console.warn(`  Jornada ${j.num} omitida`);
+    }
+  }
+  fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
+
+  console.log('Fetching goleadoras...');
+  const goles = await retry(() => getGoleadores(GRUPO_ID, COMPETICION_ID), 'goleadoras');
+  fs.writeFileSync(path.join(DATA_DIR, 'goleadores.json'), JSON.stringify(goles));
+
+  console.log('Done. Files written to FutbolFemenino/data/');
+}
+
+main().catch(e => { console.error(e); process.exit(1); });
