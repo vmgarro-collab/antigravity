@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "ANCORA GALAPAGAR",
+      "pj": 2,
+      "pg": 2,
+      "pp": 0,
+      "sg": 6,
+      "sp": null,
+      "pf": 150,
+      "pc": 79,
+      "pts": 6
+    },
+    {
+      "pos": 2,
       "equipo": "CLUB VOLEIBOL TORRELODONES C",
       "pj": 2,
       "pg": 2,
@@ -13,7 +25,7 @@
       "pts": 6
     },
     {
-      "pos": 2,
+      "pos": 3,
       "equipo": "CV GUADARRAMA",
       "pj": 2,
       "pg": 2,
@@ -23,18 +35,6 @@
       "pf": 195,
       "pc": 169,
       "pts": 6
-    },
-    {
-      "pos": 3,
-      "equipo": "ANCORA GALAPAGAR",
-      "pj": 1,
-      "pg": 1,
-      "pp": 0,
-      "sg": 3,
-      "sp": null,
-      "pf": 75,
-      "pc": 32,
-      "pts": 3
     },
     {
       "pos": 4,
@@ -74,18 +74,6 @@
     },
     {
       "pos": 7,
-      "equipo": "CV COLLADO VILLALBA C",
-      "pj": 1,
-      "pg": 0,
-      "pp": 1,
-      "sg": 1,
-      "sp": 3,
-      "pf": 79,
-      "pc": 91,
-      "pts": 0
-    },
-    {
-      "pos": 8,
       "equipo": "CLUB VOLEIBOL TORRELODONES D",
       "pj": 2,
       "pg": 0,
@@ -94,6 +82,18 @@
       "sp": 6,
       "pf": 131,
       "pc": 172,
+      "pts": 0
+    },
+    {
+      "pos": 8,
+      "equipo": "CV COLLADO VILLALBA C",
+      "pj": 2,
+      "pg": 0,
+      "pp": 2,
+      "sg": 1,
+      "sp": 6,
+      "pf": 126,
+      "pc": 166,
       "pts": 0
     },
     {
