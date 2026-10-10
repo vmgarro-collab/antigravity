@@ -62,8 +62,8 @@
   {
     "local": "CV SAN IGNACIO A",
     "visitante": "CV GUADARRAMA",
-    "resultado": "9:30",
-    "jugado": false,
+    "resultado": "1-3",
+    "jugado": true,
     "fecha": "10/10/2026",
     "hora": "9:30",
     "campo": "MARIA DE VILLOTA",
@@ -82,8 +82,8 @@
   {
     "local": "CLUB VOLEIBOL TORRELODONES D",
     "visitante": "B. M. 2 DE MAYO",
-    "resultado": "10:00",
-    "jugado": false,
+    "resultado": "1-3",
+    "jugado": true,
     "fecha": "10/10/2026",
     "hora": "10:00",
     "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
@@ -92,8 +92,8 @@
   {
     "local": "CLUB VOLEIBOL TORRELODONES C",
     "visitante": "BERNADETTE A",
-    "resultado": "10:00",
-    "jugado": false,
+    "resultado": "3-0",
+    "jugado": true,
     "fecha": "10/10/2026",
     "hora": "10:00",
     "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",

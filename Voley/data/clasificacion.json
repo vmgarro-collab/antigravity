@@ -2,6 +2,30 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "CLUB VOLEIBOL TORRELODONES C",
+      "pj": 2,
+      "pg": 2,
+      "pp": 0,
+      "sg": 6,
+      "sp": null,
+      "pf": 150,
+      "pc": 93,
+      "pts": 6
+    },
+    {
+      "pos": 2,
+      "equipo": "CV GUADARRAMA",
+      "pj": 2,
+      "pg": 2,
+      "pp": 0,
+      "sg": 6,
+      "sp": 2,
+      "pf": 195,
+      "pc": 169,
+      "pts": 6
+    },
+    {
+      "pos": 3,
       "equipo": "ANCORA GALAPAGAR",
       "pj": 1,
       "pg": 1,
@@ -13,7 +37,7 @@
       "pts": 3
     },
     {
-      "pos": 2,
+      "pos": 4,
       "equipo": "CD KOLBE",
       "pj": 1,
       "pg": 1,
@@ -25,43 +49,31 @@
       "pts": 3
     },
     {
-      "pos": 3,
-      "equipo": "CLUB VOLEIBOL TORRELODONES C",
-      "pj": 1,
-      "pg": 1,
-      "pp": 0,
-      "sg": 3,
-      "sp": null,
-      "pf": 75,
-      "pc": 53,
-      "pts": 3
-    },
-    {
-      "pos": 4,
-      "equipo": "CV GUADARRAMA",
-      "pj": 1,
-      "pg": 1,
-      "pp": 0,
-      "sg": 3,
-      "sp": 1,
-      "pf": 102,
-      "pc": 85,
-      "pts": 3
-    },
-    {
       "pos": 5,
       "equipo": "CV SAN IGNACIO A",
-      "pj": 1,
+      "pj": 2,
       "pg": 1,
-      "pp": 0,
-      "sg": 3,
-      "sp": 1,
-      "pf": 91,
-      "pc": 79,
+      "pp": 1,
+      "sg": 4,
+      "sp": 4,
+      "pf": 175,
+      "pc": 172,
       "pts": 3
     },
     {
       "pos": 6,
+      "equipo": "B. M. 2 DE MAYO",
+      "pj": 2,
+      "pg": 1,
+      "pp": 1,
+      "sg": 4,
+      "sp": 4,
+      "pf": 182,
+      "pc": 180,
+      "pts": 3
+    },
+    {
+      "pos": 7,
       "equipo": "CV COLLADO VILLALBA C",
       "pj": 1,
       "pg": 0,
@@ -73,27 +85,15 @@
       "pts": 0
     },
     {
-      "pos": 7,
-      "equipo": "B. M. 2 DE MAYO",
-      "pj": 1,
-      "pg": 0,
-      "pp": 1,
-      "sg": 1,
-      "sp": 3,
-      "pf": 85,
-      "pc": 102,
-      "pts": 0
-    },
-    {
       "pos": 8,
       "equipo": "CLUB VOLEIBOL TORRELODONES D",
-      "pj": 1,
+      "pj": 2,
       "pg": 0,
-      "pp": 1,
-      "sg": null,
-      "sp": 3,
-      "pf": 53,
-      "pc": 75,
+      "pp": 2,
+      "sg": 1,
+      "sp": 6,
+      "pf": 131,
+      "pc": 172,
       "pts": 0
     },
     {
@@ -110,6 +110,18 @@
     },
     {
       "pos": 10,
+      "equipo": "BERNADETTE A",
+      "pj": 2,
+      "pg": 0,
+      "pp": 1,
+      "sg": null,
+      "sp": 3,
+      "pf": 40,
+      "pc": 75,
+      "pts": 0
+    },
+    {
+      "pos": 11,
       "equipo": "CV BULLDOGS B B",
       "pj": 1,
       "pg": 0,
@@ -118,18 +130,6 @@
       "sp": 3,
       "pf": 32,
       "pc": 75,
-      "pts": 0
-    },
-    {
-      "pos": 11,
-      "equipo": "BERNADETTE A",
-      "pj": 1,
-      "pg": 0,
-      "pp": 0,
-      "sg": null,
-      "sp": null,
-      "pf": null,
-      "pc": null,
       "pts": 0
     },
     {
