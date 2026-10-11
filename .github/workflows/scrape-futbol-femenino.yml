@@ -2,8 +2,10 @@ name: Scrape Futbol Femenino Madrid CF B
 
 on:
   schedule:
-    - cron: '30 7,13,19 * * 1-5'  # lunes a viernes: 3 veces al día (offset 30min vs alevines)
-    - cron: '30 8-20 * * 0,6'     # sábados y domingos: cada hora de 8h a 20h
+    - cron: '30 7,13,19 * * 1-5'   # L-V: 3 veces al dia (offset 30min)
+    - cron: '*/10 8-12 * * 6'      # Sabado 10h-15h (hora espana): cada 10 min
+    - cron: '30 0-7,13-20 * * 6'   # Sabado resto: cada hora
+    - cron: '30 8-20 * * 0'        # Domingo: cada hora
   workflow_dispatch:
 
 permissions:
