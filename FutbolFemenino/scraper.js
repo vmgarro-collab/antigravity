@@ -17,15 +17,6 @@ function cached(key, fn) {
   });
 }
 
-async function fetchJson(path) {
-  const url = `${BASE_URL}${path}`;
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; FutbolFemeninoApp/1.0)' }
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return res.json();
-}
-
 async function fetchNextData(path) {
   const url = `${BASE_URL}${path}`;
   const res = await fetch(url, {
@@ -67,6 +58,36 @@ async function getClasificacion(grupoId, competicionId, jornada) {
   });
 }
 
+// Obtiene todas las jornadas + partidos de una vez desde /competicion/calendario
+async function getCalendario(grupoId, competicionId) {
+  const key = `calendario_${grupoId}_${competicionId}`;
+  return cached(key, async () => {
+    const props = await fetchNextData(
+      `/competicion/calendario?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${competicionId}&grupo=${grupoId}&jornada=1`
+    );
+    const cal = props.calendar || {};
+    const rounds = cal.rounds || [];
+    return rounds.map(r => ({
+      num:   r.codjornada,
+      label: `Jornada ${r.codjornada}`,
+      fecha: r.equipos?.[0]?.fecha || '',
+      partidos: (r.equipos || []).map(p => {
+        const jugado = p.goles_casa !== '' && p.goles_visitante !== '';
+        return {
+          local:     p.equipo_local || '',
+          visitante: p.equipo_visitante || '',
+          resultado: jugado ? `${p.goles_casa}-${p.goles_visitante}` : (p.hora || ''),
+          jugado,
+          fecha:     p.fecha || '',
+          hora:      p.hora || '',
+          campo:     p.campo || '',
+        };
+      }),
+    }));
+  });
+}
+
+// getResultados mantiene compatibilidad con jornada_actual y la clasificación
 async function getResultados(grupoId, competicionId, jornada) {
   const key = `result_${grupoId}_${competicionId}_${jornada || ''}`;
   return cached(key, async () => {
@@ -123,4 +144,4 @@ async function getGoleadores(grupoId, competicionId) {
   });
 }
 
-module.exports = { getClasificacion, getResultados, getGoleadores };
+module.exports = { getClasificacion, getResultados, getCalendario, getGoleadores };
