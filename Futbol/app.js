@@ -11,10 +11,7 @@ const TIPOJUEGO       = '2';
 // ─── Service Worker ───────────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/antigravity/Futbol/sw.js').then(reg => {
-    // Comprobar actualizaciones del SW al cargar
     reg.update();
-    // Si hay un nuevo SW instalándose, avisar al usuario
-    });
   });
 }
 
