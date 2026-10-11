@@ -14,6 +14,18 @@
     },
     {
       "pos": 2,
+      "equipo": "CD KOLBE",
+      "pj": 2,
+      "pg": 2,
+      "pp": 0,
+      "sg": 6,
+      "sp": null,
+      "pf": 150,
+      "pc": 82,
+      "pts": 6
+    },
+    {
+      "pos": 3,
       "equipo": "CLUB VOLEIBOL TORRELODONES C",
       "pj": 2,
       "pg": 2,
@@ -25,7 +37,7 @@
       "pts": 6
     },
     {
-      "pos": 3,
+      "pos": 4,
       "equipo": "CV GUADARRAMA",
       "pj": 2,
       "pg": 2,
@@ -35,18 +47,6 @@
       "pf": 195,
       "pc": 169,
       "pts": 6
-    },
-    {
-      "pos": 4,
-      "equipo": "CD KOLBE",
-      "pj": 1,
-      "pg": 1,
-      "pp": 0,
-      "sg": 3,
-      "sp": null,
-      "pf": 75,
-      "pc": 52,
-      "pts": 3
     },
     {
       "pos": 5,
@@ -123,13 +123,13 @@
     {
       "pos": 11,
       "equipo": "CV BULLDOGS B B",
-      "pj": 1,
+      "pj": 2,
       "pg": 0,
-      "pp": 1,
+      "pp": 2,
       "sg": null,
-      "sp": 3,
-      "pf": 32,
-      "pc": 75,
+      "sp": 6,
+      "pf": 62,
+      "pc": 150,
       "pts": 0
     },
     {
