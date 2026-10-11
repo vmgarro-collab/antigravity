@@ -170,7 +170,7 @@ async function loadAll() {
     }
     jornadaIdx = bestIdx;
     _todosPartidos = todosPartidos;
-    renderResultados(result);
+    await loadJornada();
     _goleadoresAll = goles;
     _goleadoresExpanded = false;
     renderGoleadores(goles, false);
