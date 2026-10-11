@@ -233,18 +233,22 @@ function renderResultados(data) {
   updateJornadaNav();
   const body = document.getElementById('resultados-body');
   if (!data.partidos?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin partidos</p>'; return; }
-  body.innerHTML = data.partidos.map(p => `
-    <div class="partido-wrap">
+  body.innerHTML = data.partidos.map(p => {
+    const esLocal = p.local.toUpperCase().includes('LIBERTAD');
+    const esVis   = p.visitante.toUpperCase().includes('LIBERTAD');
+    return `
+    <div class="partido-wrap${esLocal || esVis ? ' partido-propio' : ''}">
       <div class="partido">
-        <span class="equipo-local">${p.local}</span>
+        <span class="equipo-local${esLocal ? ' nombre-propio' : ''}">${p.local}</span>
         <span class="resultado${p.jugado ? '' : ' pendiente'}">${p.resultado}</span>
-        <span class="equipo-visitante">${p.visitante}</span>
+        <span class="equipo-visitante${esVis ? ' nombre-propio' : ''}">${p.visitante}</span>
       </div>
       ${p.hora || p.campo ? `<div class="partido-detalle">
         ${p.hora ? `<span>🕐 ${p.hora}</span>` : ''}
         ${p.campo ? `<span>📍 ${p.campo}</span>` : ''}
       </div>` : ''}
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function updateJornadaNav() {
