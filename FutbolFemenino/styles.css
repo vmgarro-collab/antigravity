@@ -321,3 +321,15 @@ tr.h2h-draw td { color: var(--text-muted); }
 .btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
 .refresh-icon { width: 20px; height: 20px; }
 .btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
+
+.app-footer {
+  text-align: center;
+  padding: 20px 16px 32px;
+}
+.footer-contact {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-decoration: none;
+  opacity: 0.7;
+}
+.footer-contact:hover { opacity: 1; }
