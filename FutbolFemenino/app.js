@@ -103,6 +103,12 @@ async function getGoleadores() {
   return data.goleadores || [];
 }
 
+function parseFechaJornada(str) {
+  // "DD-MM-YYYY"
+  const [d, m, y] = str.split('-');
+  return new Date(`${y}-${m}-${d}`);
+}
+
 // ─── State ────────────────────────────────────────────────────────────────────
 let jornadas   = [];
 let jornadaIdx = 0;
@@ -149,9 +155,20 @@ async function loadAll() {
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
-    jornadaIdx = result.jornada_actual
-      ? Math.max(0, jornadas.findIndex(j => j.num === result.jornada_actual))
-      : Math.max(0, jornadas.length - 1);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let bestIdx = 0;
+    for (let i = 0; i < jornadas.length; i++) {
+      const jFecha = jornadas[i].fecha ? parseFechaJornada(jornadas[i].fecha) : null;
+      if (jFecha && jFecha <= today) bestIdx = i;
+    }
+    // Avanza a la siguiente jornada si han pasado más de 3 días desde la jornada actual
+    const bestFecha = jornadas[bestIdx].fecha ? parseFechaJornada(jornadas[bestIdx].fecha) : null;
+    if (bestFecha) {
+      const diasDesde = (today - bestFecha) / 86400000;
+      if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
+    }
+    jornadaIdx = bestIdx;
     _todosPartidos = todosPartidos;
     renderResultados(result);
     _goleadoresAll = goles;
