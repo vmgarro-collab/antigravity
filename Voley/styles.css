@@ -291,3 +291,6 @@ tr.h2h-loss td { color: #f87171; }
 .btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
 .refresh-icon { width: 20px; height: 20px; }
 .btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
+
+/* Evitar scroll al cambiar jornada */
+body, .app { overflow-anchor: none; }
