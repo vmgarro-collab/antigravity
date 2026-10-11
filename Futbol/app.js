@@ -14,13 +14,6 @@ if ('serviceWorker' in navigator) {
     // Comprobar actualizaciones del SW al cargar
     reg.update();
     // Si hay un nuevo SW instalándose, avisar al usuario
-    reg.addEventListener('updatefound', () => {
-      const newSW = reg.installing;
-      newSW.addEventListener('statechange', () => {
-        if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-          document.getElementById('update-toast').style.display = 'flex';
-        }
-      });
     });
   });
 }
