@@ -166,4 +166,33 @@ async function getGoleadores(grupoId, competicionId) {
   });
 }
 
+
+async function getCalendario(grupoId, competicionId) {
+  const key = `calendario_${grupoId}_${competicionId}`;
+  return cached(key, async () => {
+    const props = await fetchNextData(
+      `/competicion/calendario?temporada=${TEMPORADA}&tipojuego=${TIPOJUEGO}&competicion=${competicionId}&grupo=${grupoId}&jornada=1`
+    );
+    const cal = props.calendar || {};
+    const rounds = cal.rounds || [];
+    return rounds.map(r => ({
+      num:   r.codjornada,
+      label: `Jornada ${r.codjornada}`,
+      fecha: r.equipos?.[0]?.fecha || '',
+      partidos: (r.equipos || []).map(p => {
+        const jugado = p.goles_casa !== '' && p.goles_visitante !== '';
+        return {
+          local:     p.equipo_local || '',
+          visitante: p.equipo_visitante || '',
+          resultado: jugado ? `${p.goles_casa}-${p.goles_visitante}` : (p.hora || ''),
+          jugado,
+          fecha:     p.fecha || '',
+          hora:      p.hora || '',
+          campo:     p.campo || '',
+        };
+      }),
+    }));
+  });
+}
+
 module.exports = { getGrupos, getClasificacion, getResultados, getGoleadores };
