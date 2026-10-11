@@ -3,7 +3,7 @@
 
 const fs   = require('fs');
 const path = require('path');
-const { getClasificacion, getResultados, getGoleadores } = require('./scraper.js');
+const { getClasificacion, getResultados, getCalendario, getGoleadores } = require('./scraper.js');
 
 const COMPETICION_ID = '26737919';
 const GRUPO_ID       = '26737922';
@@ -27,35 +27,39 @@ async function main() {
   const clasif = await retry(() => getClasificacion(GRUPO_ID, COMPETICION_ID), 'clasificacion');
   fs.writeFileSync(path.join(DATA_DIR, 'clasificacion.json'), JSON.stringify(clasif));
 
-  console.log('Fetching resultados (all jornadas)...');
+  // resultados.json: jornadas + jornada_actual (de resultados-y-jornadas)
+  console.log('Fetching resultados...');
   const result = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID), 'resultados');
-  fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(result));
 
+  // calendario: todas las jornadas con partidos desde /competicion/calendario
+  console.log('Fetching calendario (todas las jornadas)...');
+  const calendario = await retry(() => getCalendario(GRUPO_ID, COMPETICION_ID), 'calendario');
+
+  // Mezclar: usar jornadas del calendario, jornada_actual de resultados
+  const jornadasConFecha = calendario.map(j => ({ num: j.num, label: j.label, fecha: j.fecha }));
+  const resultadosBase = {
+    competicion:    result.competicion,
+    grupo:          result.grupo,
+    jornada_actual: result.jornada_actual,
+    jornadas:       jornadasConFecha,
+    partidos:       [],
+  };
+  fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(resultadosBase));
+
+  // Escribir un archivo por jornada y acumular todos los partidos
   const todosPartidos = [];
-  for (const j of result.jornadas || []) {
-    const filePath = path.join(DATA_DIR, `resultados_j${j.num}.json`);
-    let ok = false;
-    for (let attempt = 1; attempt <= 3 && !ok; attempt++) {
-      try {
-        const jResult = await getResultados(GRUPO_ID, COMPETICION_ID, j.num);
-        fs.writeFileSync(filePath, JSON.stringify(jResult));
-        todosPartidos.push(...(jResult.partidos || []));
-        console.log(`  Jornada ${j.num} OK (${jResult.partidos?.length || 0} partidos)`);
-        ok = true;
-      } catch (e) {
-        console.warn(`  Jornada ${j.num} intento ${attempt} fallido: ${e.message}`);
-        if (attempt < 3) await new Promise(r => setTimeout(r, 3000));
-      }
-    }
-    if (!ok) {
-      if (fs.existsSync(filePath)) {
-        try {
-          const existing = JSON.parse(fs.readFileSync(filePath));
-          todosPartidos.push(...(existing.partidos || []));
-        } catch (_) {}
-      }
-      console.warn(`  Jornada ${j.num} omitida`);
-    }
+  for (const j of calendario) {
+    const jResult = {
+      ...resultadosBase,
+      jornadas: jornadasConFecha,
+      partidos: j.partidos,
+    };
+    fs.writeFileSync(
+      path.join(DATA_DIR, `resultados_j${j.num}.json`),
+      JSON.stringify(jResult)
+    );
+    todosPartidos.push(...j.partidos);
+    console.log(`  Jornada ${j.num} OK (${j.partidos.length} partidos)`);
   }
   fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 
