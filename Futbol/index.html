@@ -27,6 +27,11 @@
     </header>
 
     <main class="main">
+      <div id="update-toast" class="update-toast" style="display:none">
+        Nueva versión disponible
+        <button onclick="window.location.reload()">Actualizar</button>
+      </div>
+
       <div class="panels" id="panels" style="display:none">
         <section class="panel glass" id="panel-clasificacion">
           <h2><i data-lucide="list-ordered"></i> Clasificación</h2>
@@ -72,10 +77,5 @@
   </div>
 
   <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/antigravity/Futbol/sw.js');
-    }
-  </script>
 </body>
 </html>
