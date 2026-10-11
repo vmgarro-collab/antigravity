@@ -195,4 +195,4 @@ async function getCalendario(grupoId, competicionId) {
   });
 }
 
-module.exports = { getGrupos, getClasificacion, getResultados, getGoleadores };
+module.exports = { getGrupos, getClasificacion, getResultados, getCalendario, getGoleadores };
