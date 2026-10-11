@@ -115,10 +115,17 @@ async function loadAll() {
 
     // Find best starting jornada: last played, or first upcoming
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     let bestIdx = 0;
     for (let i = 0; i < jornadas.length; i++) {
       const jFecha = jornadas[i].fecha ? parseDate(jornadas[i].fecha) : null;
       if (jFecha && jFecha <= today) bestIdx = i;
+    }
+    // Avanza a la siguiente jornada si han pasado más de 3 días desde la jornada actual
+    const bestFecha = jornadas[bestIdx].fecha ? parseDate(jornadas[bestIdx].fecha) : null;
+    if (bestFecha) {
+      const diasDesde = (today - bestFecha) / 86400000;
+      if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
     }
     jornadaIdx = bestIdx;
 
