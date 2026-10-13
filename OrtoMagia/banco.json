@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "items": [
+    { "id": "pal-aguda-001", "mecanica": "palabra", "categoria": "aguda", "palabra": "camión",   "distractores": ["camion"],           "regla": "Aguda terminada en -n → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-002", "mecanica": "palabra", "categoria": "aguda", "palabra": "canción",  "distractores": ["cancion"],          "regla": "Aguda terminada en -n → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-003", "mecanica": "palabra", "categoria": "aguda", "palabra": "también",  "distractores": ["tambien"],          "regla": "Aguda terminada en -n → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-004", "mecanica": "palabra", "categoria": "aguda", "palabra": "jardín",   "distractores": ["jardin"],           "regla": "Aguda terminada en -n → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-005", "mecanica": "palabra", "categoria": "aguda", "palabra": "después",  "distractores": ["despues"],          "regla": "Aguda terminada en -s → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-006", "mecanica": "palabra", "categoria": "aguda", "palabra": "café",     "distractores": ["cafe"],             "regla": "Aguda terminada en vocal → tilde.",        "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-007", "mecanica": "palabra", "categoria": "aguda", "palabra": "autobús",  "distractores": ["autobus"],          "regla": "Aguda terminada en -s → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-008", "mecanica": "palabra", "categoria": "aguda", "palabra": "francés",  "distractores": ["frances"],          "regla": "Aguda terminada en -s → tilde.",           "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-aguda-009", "mecanica": "palabra", "categoria": "aguda", "palabra": "limón",    "distractores": ["limon"],            "regla": "Aguda terminada en -n → tilde.",           "nivel": 1, "perfiles": ["martin"] },
+    { "id": "pal-aguda-010", "mecanica": "palabra", "categoria": "aguda", "palabra": "sofá",     "distractores": ["sofa"],             "regla": "Aguda terminada en vocal → tilde.",        "nivel": 1, "perfiles": ["martin", "sofia"] },
+
+    { "id": "pal-llana-001", "mecanica": "palabra", "categoria": "llana", "palabra": "árbol",    "distractores": ["arbol"],            "regla": "Llana terminada en -l → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-llana-002", "mecanica": "palabra", "categoria": "llana", "palabra": "fácil",    "distractores": ["facil"],            "regla": "Llana terminada en -l → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-llana-003", "mecanica": "palabra", "categoria": "llana", "palabra": "lápiz",    "distractores": ["lapiz"],            "regla": "Llana terminada en -z → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-llana-004", "mecanica": "palabra", "categoria": "llana", "palabra": "difícil",  "distractores": ["dificil"],          "regla": "Llana terminada en -l → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-llana-005", "mecanica": "palabra", "categoria": "llana", "palabra": "azúcar",   "distractores": ["azucar"],           "regla": "Llana terminada en -r → tilde.",           "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-llana-006", "mecanica": "palabra", "categoria": "llana", "palabra": "carácter", "distractores": ["caracter"],         "regla": "Llana terminada en -r → tilde.",           "nivel": 2, "perfiles": ["sofia"] },
+
+    { "id": "pal-esdruj-001", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "música",    "distractores": ["musica"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-002", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "médico",    "distractores": ["medico"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-003", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "pájaro",    "distractores": ["pajaro"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-004", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "número",    "distractores": ["numero"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-005", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "rápido",    "distractores": ["rapido"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-006", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "teléfono",  "distractores": ["telefono"],  "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-esdruj-007", "mecanica": "palabra", "categoria": "esdrujula", "palabra": "última",    "distractores": ["ultima"],    "regla": "Esdrújula → siempre lleva tilde.",         "nivel": 2, "perfiles": ["martin", "sofia"] },
+
+    { "id": "pal-h-001", "mecanica": "palabra", "categoria": "h", "palabra": "almohada",   "distractores": ["almoada"],           "regla": null, "mnemotecnia": "La familia de 'moho' siempre lleva h intercalada: al-mo-hada.",     "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-h-002", "mecanica": "palabra", "categoria": "h", "palabra": "zanahoria",  "distractores": ["zanajoria"],         "regla": null, "mnemotecnia": "Zanahoria con h, no con j.",                                         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-h-003", "mecanica": "palabra", "categoria": "h", "palabra": "ahora",      "distractores": ["aora"],              "regla": null, "mnemotecnia": "Ahora lleva h intercalada: a-ho-ra.",                                 "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-h-004", "mecanica": "palabra", "categoria": "h", "palabra": "herida",     "distractores": ["erida"],             "regla": null, "mnemotecnia": "Herida empieza con h, como herramienta y hermano.",                  "nivel": 1, "perfiles": ["martin"] },
+    { "id": "pal-h-005", "mecanica": "palabra", "categoria": "h", "palabra": "alcohol",    "distractores": ["alcool", "alcojol"], "regla": null, "mnemotecnia": "Alcohol viene del árabe 'al-kohl', conserva la h.",                  "nivel": 3, "perfiles": ["sofia"] },
+
+    { "id": "pal-bv-001", "mecanica": "palabra", "categoria": "b_v", "palabra": "hierba",   "distractores": ["hierva"],  "regla": null, "mnemotecnia": "Las plantas (hierba, árbol) van con b de botánica.",          "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-bv-002", "mecanica": "palabra", "categoria": "b_v", "palabra": "cabello",  "distractores": ["cavello"], "regla": null, "mnemotecnia": "Cabello con b, como cabeza y caber.",                         "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-bv-003", "mecanica": "palabra", "categoria": "b_v", "palabra": "vivir",    "distractores": ["bibir"],   "regla": "El verbo 'vivir' y sus formas llevan v (vi-vir).",                  "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-bv-004", "mecanica": "palabra", "categoria": "b_v", "palabra": "burbuja",  "distractores": ["vurbuja"], "regla": null, "mnemotecnia": "Burbuja con dos b: bur-bu-ja.",                                "nivel": 1, "perfiles": ["martin"] },
+    { "id": "pal-bv-005", "mecanica": "palabra", "categoria": "b_v", "palabra": "saber",    "distractores": ["saver"],   "regla": "Los infinitivos en -ber llevan b: saber, beber, caber.",            "nivel": 2, "perfiles": ["martin", "sofia"] },
+
+    { "id": "pal-gj-001", "mecanica": "palabra", "categoria": "g_j", "palabra": "viaje",      "distractores": ["viage"],     "regla": null, "mnemotecnia": "Viaje, equipaje, garaje: estos sustantivos llevan j.",          "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-gj-002", "mecanica": "palabra", "categoria": "g_j", "palabra": "ejercicio",  "distractores": ["egercicio"], "regla": null, "mnemotecnia": "Ejercicio empieza con e-j-e. Recuerda: eje.",                    "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-gj-003", "mecanica": "palabra", "categoria": "g_j", "palabra": "colegio",    "distractores": ["colejio"],   "regla": "Las palabras en -gio/-gia llevan g: colegio, magia, refugio.",       "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-gj-004", "mecanica": "palabra", "categoria": "g_j", "palabra": "página",     "distractores": ["pajina"],    "regla": "Las palabras en -gen/-gio/-gia llevan g.",                           "nivel": 2, "perfiles": ["martin", "sofia"] },
+
+    { "id": "pal-lly-001", "mecanica": "palabra", "categoria": "ll_y", "palabra": "llave",    "distractores": ["yave"],     "regla": null, "mnemotecnia": "Llave, lluvia, llorar: estas tres con ll.",         "nivel": 1, "perfiles": ["martin"] },
+    { "id": "pal-lly-002", "mecanica": "palabra", "categoria": "ll_y", "palabra": "pollo",    "distractores": ["poyo"],     "regla": null, "mnemotecnia": "Los animales: pollo, gallo, gallina... con ll.",     "nivel": 1, "perfiles": ["martin"] },
+    { "id": "pal-lly-003", "mecanica": "palabra", "categoria": "ll_y", "palabra": "calle",    "distractores": ["caye"],     "regla": null, "mnemotecnia": "Calle, valle, silla, ella... muchas palabras con ll.", "nivel": 1, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-lly-004", "mecanica": "palabra", "categoria": "ll_y", "palabra": "ayudar",   "distractores": ["alludar"],  "regla": null, "mnemotecnia": "Ayudar, apoyar, desayunar... van con y.",            "nivel": 2, "perfiles": ["martin", "sofia"] },
+    { "id": "pal-lly-005", "mecanica": "palabra", "categoria": "ll_y", "palabra": "ayer",     "distractores": ["aller"],    "regla": null, "mnemotecnia": "Ayer, hoy, mañana: ayer con y.",                     "nivel": 1, "perfiles": ["martin", "sofia"] },
+
+    { "id": "ctx-stub-001", "mecanica": "contexto",    "categoria": "diacritica",    "frase": "__ no sabe dónde está.", "opciones": ["Él","El"], "respuesta": "Él", "regla": "'Él' con tilde = pronombre. 'El' sin tilde = artículo.", "nivel": 2, "perfiles": ["sofia"] },
+    { "id": "pun-stub-001", "mecanica": "puntuacion",  "categoria": "interrogacion", "frase": "__ Cómo te llamas __",  "respuesta": ["¿","?"], "regla": "Las preguntas abren con ¿ y cierran con ?.",              "nivel": 1, "perfiles": ["martin", "sofia"] }
+  ]
+}
