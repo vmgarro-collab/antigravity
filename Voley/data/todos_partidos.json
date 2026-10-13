@@ -202,26 +202,26 @@
   {
     "local": "ANCORA GALAPAGAR",
     "visitante": "B. M. 2 DE MAYO",
-    "resultado": "–",
+    "resultado": "13:30",
     "jugado": false,
-    "fecha": "25/10/2026",
-    "hora": "",
-    "campo": "",
-    "jornada": 43654
-  },
-  {
-    "local": "BERNADETTE B",
-    "visitante": "CV COLLADO VILLALBA C",
-    "resultado": "–",
-    "jugado": false,
-    "fecha": "25/10/2026",
-    "hora": "",
-    "campo": "",
+    "fecha": "24/10/2026",
+    "hora": "13:30",
+    "campo": "POLIDEPORTIVO MUNICIPAL DE GALAPAGAR",
     "jornada": 43654
   },
   {
     "local": "BERNADETTE A",
     "visitante": "ABV BOADILLA B B",
+    "resultado": "15:00",
+    "jugado": false,
+    "fecha": "24/10/2026",
+    "hora": "15:00",
+    "campo": "BERNADETTE, COLEGIO",
+    "jornada": 43654
+  },
+  {
+    "local": "BERNADETTE B",
+    "visitante": "CV COLLADO VILLALBA C",
     "resultado": "–",
     "jugado": false,
     "fecha": "25/10/2026",
