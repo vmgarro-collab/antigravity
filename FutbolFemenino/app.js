@@ -259,6 +259,14 @@ function updateJornadaNav() {
   next.disabled = jornadaIdx >= jornadas.length - 1;
 }
 
+function abreviarNombre(str) {
+  if (!str) return str;
+  const [apellidos, nombre] = str.split(', ');
+  if (!nombre) return str;
+  const caps = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  const iniciales = apellidos.split(' ').map(a => a.charAt(0).toUpperCase() + '.').join(' ');
+  return caps(nombre) + ' ' + iniciales;
+}
 function renderGoleadores(goles, showAll = false) {
   const body = document.getElementById('goleadores-body');
   if (!goles?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin datos</p>'; return; }
@@ -268,7 +276,7 @@ function renderGoleadores(goles, showAll = false) {
     const propio = esEquipoPropio(g.equipo);
     return `<tr${propio ? ' class="propio-row"' : ''}>
       <td>${i + 1}</td>
-      <td>${g.jugador}${propio ? '<span class="propio-badge">MCF</span>' : ''}</td>
+      <td>${abreviarNombre(g.jugador)}${propio ? '<span class="propio-badge">MCF</span>' : ''}</td>
       <td class="col-equipo">${g.equipo}</td>
       <td>${g.partidos}</td>
       <td class="goles-cell">${g.goles}</td>
