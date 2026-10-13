@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7c3aed">
+  <title>OrtoMagia ✍️</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── Selección de perfil ──────────────────────────────────────────── -->
+<div id="screen-profiles" class="screen active">
+  <div class="profiles-logo">
+    <span class="logo-icon">✍️</span>
+    <h1>OrtoMagia</h1>
+    <p>Practica ortografía</p>
+  </div>
+  <div class="profiles-grid">
+    <button class="profile-btn" data-profile="martin">
+      <span class="profile-avatar">🧑</span>
+      <span>Martín</span>
+    </button>
+    <button class="profile-btn" data-profile="sofia">
+      <span class="profile-avatar">👩</span>
+      <span>Sofía</span>
+    </button>
+  </div>
+  <button id="btn-to-padre" class="btn-padre">⚙️ Modo Padre</button>
+</div>
+
+<!-- ── Home ────────────────────────────────────────────────────────── -->
+<div id="screen-home" class="screen">
+  <div class="home-header">
+    <div class="home-profile" id="home-profile-name"></div>
+    <div class="home-chips">
+      <div class="chip racha"><span>🔥</span><span id="home-racha">0</span></div>
+      <div class="chip stars"><span>⭐</span><span id="home-stars">0</span></div>
+      <button class="btn-icon" id="btn-to-stats" title="Estadísticas">📊</button>
+    </div>
+  </div>
+
+  <div class="modes-grid">
+    <button class="mode-card" data-mode="quiz">
+      <div class="mode-icon">⚡</div>
+      <div class="mode-text">
+        <span class="mode-name">Quiz Rápido</span>
+        <span class="mode-desc">10 preguntas mezcladas</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+    <button class="mode-card" data-mode="aventura">
+      <div class="mode-icon" id="mode-icon-aventura">🗺️</div>
+      <div class="mode-text">
+        <span class="mode-name">Aventura</span>
+        <span class="mode-desc">Supera zonas y gana estrellas</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+    <button class="mode-card" data-mode="debiles">
+      <div class="mode-icon">💪</div>
+      <div class="mode-text">
+        <span class="mode-name">Entrena Débiles</span>
+        <span class="mode-desc" id="mode-debiles-desc">Refuerza tus errores</span>
+      </div>
+      <span class="mode-arrow">›</span>
+    </button>
+  </div>
+
+  <div class="home-footer">
+    <button class="btn-outline" id="btn-home-back">← Cambiar perfil</button>
+    <button class="btn-outline" id="btn-home-settings" title="Ajustes">⚙️</button>
+  </div>
+</div>
+
+<!-- ── Quiz / sesión ─────────────────────────────────────────────────── -->
+<div id="screen-quiz" class="screen">
+  <div class="quiz-header">
+    <button class="btn-back" id="btn-quiz-back">✕</button>
+    <div class="progress-bar">
+      <div class="progress-fill" id="quiz-progress"></div>
+    </div>
+    <span class="progress-label" id="quiz-counter">1/10</span>
+  </div>
+
+  <div class="question-area">
+    <span class="question-category" id="q-category"></span>
+    <p class="question-text" id="q-text"></p>
+
+    <!-- Choice -->
+    <div class="choices-grid" id="q-choices"></div>
+
+    <!-- Input -->
+    <div class="input-group hidden" id="q-input-group">
+      <input type="text" class="word-input" id="q-input" placeholder="Escribe aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="btn-primary" id="btn-submit-input">Comprobar</button>
+    </div>
+  </div>
+
+  <!-- Feedback panel -->
+  <div class="feedback-panel" id="feedback-panel">
+    <span class="feedback-icon" id="feedback-icon"></span>
+    <p class="feedback-text" id="feedback-text"></p>
+    <button class="btn-next btn-primary" id="btn-next">Siguiente →</button>
+  </div>
+</div>
+
+<!-- ── Resultados ────────────────────────────────────────────────────── -->
+<div id="screen-results" class="screen">
+  <div class="header">
+    <span class="header-title" id="results-mode-label">Resultado</span>
+  </div>
+  <div class="results-screen">
+    <div class="results-big" id="results-score"></div>
+    <div class="results-label" id="results-label"></div>
+
+    <div class="results-breakdown" id="results-breakdown"></div>
+
+    <div class="results-items" id="results-items"></div>
+
+    <button class="btn-home" id="btn-results-home">Volver al inicio</button>
+  </div>
+</div>
+
+<!-- ── Aventura: mapa de zonas ──────────────────────────────────────── -->
+<div id="screen-aventura" class="screen">
+  <div class="header">
+    <button class="btn-back" id="btn-aventura-back">‹ Inicio</button>
+    <span class="header-title" id="aventura-title">Aventura</span>
+    <div></div>
+  </div>
+  <div class="zones-list" id="zones-list"></div>
+</div>
+
+<!-- ── Resultado de zona ────────────────────────────────────────────── -->
+<div id="screen-zona-result" class="screen">
+  <div class="header">
+    <div></div>
+    <span class="header-title" id="zona-res-title"></span>
+    <div></div>
+  </div>
+  <div class="results-screen">
+    <div class="results-big" id="zona-res-stars"></div>
+    <div class="results-label" id="zona-res-label"></div>
+    <div class="results-breakdown" id="zona-res-breakdown"></div>
+    <div class="results-items" id="zona-res-items"></div>
+    <button class="btn-home" id="btn-zona-res-back">Volver al mapa</button>
+  </div>
+</div>
+
+<!-- ── Stats ────────────────────────────────────────────────────────── -->
+<div id="screen-stats" class="screen">
+  <div class="header">
+    <button class="btn-back" id="btn-stats-back">‹ Inicio</button>
+    <span class="header-title">Mis estadísticas</span>
+    <div></div>
+  </div>
+  <div class="stats-body" id="stats-body"></div>
+</div>
+
+<!-- ── Modo Padre ────────────────────────────────────────────────────── -->
+<div id="screen-padre" class="screen">
+  <div class="header">
+    <button class="btn-back" id="btn-padre-back">‹ Volver</button>
+    <span class="header-title">Modo Padre</span>
+    <div></div>
+  </div>
+  <div class="padre-body">
+
+    <!-- Añadir ítem custom -->
+    <div class="form-section">
+      <h3>Añadir palabra personalizada</h3>
+
+      <div class="form-field">
+        <label>Perfil</label>
+        <select id="padre-perfil">
+          <option value="martin">Martín</option>
+          <option value="sofia">Sofía</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Categoría</label>
+        <select id="padre-cat">
+          <option value="aguda">Aguda (tilde)</option>
+          <option value="llana">Llana (tilde)</option>
+          <option value="esdrujula">Esdrújula (tilde)</option>
+          <option value="h">H muda/intercalada</option>
+          <option value="b_v">B / V</option>
+          <option value="g_j">G / J</option>
+          <option value="ll_y">LL / Y</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Palabra correcta</label>
+        <input type="text" id="padre-palabra" placeholder="camión" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="form-field">
+        <label>Distractores plausibles</label>
+        <input type="text" id="padre-distractores" placeholder="camion (separados por comas)" autocorrect="off" spellcheck="false">
+        <span class="hint">Solo errores que alguien cometería de verdad.</span>
+      </div>
+      <div class="form-field">
+        <label>Regla (opcional)</label>
+        <input type="text" id="padre-regla" placeholder="Aguda terminada en -n → tilde.">
+      </div>
+      <div class="form-field">
+        <label>Mnemotecnia (si no hay regla)</label>
+        <input type="text" id="padre-mnemo" placeholder="Recuerda: camión lleva tilde porque...">
+      </div>
+      <div class="form-field">
+        <label>Nivel (1=básico, 2=medio, 3=avanzado)</label>
+        <select id="padre-nivel">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <p class="form-error hidden" id="padre-error"></p>
+      <button class="btn-primary" id="btn-padre-add" style="margin-top:8px; width:100%">Añadir al banco</button>
+    </div>
+
+    <!-- Lista de custom items -->
+    <div class="form-section">
+      <h3>Palabras personalizadas guardadas</h3>
+      <div class="custom-list" id="custom-list"></div>
+    </div>
+
+    <!-- Export / Import -->
+    <div class="form-section">
+      <h3>Backup</h3>
+      <div class="padre-actions">
+        <button class="btn-secondary" id="btn-export-martin">⬇ Exportar Martín</button>
+        <button class="btn-secondary" id="btn-export-sofia">⬇ Exportar Sofía</button>
+      </div>
+      <div class="padre-actions" style="margin-top:10px">
+        <label class="btn-secondary" style="text-align:center; cursor:pointer">
+          ⬆ Importar JSON
+          <input type="file" id="btn-import" accept=".json" class="hidden">
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Trophy overlay ───────────────────────────────────────────────── -->
+<div id="trophy-overlay">
+  <div class="trophy-box">
+    <span class="trophy-icon" id="trophy-icon"></span>
+    <div class="trophy-title" id="trophy-title"></div>
+    <div class="trophy-sub" id="trophy-sub"></div>
+    <button class="btn-primary trophy-btn" id="btn-trophy-ok">¡Genial!</button>
+  </div>
+</div>
+
+<!-- ── Settings overlay (Sofía accent picker) ───────────────────────── -->
+<div id="settings-overlay" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:40;display:flex;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border-radius:var(--radius);padding:24px 28px;max-width:300px;width:90%;">
+    <h3 style="margin-bottom:12px;font-size:0.9rem;">Color de acento</h3>
+    <div class="accent-row" id="accent-row">
+      <button class="accent-dot" data-accent="purple" style="background:#7c3aed" title="Morado"></button>
+      <button class="accent-dot" data-accent="teal"   style="background:#0d9488" title="Verde azulado"></button>
+      <button class="accent-dot" data-accent="rose"   style="background:#e11d48" title="Rosa"></button>
+      <button class="accent-dot" data-accent="amber"  style="background:#d97706" title="Ámbar"></button>
+    </div>
+    <button class="btn-primary" id="btn-settings-close" style="margin-top:16px;width:100%;padding:10px;">Cerrar</button>
+  </div>
+</div>
+
+<script src="generators.js"></script>
+<script src="feedback.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
