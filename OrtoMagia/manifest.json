@@ -1,0 +1,12 @@
+{
+  "name": "OrtoMagia",
+  "short_name": "OrtoMagia",
+  "description": "Practica ortografía: tildes y grafías",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
