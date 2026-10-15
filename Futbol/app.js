@@ -161,15 +161,20 @@ async function loadAll() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     let bestIdx = 0;
+    let anyFecha = false;
     for (let i = 0; i < jornadas.length; i++) {
       const jFecha = jornadas[i].fecha ? parseFechaJornada(jornadas[i].fecha) : null;
-      if (jFecha && jFecha <= today) bestIdx = i;
+      if (jFecha && jFecha <= today) { bestIdx = i; anyFecha = true; }
     }
-    // Avanza a la siguiente jornada si han pasado más de 3 días desde la jornada actual
-    const bestFecha = jornadas[bestIdx].fecha ? parseFechaJornada(jornadas[bestIdx].fecha) : null;
-    if (bestFecha) {
-      const diasDesde = (today - bestFecha) / 86400000;
-      if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
+    if (anyFecha) {
+      const bestFecha = jornadas[bestIdx].fecha ? parseFechaJornada(jornadas[bestIdx].fecha) : null;
+      if (bestFecha) {
+        const diasDesde = (today - bestFecha) / 86400000;
+        if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
+      }
+    } else if (result.jornada_actual) {
+      const idx = jornadas.findIndex(j => String(j.num) === String(result.jornada_actual));
+      if (idx >= 0) bestIdx = idx;
     }
     jornadaIdx = bestIdx;
     _todosPartidos = todosPartidos;
