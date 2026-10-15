@@ -1,78 +1,6 @@
 [
   {
     "pos": 1,
-    "jugador": "Josu Uriarte Fernández",
-    "equipo": "CHAOX F.C",
-    "goles": 37,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 2,
-    "jugador": "Francisco PASCUAL RODRIGUEZ",
-    "equipo": "SPORTING SARRIA",
-    "goles": 29,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 3,
-    "jugador": "Ruben RODRIGUEZ PENA",
-    "equipo": "SACONIA 2.0",
-    "goles": 29,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 4,
-    "jugador": "Cristhian COLMAN BRITAZ",
-    "equipo": "BOCA SENIOR",
-    "goles": 27,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 5,
-    "jugador": "Adrian García Lopez",
-    "equipo": "CHAOX F.C",
-    "goles": 27,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 6,
-    "jugador": "Antonio JIMENEZ GALAN",
-    "equipo": "SPORTING SARRIA",
-    "goles": 27,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 7,
-    "jugador": "Mohammed SALMOUN",
-    "equipo": "RAYO PILAR",
-    "goles": 20,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 8,
-    "jugador": "Javier Álvarez ranero",
-    "equipo": "PREVISEGUR",
-    "goles": 20,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 9,
-    "jugador": "Oscar LORENZO GONZALEZ",
-    "equipo": "BOCA SENIOR",
-    "goles": 17,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 10,
     "jugador": "Victor Manuel GARRO PEREZ",
     "equipo": "EL PARAGUAS",
     "goles": 16,
@@ -80,87 +8,7 @@
     "paraguas": true
   },
   {
-    "pos": 11,
-    "jugador": "GUSTAVO PEREZ",
-    "equipo": "RCD CAMBADOS",
-    "goles": 16,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 12,
-    "jugador": "Alejandro GESTAL",
-    "equipo": "RCD CAMBADOS",
-    "goles": 15,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 13,
-    "jugador": "Enrique SANCHEZ REY",
-    "equipo": "TROPICAL",
-    "goles": 15,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 14,
-    "jugador": "Abdelmajid AHARRAM",
-    "equipo": "TROPICAL",
-    "goles": 13,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 15,
-    "jugador": "Alberto ALONSO MARTIN",
-    "equipo": "PREVISEGUR",
-    "goles": 13,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 16,
-    "jugador": "Alejandro Martínez Rafel",
-    "equipo": "CHAOX F.C",
-    "goles": 13,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 17,
-    "jugador": "Lorenzo Jose Rioja Ortega",
-    "equipo": "RAYO HUESCA",
-    "goles": 13,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 18,
-    "jugador": "BADR EDDINE ILLAMI",
-    "equipo": "TROPICAL",
-    "goles": 12,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 19,
-    "jugador": "JUAN CARLOS VIEIRO",
-    "equipo": "RCD CAMBADOS",
-    "goles": 12,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 20,
-    "jugador": "Smail Mahiri",
-    "equipo": "RAYO HUESCA",
-    "goles": 11,
-    "partidos": null,
-    "paraguas": false
-  },
-  {
-    "pos": 21,
+    "pos": 2,
     "jugador": "Daniel GOMEZ GANCEDO",
     "equipo": "EL PARAGUAS",
     "goles": 9,
@@ -168,7 +16,7 @@
     "paraguas": true
   },
   {
-    "pos": 22,
+    "pos": 3,
     "jugador": "Ruben Ríos Cepeda",
     "equipo": "EL PARAGUAS",
     "goles": 8,
@@ -176,7 +24,7 @@
     "paraguas": true
   },
   {
-    "pos": 23,
+    "pos": 4,
     "jugador": "Aitor GARCIA MARTIN",
     "equipo": "EL PARAGUAS",
     "goles": 5,
@@ -184,7 +32,7 @@
     "paraguas": true
   },
   {
-    "pos": 24,
+    "pos": 5,
     "jugador": "Marco SANCHEZ MORALES",
     "equipo": "EL PARAGUAS",
     "goles": 4,
@@ -192,7 +40,7 @@
     "paraguas": true
   },
   {
-    "pos": 25,
+    "pos": 6,
     "jugador": "Julio GONZALEZ DE MANUELES",
     "equipo": "EL PARAGUAS",
     "goles": 3,
@@ -200,7 +48,7 @@
     "paraguas": true
   },
   {
-    "pos": 26,
+    "pos": 7,
     "jugador": "Javier Gómez Gancedo",
     "equipo": "EL PARAGUAS",
     "goles": 3,
@@ -208,7 +56,7 @@
     "paraguas": true
   },
   {
-    "pos": 27,
+    "pos": 8,
     "jugador": "Roberto Jiménez Tejedor",
     "equipo": "EL PARAGUAS",
     "goles": 3,
@@ -216,7 +64,7 @@
     "paraguas": true
   },
   {
-    "pos": 28,
+    "pos": 9,
     "jugador": "Petko Atanasov Marinov",
     "equipo": "EL PARAGUAS",
     "goles": 2,
@@ -224,7 +72,7 @@
     "paraguas": true
   },
   {
-    "pos": 29,
+    "pos": 10,
     "jugador": "Cesar CRISTOBAL BUENO",
     "equipo": "EL PARAGUAS",
     "goles": 2,
@@ -232,7 +80,7 @@
     "paraguas": true
   },
   {
-    "pos": 30,
+    "pos": 11,
     "jugador": "Jorge HIDALGO MARTINEZ",
     "equipo": "EL PARAGUAS",
     "goles": 2,
@@ -240,7 +88,7 @@
     "paraguas": true
   },
   {
-    "pos": 31,
+    "pos": 12,
     "jugador": "Ramon VICENTE FERNANDEZ",
     "equipo": "EL PARAGUAS",
     "goles": 2,
@@ -248,7 +96,7 @@
     "paraguas": true
   },
   {
-    "pos": 32,
+    "pos": 13,
     "jugador": "Ignacio SANCHEZ MORALES",
     "equipo": "EL PARAGUAS",
     "goles": 0,
