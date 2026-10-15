@@ -39,7 +39,8 @@ async function apiFetch(endpoint) {
     '/api/paraguas':      'data/paraguas.json',
   };
   const url = staticMap[endpoint] || endpoint;
-  const res = await fetch(url);
+  const bust = url.startsWith('data/') ? `?t=${Date.now()}` : '';
+  const res = await fetch(url + bust);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
     throw new Error(err.error || `HTTP ${res.status}`);
