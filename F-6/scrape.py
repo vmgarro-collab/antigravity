@@ -18,9 +18,9 @@ HEADERS = {
 }
 
 BASE = "https://artificialfsala.leaguerepublic.com"
-URL_STANDINGS  = f"{BASE}/standingsForDate/950925790/2/-1/-1.html"
+URL_STANDINGS  = f"{BASE}/standingsForDate/747215306/2/-1/-1.html"
 URL_STATS      = "https://artificialfsala.leaguerepublic.com/playerStats/890842856.html"
-URL_MATCHHUB   = f"{BASE}/matchHub/890842856/-1_-1/-1/-1/-1/-1/-1/false.html"
+URL_MATCHHUB   = f"{BASE}/matchHub.html"
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "data")
 
@@ -181,7 +181,7 @@ def _parse_player_table(html, equipo_paraguas=False):
             break  # use first valid table with data
     return result
 
-URL_GOLEADORES = f"{BASE}/playerStats/890842856/1_950925790.html"
+URL_GOLEADORES = f"{BASE}/playerStats/890842856/1_747215306.html"
 
 def scrape_jugadores():
     players = []
