@@ -11,9 +11,9 @@
   },
   {
     "local": "BERNADETTE A",
-    "visitante": "BERNADETTE B",
-    "resultado": "0-0",
-    "jugado": true,
+    "visitante": "DESCANSA...",
+    "resultado": "10:30",
+    "jugado": false,
     "fecha": "03/10/2026",
     "hora": "10:30",
     "campo": "BERNADETTE, COLEGIO",
@@ -100,7 +100,7 @@
     "jornada": 43652
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "ABV BOADILLA B B",
     "resultado": "–",
     "jugado": false,
@@ -161,7 +161,7 @@
   },
   {
     "local": "CV BULLDOGS B B",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "12:15",
     "jugado": false,
     "fecha": "18/10/2026",
@@ -220,7 +220,7 @@
     "jornada": 43654
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CV COLLADO VILLALBA C",
     "resultado": "–",
     "jugado": false,
@@ -271,7 +271,7 @@
   },
   {
     "local": "CV GUADARRAMA",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "08/11/2026",
@@ -320,7 +320,7 @@
     "jornada": 43656
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "B. M. 2 DE MAYO",
     "resultado": "–",
     "jugado": false,
@@ -401,7 +401,7 @@
   },
   {
     "local": "CV SAN IGNACIO A",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "22/11/2026",
@@ -430,7 +430,7 @@
     "jornada": 43658
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "ANCORA GALAPAGAR",
     "resultado": "–",
     "jugado": false,
@@ -531,7 +531,7 @@
   },
   {
     "local": "CD KOLBE",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "13/12/2026",
@@ -541,7 +541,7 @@
   },
   {
     "local": "CLUB VOLEIBOL TORRELODONES D",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "20/12/2026",
@@ -650,7 +650,7 @@
     "jornada": 43661
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CLUB VOLEIBOL TORRELODONES C",
     "resultado": "–",
     "jugado": false,
@@ -670,7 +670,7 @@
     "jornada": 43662
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "BERNADETTE A",
     "resultado": "–",
     "jugado": false,
@@ -761,7 +761,7 @@
   },
   {
     "local": "ABV BOADILLA B B",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "24/01/2027",
@@ -800,7 +800,7 @@
     "jornada": 43664
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CV BULLDOGS B B",
     "resultado": "–",
     "jugado": false,
@@ -871,7 +871,7 @@
   },
   {
     "local": "CV COLLADO VILLALBA C",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "07/02/2027",
@@ -930,7 +930,7 @@
     "jornada": 43666
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CV GUADARRAMA",
     "resultado": "–",
     "jugado": false,
@@ -981,7 +981,7 @@
   },
   {
     "local": "B. M. 2 DE MAYO",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "28/02/2027",
@@ -1060,7 +1060,7 @@
     "jornada": 43668
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CV SAN IGNACIO A",
     "resultado": "–",
     "jugado": false,
@@ -1091,7 +1091,7 @@
   },
   {
     "local": "ANCORA GALAPAGAR",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "14/03/2027",
@@ -1190,7 +1190,7 @@
     "jornada": 43670
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CD KOLBE",
     "resultado": "–",
     "jugado": false,
@@ -1200,7 +1200,7 @@
     "jornada": 43670
   },
   {
-    "local": "BERNADETTE B",
+    "local": "DESCANSA...",
     "visitante": "CLUB VOLEIBOL TORRELODONES D",
     "resultado": "–",
     "jugado": false,
@@ -1311,7 +1311,7 @@
   },
   {
     "local": "CLUB VOLEIBOL TORRELODONES C",
-    "visitante": "BERNADETTE B",
+    "visitante": "DESCANSA...",
     "resultado": "–",
     "jugado": false,
     "fecha": "18/04/2027",

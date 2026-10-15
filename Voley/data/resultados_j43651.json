@@ -12,9 +12,9 @@
     },
     {
       "local": "BERNADETTE A",
-      "visitante": "BERNADETTE B",
-      "resultado": "0-0",
-      "jugado": true,
+      "visitante": "DESCANSA...",
+      "resultado": "10:30",
+      "jugado": false,
       "fecha": "03/10/2026",
       "hora": "10:30",
       "campo": "BERNADETTE, COLEGIO",
