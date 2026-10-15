@@ -20,7 +20,7 @@ HEADERS = {
 BASE = "https://artificialfsala.leaguerepublic.com"
 URL_STANDINGS  = f"{BASE}/standingsForDate/747215306/2/-1/-1.html"
 URL_STATS      = "https://artificialfsala.leaguerepublic.com/playerStats/890842856.html"
-URL_MATCHHUB   = f"{BASE}/matchHub.html"
+URL_MATCHHUB   = f"{BASE}/matchHub/890842856/1_747215306/-1/-1/-1/-1/1/true.html"
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "data")
 
