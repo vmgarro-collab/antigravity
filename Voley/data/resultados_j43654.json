@@ -1,6 +1,16 @@
 {
   "partidos": [
     {
+      "local": "DESCANSA...",
+      "visitante": "CV COLLADO VILLALBA C",
+      "resultado": "–",
+      "jugado": false,
+      "fecha": "24/10/2026",
+      "hora": "",
+      "campo": "BERNADETTE, COLEGIO",
+      "jornada": 43654
+    },
+    {
       "local": "CLUB VOLEIBOL TORRELODONES D",
       "visitante": "CV SAN IGNACIO A",
       "resultado": "9:30",
@@ -38,16 +48,6 @@
       "fecha": "24/10/2026",
       "hora": "15:00",
       "campo": "BERNADETTE, COLEGIO",
-      "jornada": 43654
-    },
-    {
-      "local": "DESCANSA...",
-      "visitante": "CV COLLADO VILLALBA C",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "25/10/2026",
-      "hora": "",
-      "campo": "",
       "jornada": 43654
     },
     {
