@@ -3,14 +3,14 @@
     {
       "pos": 1,
       "equipo": "ANCORA GALAPAGAR",
-      "pj": 2,
-      "pg": 2,
+      "pj": 3,
+      "pg": 3,
       "pp": 0,
-      "sg": 6,
-      "sp": null,
-      "pf": 150,
-      "pc": 79,
-      "pts": 6
+      "sg": 9,
+      "sp": 1,
+      "pf": 239,
+      "pc": 164,
+      "pts": 9
     },
     {
       "pos": 2,
@@ -39,13 +39,13 @@
     {
       "pos": 4,
       "equipo": "CV GUADARRAMA",
-      "pj": 2,
+      "pj": 3,
       "pg": 2,
-      "pp": 0,
-      "sg": 6,
-      "sp": 2,
-      "pf": 195,
-      "pc": 169,
+      "pp": 1,
+      "sg": 7,
+      "sp": 5,
+      "pf": 280,
+      "pc": 258,
       "pts": 6
     },
     {
