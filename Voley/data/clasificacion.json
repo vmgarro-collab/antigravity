@@ -51,29 +51,17 @@
     {
       "pos": 5,
       "equipo": "CV SAN IGNACIO A",
-      "pj": 2,
-      "pg": 1,
+      "pj": 3,
+      "pg": 2,
       "pp": 1,
-      "sg": 4,
-      "sp": 4,
-      "pf": 175,
-      "pc": 172,
-      "pts": 3
+      "sg": 7,
+      "sp": 5,
+      "pf": 265,
+      "pc": 253,
+      "pts": 6
     },
     {
       "pos": 6,
-      "equipo": "B. M. 2 DE MAYO",
-      "pj": 2,
-      "pg": 1,
-      "pp": 1,
-      "sg": 4,
-      "sp": 4,
-      "pf": 182,
-      "pc": 180,
-      "pts": 3
-    },
-    {
-      "pos": 7,
       "equipo": "BERNADETTE A",
       "pj": 3,
       "pg": 1,
@@ -82,6 +70,18 @@
       "sp": 4,
       "pf": 137,
       "pc": 148,
+      "pts": 3
+    },
+    {
+      "pos": 7,
+      "equipo": "B. M. 2 DE MAYO",
+      "pj": 3,
+      "pg": 1,
+      "pp": 2,
+      "sg": 5,
+      "sp": 7,
+      "pf": 263,
+      "pc": 270,
       "pts": 3
     },
     {
