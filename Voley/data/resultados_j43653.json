@@ -3,8 +3,8 @@
     {
       "local": "BERNADETTE A",
       "visitante": "CLUB VOLEIBOL TORRELODONES D",
-      "resultado": "13:00",
-      "jugado": false,
+      "resultado": "3-1",
+      "jugado": true,
       "fecha": "17/10/2026",
       "hora": "13:00",
       "campo": "BERNADETTE, COLEGIO",
@@ -13,8 +13,8 @@
     {
       "local": "CV GUADARRAMA",
       "visitante": "ANCORA GALAPAGAR",
-      "resultado": "16:00",
-      "jugado": false,
+      "resultado": "0-2",
+      "jugado": true,
       "fecha": "17/10/2026",
       "hora": "16:00",
       "campo": "COLEGIO PUBLICO VILLA DE GUADARRAMA",

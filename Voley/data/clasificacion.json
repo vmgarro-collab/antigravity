@@ -74,18 +74,30 @@
     },
     {
       "pos": 7,
-      "equipo": "CLUB VOLEIBOL TORRELODONES D",
-      "pj": 2,
-      "pg": 0,
-      "pp": 2,
-      "sg": 1,
-      "sp": 6,
-      "pf": 131,
-      "pc": 172,
-      "pts": 0
+      "equipo": "BERNADETTE A",
+      "pj": 3,
+      "pg": 1,
+      "pp": 1,
+      "sg": 3,
+      "sp": 4,
+      "pf": 137,
+      "pc": 148,
+      "pts": 3
     },
     {
       "pos": 8,
+      "equipo": "CLUB VOLEIBOL TORRELODONES D",
+      "pj": 3,
+      "pg": 0,
+      "pp": 3,
+      "sg": 2,
+      "sp": 9,
+      "pf": 204,
+      "pc": 269,
+      "pts": 0
+    },
+    {
+      "pos": 9,
       "equipo": "CV COLLADO VILLALBA C",
       "pj": 2,
       "pg": 0,
@@ -97,7 +109,7 @@
       "pts": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "ABV BOADILLA B B",
       "pj": 1,
       "pg": 0,
@@ -105,18 +117,6 @@
       "sg": null,
       "sp": 3,
       "pf": 52,
-      "pc": 75,
-      "pts": 0
-    },
-    {
-      "pos": 10,
-      "equipo": "BERNADETTE A",
-      "pj": 2,
-      "pg": 0,
-      "pp": 1,
-      "sg": null,
-      "sp": 3,
-      "pf": 40,
       "pc": 75,
       "pts": 0
     },
