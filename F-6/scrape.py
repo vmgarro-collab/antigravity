@@ -181,7 +181,7 @@ def _parse_player_table(html, equipo_paraguas=False):
             break  # use first valid table with data
     return result
 
-URL_GOLEADORES = f"{BASE}/playerStats/890842856/1_747215306.html"
+URL_GOLEADORES = "https://artificialfsala.leaguerepublic.com/playerStats/890842856.html"
 
 def scrape_jugadores():
     players = []
