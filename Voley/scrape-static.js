@@ -31,9 +31,18 @@ async function main() {
   const clasif     = normalizeClasificacion(raw);
   const resultados = normalizeResultados(raw);
 
-  write('clasificacion.json', clasif);
-  write('resultados.json', resultados);
-  write('todos_partidos.json', resultados.partidos || []);
+  if (clasif && clasif.length > 0) {
+    write('clasificacion.json', clasif);
+  } else {
+    console.log('  Clasificacion vacia de la API - manteniendo datos anteriores');
+  }
+
+  if (resultados && resultados.partidos && resultados.partidos.length > 0) {
+    write('resultados.json', resultados);
+    write('todos_partidos.json', resultados.partidos);
+  } else {
+    console.log('  Resultados vacios de la API - manteniendo datos anteriores');
+  }
 
   // Per-jornada files
   for (const j of resultados.jornadas || []) {
