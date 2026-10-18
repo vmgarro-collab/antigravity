@@ -427,7 +427,6 @@ tbody td {
   background: rgba(121, 40, 202, 0.15) !important;
 }
 .paraguas-badge {
-  font-size: 0.85em;
   color: var(--primary-color);
   margin-left: 4px;
 }
