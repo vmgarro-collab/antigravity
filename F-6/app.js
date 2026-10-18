@@ -96,9 +96,7 @@ async function loadClasificacion() {
               <tr class="${row.equipo.toLowerCase().includes('paraguas') ? 'paraguas-row' : ''}">
                 <td class="center">${row.pos}</td>
                 <td>
-                  <span class="equipo-link" onclick="buscarEquipo('${escHtml(row.equipo)}')">
-                    ${escHtml(row.equipo)}
-                  </span>
+                  ${escHtml(row.equipo)}${row.equipo.toLowerCase().includes('paraguas') ? ' <span class="paraguas-badge">☂</span>' : ''}
                 </td>
                 <td class="center">${row.pj}</td>
                 <td class="center">${row.g}</td>
@@ -147,12 +145,15 @@ async function loadResultados() {
           Jornada ${jornada}
         </div>
         <div class="jornada-body">
-          ${partidos.map(p => `
-            <div class="partido-card">
-              <div class="partido-equipo-local">${escHtml(p.local)}</div>
+          ${partidos.map(p => {
+              const esLocal = p.local.toUpperCase().includes('PARAGUAS');
+              const esVis   = p.visitante.toUpperCase().includes('PARAGUAS');
+              return `
+            <div class="partido-card${esLocal || esVis ? ' partido-propio' : '''}">
+              <div class="partido-equipo-local${esLocal ? ' nombre-propio' : '''}">${escHtml(p.local)}</div>
               <div class="partido-marcador">${p.golesLocal} – ${p.golesVisitante}</div>
-              <div class="partido-equipo-visitante">${escHtml(p.visitante)}</div>
-            </div>
+              <div class="partido-equipo-visitante${esVis ? ' nombre-propio' : '''}">${escHtml(p.visitante)}</div>
+            </div>`; })
           `).join('')}
         </div>
       </div>
@@ -222,13 +223,16 @@ async function loadCalendario() {
       const matches = fechaMap[fecha];
       const todayBadge = isToday(fecha) ? '<span class="hoy-badge">HOY</span> ' : '';
       const header = `<div class="jornada-header">${todayBadge}${escHtml(fecha)}</div>`;
-      const cards = matches.map(f => `
-        <div class="fixture-card">
+      const cards = matches.map(f => {
+        const esL = f.local.toUpperCase().includes('PARAGUAS');
+        const esV = f.visitante.toUpperCase().includes('PARAGUAS');
+        return `
+        <div class="fixture-card${esL || esV ? ' partido-propio' : '''}">
           ${f.hora ? `<div class="fixture-hora">${escHtml(f.hora)}</div>` : ''}
-          <div class="fixture-local">${escHtml(f.local)}</div>
+          <div class="fixture-local${esL ? ' nombre-propio' : '''}">${escHtml(f.local)}</div>
           <div class="fixture-vs">vs</div>
-          <div class="fixture-visitante">${escHtml(f.visitante)}</div>
-        </div>`).join('');
+          <div class="fixture-visitante${esV ? ' nombre-propio' : '''}">${escHtml(f.visitante)}</div>
+        </div>`;}).join('');
       return `<div class="fecha-group">${header}${cards}</div>`;
     }).join('') || '<div class="loading">No hay partidos próximos</div>';
   } catch (e) {
