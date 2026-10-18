@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "jornada": 1,
+    "fecha": "18/10/2614",
+    "local": "PREVISEGUR",
+    "golesLocal": 6,
+    "golesVisitante": 5,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 2,
+    "fecha": "18/10/2613",
+    "local": "BOCA SENIOR",
+    "golesLocal": 7,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 3,
+    "fecha": "18/10/2612",
+    "local": "SACONIA 2.0",
+    "golesLocal": 9,
+    "golesVisitante": 4,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/10/2611",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 5,
+    "fecha": "18/10/2610",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 5,
+    "golesVisitante": 7,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 6,
+    "fecha": "24/05/2613",
+    "local": "SACONIA 2.0",
+    "golesLocal": 5,
+    "golesVisitante": 11,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 7,
+    "fecha": "24/05/2612",
+    "local": "BOCA SENIOR",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "RCD CAMBADOS"
+  }
+]
