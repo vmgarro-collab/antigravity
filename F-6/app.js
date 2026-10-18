@@ -38,7 +38,7 @@ async function apiFetch(endpoint) {
     '/api/calendario':    'data/calendario.json',
   };
   const url = staticMap[endpoint] || endpoint;
-  const bust = url.startsWith('data/') ? `?t=${Date.now()}` : '';
+  const bust = url.startsWith('data/') ? `?t=${Math.floor(Date.now()/60000)}` : '';
   const res = await fetch(url + bust);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
