@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "CLUB VOLEIBOL TORRELODONES C",
+      "pj": 3,
+      "pg": 3,
+      "pp": 0,
+      "sg": 9,
+      "sp": null,
+      "pf": 225,
+      "pc": 148,
+      "pts": 9
+    },
+    {
+      "pos": 2,
       "equipo": "ANCORA GALAPAGAR",
       "pj": 3,
       "pg": 3,
@@ -13,7 +25,7 @@
       "pts": 9
     },
     {
-      "pos": 2,
+      "pos": 3,
       "equipo": "CD KOLBE",
       "pj": 2,
       "pg": 2,
@@ -22,18 +34,6 @@
       "sp": null,
       "pf": 150,
       "pc": 82,
-      "pts": 6
-    },
-    {
-      "pos": 3,
-      "equipo": "CLUB VOLEIBOL TORRELODONES C",
-      "pj": 2,
-      "pg": 2,
-      "pp": 0,
-      "sg": 6,
-      "sp": null,
-      "pf": 150,
-      "pc": 93,
       "pts": 6
     },
     {
@@ -111,13 +111,13 @@
     {
       "pos": 10,
       "equipo": "ABV BOADILLA B B",
-      "pj": 1,
+      "pj": 2,
       "pg": 0,
-      "pp": 1,
+      "pp": 2,
       "sg": null,
-      "sp": 3,
-      "pf": 52,
-      "pc": 75,
+      "sp": 6,
+      "pf": 107,
+      "pc": 150,
       "pts": 0
     },
     {

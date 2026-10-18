@@ -152,8 +152,8 @@
   {
     "local": "ABV BOADILLA B B",
     "visitante": "CLUB VOLEIBOL TORRELODONES C",
-    "resultado": "11:00",
-    "jugado": false,
+    "resultado": "0-3",
+    "jugado": true,
     "fecha": "18/10/2026",
     "hora": "11:00",
     "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
