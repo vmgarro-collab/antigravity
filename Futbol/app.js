@@ -10,9 +10,8 @@ const TIPOJUEGO       = '2';
 
 // ─── Service Worker ───────────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/antigravity/Futbol/sw.js').then(reg => {
-    reg.update();
-  });
+  navigator.serviceWorker.register('/antigravity/Futbol/sw.js').then(reg => { reg.update(); });
+  navigator.serviceWorker.addEventListener('controllerchange', () => { window.location.reload(); });
 }
 
 // ─── Head-to-head modal ───────────────────────────────────────────────────────
