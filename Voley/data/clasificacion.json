@@ -14,6 +14,18 @@
     },
     {
       "pos": 2,
+      "equipo": "CD KOLBE",
+      "pj": 3,
+      "pg": 3,
+      "pp": 0,
+      "sg": 9,
+      "sp": 1,
+      "pf": 248,
+      "pc": 154,
+      "pts": 9
+    },
+    {
+      "pos": 3,
       "equipo": "ANCORA GALAPAGAR",
       "pj": 3,
       "pg": 3,
@@ -23,18 +35,6 @@
       "pf": 239,
       "pc": 164,
       "pts": 9
-    },
-    {
-      "pos": 3,
-      "equipo": "CD KOLBE",
-      "pj": 2,
-      "pg": 2,
-      "pp": 0,
-      "sg": 6,
-      "sp": null,
-      "pf": 150,
-      "pc": 82,
-      "pts": 6
     },
     {
       "pos": 4,
@@ -99,13 +99,13 @@
     {
       "pos": 9,
       "equipo": "CV COLLADO VILLALBA C",
-      "pj": 2,
+      "pj": 3,
       "pg": 0,
-      "pp": 2,
-      "sg": 1,
-      "sp": 6,
-      "pf": 126,
-      "pc": 166,
+      "pp": 3,
+      "sg": 2,
+      "sp": 9,
+      "pf": 198,
+      "pc": 264,
       "pts": 0
     },
     {
