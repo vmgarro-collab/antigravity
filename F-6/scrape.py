@@ -258,21 +258,32 @@ def scrape_resultados_y_calendario():
         text_all = [td.get_text(strip=True) for td in tds]
         full_text = " ".join(text_all)
 
-        date_m = re.search(r"(\d{1,2})[/\-](\d{1,2})[/\-](\d{4})", full_text)
-        if not date_m:
+        # Date: dd/mm/yy or dd/mm/yyyy — extract from each td separately to avoid hora collision
+        fecha_str, fecha_dt = None, None
+        for td in tds:
+            td_text = td.get_text(strip=True)
+            date_m = re.match(r"(\d{1,2})[/\-](\d{1,2})[/\-](\d{2,4})$", td_text)
+            if date_m:
+                d, mo, y = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
+                if y < 100:
+                    y += 2000
+                fecha_str = f"{str(d).zfill(2)}/{str(mo).zfill(2)}/{y}"
+                fecha_dt  = datetime(y, mo, d)
+                break
+        if not fecha_str:
             continue
-        d, mo, y = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
-        fecha_str = f"{str(d).zfill(2)}/{str(mo).zfill(2)}/{y}"
-        fecha_dt  = datetime(y, mo, d)
 
         if fecha_str not in jornada_map:
             jornada_map[fecha_str] = len(jornada_map) + 1
         jornada = jornada_map[fecha_str]
 
         hora = ""
-        time_m = re.search(r"\b(\d{1,2}:\d{2})\b", full_text)
-        if time_m:
-            hora = time_m.group(1)
+        for td in tds:
+            td_text = td.get_text(strip=True)
+            time_m = re.match(r"(\d{1,2}:\d{2})$", td_text)
+            if time_m:
+                hora = time_m.group(1)
+                break
 
         score = parse_score(full_text)
         if score:
