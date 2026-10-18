@@ -239,6 +239,7 @@ def scrape_jugadores():
 # ---------------------------------------------------------------------------
 
 SEASON_YEAR = 2026
+SEASON_START = datetime(2026, 9, 1)  # Inicio temporada otoño 2026
 
 def get_match_date_urls():
     soup = BeautifulSoup(get(URL_MATCHHUB), "lxml")
@@ -246,10 +247,16 @@ def get_match_date_urls():
     for a in soup.find_all("a", href=True):
         href = a["href"]
         if "matchHub" in href and f"year{SEASON_YEAR}" in href:
+            # Only include dates from season start onwards
+            m = re.search(r"year(\d+)_month(\d+)_day(\d+)", href)
+            if m:
+                link_date = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+                if link_date < SEASON_START:
+                    continue
             if not href.startswith("http"):
                 href = BASE + href
             links.append(href)
-    print(f"  Found {len(links)} date URLs for {SEASON_YEAR}")
+    print(f"  Found {len(links)} date URLs for {SEASON_YEAR} season")
     return list(dict.fromkeys(links))
 
 def parse_fecha(url):
