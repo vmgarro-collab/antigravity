@@ -126,6 +126,24 @@
     </div>
 
     <div id="marcador-toast" class="marcador-toast" style="display:none"></div>
+
+    <!-- Setup modal -->
+    <div id="setup-modal" class="setup-modal" style="display:none">
+      <div class="setup-box">
+        <div class="setup-titulo">Nuevo partido</div>
+        <label class="setup-label">Nombre del rival</label>
+        <input id="setup-rival" class="setup-input" type="text" placeholder="Rival" autocomplete="off" />
+        <label class="setup-label">¿Dónde jugáis?</label>
+        <div class="setup-campo-btns">
+          <button id="btn-casa" class="btn-campo" onclick="elegirCampo(true)">
+            🏠 En casa
+          </button>
+          <button id="btn-fuera" class="btn-campo" onclick="elegirCampo(false)">
+            ✈️ Fuera
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="app.js"></script>
   <script>
