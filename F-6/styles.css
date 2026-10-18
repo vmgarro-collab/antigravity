@@ -414,6 +414,7 @@ tbody td {
     min-width: 0;
   }
   .fixture-vs {
+    display: block;
     font-size: 0.7rem;
     color: var(--text-secondary);
     background: var(--bg-surface);
