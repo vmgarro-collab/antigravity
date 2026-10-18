@@ -81,7 +81,8 @@
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/antigravity/Voley/sw.js');
+      navigator.serviceWorker.register('/antigravity/Voley/sw.js').then(reg => { reg.update(); });
+      navigator.serviceWorker.addEventListener('controllerchange', () => { window.location.reload(); });
     }
   </script>
 </body>
