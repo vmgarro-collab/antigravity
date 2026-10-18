@@ -259,10 +259,12 @@ def scrape_resultados_y_calendario():
         full_text = " ".join(text_all)
 
         # Date: dd/mm/yy or dd/mm/yyyy — extract from each td separately to avoid hora collision
+        if len(resultados) + len(calendario) == 0:
+            print(f"  DEBUG row tds: {[td.get_text(strip=True) for td in tds[:6]]}")
         fecha_str, fecha_dt = None, None
         for td in tds:
             td_text = td.get_text(strip=True)
-            date_m = re.match(r"(\d{1,2})[/\-](\d{1,2})[/\-](\d{2,4})$", td_text)
+            date_m = re.search(r"(\d{1,2})[/\-](\d{1,2})[/\-](\d{2,4})", td_text)
             if date_m:
                 d, mo, y = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
                 if y < 100:
@@ -280,8 +282,8 @@ def scrape_resultados_y_calendario():
         hora = ""
         for td in tds:
             td_text = td.get_text(strip=True)
-            time_m = re.match(r"(\d{1,2}:\d{2})$", td_text)
-            if time_m:
+            time_m = re.search(r"(\d{1,2}:\d{2})", td_text)
+            if time_m and td_text != fecha_str:
                 hora = time_m.group(1)
                 break
 
