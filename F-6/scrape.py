@@ -240,6 +240,10 @@ def scrape_jugadores():
 
 def get_match_date_urls():
     soup = BeautifulSoup(get(URL_MATCHHUB), "lxml")
+    all_hrefs = [a["href"] for a in soup.find_all("a", href=True)]
+    print(f"  Total links on page: {len(all_hrefs)}")
+    sample = [h for h in all_hrefs if any(k in h for k in ["match","year","date","fixture","jornada","round"])]
+    print(f"  Match-related links: {sample[:10]}")
     links = []
     for a in soup.find_all("a", href=True):
         href = a["href"]
@@ -247,7 +251,7 @@ def get_match_date_urls():
             if not href.startswith("http"):
                 href = BASE + href
             links.append(href)
-    print(f"  Found {len(links)} date URLs from league page")
+    print(f"  Found {len(links)} date URLs")
     return list(dict.fromkeys(links))
 
 def parse_fecha(url):
