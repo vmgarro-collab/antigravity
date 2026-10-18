@@ -303,6 +303,11 @@ function abrirMarcador() {
   document.body.style.overflow = 'hidden';
   renderMarcador();
   lucide.createIcons();
+  // First open: ask setup
+  const esInicial = estado.setsLocal === 0 && estado.setsVisitante === 0 &&
+    estado.puntosLocal === 0 && estado.puntosVisitante === 0 &&
+    estado.nombreVisitante === 'Rival';
+  if (esInicial) setTimeout(resetPartido, 200);
 }
 
 function cerrarMarcador() {
@@ -393,12 +398,17 @@ function resetSet() {
 }
 
 function resetPartido() {
-  if (!confirm('¿Empezar nuevo partido? Se borrará el marcador actual.')) return;
-  const nl = estado.nombreLocal;
-  const nv = estado.nombreVisitante;
+  const rival = prompt('Nombre del rival:', estado.nombreVisitante === '2 de Mayo' ? estado.nombreLocal : estado.nombreVisitante);
+  if (!rival) return;
+  const esCasa = confirm('¿El 2 de Mayo juega en CASA?\n\nAceptar = Local (izquierda)\nCancelar = Visitante (derecha)');
   estado = estadoInicial();
-  estado.nombreLocal = nl;
-  estado.nombreVisitante = nv;
+  if (esCasa) {
+    estado.nombreLocal = '2 de Mayo';
+    estado.nombreVisitante = rival.trim();
+  } else {
+    estado.nombreLocal = rival.trim();
+    estado.nombreVisitante = '2 de Mayo';
+  }
   guardarEstado();
   renderMarcador();
   lucide.createIcons();
