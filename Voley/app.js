@@ -266,3 +266,144 @@ function showError(html) { const el = document.getElementById('error-msg'); el.i
 function hideError() { document.getElementById('error-msg').style.display = 'none'; }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// ─────────────────────────────────────────────────────────
+// MARCADOR
+// ─────────────────────────────────────────────────────────
+const MARCADOR_KEY = 'voley_marcador_v1';
+
+let estado = cargarEstado();
+
+function estadoInicial() {
+  return {
+    nombreLocal: '2 de Mayo',
+    nombreVisitante: 'Rival',
+    setsLocal: 0,
+    setsVisitante: 0,
+    puntosLocal: 0,
+    puntosVisitante: 0,
+    setActual: 1,
+    historico: []  // [{l, v}]
+  };
+}
+
+function cargarEstado() {
+  try {
+    const s = localStorage.getItem(MARCADOR_KEY);
+    return s ? JSON.parse(s) : estadoInicial();
+  } catch { return estadoInicial(); }
+}
+
+function guardarEstado() {
+  localStorage.setItem(MARCADOR_KEY, JSON.stringify(estado));
+}
+
+function abrirMarcador() {
+  document.getElementById('marcador-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  renderMarcador();
+  lucide.createIcons();
+}
+
+function cerrarMarcador() {
+  document.getElementById('marcador-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function renderMarcador() {
+  const e = estado;
+  document.getElementById('sets-local').textContent = e.setsLocal;
+  document.getElementById('sets-visitante').textContent = e.setsVisitante;
+  document.getElementById('nombre-local').textContent = e.nombreLocal;
+  document.getElementById('nombre-visitante').textContent = e.nombreVisitante;
+  document.getElementById('puntos-local').textContent = e.puntosLocal;
+  document.getElementById('puntos-visitante').textContent = e.puntosVisitante;
+
+  // Destacar quién va ganando el set
+  document.getElementById('puntos-local').className =
+    'puntos-display' + (e.puntosLocal > e.puntosVisitante ? ' ganando' : '');
+  document.getElementById('puntos-visitante').className =
+    'puntos-display' + (e.puntosVisitante > e.puntosLocal ? ' ganando' : '');
+
+  const esQuinto = e.setActual === 5;
+  document.getElementById('set-num-label').textContent = 'SET ' + e.setActual + (esQuinto ? ' (15pts)' : '');
+
+  // Histórico de sets
+  const hist = document.getElementById('set-historico');
+  hist.innerHTML = e.historico.map((s, i) => {
+    const ganLocal = s.l > s.v;
+    return '<div class="set-result ' + (ganLocal ? 'ganado' : '') + '">' +
+      (i + 1) + ': ' + s.l + '–' + s.v + '</div>';
+  }).join('');
+}
+
+function punto(equipo, delta) {
+  const key = equipo === 'local' ? 'puntosLocal' : 'puntosVisitante';
+  estado[key] = Math.max(0, estado[key] + delta);
+  guardarEstado();
+  renderMarcador();
+  comprobarFinSet();
+}
+
+function comprobarFinSet() {
+  const l = estado.puntosLocal;
+  const v = estado.puntosVisitante;
+  const limite = estado.setActual === 5 ? 15 : 25;
+  const ventaja = 2;
+
+  const localGana = l >= limite && l - v >= ventaja;
+  const visitanteGana = v >= limite && v - l >= ventaja;
+
+  if (localGana || visitanteGana) {
+    estado.historico.push({ l, v });
+    if (localGana) estado.setsLocal++;
+    else estado.setsVisitante++;
+
+    const ganador = localGana ? estado.nombreLocal : estado.nombreVisitante;
+    mostrarToast('Set ' + estado.setActual + ' para ' + ganador + ' (' + l + '–' + v + ')');
+
+    estado.puntosLocal = 0;
+    estado.puntosVisitante = 0;
+    estado.setActual++;
+    guardarEstado();
+    renderMarcador();
+    lucide.createIcons();
+  }
+}
+
+function mostrarToast(msg) {
+  const t = document.getElementById('marcador-toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+function resetSet() {
+  estado.puntosLocal = 0;
+  estado.puntosVisitante = 0;
+  guardarEstado();
+  renderMarcador();
+}
+
+function resetPartido() {
+  if (!confirm('¿Empezar nuevo partido? Se borrará el marcador actual.')) return;
+  const nl = estado.nombreLocal;
+  const nv = estado.nombreVisitante;
+  estado = estadoInicial();
+  estado.nombreLocal = nl;
+  estado.nombreVisitante = nv;
+  guardarEstado();
+  renderMarcador();
+  lucide.createIcons();
+}
+
+function editarNombre(equipo) {
+  const key = equipo === 'local' ? 'nombreLocal' : 'nombreVisitante';
+  const actual = estado[key];
+  const nuevo = prompt('Nombre del equipo:', actual);
+  if (nuevo && nuevo.trim()) {
+    estado[key] = nuevo.trim();
+    guardarEstado();
+    renderMarcador();
+  }
+}
