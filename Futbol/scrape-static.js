@@ -63,7 +63,11 @@ async function main() {
 
   console.log('Fetching goleadores...');
   const goles = await retry(() => getGoleadores(GRUPO_ID, COMPETICION_ID), 'goleadores');
-  fs.writeFileSync(path.join(DATA_DIR, 'goleadores.json'), JSON.stringify(goles));
+  if (goles.goleadores && goles.goleadores.length > 0) {
+    fs.writeFileSync(path.join(DATA_DIR, 'goleadores.json'), JSON.stringify(goles));
+  } else {
+    console.log('Goleadores vacíos de la API — manteniendo datos anteriores');
+  }
 
   console.log('Done. Files written to Futbol/data/');
 }
