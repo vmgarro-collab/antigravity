@@ -355,7 +355,7 @@ tbody td {
     padding: 4px;
   }
   .tab-btn {
-    flex: 1 1 calc(33.333% - 4px);
+    flex: 1 1 calc(25% - 4px);
     min-width: 0;
     font-size: 0.72rem;
     padding: 9px 4px;
