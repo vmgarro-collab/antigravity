@@ -1,1 +1,674 @@
-[]
+[
+  {
+    "jornada": 1,
+    "fecha": "10/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 8,
+    "golesVisitante": 6,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 2,
+    "fecha": "11/01/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 9,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 2,
+    "fecha": "11/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 2,
+    "fecha": "11/01/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 2,
+    "fecha": "11/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 9,
+    "golesVisitante": 6,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 2,
+    "fecha": "11/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 3,
+    "golesVisitante": 11,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/01/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 1,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/01/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 4,
+    "fecha": "18/01/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 3,
+    "golesVisitante": 11,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 5,
+    "fecha": "24/01/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 3,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 6,
+    "fecha": "25/01/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 11,
+    "golesVisitante": 1,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 6,
+    "fecha": "25/01/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 8,
+    "golesVisitante": 7,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 6,
+    "fecha": "25/01/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 6,
+    "fecha": "25/01/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 8,
+    "fecha": "01/02/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 8,
+    "fecha": "01/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 3,
+    "golesVisitante": 8,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 8,
+    "fecha": "01/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 8,
+    "fecha": "01/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 12,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 8,
+    "fecha": "01/02/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 10,
+    "golesVisitante": 5,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 10,
+    "fecha": "08/02/2026",
+    "local": "TROPICAL",
+    "golesLocal": 7,
+    "golesVisitante": 9,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 10,
+    "fecha": "08/02/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 7,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 10,
+    "fecha": "08/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 14,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 10,
+    "fecha": "08/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 9,
+    "golesVisitante": 8,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 10,
+    "fecha": "08/02/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 11,
+    "golesVisitante": 0,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 12,
+    "fecha": "15/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 7,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 12,
+    "fecha": "15/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 4,
+    "golesVisitante": 15,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 12,
+    "fecha": "15/02/2026",
+    "local": "TROPICAL",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 12,
+    "fecha": "15/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 4,
+    "golesVisitante": 6,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 13,
+    "fecha": "21/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 6,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 14,
+    "fecha": "22/02/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 1,
+    "golesVisitante": 12,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 14,
+    "fecha": "22/02/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 3,
+    "golesVisitante": 1,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 14,
+    "fecha": "22/02/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 4,
+    "golesVisitante": 12,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 14,
+    "fecha": "22/02/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 6,
+    "golesVisitante": 8,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 14,
+    "fecha": "22/02/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 4,
+    "golesVisitante": 11,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 16,
+    "fecha": "01/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 16,
+    "fecha": "01/03/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 6,
+    "golesVisitante": 6,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 16,
+    "fecha": "01/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 4,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 18,
+    "fecha": "08/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 3,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 18,
+    "fecha": "08/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 12,
+    "golesVisitante": 3,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 18,
+    "fecha": "08/03/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 18,
+    "fecha": "08/03/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 18,
+    "fecha": "08/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 8,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 20,
+    "fecha": "15/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 13,
+    "golesVisitante": 4,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 20,
+    "fecha": "15/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 4,
+    "golesVisitante": 15,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 20,
+    "fecha": "15/03/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 20,
+    "fecha": "15/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 7,
+    "golesVisitante": 3,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 20,
+    "fecha": "15/03/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 8,
+    "golesVisitante": 8,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 21,
+    "fecha": "22/03/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 9,
+    "golesVisitante": 1,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 21,
+    "fecha": "22/03/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 4,
+    "golesVisitante": 4,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 21,
+    "fecha": "22/03/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 12,
+    "golesVisitante": 5,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 21,
+    "fecha": "22/03/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 8,
+    "golesVisitante": 11,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 21,
+    "fecha": "22/03/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 6,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 22,
+    "fecha": "11/04/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 8,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 23,
+    "fecha": "12/04/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 12,
+    "golesVisitante": 4,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 23,
+    "fecha": "12/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 6,
+    "golesVisitante": 7,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 23,
+    "fecha": "12/04/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 3,
+    "golesVisitante": 7,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 23,
+    "fecha": "12/04/2026",
+    "local": "TROPICAL",
+    "golesLocal": 2,
+    "golesVisitante": 5,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 23,
+    "fecha": "12/04/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 3,
+    "golesVisitante": 10,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 24,
+    "fecha": "19/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 5,
+    "golesVisitante": 13,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 24,
+    "fecha": "19/04/2026",
+    "local": "TROPICAL",
+    "golesLocal": 5,
+    "golesVisitante": 10,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 24,
+    "fecha": "19/04/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 5,
+    "golesVisitante": 1,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 24,
+    "fecha": "19/04/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 11,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
+  },
+  {
+    "jornada": 25,
+    "fecha": "26/04/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 0,
+    "golesVisitante": 7,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 25,
+    "fecha": "26/04/2026",
+    "local": "RCD CAMBADOS",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 25,
+    "fecha": "26/04/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 5,
+    "golesVisitante": 3,
+    "visitante": "CHAOX F.C"
+  },
+  {
+    "jornada": 25,
+    "fecha": "26/04/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 3,
+    "golesVisitante": 12,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 26,
+    "fecha": "10/05/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 7,
+    "golesVisitante": 8,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 26,
+    "fecha": "10/05/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 13,
+    "golesVisitante": 4,
+    "visitante": "TROPICAL"
+  },
+  {
+    "jornada": 26,
+    "fecha": "10/05/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 3,
+    "golesVisitante": 7,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 26,
+    "fecha": "10/05/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 0,
+    "golesVisitante": 9,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 27,
+    "fecha": "17/05/2026",
+    "local": "EL PARAGUAS",
+    "golesLocal": 2,
+    "golesVisitante": 13,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 27,
+    "fecha": "17/05/2026",
+    "local": "RAYO HUESCA",
+    "golesLocal": 5,
+    "golesVisitante": 5,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 27,
+    "fecha": "17/05/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 28,
+    "fecha": "24/05/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 3,
+    "golesVisitante": 0,
+    "visitante": "RAYO PILAR"
+  },
+  {
+    "jornada": 28,
+    "fecha": "24/05/2026",
+    "local": "TROPICAL",
+    "golesLocal": 4,
+    "golesVisitante": 5,
+    "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 28,
+    "fecha": "24/05/2026",
+    "local": "BOCA SENIOR",
+    "golesLocal": 4,
+    "golesVisitante": 2,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 28,
+    "fecha": "24/05/2026",
+    "local": "SACONIA 2.0",
+    "golesLocal": 5,
+    "golesVisitante": 11,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 29,
+    "fecha": "31/05/2026",
+    "local": "CHAOX F.C",
+    "golesLocal": 12,
+    "golesVisitante": 3,
+    "visitante": "EL PARAGUAS"
+  },
+  {
+    "jornada": 29,
+    "fecha": "31/05/2026",
+    "local": "SPORTING SARRIA",
+    "golesLocal": 4,
+    "golesVisitante": 3,
+    "visitante": "BOCA SENIOR"
+  },
+  {
+    "jornada": 29,
+    "fecha": "31/05/2026",
+    "local": "PREVISEGUR",
+    "golesLocal": 5,
+    "golesVisitante": 10,
+    "visitante": "RCD CAMBADOS"
+  },
+  {
+    "jornada": 29,
+    "fecha": "31/05/2026",
+    "local": "TROPICAL",
+    "golesLocal": 7,
+    "golesVisitante": 4,
+    "visitante": "RAYO HUESCA"
+  },
+  {
+    "jornada": 29,
+    "fecha": "31/05/2026",
+    "local": "RAYO PILAR",
+    "golesLocal": 3,
+    "golesVisitante": 4,
+    "visitante": "SACONIA 2.0"
+  }
+]
