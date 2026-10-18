@@ -415,6 +415,7 @@ body, .app { overflow-anchor: none; }
   cursor: pointer;
   transition: background .15s, transform .1s;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .btn-punto svg { width: 22px; height: 22px; }
 .btn-punto:active { transform: scale(.92); }
