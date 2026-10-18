@@ -1,1 +1,106 @@
-[]
+[
+  {
+    "pos": 1,
+    "jugador": "Victor Manuel GARRO PEREZ",
+    "equipo": "EL PARAGUAS",
+    "goles": 16,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 2,
+    "jugador": "Daniel GOMEZ GANCEDO",
+    "equipo": "EL PARAGUAS",
+    "goles": 9,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 3,
+    "jugador": "Ruben Ríos Cepeda",
+    "equipo": "EL PARAGUAS",
+    "goles": 8,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 4,
+    "jugador": "Aitor GARCIA MARTIN",
+    "equipo": "EL PARAGUAS",
+    "goles": 5,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 5,
+    "jugador": "Marco SANCHEZ MORALES",
+    "equipo": "EL PARAGUAS",
+    "goles": 4,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 6,
+    "jugador": "Julio GONZALEZ DE MANUELES",
+    "equipo": "EL PARAGUAS",
+    "goles": 3,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 7,
+    "jugador": "Javier Gómez Gancedo",
+    "equipo": "EL PARAGUAS",
+    "goles": 3,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 8,
+    "jugador": "Roberto Jiménez Tejedor",
+    "equipo": "EL PARAGUAS",
+    "goles": 3,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 9,
+    "jugador": "Petko Atanasov Marinov",
+    "equipo": "EL PARAGUAS",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 10,
+    "jugador": "Cesar CRISTOBAL BUENO",
+    "equipo": "EL PARAGUAS",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 11,
+    "jugador": "Jorge HIDALGO MARTINEZ",
+    "equipo": "EL PARAGUAS",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 12,
+    "jugador": "Ramon VICENTE FERNANDEZ",
+    "equipo": "EL PARAGUAS",
+    "goles": 2,
+    "partidos": null,
+    "paraguas": true
+  },
+  {
+    "pos": 13,
+    "jugador": "Ignacio SANCHEZ MORALES",
+    "equipo": "EL PARAGUAS",
+    "goles": 0,
+    "partidos": null,
+    "paraguas": true
+  }
+]
