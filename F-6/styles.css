@@ -457,3 +457,16 @@ tbody td {
   color: var(--text-secondary);
   margin-top: 2px;
 }
+
+/* Partido con El Paraguas */
+.partido-propio {
+  border-color: rgba(121, 40, 202, 0.4) !important;
+  background: rgba(121, 40, 202, 0.08) !important;
+}
+.partido-propio:hover {
+  background: rgba(121, 40, 202, 0.15) !important;
+}
+.nombre-propio {
+  color: var(--accent-color);
+  font-weight: 700;
+}
