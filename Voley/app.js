@@ -320,10 +320,17 @@ function renderMarcador() {
   document.getElementById('puntos-visitante').textContent = e.puntosVisitante;
 
   // Destacar quién va ganando el set
+  const igualados = e.puntosLocal === e.puntosVisitante;
+  const localGanando = e.puntosLocal > e.puntosVisitante;
   document.getElementById('puntos-local').className =
-    'puntos-display' + (e.puntosLocal > e.puntosVisitante ? ' ganando' : '');
+    'puntos-display' + (igualados ? '' : localGanando ? ' ganando' : ' perdiendo');
   document.getElementById('puntos-visitante').className =
-    'puntos-display' + (e.puntosVisitante > e.puntosLocal ? ' ganando' : '');
+    'puntos-display' + (igualados ? '' : localGanando ? ' perdiendo' : ' ganando');
+
+  // Tinte de fondo al bloque
+  const bloques = document.querySelectorAll('.equipo-bloque');
+  bloques[0].className = 'equipo-bloque' + (igualados ? '' : localGanando ? ' ganando' : ' perdiendo');
+  bloques[1].className = 'equipo-bloque' + (igualados ? '' : localGanando ? ' perdiendo' : ' ganando');
 
   const esQuinto = e.setActual === 5;
   document.getElementById('set-num-label').textContent = 'SET ' + e.setActual + (esQuinto ? ' (15pts)' : '');
