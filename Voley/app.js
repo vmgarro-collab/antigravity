@@ -303,11 +303,10 @@ function abrirMarcador() {
   document.body.style.overflow = 'hidden';
   renderMarcador();
   lucide.createIcons();
-  // First open: ask setup
   const esInicial = estado.setsLocal === 0 && estado.setsVisitante === 0 &&
     estado.puntosLocal === 0 && estado.puntosVisitante === 0 &&
     estado.nombreVisitante === 'Rival';
-  if (esInicial) setTimeout(resetPartido, 200);
+  if (esInicial) abrirSetup();
 }
 
 function cerrarMarcador() {
@@ -398,15 +397,29 @@ function resetSet() {
 }
 
 function resetPartido() {
-  const rival = prompt('Nombre del rival:', estado.nombreVisitante === '2 de Mayo' ? estado.nombreLocal : estado.nombreVisitante);
-  if (!rival) return;
-  const esCasa = confirm('¿El 2 de Mayo juega en CASA?\n\nAceptar = Local (izquierda)\nCancelar = Visitante (derecha)');
+  abrirSetup();
+}
+
+function abrirSetup() {
+  const rivalActual = estado.nombreLocal === '2 de Mayo' ? estado.nombreVisitante : estado.nombreLocal;
+  document.getElementById('setup-rival').value = rivalActual === 'Rival' ? '' : rivalActual;
+  document.getElementById('btn-casa').classList.remove('selected');
+  document.getElementById('btn-fuera').classList.remove('selected');
+  document.getElementById('setup-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('setup-rival').focus(), 100);
+}
+
+function elegirCampo(esCasa) {
+  const rival = document.getElementById('setup-rival').value.trim() || 'Rival';
+  document.getElementById('btn-casa').classList.toggle('selected', esCasa);
+  document.getElementById('btn-fuera').classList.toggle('selected', !esCasa);
+  document.getElementById('setup-modal').style.display = 'none';
   estado = estadoInicial();
   if (esCasa) {
     estado.nombreLocal = '2 de Mayo';
-    estado.nombreVisitante = rival.trim();
+    estado.nombreVisitante = rival;
   } else {
-    estado.nombreLocal = rival.trim();
+    estado.nombreLocal = rival;
     estado.nombreVisitante = '2 de Mayo';
   }
   guardarEstado();
@@ -415,12 +428,6 @@ function resetPartido() {
 }
 
 function editarNombre(equipo) {
-  const key = equipo === 'local' ? 'nombreLocal' : 'nombreVisitante';
-  const actual = estado[key];
-  const nuevo = prompt('Nombre del equipo:', actual);
-  if (nuevo && nuevo.trim()) {
-    estado[key] = nuevo.trim();
-    guardarEstado();
-    renderMarcador();
-  }
+  abrirSetup();
 }
+
