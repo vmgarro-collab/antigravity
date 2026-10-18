@@ -20,7 +20,7 @@ HEADERS = {
 BASE = "https://artificialfsala.leaguerepublic.com"
 URL_STANDINGS  = f"{BASE}/standingsForDate/747215306/2/-1/-1.html"
 URL_STATS      = "https://artificialfsala.leaguerepublic.com/playerStats/890842856.html"
-URL_MATCHHUB   = f"{BASE}/matchHub/890842856/1_747215306/-1/-1/-1/-1/1/true.html"
+URL_MATCHHUB   = f"{BASE}/matchHub.html"
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "data")
 
@@ -238,15 +238,18 @@ def scrape_jugadores():
 
 # ---------------------------------------------------------------------------
 
+SEASON_YEAR = 2026
+
 def get_match_date_urls():
     soup = BeautifulSoup(get(URL_MATCHHUB), "lxml")
     links = []
     for a in soup.find_all("a", href=True):
         href = a["href"]
-        if "matchHub" in href and "year" in href:
+        if "matchHub" in href and f"year{SEASON_YEAR}" in href:
             if not href.startswith("http"):
                 href = BASE + href
             links.append(href)
+    print(f"  Found {len(links)} date URLs for {SEASON_YEAR}")
     return list(dict.fromkeys(links))
 
 def parse_fecha(url):
