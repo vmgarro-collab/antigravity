@@ -65,7 +65,11 @@ async function main() {
 
   console.log('Fetching goleadoras...');
   const goles = await retry(() => getGoleadores(GRUPO_ID, COMPETICION_ID), 'goleadoras');
-  fs.writeFileSync(path.join(DATA_DIR, 'goleadores.json'), JSON.stringify(goles));
+  if (goles.goleadores && goles.goleadores.length > 0) {
+    fs.writeFileSync(path.join(DATA_DIR, 'goleadores.json'), JSON.stringify(goles));
+  } else {
+    console.log('Goleadoras vacías de la API — manteniendo datos anteriores');
+  }
 
   console.log('Done. Files written to FutbolFemenino/data/');
 }
