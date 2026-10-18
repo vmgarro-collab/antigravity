@@ -238,118 +238,69 @@ def scrape_jugadores():
 
 # ---------------------------------------------------------------------------
 
-def get_match_date_urls():
-    soup = BeautifulSoup(get(URL_MATCHHUB), "lxml")
-    all_hrefs = [a["href"] for a in soup.find_all("a", href=True)]
-    print(f"  Total links on page: {len(all_hrefs)}")
-    sample = [h for h in all_hrefs if any(k in h for k in ["match","year","date","fixture","jornada","round"])]
-    print(f"  Match-related links: {sample[:10]}")
-    links = []
-    for a in soup.find_all("a", href=True):
-        href = a["href"]
-        if "matchHub" in href and "year" in href:
-            if not href.startswith("http"):
-                href = BASE + href
-            links.append(href)
-    print(f"  Found {len(links)} date URLs")
-    return list(dict.fromkeys(links))
-
-def parse_fecha(url):
-    m = re.search(r"year(\d+)_month(\d+)_day(\d+)", url)
-    if not m:
-        return None, None
-    y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
-    return f"{str(d).zfill(2)}/{str(mo).zfill(2)}/{y}", datetime(y, mo, d)
+URL_FIXTURES = f"{BASE}/fg/1_747215306.html"
 
 def parse_score(text):
     m = re.search(r"(\d+)\s*-\s*(\d+)", text)
     return (int(m.group(1)), int(m.group(2))) if m else None
 
-def scrape_matches_from_page(html, jornada, fecha):
-    soup = BeautifulSoup(html, "lxml")
-    played, upcoming = [], []
-    current_hora = ""
+def scrape_resultados_y_calendario():
+    """Scrape the fixture group page directly — has all matches in one table."""
+    soup = BeautifulSoup(get(URL_FIXTURES), "lxml")
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    resultados, calendario = [], []
+    jornada_map = {}
 
-    # Walk every element in document order so time headers are captured
-    # regardless of whether they're inside a table or in a div/p outside.
-    for element in soup.find_all(["tr", "div", "p", "span", "h1", "h2", "h3", "h4", "li"]):
-        text = element.get_text(strip=True)
-
-        # Capture time patterns from any element (e.g. "10:00")
-        tm = re.match(r'^(\d{1,2}:\d{2})$', text)
-        if not tm:
-            tm = re.search(r'^\s*(\d{1,2}:\d{2})\s*$', text)
-        if tm:
-            current_hora = tm.group(1)
-
-        if element.name != "tr":
-            continue
-
-        tds = element.find_all("td")
+    for row in soup.find_all("tr"):
+        tds = row.find_all("td")
         if len(tds) < 3:
-            # Still check for time in short rows (colspan headers)
-            tm2 = re.search(r'\b(\d{1,2}:\d{2})\b', text)
-            if tm2:
-                current_hora = tm2.group(1)
             continue
+        text_all = [td.get_text(strip=True) for td in tds]
+        full_text = " ".join(text_all)
 
-        # Score (played)
-        score_td = next((td for td in tds if re.search(r"\d+\s*-\s*\d+", td.get_text())), None)
-        if score_td:
-            score = parse_score(score_td.get_text(strip=True))
-            if score:
-                idx = tds.index(score_td)
-                local     = tds[idx-1].get_text(strip=True) if idx > 0 else ""
-                visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
-                if local or visitante:
-                    played.append({
-                        "jornada": jornada, "fecha": fecha,
+        date_m = re.search(r"(\d{1,2})[/\-](\d{1,2})[/\-](\d{4})", full_text)
+        if not date_m:
+            continue
+        d, mo, y = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
+        fecha_str = f"{str(d).zfill(2)}/{str(mo).zfill(2)}/{y}"
+        fecha_dt  = datetime(y, mo, d)
+
+        if fecha_str not in jornada_map:
+            jornada_map[fecha_str] = len(jornada_map) + 1
+        jornada = jornada_map[fecha_str]
+
+        hora = ""
+        time_m = re.search(r"\b(\d{1,2}:\d{2})\b", full_text)
+        if time_m:
+            hora = time_m.group(1)
+
+        score = parse_score(full_text)
+        if score:
+            idx = next((i for i, td in enumerate(tds) if re.search(r"\d+\s*-\s*\d+", td.get_text())), None)
+            if idx is not None and idx > 0 and idx + 1 < len(tds):
+                local     = tds[idx - 1].get_text(strip=True)
+                visitante = tds[idx + 1].get_text(strip=True)
+                if local and visitante:
+                    resultados.append({
+                        "jornada": jornada, "fecha": fecha_str,
                         "local": local, "golesLocal": score[0],
                         "golesVisitante": score[1], "visitante": visitante,
                     })
             continue
 
-        # VS (upcoming)
-        vs_td = next((td for td in tds if re.search(r"\bVS\b", td.get_text(), re.IGNORECASE)), None)
-        if vs_td:
-            idx = tds.index(vs_td)
-            local     = tds[idx-1].get_text(strip=True) if idx > 0 else ""
-            visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
-            if local or visitante:
-                # Also try to find time in this row if not already captured
-                if not current_hora:
-                    tm3 = re.search(r'\b(\d{1,2}:\d{2})\b', text)
-                    if tm3:
-                        current_hora = tm3.group(1)
-                print(f"    Upcoming: {local} vs {visitante} @ {current_hora}")
-                upcoming.append({
-                    "jornada": jornada, "fecha": fecha, "hora": current_hora,
+        vs_idx = next((i for i, td in enumerate(tds) if re.search(r"\bVS\b", td.get_text(), re.IGNORECASE)), None)
+        if vs_idx is not None and vs_idx > 0 and vs_idx + 1 < len(tds):
+            local     = tds[vs_idx - 1].get_text(strip=True)
+            visitante = tds[vs_idx + 1].get_text(strip=True)
+            if local and visitante:
+                print(f"    Upcoming: {local} vs {visitante} {fecha_str} {hora}")
+                calendario.append({
+                    "jornada": jornada, "fecha": fecha_str, "hora": hora,
                     "local": local, "visitante": visitante,
                 })
 
-    return played, upcoming
-
-def scrape_resultados_y_calendario():
-    date_urls = get_match_date_urls()
-    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-    resultados, calendario = [], []
-    for jornada, url in enumerate(date_urls, start=1):
-        fecha_str, fecha_dt = parse_fecha(url)
-        if not fecha_str:
-            continue
-        try:
-            html = get(url)
-        except Exception as e:
-            print(f"  ⚠ Skipping {url}: {e}")
-            continue
-        played, upcoming = scrape_matches_from_page(html, jornada, fecha_str)
-        if fecha_dt < today:
-            resultados.extend(played)
-        else:
-            calendario.extend(upcoming)
+    print(f"  Resultados: {len(resultados)}, Calendario: {len(calendario)}")
     return resultados, calendario
-
-# ---------------------------------------------------------------------------
 
 def save(name, data):
     path = os.path.join(OUT_DIR, f"{name}.json")
