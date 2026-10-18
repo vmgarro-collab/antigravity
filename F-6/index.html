@@ -78,7 +78,8 @@
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/antigravity/F-6/sw.js', { scope: '/antigravity/F-6/' });
+      navigator.serviceWorker.register('/antigravity/F-6/sw.js', { scope: '/antigravity/F-6/' }).then(reg => { reg.update(); });
+      navigator.serviceWorker.addEventListener('controllerchange', () => { window.location.reload(); });
     }
   </script>
 </body>
