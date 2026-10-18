@@ -36,7 +36,6 @@ async function apiFetch(endpoint) {
     '/api/resultados':    'data/resultados.json',
     '/api/goleadores':    'data/goleadores.json',
     '/api/calendario':    'data/calendario.json',
-    '/api/paraguas':      'data/paraguas.json',
   };
   const url = staticMap[endpoint] || endpoint;
   const bust = url.startsWith('data/') ? `?t=${Date.now()}` : '';
@@ -64,8 +63,6 @@ async function loadTab(tabName) {
     case 'resultados':    return loadResultados();
     case 'goleadores':    return loadGoleadores();
     case 'calendario':    return loadCalendario();
-    case 'paraguas':      return loadParaguas();
-    // jugador is search-driven, no initial load
   }
 }
 
@@ -126,8 +123,6 @@ async function loadClasificacion() {
 
 function buscarEquipo(nombre) {
   document.getElementById('jugador-input').value = nombre;
-  switchTab('jugador');
-  buscarJugador(nombre);
 }
 
 function escHtml(str) {
