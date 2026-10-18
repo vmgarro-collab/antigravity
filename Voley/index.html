@@ -78,6 +78,52 @@
       </a>
     </footer>
 
+
+  <!-- Marcador overlay -->
+  <div id="marcador-overlay" class="marcador-overlay" style="display:none">
+    <div class="marcador-header">
+      <span class="marcador-titulo">Marcador</span>
+      <button class="marcador-close" onclick="cerrarMarcador()"><i data-lucide="x"></i></button>
+    </div>
+
+    <div class="marcador-sets">
+      <div class="set-badge" id="sets-local">0</div>
+      <div class="sets-label">SETS</div>
+      <div class="set-badge" id="sets-visitante">0</div>
+    </div>
+
+    <div class="marcador-equipos">
+      <div class="equipo-bloque">
+        <div class="equipo-nombre" id="nombre-local" onclick="editarNombre('local')">2 de Mayo</div>
+        <div class="puntos-display" id="puntos-local">0</div>
+        <div class="btn-grupo">
+          <button class="btn-punto btn-menos" onclick="punto('local',-1)"><i data-lucide="minus"></i></button>
+          <button class="btn-punto btn-mas" onclick="punto('local',1)"><i data-lucide="plus"></i></button>
+        </div>
+      </div>
+
+      <div class="marcador-sep">
+        <div class="set-num" id="set-num-label">SET 1</div>
+        <div class="set-historico" id="set-historico"></div>
+      </div>
+
+      <div class="equipo-bloque">
+        <div class="equipo-nombre" id="nombre-visitante" onclick="editarNombre('visitante')">Rival</div>
+        <div class="puntos-display" id="puntos-visitante">0</div>
+        <div class="btn-grupo">
+          <button class="btn-punto btn-menos" onclick="punto('visitante',-1)"><i data-lucide="minus"></i></button>
+          <button class="btn-punto btn-mas" onclick="punto('visitante',1)"><i data-lucide="plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="marcador-acciones">
+      <button class="btn-accion" onclick="resetSet()"><i data-lucide="rotate-ccw"></i> Reset set</button>
+      <button class="btn-accion btn-accion-danger" onclick="resetPartido()"><i data-lucide="trash-2"></i> Nuevo partido</button>
+    </div>
+
+    <div id="marcador-toast" class="marcador-toast" style="display:none"></div>
+  </div>
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
