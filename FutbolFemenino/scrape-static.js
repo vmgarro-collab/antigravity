@@ -25,7 +25,11 @@ async function main() {
 
   console.log('Fetching clasificacion...');
   const clasif = await retry(() => getClasificacion(GRUPO_ID, COMPETICION_ID), 'clasificacion');
-  fs.writeFileSync(path.join(DATA_DIR, 'clasificacion.json'), JSON.stringify(clasif));
+  if (clasif.tabla && clasif.tabla.length > 0) {
+    fs.writeFileSync(path.join(DATA_DIR, 'clasificacion.json'), JSON.stringify(clasif));
+  } else {
+    console.log('Clasificacion vacía de la API — manteniendo datos anteriores');
+  }
 
   // resultados.json: jornadas + jornada_actual (de resultados-y-jornadas)
   console.log('Fetching resultados...');
