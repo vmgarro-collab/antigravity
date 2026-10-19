@@ -389,6 +389,17 @@ function mostrarToast(msg) {
   setTimeout(() => { t.style.display = 'none'; }, 3000);
 }
 
+function cambiarLado() {
+  [estado.nombreLocal, estado.nombreVisitante] = [estado.nombreVisitante, estado.nombreLocal];
+  [estado.setsLocal, estado.setsVisitante] = [estado.setsVisitante, estado.setsLocal];
+  [estado.puntosLocal, estado.puntosVisitante] = [estado.puntosVisitante, estado.puntosLocal];
+  estado.historico = estado.historico.map(s => ({ l: s.v, v: s.l }));
+  guardarEstado();
+  renderMarcador();
+  lucide.createIcons();
+  mostrarToast('Lados cambiados');
+}
+
 function resetSet() {
   estado.puntosLocal = 0;
   estado.puntosVisitante = 0;
