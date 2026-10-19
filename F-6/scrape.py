@@ -203,31 +203,23 @@ def scrape_jugadores():
     except Exception as e:
         print(f"    Error: {e}")
 
-    # Paraguas team (garantiza que aparecen aunque no estén en goleadores)
-    print(f"  Fetching Paraguas: {URL_PARAGUAS}")
-    try:
-        r2 = _get_session().get(URL_PARAGUAS, headers={"Referer": BASE + "/"}, timeout=20)
-        print(f"    Status: {r2.status_code}")
-        if r2.status_code == 200:
-            paraguas = _parse_player_table(r2.text, equipo_paraguas=True)
-            added = 0
-            for p in paraguas:
-                if p["jugador"].lower() not in seen:
-                    seen.add(p["jugador"].lower())
-                    p["pos"] = len(players) + 1
-                    p["equipo"] = "EL PARAGUAS"
-                    p["paraguas"] = True
-                    players.append(p)
-                    added += 1
-                else:
-                    # Ensure equipo name is correct for already-added Paraguas players
+    # Paraguas team — solo si ya hay estadísticas generales, para corregir nombre de equipo
+    if players:
+        print(f"  Fetching Paraguas: {URL_PARAGUAS}")
+        try:
+            r2 = _get_session().get(URL_PARAGUAS, headers={"Referer": BASE + "/"}, timeout=20)
+            print(f"    Status: {r2.status_code}")
+            if r2.status_code == 200:
+                paraguas = _parse_player_table(r2.text, equipo_paraguas=True)
+                for p in paraguas:
                     for mp in players:
                         if mp["jugador"].lower() == p["jugador"].lower():
                             mp["equipo"] = "EL PARAGUAS"
                             mp["paraguas"] = True
-            print(f"    Paraguas players added: {added}")
-    except Exception as e:
-        print(f"    Error: {e}")
+        except Exception as e:
+            print(f"    Error: {e}")
+    else:
+        print("  Sin estadísticas aún — omitiendo fetch de Paraguas")
 
     # Fix positions
     for i, p in enumerate(players, start=1):
