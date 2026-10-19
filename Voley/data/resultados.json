@@ -281,8 +281,8 @@
       "jornada": 43655
     },
     {
-      "local": "B. M. 2 DE MAYO",
-      "visitante": "CD KOLBE",
+      "local": "CV SAN IGNACIO A",
+      "visitante": "ANCORA GALAPAGAR",
       "resultado": "–",
       "jugado": false,
       "fecha": "08/11/2026",
@@ -291,13 +291,13 @@
       "jornada": 43655
     },
     {
-      "local": "CV SAN IGNACIO A",
-      "visitante": "ANCORA GALAPAGAR",
-      "resultado": "–",
+      "local": "B. M. 2 DE MAYO",
+      "visitante": "CD KOLBE",
+      "resultado": "17:30",
       "jugado": false,
       "fecha": "08/11/2026",
-      "hora": "",
-      "campo": "",
+      "hora": "17:30",
+      "campo": "AMANECER, COLEGIO",
       "jornada": 43655
     },
     {
