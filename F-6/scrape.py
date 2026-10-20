@@ -92,20 +92,31 @@ def scrape_clasificacion():
                     nums.append(int(c))
                 except ValueError:
                     nums.append(None)
-            # Find a run of 7 consecutive numeric values (pj g e p gf gc pts)
+            # Find a run of 8 consecutive numeric values (pj g e p gf gc gd pts)
+            # or fall back to 7 (older tables without GD column)
             stats = None
-            for start in range(len(nums) - 6):
-                run = nums[start:start+7]
-                if all(v is not None for v in run):
-                    stats = run
+            for length in (8, 7):
+                for start in range(len(nums) - length + 1):
+                    run = nums[start:start+length]
+                    if all(v is not None for v in run):
+                        stats = run
+                        break
+                if stats:
                     break
             if stats is None:
                 continue
-            entry = {
-                "pos": pos, "equipo": equipo,
-                "pj": stats[0], "g": stats[1], "e": stats[2], "p": stats[3],
-                "gf": stats[4], "gc": stats[5], "pts": stats[6],
-            }
+            if len(stats) == 8:
+                entry = {
+                    "pos": pos, "equipo": equipo,
+                    "pj": stats[0], "g": stats[1], "e": stats[2], "p": stats[3],
+                    "gf": stats[4], "gc": stats[5], "gd": stats[6], "pts": stats[7],
+                }
+            else:
+                entry = {
+                    "pos": pos, "equipo": equipo,
+                    "pj": stats[0], "g": stats[1], "e": stats[2], "p": stats[3],
+                    "gf": stats[4], "gc": stats[5], "pts": stats[6],
+                }
             if team_id:
                 entry["team_id"] = team_id
             result.append(entry)
