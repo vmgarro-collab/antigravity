@@ -68,7 +68,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 /* Clasificacion table */
-.tabla-clasificacion { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 360px; }
+.tabla-clasificacion { width: 100%; border-collapse: collapse; font-size: 0.82rem; table-layout: fixed; }
 .tabla-clasificacion th {
   color: var(--text-muted);
   text-align: center;
@@ -84,11 +84,15 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   border-bottom: 1px solid rgba(255,255,255,0.03);
   white-space: nowrap;
 }
+.tabla-clasificacion th:nth-child(1) { width: 28px; }
+.tabla-clasificacion th:nth-child(2) { width: auto; }
+.tabla-clasificacion th:nth-child(n+3) { width: 30px; }
 .tabla-clasificacion td:nth-child(2) {
   text-align: left;
-  white-space: normal;
-  word-break: break-word;
-  min-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
 }
 .tabla-clasificacion td.pts { font-weight: 700; color: var(--accent); }
 .tabla-clasificacion tbody tr:first-child td { color: var(--accent); font-weight: 600; }
