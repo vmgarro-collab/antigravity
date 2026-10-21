@@ -58,6 +58,22 @@
     </main>
   </div>
 
+  <!-- H2H modal -->
+  <div id="h2h-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center;padding:16px">
+    <div class="h2h-box">
+      <div class="h2h-header">
+        <span id="h2h-title"></span>
+        <button onclick="closeH2H()" class="h2h-close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="h2h-body">
+        <table class="h2h-table">
+          <thead><tr><th>Fecha</th><th>Local</th><th></th><th>Visitante</th></tr></thead>
+          <tbody id="h2h-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="app.js"></script>
   <script>
@@ -68,7 +84,7 @@
     }
   </script>
   <footer class="app-footer">
-    <div class="app-version">v: veteranos-v9</div>
+    <div class="app-version">v: veteranos-v10</div>
   </footer>
 </body>
 </html>

@@ -1,7 +1,7 @@
 // F-6/sw.js — Service Worker (network-first: siempre descarga lo último)
 'use strict';
 
-const CACHE = 'veteranos-v9';
+const CACHE = 'veteranos-v10';
 
 self.addEventListener('install', e => {
   self.skipWaiting();

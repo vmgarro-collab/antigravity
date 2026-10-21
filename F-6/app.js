@@ -2,6 +2,42 @@
 
 lucide.createIcons();
 
+// ─── Head-to-head ────────────────────────────────────────────────────────────
+let _todosPartidos = [];
+
+function showH2H(equipo) {
+  const partidos = _todosPartidos.filter(p => {
+    const l = p.local.toUpperCase(), v = p.visitante.toUpperCase();
+    const rival = equipo.toUpperCase();
+    return (l.includes('PARAGUAS') && v.includes(rival)) ||
+           (v.includes('PARAGUAS') && l.includes(rival));
+  });
+
+  const rows = partidos.length
+    ? partidos.map(p => {
+        const esLocal = p.local.toUpperCase().includes('PARAGUAS');
+        const gl = esLocal ? p.golesLocal : p.golesVisitante;
+        const gv = esLocal ? p.golesVisitante : p.golesLocal;
+        const cls = gl > gv ? 'win' : gl < gv ? 'loss' : 'draw';
+        return `<tr class="h2h-${cls}">
+          <td>${p.fecha || '–'}</td>
+          <td>${esLocal ? '🏠' : '✈️'} El Paraguas</td>
+          <td class="h2h-score">${gl} – ${gv}</td>
+          <td>${esLocal ? escHtml(p.visitante) : escHtml(p.local)}</td>
+        </tr>`;
+      }).join('')
+    : `<tr><td colspan="4" style="color:rgba(255,255,255,0.4);padding:12px;text-align:center">Sin enfrentamientos aún</td></tr>`;
+
+  document.getElementById('h2h-title').textContent = `☂ El Paraguas vs ${equipo}`;
+  document.getElementById('h2h-tbody').innerHTML = rows;
+  document.getElementById('h2h-modal').style.display = 'flex';
+  lucide.createIcons();
+}
+
+function closeH2H() {
+  document.getElementById('h2h-modal').style.display = 'none';
+}
+
 const API_BASE = '';
 
 // ---------------------------------------------------------------------------
@@ -74,7 +110,11 @@ async function loadClasificacion() {
   panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando clasificación...</div>';
   lucide.createIcons();
   try {
-    const data = await apiFetch('/api/clasificacion');
+    const [data, partidos] = await Promise.all([
+      apiFetch('/api/clasificacion'),
+      fetch(`data/resultados.json?t=${Date.now()}`).then(r => r.json()).catch(() => [])
+    ]);
+    _todosPartidos = partidos;
     panel.innerHTML = `
       <div class="glass-card tabla-wrapper">
         <table>
@@ -92,11 +132,14 @@ async function loadClasificacion() {
             </tr>
           </thead>
           <tbody>
-            ${data.map(row => `
-              <tr class="${row.equipo.toLowerCase().includes('paraguas') ? 'paraguas-row' : ''}">
+            ${data.map(row => {
+              const esParaguas = row.equipo.toLowerCase().includes('paraguas');
+              const click = esParaguas ? '' : ` onclick="showH2H('${row.equipo.replace(/'/g, "\\'")}')" style="cursor:pointer" title="Ver enfrentamientos vs El Paraguas"`;
+              return `
+              <tr class="${esParaguas ? 'paraguas-row' : ''}"${click}>
                 <td class="center">${row.pos}</td>
                 <td>
-                  ${escHtml(row.equipo)}${row.equipo.toLowerCase().includes('paraguas') ? ' <span class="paraguas-badge">☂</span>' : ''}
+                  ${escHtml(row.equipo)}${esParaguas ? ' <span class="paraguas-badge">☂</span>' : ''}
                 </td>
                 <td class="center">${row.pj}</td>
                 <td class="center">${row.g}</td>
@@ -105,8 +148,8 @@ async function loadClasificacion() {
                 <td class="center">${row.gf}</td>
                 <td class="center">${row.gc}</td>
                 <td class="center"><strong>${row.pts}</strong></td>
-              </tr>
-            `).join('')}
+              </tr>`;
+            }).join('')}
           </tbody>
         </table>
       </div>`;
