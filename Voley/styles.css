@@ -311,9 +311,9 @@ body, .app { overflow-anchor: none; }
 }
 .app-version {
   margin-top: 4px;
-  font-size: 0.55rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  opacity: 0.35;
+  opacity: 0.5;
 }
 .footer-contact:hover { opacity: 1; }
 
