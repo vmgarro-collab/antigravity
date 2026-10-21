@@ -509,3 +509,12 @@ tbody td {
   color: var(--accent-color);
   font-weight: 700;
 }
+.app-footer {
+  text-align: center;
+  padding: 20px 16px 32px;
+}
+.app-version {
+  margin-top: 6px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+}
