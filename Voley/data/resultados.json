@@ -241,6 +241,16 @@
       "jornada": 43654
     },
     {
+      "local": "CV SAN IGNACIO A",
+      "visitante": "ANCORA GALAPAGAR",
+      "resultado": "9:30",
+      "jugado": false,
+      "fecha": "07/11/2026",
+      "hora": "9:30",
+      "campo": "MARIA DE VILLOTA",
+      "jornada": 43655
+    },
+    {
       "local": "ABV BOADILLA B B",
       "visitante": "CLUB VOLEIBOL TORRELODONES D",
       "resultado": "–",
@@ -273,16 +283,6 @@
     {
       "local": "CV GUADARRAMA",
       "visitante": "DESCANSA...",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "08/11/2026",
-      "hora": "",
-      "campo": "",
-      "jornada": 43655
-    },
-    {
-      "local": "CV SAN IGNACIO A",
-      "visitante": "ANCORA GALAPAGAR",
       "resultado": "–",
       "jugado": false,
       "fecha": "08/11/2026",
