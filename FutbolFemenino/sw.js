@@ -1,7 +1,7 @@
 // FutbolFemenino/sw.js — Service Worker (network-first: siempre descarga lo último)
 'use strict';
 
-const CACHE = 'mcf-femenino-v9';
+const CACHE = 'mcf-femenino-v10';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -17,7 +17,17 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  const url = e.request.url;
 
+  // JSON de datos: siempre red, sin caché (fallback a caché si sin conexión)
+  if (url.includes('.json')) {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  // Estáticos (HTML, CSS, JS, iconos): network-first con caché
   e.respondWith(
     fetch(e.request)
       .then(res => {
