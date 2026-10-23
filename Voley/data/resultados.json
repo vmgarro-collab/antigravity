@@ -311,16 +311,6 @@
       "jornada": 43656
     },
     {
-      "local": "CD KOLBE",
-      "visitante": "CV SAN IGNACIO A",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "15/11/2026",
-      "hora": "",
-      "campo": "",
-      "jornada": 43656
-    },
-    {
       "local": "DESCANSA...",
       "visitante": "B. M. 2 DE MAYO",
       "resultado": "–",
@@ -358,6 +348,16 @@
       "fecha": "15/11/2026",
       "hora": "",
       "campo": "",
+      "jornada": 43656
+    },
+    {
+      "local": "CD KOLBE",
+      "visitante": "CV SAN IGNACIO A",
+      "resultado": "10:00",
+      "jugado": false,
+      "fecha": "15/11/2026",
+      "hora": "10:00",
+      "campo": "KOLBE, COLEGIO",
       "jornada": 43656
     },
     {
