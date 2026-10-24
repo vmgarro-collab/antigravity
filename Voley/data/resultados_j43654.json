@@ -13,8 +13,8 @@
     {
       "local": "CLUB VOLEIBOL TORRELODONES D",
       "visitante": "CV SAN IGNACIO A",
-      "resultado": "9:30",
-      "jugado": false,
+      "resultado": "0-3",
+      "jugado": true,
       "fecha": "24/10/2026",
       "hora": "9:30",
       "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
@@ -23,8 +23,8 @@
     {
       "local": "CLUB VOLEIBOL TORRELODONES C",
       "visitante": "CV BULLDOGS B B",
-      "resultado": "9:30",
-      "jugado": false,
+      "resultado": "3-0",
+      "jugado": true,
       "fecha": "24/10/2026",
       "hora": "9:30",
       "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
