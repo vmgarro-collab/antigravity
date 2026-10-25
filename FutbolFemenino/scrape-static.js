@@ -62,9 +62,12 @@ async function main() {
       try {
         const jRes = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID, j.num), `resultados_j${j.num}`);
         if (jRes.partidos && jRes.partidos.length > 0) {
-          partidos = jRes.partidos.map((rp, i) => {
-            const cp = partidos[i] || {};
-            if (rp.jugado) return { ...cp, resultado: rp.resultado, jugado: true };
+          const norm = s => (s || '').toUpperCase().trim();
+          partidos = partidos.map(cp => {
+            const rp = jRes.partidos.find(r =>
+              norm(r.local) === norm(cp.local) && norm(r.visitante) === norm(cp.visitante)
+            );
+            if (rp && rp.jugado) return { ...cp, resultado: rp.resultado, jugado: true };
             return cp;
           });
           console.log(`  Jornada ${j.num} OK con resultados (${partidos.filter(p => p.jugado).length} jugados)`);
