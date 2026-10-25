@@ -284,7 +284,7 @@ function renderGoleadores(goles, showAll = false) {
     const lib = g.codigo_equipo === LIBERTAD_ID;
     return `<tr${lib ? ' class="libertad-row"' : ''}>
       <td>${i + 1}</td>
-      <td>${abreviarNombre(g.jugador)}${lib ? '<span class="libertad-badge">LIBERTAD</span>' : ''}</td>
+      <td>${abreviarNombre(g.jugador)}${lib ? '<span class="libertad-badge">LIBER</span>' : ''}</td>
       <td class="col-equipo">${g.equipo}</td>
       <td>${g.partidos}</td>
       <td class="goles-cell">${g.goles}</td>
