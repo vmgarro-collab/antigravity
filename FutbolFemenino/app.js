@@ -240,7 +240,8 @@ function renderResultados(data) {
         <span class="resultado${p.jugado ? '' : ' pendiente'}">${p.resultado}</span>
         <span class="equipo-visitante${visPropio ? ' nombre-propio' : ''}">${p.visitante}</span>
       </div>
-      ${p.hora || p.campo ? `<div class="partido-detalle">
+      ${p.hora || p.campo || p.fecha ? `<div class="partido-detalle">
+        ${p.fecha ? `<span>📅 ${(() => { const DIAS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']; const f=parseFechaJornada(p.fecha); return DIAS[f.getDay()]+' '+p.fecha; })()}</span>` : ''}
         ${p.hora ? `<span>🕐 ${p.hora}</span>` : ''}
         ${p.campo ? `<span>📍 ${p.campo}</span>` : ''}
       </div>` : ''}
