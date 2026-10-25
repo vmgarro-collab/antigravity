@@ -31,7 +31,7 @@ async function main() {
   const clasif     = normalizeClasificacion(raw);
   const resultados = normalizeResultados(raw);
 
-  if (clasif && clasif.length > 0) {
+  if (clasif && clasif.tabla && clasif.tabla.length > 0) {
     write('clasificacion.json', clasif);
   } else {
     console.log('  Clasificacion vacia de la API - manteniendo datos anteriores');
