@@ -129,8 +129,8 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 }
 .partido-wrap:last-child { border-bottom: none; }
 
-.partido-wrap.partido-propio { background: rgba(79,172,254,0.07); border-radius: 8px; padding: 9px 6px; }
-.partido .nombre-propio { color: var(--accent-blue); font-weight: 600; }
+.partido-wrap.partido-propio { background: rgba(0,255,136,0.07); border-radius: 8px; padding: 9px 6px; }
+.partido .nombre-propio { color: var(--accent-green); font-weight: 600; }
 .partido {
   display: flex;
   align-items: center;
