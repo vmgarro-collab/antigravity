@@ -241,7 +241,6 @@ def scrape_jugadores():
 
 # ---------------------------------------------------------------------------
 
-URL_MATCHHUB = f"{BASE}/matchHub.html"
 SEASON_START = datetime(2026, 9, 1)
 
 def parse_score(text):
