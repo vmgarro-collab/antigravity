@@ -298,9 +298,54 @@ function guardarEstado() {
   localStorage.setItem(MARCADOR_KEY, JSON.stringify(estado));
 }
 
+let _wakeLock = null;
+let _silentAudioEl = null;
+
+// WAV silencioso mínimo (44 bytes, 1 muestra a 8kHz)
+const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+
+async function _acquireWakeLock() {
+  // Standard Wake Lock API (Chrome/Edge/Firefox Android)
+  if ('wakeLock' in navigator) {
+    try {
+      _wakeLock = await navigator.wakeLock.request('screen');
+      _wakeLock.addEventListener('release', () => { _wakeLock = null; });
+      return;
+    } catch (_) {}
+  }
+  // Fallback iOS Safari: <audio loop> silencioso
+  // iOS mantiene la pantalla encendida mientras hay reproducción de audio activa
+  if (_silentAudioEl) return;
+  try {
+    const a = new Audio(SILENT_WAV);
+    a.loop = true;
+    a.volume = 0;
+    await a.play();
+    _silentAudioEl = a;
+  } catch (_) {}
+}
+
+function _releaseWakeLock() {
+  if (_wakeLock) { _wakeLock.release(); _wakeLock = null; }
+  if (_silentAudioEl) {
+    _silentAudioEl.pause();
+    _silentAudioEl.src = '';
+    _silentAudioEl = null;
+  }
+}
+
+// Re-acquire si la pestaña vuelve a primer plano
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' &&
+      document.getElementById('marcador-overlay').style.display === 'flex') {
+    _acquireWakeLock();
+  }
+});
+
 function abrirMarcador() {
   document.getElementById('marcador-overlay').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  _acquireWakeLock();
   renderMarcador();
   lucide.createIcons();
   const esInicial = estado.setsLocal === 0 && estado.setsVisitante === 0 &&
@@ -312,6 +357,7 @@ function abrirMarcador() {
 function cerrarMarcador() {
   document.getElementById('marcador-overlay').style.display = 'none';
   document.body.style.overflow = '';
+  _releaseWakeLock();
 }
 
 function renderMarcador() {
