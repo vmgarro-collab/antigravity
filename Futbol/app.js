@@ -262,7 +262,12 @@ function updateJornadaNav() {
   const next = document.getElementById('jornada-next');
   const lbl  = document.getElementById('jornada-label');
   if (!j) { lbl.textContent = '—'; prev.disabled = true; next.disabled = true; return; }
-  lbl.textContent = `${j.label}${j.fecha ? ' · ' + j.fecha : ''}`;
+  const DIAS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const fechaLabel = j.fecha ? (() => {
+    const f = parseFechaJornada(j.fecha);
+    return ` · ${DIAS[f.getDay()]} ${j.fecha}`;
+  })() : '';
+  lbl.textContent = `${j.label}${fechaLabel}`;
   prev.disabled = jornadaIdx <= 0;
   next.disabled = jornadaIdx >= jornadas.length - 1;
 }
