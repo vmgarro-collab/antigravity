@@ -4,7 +4,7 @@
 // ─── Config ───────────────────────────────────────────────────────────────────
 const COMPETICION_ID  = '26738141';
 const GRUPO_ID        = '26738150';
-const LIBERTAD_ID     = '851121';
+const LIBERTAD_ID     = '13789535';
 const TEMPORADA       = '22';
 const TIPOJUEGO       = '2';
 
