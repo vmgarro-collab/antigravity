@@ -241,6 +241,7 @@ def scrape_jugadores():
 
 # ---------------------------------------------------------------------------
 
+URL_MATCHHUB = f"{BASE}/matchHub.html"
 SEASON_START = datetime(2026, 9, 1)
 
 def parse_score(text):
@@ -248,31 +249,22 @@ def parse_score(text):
     return (int(m.group(1)), int(m.group(2))) if m else None
 
 def get_match_date_urls():
-    from datetime import timedelta
-    all_dates = set()
-    today = datetime.now()
-    # Fetch current month + next 5 months; use -1_-1 (all groups) to navigate
-    # then build per-day URLs filtered to SEASON_START
-    for offset in range(6):
-        d = (today.replace(day=1) + timedelta(days=31 * offset))
-        url = f"{BASE}/matchHub/890842856/-1_-1/-1/-1/-1/year{d.year}_month{d.month}_day1/-1/false.html"
-        try:
-            html = get(url)
-        except Exception as e:
-            print(f"    matchHub month {d.year}/{d.month} error: {e}")
+    soup = BeautifulSoup(get(URL_MATCHHUB), "lxml")
+    links = []
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        if "matchHub" not in href or "year" not in href:
             continue
-        found = re.findall(r"year(\d+)_month(\d+)_day(\d+)", html)
-        print(f"    matchHub month {d.year}/{d.month}: {len(found)} raw dates")
-        for yr, mo, dy in found:
-            link_date = datetime(int(yr), int(mo), int(dy))
-            if link_date >= SEASON_START:
-                all_dates.add(link_date)
-    sorted_dates = sorted(all_dates)
-    # Build per-day matchHub URLs filtered to this group
-    links = [
-        f"{BASE}/matchHub/890842856/1_747215306/-1/-1/-1/year{d.year}_month{d.month}_day{d.day}/-1/false.html"
-        for d in sorted_dates
-    ]
+        m = re.search(r"year(\d+)_month(\d+)_day(\d+)", href)
+        if not m:
+            continue
+        link_date = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if link_date < SEASON_START:
+            continue
+        if not href.startswith("http"):
+            href = BASE + href
+        links.append(href)
+    links = list(dict.fromkeys(links))
     print(f"  Found {len(links)} date URLs from {SEASON_START.strftime('%d/%m/%Y')}")
     return links
 
