@@ -50,20 +50,42 @@ async function main() {
   };
   fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(resultadosBase));
 
+  const jornadaActual = parseInt(result.jornada_actual) || 0;
+
   // Escribir un archivo por jornada y acumular todos los partidos
   const todosPartidos = [];
   for (const j of calendario) {
+    let partidos = j.partidos;
+
+    // Para jornadas ya jugadas, obtener resultados reales del endpoint de resultados
+    if (parseInt(j.num) <= jornadaActual) {
+      try {
+        const jRes = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID, j.num), `resultados_j${j.num}`);
+        if (jRes.partidos && jRes.partidos.length > 0) {
+          partidos = jRes.partidos.map((rp, i) => {
+            const cp = partidos[i] || {};
+            if (rp.jugado) return { ...cp, resultado: rp.resultado, jugado: true };
+            return cp;
+          });
+          console.log(`  Jornada ${j.num} OK con resultados (${partidos.filter(p => p.jugado).length} jugados)`);
+        }
+      } catch (e) {
+        console.warn(`  Jornada ${j.num}: no se pudieron obtener resultados, usando calendario`);
+      }
+    } else {
+      console.log(`  Jornada ${j.num} OK (${partidos.length} partidos)`);
+    }
+
     const jResult = {
       ...resultadosBase,
       jornadas: jornadasConFecha,
-      partidos: j.partidos,
+      partidos,
     };
     fs.writeFileSync(
       path.join(DATA_DIR, `resultados_j${j.num}.json`),
       JSON.stringify(jResult)
     );
-    todosPartidos.push(...j.partidos);
-    console.log(`  Jornada ${j.num} OK (${j.partidos.length} partidos)`);
+    todosPartidos.push(...partidos);
   }
   fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 

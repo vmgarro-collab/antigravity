@@ -62,7 +62,8 @@ async function main() {
           // Combinar: tomar resultado/jugado del endpoint de resultados, resto del calendario
           partidos = jRes.partidos.map((rp, i) => {
             const cp = partidos[i] || {};
-            return { ...cp, resultado: rp.resultado, jugado: rp.jugado };
+            if (rp.jugado) return { ...cp, resultado: rp.resultado, jugado: true };
+            return cp;
           });
           console.log(`  Jornada ${j.num} OK con resultados (${partidos.filter(p => p.jugado).length} jugados)`);
         }

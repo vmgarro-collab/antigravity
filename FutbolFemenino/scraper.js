@@ -76,7 +76,7 @@ async function getCalendario(grupoId, competicionId) {
         return {
           local:     p.equipo_local || '',
           visitante: p.equipo_visitante || '',
-          resultado: jugado ? `${p.goles_casa}-${p.goles_visitante}` : (p.hora || ''),
+          resultado: jugado ? `${p.goles_casa}-${p.goles_visitante}` : '',
           jugado,
           fecha:     p.fecha || '',
           hora:      p.hora || '',
