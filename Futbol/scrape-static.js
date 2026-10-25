@@ -34,6 +34,7 @@ async function main() {
   // resultados.json: jornada_actual (de resultados-y-jornadas)
   console.log('Fetching resultados...');
   const result = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID), 'resultados');
+  const jornadaActual = parseInt(result.jornada_actual) || 0;
 
   // calendario: todas las jornadas con partidos desde /competicion/calendario
   console.log('Fetching calendario (todas las jornadas)...');
@@ -51,17 +52,30 @@ async function main() {
 
   const todosPartidos = [];
   for (const j of calendario) {
-    const jResult = {
-      ...resultadosBase,
-      jornadas: jornadasConFecha,
-      partidos: j.partidos,
-    };
-    fs.writeFileSync(
-      path.join(DATA_DIR, `resultados_j${j.num}.json`),
-      JSON.stringify(jResult)
-    );
-    todosPartidos.push(...j.partidos);
-    console.log(`  Jornada ${j.num} OK (${j.partidos.length} partidos)`);
+    let partidos = j.partidos;
+
+    // Para jornadas ya jugadas, obtener resultados reales del endpoint de resultados
+    if (parseInt(j.num) <= jornadaActual) {
+      try {
+        const jRes = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID, j.num), `resultados_j${j.num}`);
+        if (jRes.partidos && jRes.partidos.length > 0) {
+          // Combinar: tomar resultado/jugado del endpoint de resultados, resto del calendario
+          partidos = jRes.partidos.map((rp, i) => {
+            const cp = partidos[i] || {};
+            return { ...cp, resultado: rp.resultado, jugado: rp.jugado };
+          });
+          console.log(`  Jornada ${j.num} OK con resultados (${partidos.filter(p => p.jugado).length} jugados)`);
+        }
+      } catch (e) {
+        console.warn(`  Jornada ${j.num}: no se pudieron obtener resultados, usando calendario`);
+      }
+    } else {
+      console.log(`  Jornada ${j.num} OK (${partidos.length} partidos)`);
+    }
+
+    const jResult = { ...resultadosBase, jornadas: jornadasConFecha, partidos };
+    fs.writeFileSync(path.join(DATA_DIR, `resultados_j${j.num}.json`), JSON.stringify(jResult));
+    todosPartidos.push(...partidos);
   }
   fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 
