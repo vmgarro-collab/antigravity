@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ortomagia-v1'
+const CACHE_NAME = 'ortomagia-v2'
 const PRECACHE = [
   './',
   'index.html',
