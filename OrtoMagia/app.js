@@ -184,7 +184,7 @@ function renderQuestion() {
   const idx = session.idx
 
   const tipo = session.mode === 'debiles' ? 'input' : 'choice'
-  const q = generarPregunta(item, tipo)
+  const q = generarPregunta(item, tipo, profileItems())
 
   if (!q) { advanceSession(false); return }
 
@@ -217,6 +217,15 @@ function renderQuestion() {
   } else {
     hide('q-choices')
     show('q-input-group')
+    // Mostrar la forma incorrecta como referencia visible
+    let hint = $('q-incorrect-hint')
+    if (!hint) {
+      hint = document.createElement('div')
+      hint.id = 'q-incorrect-hint'
+      hint.style.cssText = 'font-size:2rem;font-weight:800;text-align:center;letter-spacing:0.04em;color:var(--error);margin-bottom:4px'
+      $('q-input-group').insertBefore(hint, $('q-input-group').firstChild)
+    }
+    hint.textContent = q.palabraIncorrecta || ''
     $('q-input').value = ''
     $('q-input').focus()
     $('btn-submit-input').onclick = () => {
