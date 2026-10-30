@@ -11,6 +11,11 @@ function shuffle(arr) {
   return a
 }
 
+// Strip accents — usado para mostrar la palabra "sin tilde" como prompt
+function sinTilde(str) {
+  return str.normalize('NFD').replace(/[̀-ͯ]/g, '')
+}
+
 // ── Validator ──────────────────────────────────────────────────────────────
 
 function validateBanco(items) {
@@ -38,22 +43,44 @@ function validateBanco(items) {
 
 // ── Mechanic 1: "palabra" ──────────────────────────────────────────────────
 
-function generarPreguntaPalabra(item, tipo = 'choice') {
+// poolItems: todos los ítems del perfil (para padding de opciones)
+function generarPreguntaPalabra(item, tipo = 'choice', poolItems = []) {
   if (tipo === 'choice') {
-    const opciones = shuffle([item.palabra, ...item.distractores])
+    let opciones = [item.palabra, ...item.distractores]
+
+    // Pad hasta 4 opciones con distractores plausibles de otros ítems
+    // de la misma categoría (para evitar que 2 opciones sea trivial)
+    if (opciones.length < 4) {
+      const mismaCategoria = poolItems.filter(
+        i => i.id !== item.id && i.mecanica === 'palabra' && i.categoria === item.categoria
+      )
+      for (const otro of shuffle(mismaCategoria)) {
+        if (opciones.length >= 4) break
+        // Añadir la versión sin tilde del otro ítem como decoy
+        const decoy = otro.distractores[0]
+        if (decoy && !opciones.includes(decoy) && decoy !== item.palabra) {
+          opciones.push(decoy)
+        }
+      }
+    }
+
     return {
       mecanica: 'palabra',
       tipo: 'choice',
       enunciado: '¿Cómo se escribe?',
-      opciones,
+      opciones: shuffle(opciones),
       respuesta: item.palabra,
       item,
     }
   }
+
+  // Modo input: mostrar la forma incorrecta como prompt para que el usuario la corrija
+  const incorrecta = item.distractores[0] || sinTilde(item.palabra)
   return {
     mecanica: 'palabra',
     tipo: 'input',
-    enunciado: 'Escribe la palabra correctamente:',
+    enunciado: 'Corrige esta palabra:',
+    palabraIncorrecta: incorrecta,
     respuesta: item.palabra,
     item,
   }
@@ -75,9 +102,9 @@ function generarPreguntaPuntuacion(item) {
 
 // ── Dispatcher ────────────────────────────────────────────────────────────
 
-function generarPregunta(item, tipo = 'choice') {
+function generarPregunta(item, tipo = 'choice', poolItems = []) {
   switch (item.mecanica) {
-    case 'palabra':    return generarPreguntaPalabra(item, tipo)
+    case 'palabra':    return generarPreguntaPalabra(item, tipo, poolItems)
     case 'contexto':   return generarPreguntaContexto(item)
     case 'puntuacion': return generarPreguntaPuntuacion(item)
     default:
