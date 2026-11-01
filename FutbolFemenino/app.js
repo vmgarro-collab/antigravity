@@ -202,9 +202,6 @@ async function loadJornada() {
 function renderClasificacion(data) {
   const body = document.getElementById('clasificacion-body');
   if (!data.tabla?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin datos</p>'; return; }
-  const tabla = [...data.tabla].sort((a, b) =>
-    (b.pts - a.pts) || ((b.gf - b.gc) - (a.gf - a.gc)) || (b.gf - a.gf)
-  ).map((r, i) => ({ ...r, pos: i + 1 }));
   body.innerHTML = `
     <table class="tabla-clasificacion">
       <thead><tr>
@@ -215,7 +212,7 @@ function renderClasificacion(data) {
         <th class="col-gc" title="Goles en contra">GC</th>
         <th>Pts</th>
       </tr></thead>
-      <tbody>${tabla.map(r => {
+      <tbody>${data.tabla.map(r => {
         const propio = esEquipoPropio(r.equipo);
         const click = propio ? '' : ` onclick="showH2H('${r.equipo.replace(/'/g, "\\'")}')" style="cursor:pointer" title="Ver enfrentamientos vs Madrid C.F. Femenino 'B'"`;
         return `<tr${propio ? ' class="propio-clasif"' : ''}${click}>
