@@ -239,11 +239,17 @@ function renderResultados(data) {
   body.innerHTML = data.partidos.map(p => {
     const localPropio = esEquipoPropio(p.local);
     const visPropio   = esEquipoPropio(p.visitante);
+    let resCls = '';
+    if (p.jugado && (localPropio || visPropio)) {
+      const [a, b] = p.resultado.split('-').map(Number);
+      const gl = localPropio ? a : b, gv = localPropio ? b : a;
+      resCls = gl > gv ? ' resultado-win' : gl < gv ? ' resultado-loss' : '';
+    }
     return `
     <div class="partido-wrap${localPropio || visPropio ? ' partido-propio' : ''}">
       <div class="partido">
         <span class="equipo-local${localPropio ? ' nombre-propio' : ''}">${p.local}</span>
-        <span class="resultado${p.jugado ? '' : ' pendiente'}">${p.resultado}</span>
+        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${p.resultado}</span>
         <span class="equipo-visitante${visPropio ? ' nombre-propio' : ''}">${p.visitante}</span>
       </div>
       ${p.hora || p.campo || p.fecha ? `<div class="partido-detalle">

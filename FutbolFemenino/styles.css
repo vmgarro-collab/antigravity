@@ -4,11 +4,15 @@
   --bg: #0a0a0f;
   --glass-bg: rgba(255,255,255,0.04);
   --glass-border: rgba(255,255,255,0.08);
-  --accent-main: #c084fc;   /* purple — Madrid CF Femenino */
-  --accent-blue: #f59e0b;   /* amber/gold */
+  --team: #c084fc;        /* Madrid CFF B — morado rosa */
+  --ui: #2dd4bf;          /* UI accent — teal */
+  --win: #4ade80;         /* victoria / líder */
+  --loss: #f87171;        /* derrota */
   --text: #e8e8f0;
   --text-muted: #888899;
   --radius: 16px;
+  /* Keep --accent-main for HTML refs */
+  --accent-main: #c084fc;
 }
 
 body {
@@ -24,16 +28,16 @@ body {
 /* Header */
 .header { margin-bottom: 20px; }
 .header-content { display: flex; align-items: center; gap: 12px; }
-.header-icon { color: var(--accent-main); width: 28px; height: 28px; flex-shrink: 0; }
+.header-icon { color: var(--team); width: 28px; height: 28px; flex-shrink: 0; }
 .header-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .header-text { flex: 1; min-width: 0; }
 h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; }
-.badge-b { color: var(--accent-main); }
+.badge-b { color: var(--team); }
 .header-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 .season-badge {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  color: var(--accent-blue);
+  color: var(--ui);
   padding: 4px 10px;
   border-radius: 99px;
   font-size: 0.75rem;
@@ -60,7 +64,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   align-items: center;
   gap: 8px;
   font-size: 0.85rem;
-  color: var(--accent-blue);
+  color: var(--ui);
   margin-bottom: 14px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -92,13 +96,26 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   word-break: break-word;
   min-width: 100px;
 }
-.tabla-clasificacion tbody tr:first-child td { color: var(--accent-main); font-weight: 600; }
-.tabla-clasificacion td.pts { font-weight: 700; color: var(--accent-main); }
+.tabla-clasificacion tbody tr:first-child td { color: var(--win); font-weight: 600; }
+.tabla-clasificacion td.pts { font-weight: 700; color: var(--win); }
 
 @media (max-width: 400px) {
   .tabla-clasificacion .col-gf,
   .tabla-clasificacion .col-gc { display: none; }
 }
+
+/* Propio row in clasificacion */
+.tabla-clasificacion tr.propio-clasif td {
+  background: rgba(192,132,252,0.06);
+  color: var(--team);
+  font-weight: 600;
+}
+.tabla-clasificacion tr.propio-clasif td.pts { color: var(--team); }
+
+/* Filas clicables en clasificacion */
+.tabla-clasificacion tr:not(.propio-clasif) { cursor: pointer; }
+.tabla-clasificacion tr:not(.propio-clasif):hover td,
+.tabla-clasificacion tr:not(.propio-clasif):active td { background: rgba(45,212,191,0.08); }
 
 /* Resultados */
 .jornada-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
@@ -118,7 +135,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   transition: border-color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.btn-nav:hover { border-color: var(--accent-main); color: var(--accent-main); }
+.btn-nav:hover { border-color: var(--ui); color: var(--ui); }
 .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
 #jornada-label { flex: 1; text-align: center; color: var(--text-muted); font-size: 0.82rem; line-height: 1.3; }
 
@@ -139,15 +156,15 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 }
 .partido .equipo-local  { flex: 1; text-align: right; line-height: 1.3; word-break: break-word; }
 .partido .equipo-visitante { flex: 1; line-height: 1.3; word-break: break-word; }
-.partido .nombre-propio { color: var(--accent-main); font-weight: 600; }
+.partido .nombre-propio { color: var(--team); font-weight: 600; }
 .partido .resultado {
   min-width: 50px;
   flex-shrink: 0;
   text-align: center;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--accent-main);
-  background: rgba(192,132,252,0.1);
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
   border-radius: 8px;
   padding: 4px 6px;
 }
@@ -157,6 +174,8 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   font-weight: 400;
   font-size: 0.78rem;
 }
+.resultado-win  { color: var(--win)  !important; background: rgba(74,222,128,0.1)  !important; }
+.resultado-loss { color: var(--loss) !important; background: rgba(248,113,113,0.1) !important; }
 
 .partido-detalle {
   font-size: 0.72rem;
@@ -177,7 +196,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   display: inline-block;
   width: 18px; height: 18px;
   border: 2px solid rgba(255,255,255,0.1);
-  border-top-color: var(--accent-main);
+  border-top-color: var(--team);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   vertical-align: middle;
@@ -217,13 +236,13 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .tabla-goleadores td:not(:nth-child(2)):not(:nth-child(3)) { text-align: center; }
 .tabla-goleadores td:nth-child(2) { white-space: normal; word-break: break-word; min-width: 90px; }
 .tabla-goleadores td:nth-child(3) { white-space: normal; word-break: break-word; min-width: 80px; }
-.tabla-goleadores td.goles-cell { font-weight: 700; color: var(--accent-main); }
+.tabla-goleadores td.goles-cell { font-weight: 700; color: var(--team); }
 .tabla-goleadores tr.propio-row td { background: rgba(192,132,252,0.06); }
 
 .propio-badge {
   display: inline-block;
   background: rgba(192,132,252,0.18);
-  color: var(--accent-main);
+  color: var(--team);
   font-size: 0.65rem;
   padding: 1px 5px;
   border-radius: 4px;
@@ -241,7 +260,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   padding: 10px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  color: var(--accent-blue);
+  color: var(--ui);
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.8rem;
@@ -249,12 +268,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   transition: border-color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.btn-ver-todos:hover { border-color: var(--accent-blue); }
-
-/* Filas clicables en clasificacion */
-.tabla-clasificacion tr:not(.propio-clasif) { cursor: pointer; }
-.tabla-clasificacion tr:not(.propio-clasif):hover td,
-.tabla-clasificacion tr:not(.propio-clasif):active td { background: rgba(192,132,252,0.1); }
+.btn-ver-todos:hover { border-color: var(--ui); }
 
 .h2h-tip { font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 8px; }
 
@@ -278,7 +292,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 20px;
   border-bottom: 1px solid var(--glass-border);
-  font-weight: 600; color: var(--accent-main);
+  font-weight: 600; color: var(--ui);
 }
 .h2h-close {
   background: none; border: none; color: var(--text-muted);
@@ -288,17 +302,9 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .tabla-h2h th { padding: 8px 12px; color: var(--text-muted); text-align: left; }
 .tabla-h2h td { padding: 8px 12px; border-top: 1px solid rgba(255,255,255,0.05); }
 .h2h-score { font-weight: 700; text-align: center; }
-tr.h2h-win  td { color: var(--accent-main); }
-tr.h2h-loss td { color: #ff6b6b; }
+tr.h2h-win  td { color: var(--win); }
+tr.h2h-loss td { color: var(--loss); }
 tr.h2h-draw td { color: var(--text-muted); }
-
-/* Propio row in clasificacion */
-.tabla-clasificacion tr.propio-clasif td {
-  background: rgba(192,132,252,0.06);
-  color: var(--accent-main);
-  font-weight: 600;
-}
-.tabla-clasificacion tr.propio-clasif td.pts { color: var(--accent-main); }
 
 /* Refresh button */
 .btn-refresh {
@@ -318,7 +324,7 @@ tr.h2h-draw td { color: var(--text-muted); }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-refresh:hover,
-.btn-refresh:active { color: var(--accent-main); background: rgba(192,132,252,0.1); }
+.btn-refresh:active { color: var(--ui); background: rgba(45,212,191,0.1); }
 .btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
 .refresh-icon { width: 20px; height: 20px; }
 .btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }

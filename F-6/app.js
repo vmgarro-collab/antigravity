@@ -209,11 +209,17 @@ function renderJornada() {
     const esLocal = (p.local || '').toUpperCase().includes('PARAGUAS');
     const esVis   = (p.visitante || '').toUpperCase().includes('PARAGUAS');
     const res = p.jugado ? p.resultado : (p.hora || '–');
+    let resCls = '';
+    if (p.jugado && (esLocal || esVis)) {
+      const gl = esLocal ? p.golesLocal : p.golesVisitante;
+      const gv = esLocal ? p.golesVisitante : p.golesLocal;
+      resCls = gl > gv ? ' resultado-win' : gl < gv ? ' resultado-loss' : '';
+    }
     return `
     <div class="partido-wrap${esLocal || esVis ? ' partido-propio' : ''}">
       <div class="partido">
         <span class="equipo-local${esLocal ? ' nombre-propio' : ''}">${escHtml(p.local)}</span>
-        <span class="resultado${p.jugado ? '' : ' pendiente'}">${res}</span>
+        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${res}</span>
         <span class="equipo-visitante${esVis ? ' nombre-propio' : ''}">${escHtml(p.visitante)}</span>
       </div>
       ${p.fecha ? `<div class="partido-detalle"><span>📅 ${formatFechaLabel(p.fecha)}</span></div>` : ''}

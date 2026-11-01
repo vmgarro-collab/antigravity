@@ -241,11 +241,17 @@ function renderResultados(data) {
   body.innerHTML = data.partidos.map(p => {
     const esLocal = p.local.toUpperCase().includes('LIBERTAD');
     const esVis   = p.visitante.toUpperCase().includes('LIBERTAD');
+    let resCls = '';
+    if (p.jugado && (esLocal || esVis)) {
+      const [a, b] = p.resultado.split('-').map(Number);
+      const gl = esLocal ? a : b, gv = esLocal ? b : a;
+      resCls = gl > gv ? ' resultado-win' : gl < gv ? ' resultado-loss' : '';
+    }
     return `
     <div class="partido-wrap${esLocal || esVis ? ' partido-propio' : ''}">
       <div class="partido">
         <span class="equipo-local${esLocal ? ' nombre-propio' : ''}">${p.local}</span>
-        <span class="resultado${p.jugado ? '' : ' pendiente'}">${p.resultado}</span>
+        <span class="resultado${p.jugado ? resCls : ' pendiente'}">${p.resultado}</span>
         <span class="equipo-visitante${esVis ? ' nombre-propio' : ''}">${p.visitante}</span>
       </div>
       ${p.hora || p.campo || p.fecha ? `<div class="partido-detalle">

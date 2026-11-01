@@ -215,7 +215,9 @@ function renderResultados(data) {
         const mayoLocal = esMayo(p.local), mayoVis = esMayo(p.visitante);
         if (mayoLocal || mayoVis) {
           const [a, b] = p.resultado.split('-').map(Number);
-          resCls = ((mayoLocal && a > b) || (mayoVis && b > a)) ? ' resultado-win' : ' resultado-loss';
+          const ganaMayo = (mayoLocal && a > b) || (mayoVis && b > a);
+          const pierdeMayo = (mayoLocal && a < b) || (mayoVis && b < a);
+          resCls = ganaMayo ? ' resultado-win' : pierdeMayo ? ' resultado-loss' : '';
         }
       }
       const marcador = p.jugado ? p.resultado : (p.hora && p.hora !== '0:00' ? p.hora : '–');
