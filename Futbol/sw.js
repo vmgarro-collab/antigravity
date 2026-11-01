@@ -1,7 +1,7 @@
 // Futbol/sw.js — Service Worker (network-first: siempre descarga lo último)
 'use strict';
 
-const CACHE = 'libertad-v15';
+const CACHE = '__CACHE_VERSION__';
 
 self.addEventListener('install', e => {
   self.skipWaiting();

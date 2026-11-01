@@ -1,7 +1,7 @@
 // FutbolFemenino/sw.js — Service Worker (network-first: siempre descarga lo último)
 'use strict';
 
-const CACHE = 'mcf-femenino-v11';
+const CACHE = '__CACHE_VERSION__';
 
 self.addEventListener('install', e => {
   self.skipWaiting();

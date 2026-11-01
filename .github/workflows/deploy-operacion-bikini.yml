@@ -41,6 +41,14 @@ jobs:
           npm ci
           npm run build
 
+      # Inyectar SHA del commit en los Service Workers (auto-versionado)
+      - name: Stamp SW cache version
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          for f in Futbol/sw.js FutbolFemenino/sw.js Voley/sw.js F-6/sw.js; do
+            sed -i "s/__CACHE_VERSION__/$SHA/g" "$f"
+          done
+
       # Montar sitio completo: repo + build de OperacionBikini
       - name: Prepare full site
         run: |
