@@ -222,7 +222,7 @@ function renderJornada() {
         <span class="resultado${p.jugado ? resCls : ' pendiente'}">${res}</span>
         <span class="equipo-visitante${esVis ? ' nombre-propio' : ''}">${escHtml(p.visitante)}</span>
       </div>
-      ${p.fecha ? `<div class="partido-detalle"><span>📅 ${formatFechaLabel(p.fecha)}</span></div>` : ''}
+      ${p.fecha ? `<div class="partido-detalle"><span>📅 ${formatFechaLabel(p.fecha)}${p.hora ? ' · ' + p.hora : ''}</span></div>` : ''}
     </div>`;
   }).join('');
 }

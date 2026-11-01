@@ -302,7 +302,7 @@ def scrape_matches_from_page(html, jornada, fecha):
                 visitante = tds[idx+1].get_text(strip=True) if idx+1 < len(tds) else ""
                 if local or visitante:
                     played.append({
-                        "jornada": jornada, "fecha": fecha,
+                        "jornada": jornada, "fecha": fecha, "hora": current_hora,
                         "local": local, "golesLocal": score[0],
                         "golesVisitante": score[1], "visitante": visitante,
                     })
