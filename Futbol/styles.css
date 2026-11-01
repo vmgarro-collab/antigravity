@@ -25,8 +25,7 @@ body {
 .header { margin-bottom: 20px; }
 .header-content { display: flex; align-items: center; gap: 12px; }
 .header-icon { color: var(--accent-green); width: 28px; height: 28px; flex-shrink: 0; }
-.header-logo { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-@media (max-width: 480px) { .header-logo { width: 28px; height: 28px; } }
+.header-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .header-text { flex: 1; min-width: 0; }
 h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; }
 .header-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
