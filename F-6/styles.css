@@ -101,11 +101,11 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 
 /* Paraguas row in clasificacion */
 .tabla-clasificacion tr.paraguas-clasif td {
-  background: rgba(0,255,136,0.06);
-  color: var(--accent-green);
+  background: rgba(245,158,11,0.08);
+  color: var(--accent-amber);
   font-weight: 600;
 }
-.tabla-clasificacion tr.paraguas-clasif td.pts { color: var(--accent-green); }
+.tabla-clasificacion tr.paraguas-clasif td.pts { color: var(--accent-amber); }
 
 /* Filas clicables en clasificacion */
 .tabla-clasificacion tr:not(.paraguas-clasif) { cursor: pointer; }
@@ -142,8 +142,8 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 .partido-wrap:last-child { border-bottom: none; }
-.partido-wrap.partido-propio { background: rgba(0,255,136,0.07); border-radius: 8px; padding: 9px 6px; }
-.partido .nombre-propio { color: var(--accent-green); font-weight: 600; }
+.partido-wrap.partido-propio { background: rgba(245,158,11,0.07); border-radius: 8px; padding: 9px 6px; }
+.partido .nombre-propio { color: var(--accent-amber); font-weight: 600; }
 .partido {
   display: flex;
   align-items: center;
@@ -158,8 +158,8 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   text-align: center;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--accent-green);
-  background: rgba(0,255,136,0.08);
+  color: var(--accent-blue);
+  background: rgba(79,172,254,0.08);
   border-radius: 8px;
   padding: 4px 6px;
 }
@@ -182,8 +182,8 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 /* Paraguas badge */
 .paraguas-badge {
   display: inline-block;
-  background: rgba(0,255,136,0.18);
-  color: var(--accent-green);
+  background: rgba(245,158,11,0.18);
+  color: var(--accent-amber);
   font-size: 0.65rem;
   padding: 1px 5px;
   border-radius: 4px;
@@ -241,7 +241,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .tabla-goleadores td:nth-child(2) { white-space: normal; word-break: break-word; min-width: 90px; }
 .tabla-goleadores td:nth-child(3) { white-space: normal; word-break: break-word; min-width: 80px; }
 .tabla-goleadores td.goles-cell { font-weight: 700; color: var(--accent-amber); }
-.tabla-goleadores tr.paraguas-row td { background: rgba(0,255,136,0.06); }
+.tabla-goleadores tr.paraguas-row td { background: rgba(245,158,11,0.06); }
 
 /* Ver todos button */
 .btn-ver-todos {
@@ -294,7 +294,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .tabla-h2h th { padding: 8px 12px; color: var(--text-muted); text-align: left; }
 .tabla-h2h td { padding: 8px 12px; border-top: 1px solid rgba(255,255,255,0.05); }
 .h2h-score { font-weight: 700; text-align: center; }
-tr.h2h-win  td { color: var(--accent-green); }
+tr.h2h-win  td { color: var(--accent-amber); }
 tr.h2h-loss td { color: #ff6b6b; }
 tr.h2h-draw td { color: var(--text-muted); }
 
