@@ -88,7 +88,7 @@ async function main() {
       path.join(DATA_DIR, `resultados_j${j.num}.json`),
       JSON.stringify(jResult)
     );
-    todosPartidos.push(...partidos);
+    todosPartidos.push(...partidos.map(p => ({ ...p, jornada: j.num })));
   }
   fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 

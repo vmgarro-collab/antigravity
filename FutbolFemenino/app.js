@@ -155,6 +155,12 @@ async function loadAll() {
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
+    // Rellenar fechas de jornada que vienen vacías usando los partidos
+    jornadas = jornadas.map(j => {
+      if (j.fecha) return j;
+      const p = todosPartidos.find(p => String(p.jornada) === String(j.num) && p.fecha);
+      return p ? { ...j, fecha: p.fecha } : j;
+    });
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     let bestIdx = 0;
