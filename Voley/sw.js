@@ -1,7 +1,7 @@
 // Voley/sw.js — Service Worker (network-first: siempre descarga lo último)
 'use strict';
 
-const CACHE = 'voley-mayo-v14';
+const CACHE = 'voley-mayo-v15';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
