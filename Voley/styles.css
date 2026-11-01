@@ -6,7 +6,6 @@
   --glass-border: rgba(255,255,255,0.08);
   --accent: #a78bfa;      /* 2 de Mayo — morado */
   --team: #a78bfa;
-  --ui: #2dd4bf;          /* UI accent — teal */
   --win: #4ade80;         /* victoria / líder */
   --loss: #f87171;        /* derrota */
   --text: #e8e8f0;
@@ -35,7 +34,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .season-badge {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  color: var(--ui);
+  color: var(--team);
   padding: 4px 10px;
   border-radius: 99px;
   font-size: 0.75rem;
@@ -62,7 +61,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   align-items: center;
   gap: 8px;
   font-size: 0.85rem;
-  color: var(--ui);
+  color: var(--team);
   margin-bottom: 14px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -123,7 +122,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   transition: border-color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.btn-nav:hover { border-color: var(--ui); color: var(--ui); }
+.btn-nav:hover { border-color: var(--team); color: var(--team); }
 .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
 #jornada-label { flex: 1; text-align: center; color: var(--text-muted); font-size: 0.82rem; line-height: 1.3; }
 
@@ -239,7 +238,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 20px;
   border-bottom: 1px solid var(--glass-border);
-  font-weight: 600; color: var(--ui);
+  font-weight: 600; color: var(--team);
 }
 .h2h-close {
   background: none; border: none; color: var(--text-muted);
@@ -295,7 +294,7 @@ tr.h2h-loss td { color: #f87171; }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-refresh:hover,
-.btn-refresh:active { color: var(--ui); background: rgba(45,212,191,0.1); }
+.btn-refresh:active { color: var(--team); background: rgba(167,139,250,0.1); }
 .btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
 .refresh-icon { width: 20px; height: 20px; }
 .btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
