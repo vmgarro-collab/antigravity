@@ -1,13 +1,19 @@
-// Liga Veteranos F-6
+// F-6/app.js — El Paraguas, Liga Veteranos
+'use strict';
 
-lucide.createIcons();
+// ─── Service Worker ───────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  const _hadCtrl = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('/antigravity/F-6/sw.js').then(reg => { reg.update(); });
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (_hadCtrl) window.location.reload(); });
+}
 
-// ─── Head-to-head ────────────────────────────────────────────────────────────
+// ─── H2H modal ────────────────────────────────────────────────────────────────
 let _todosPartidos = [];
 
 function showH2H(equipo) {
   const partidos = _todosPartidos.filter(p => {
-    const l = p.local.toUpperCase(), v = p.visitante.toUpperCase();
+    const l = (p.local || '').toUpperCase(), v = (p.visitante || '').toUpperCase();
     const rival = equipo.toUpperCase();
     return (l.includes('PARAGUAS') && v.includes(rival)) ||
            (v.includes('PARAGUAS') && l.includes(rival));
@@ -15,7 +21,7 @@ function showH2H(equipo) {
 
   const rows = partidos.length
     ? partidos.map(p => {
-        const esLocal = p.local.toUpperCase().includes('PARAGUAS');
+        const esLocal = (p.local || '').toUpperCase().includes('PARAGUAS');
         const gl = esLocal ? p.golesLocal : p.golesVisitante;
         const gv = esLocal ? p.golesVisitante : p.golesLocal;
         const cls = gl > gv ? 'win' : gl < gv ? 'loss' : 'draw';
@@ -23,10 +29,10 @@ function showH2H(equipo) {
           <td>${p.fecha || '–'}</td>
           <td>${esLocal ? '🏠' : '✈️'} El Paraguas</td>
           <td class="h2h-score">${gl} – ${gv}</td>
-          <td>${esLocal ? escHtml(p.visitante) : escHtml(p.local)}</td>
+          <td>${escHtml(esLocal ? p.visitante : p.local)}</td>
         </tr>`;
       }).join('')
-    : `<tr><td colspan="4" style="color:rgba(255,255,255,0.4);padding:12px;text-align:center">Sin enfrentamientos aún</td></tr>`;
+    : `<tr><td colspan="4" style="color:var(--text-muted);padding:12px;text-align:center">Sin enfrentamientos aún</td></tr>`;
 
   document.getElementById('h2h-title').textContent = `☂ El Paraguas vs ${equipo}`;
   document.getElementById('h2h-tbody').innerHTML = rows;
@@ -38,253 +44,237 @@ function closeH2H() {
   document.getElementById('h2h-modal').style.display = 'none';
 }
 
-const API_BASE = '';
-
-// ---------------------------------------------------------------------------
-// Tab navigation
-// ---------------------------------------------------------------------------
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanels = document.querySelectorAll('.tab-panel');
-
-function switchTab(tabName) {
-  tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabName));
-  tabPanels.forEach(panel => {
-    panel.classList.toggle('active', panel.id === `tab-${tabName}`);
-  });
-  if (!loadedTabs.has(tabName)) {
-    loadTab(tabName);
-  }
-}
-
-const loadedTabs = new Set();
-
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-});
-
-// ---------------------------------------------------------------------------
-// Generic fetch helper
-// ---------------------------------------------------------------------------
-async function apiFetch(endpoint) {
-  // Map API endpoints to static JSON files
-  const staticMap = {
-    '/api/clasificacion': 'data/clasificacion.json',
-    '/api/resultados':    'data/resultados.json',
-    '/api/goleadores':    'data/goleadores.json',
-    '/api/calendario':    'data/calendario.json',
-  };
-  const url = staticMap[endpoint] || endpoint;
-  const bust = url.startsWith('data/') ? `?t=${Math.floor(Date.now()/60000)}` : '';
-  const res = await fetch(url + bust);
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
-    throw new Error(err.error || `HTTP ${res.status}`);
-  }
-  return res.json();
-}
-
-function showError(panelId, msg) {
-  document.getElementById(panelId).innerHTML =
-    `<div class="error-card"><i data-lucide="triangle-alert"></i> ${msg}</div>`;
-  lucide.createIcons();
-}
-
-// ---------------------------------------------------------------------------
-// Tab loaders
-// ---------------------------------------------------------------------------
-async function loadTab(tabName) {
-  loadedTabs.add(tabName);
-  switch (tabName) {
-    case 'clasificacion': return loadClasificacion();
-    case 'resultados':    return loadResultados();
-    case 'goleadores':    return loadGoleadores();
-    case 'calendario':    return loadCalendario();
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Clasificación
-// ---------------------------------------------------------------------------
-async function loadClasificacion() {
-  const panel = document.getElementById('tab-clasificacion');
-  panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando clasificación...</div>';
-  lucide.createIcons();
-  try {
-    const [data, partidos] = await Promise.all([
-      apiFetch('/api/clasificacion'),
-      fetch(`data/resultados.json?t=${Date.now()}`).then(r => r.json()).catch(() => [])
-    ]);
-    _todosPartidos = partidos;
-    panel.innerHTML = `
-      <div class="glass-card tabla-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Pos</th>
-              <th>Equipo</th>
-              <th class="center">PJ</th>
-              <th class="center">G</th>
-              <th class="center">E</th>
-              <th class="center">P</th>
-              <th class="center">GF</th>
-              <th class="center">GC</th>
-              <th class="center">Pts</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${data.map(row => {
-              const esParaguas = row.equipo.toLowerCase().includes('paraguas');
-              const click = esParaguas ? '' : ` onclick="showH2H('${row.equipo.replace(/'/g, "\\'")}')" style="cursor:pointer" title="Ver enfrentamientos vs El Paraguas"`;
-              return `
-              <tr class="${esParaguas ? 'paraguas-row' : ''}"${click}>
-                <td class="center">${row.pos}</td>
-                <td>
-                  ${escHtml(row.equipo)}${esParaguas ? ' <span class="paraguas-badge">☂</span>' : ''}
-                </td>
-                <td class="center">${row.pj}</td>
-                <td class="center">${row.g}</td>
-                <td class="center">${row.e}</td>
-                <td class="center">${row.p}</td>
-                <td class="center">${row.gf}</td>
-                <td class="center">${row.gc}</td>
-                <td class="center"><strong>${row.pts}</strong></td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>
-      </div>`;
-    lucide.createIcons();
-  } catch (e) {
-    const msg = e.message.includes('Failed to fetch')
-      ? 'Error cargando datos'
-      : e.message;
-    showError('tab-clasificacion', msg);
-  }
-}
-
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
-// ---------------------------------------------------------------------------
-// Resultados
-// ---------------------------------------------------------------------------
-async function loadResultados() {
-  const panel = document.getElementById('tab-resultados');
-  panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando resultados...</div>';
-  lucide.createIcons();
-  try {
-    const data = await apiFetch('/api/resultados');
-    // Group by jornada
-    const byJornada = {};
-    data.forEach(m => {
-      if (!byJornada[m.jornada]) byJornada[m.jornada] = [];
-      byJornada[m.jornada].push(m);
-    });
-    const html = Object.entries(byJornada).reverse().map(([jornada, partidos]) => `
-      <div class="jornada-section">
-        <div class="jornada-header" onclick="toggleJornada(this)">
-          <i data-lucide="chevron-down"></i>
-          Jornada ${jornada}
-        </div>
-        <div class="jornada-body">
-          ${partidos.map(p => {
-              const esLocal = p.local.toUpperCase().includes('PARAGUAS');
-              const esVis   = p.visitante.toUpperCase().includes('PARAGUAS');
-              return `
-            <div class="partido-card${esLocal || esVis ? ' partido-propio' : ''}">
-              <div class="partido-equipo-local${esLocal ? ' nombre-propio' : ''}">${escHtml(p.local)}${esLocal ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
-              <div class="partido-marcador">${p.golesLocal} – ${p.golesVisitante}</div>
-              <div class="partido-equipo-visitante${esVis ? ' nombre-propio' : ''}">${escHtml(p.visitante)}${esVis ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
-            </div>`;
-    }).join('')}
-        </div>
-      </div>
-    `).join('');
-    panel.innerHTML = html || '<div class="loading">No hay resultados aún</div>';
-    lucide.createIcons();
-  } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
-    showError('tab-resultados', msg);
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function bust() { return `?t=${Date.now()}`; }
+
+function parseFecha(str) {
+  // "DD/MM/YYYY"
+  if (!str) return null;
+  const [d, m, y] = str.split('/');
+  if (!d || !m || !y) return null;
+  return new Date(`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+}
+
+function formatFechaLabel(str) {
+  const DIAS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const f = parseFecha(str);
+  if (!f) return str || '';
+  return `${DIAS[f.getDay()]} ${str}`;
+}
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let jornadas   = []; // [{num, fecha, partidos:[]}]
+let jornadaIdx = 0;
+let _goleadoresAll = [];
+let _goleadoresExpanded = false;
+
+// ─── Refresh ──────────────────────────────────────────────────────────────────
+function setRefreshing(on) {
+  const btn = document.getElementById('btn-refresh');
+  if (!btn) return;
+  btn.disabled = on;
+  btn.classList.toggle('spinning', on);
+}
+
+async function refreshData() {
+  setRefreshing(true);
+  if ('serviceWorker' in navigator) {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg) reg.update();
   }
+  await loadAll();
+  setRefreshing(false);
 }
 
-function toggleJornada(header) {
-  const body = header.nextElementSibling;
-  const icon = header.querySelector('[data-lucide]');
-  const isOpen = body.style.display !== 'none';
-  body.style.display = isOpen ? 'none' : 'block';
-  icon.setAttribute('data-lucide', isOpen ? 'chevron-right' : 'chevron-down');
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+async function init() {
   lucide.createIcons();
+  document.getElementById('jornada-prev').addEventListener('click', () => {
+    jornadaIdx = Math.max(0, jornadaIdx - 1);
+    renderJornada();
+  });
+  document.getElementById('jornada-next').addEventListener('click', () => {
+    jornadaIdx = Math.min(jornadas.length - 1, jornadaIdx + 1);
+    renderJornada();
+  });
+  await loadAll();
 }
 
-// ---------------------------------------------------------------------------
-// Goleadores
-// ---------------------------------------------------------------------------
-async function loadGoleadores() {
-  const panel = document.getElementById('tab-goleadores');
-  panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando goleadores...</div>';
-  lucide.createIcons();
+async function loadAll() {
+  setLoading(true);
+  hideError();
   try {
-    const data = await apiFetch('/api/goleadores');
-    const medalClass = (pos) => pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : '';
-    panel.innerHTML = data.map(g => `
-      <div class="goleador-row${g.paraguas ? ' paraguas-row' : ''}">
-        <div class="rank-badge ${medalClass(g.pos)}">${g.pos}</div>
-        <div class="goleador-nombre">${escHtml(g.jugador)}${g.paraguas ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
-        <div class="goleador-equipo">${escHtml(g.equipo)}</div>
-        <div class="goleador-goles">${g.goles} ⚽</div>
-      </div>
-    `).join('') || '<div class="loading">No hay datos de goleadores</div>';
-    lucide.createIcons();
-  } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
-    showError('tab-goleadores', msg);
-  }
-}
+    const [clasificacion, resultados, calendario, goleadores] = await Promise.all([
+      fetch('data/clasificacion.json' + bust()).then(r => r.json()),
+      fetch('data/resultados.json' + bust()).then(r => r.json()).catch(() => []),
+      fetch('data/calendario.json' + bust()).then(r => r.json()).catch(() => []),
+      fetch('data/goleadores.json' + bust()).then(r => r.json()).catch(() => []),
+    ]);
 
-// ---------------------------------------------------------------------------
-// Calendario
-// ---------------------------------------------------------------------------
-async function loadCalendario() {
-  const panel = document.getElementById('tab-calendario');
-  panel.innerHTML = '<div class="loading"><i data-lucide="loader-circle"></i> Cargando calendario...</div>';
-  lucide.createIcons();
-  try {
-    const data = await apiFetch('/api/calendario');
-    const d = new Date();
-    const today = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
-    // Group by fecha
-    const byFecha = [];
-    const fechaMap = {};
-    for (const f of data) {
-      if (!fechaMap[f.fecha]) { fechaMap[f.fecha] = []; byFecha.push(f.fecha); }
-      fechaMap[f.fecha].push(f);
+    // Build jornadas combining resultados + calendario
+    _todosPartidos = resultados;
+    const jornadaMap = {};
+
+    for (const p of resultados) {
+      const k = p.jornada;
+      if (!jornadaMap[k]) jornadaMap[k] = { num: k, fecha: p.fecha, partidos: [] };
+      jornadaMap[k].partidos.push({ ...p, jugado: true, resultado: `${p.golesLocal}-${p.golesVisitante}` });
     }
-    const isToday = fecha => fecha === today;
-    panel.innerHTML = byFecha.map(fecha => {
-      const matches = fechaMap[fecha];
-      const todayBadge = isToday(fecha) ? '<span class="hoy-badge">HOY</span> ' : '';
-      const header = `<div class="jornada-header">${todayBadge}${escHtml(fecha)}</div>`;
-      const cards = matches.map(f => {
-        const esL = f.local.toUpperCase().includes('PARAGUAS');
-        const esV = f.visitante.toUpperCase().includes('PARAGUAS');
-        return `
-        <div class="fixture-card${esL || esV ? ' partido-propio' : ''}">
-          ${f.hora ? `<div class="fixture-hora">${escHtml(f.hora)}</div>` : ''}
-          <div class="fixture-local${esL ? ' nombre-propio' : ''}">${escHtml(f.local)}${esL ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
-          <div class="fixture-vs">vs</div>
-          <div class="fixture-visitante${esV ? ' nombre-propio' : ''}">${escHtml(f.visitante)}${esV ? ' <span class="paraguas-badge">☂</span>' : ''}</div>
-        </div>`;}).join('');
-      return `<div class="fecha-group">${header}${cards}</div>`;
-    }).join('') || '<div class="loading">No hay partidos próximos</div>';
+    for (const p of calendario) {
+      const k = p.jornada;
+      if (!jornadaMap[k]) jornadaMap[k] = { num: k, fecha: p.fecha, partidos: [] };
+      else if (!jornadaMap[k].fecha && p.fecha) jornadaMap[k].fecha = p.fecha;
+      // Only add if not already in resultados
+      const yaJugado = jornadaMap[k].partidos.some(r =>
+        r.local === p.local && r.visitante === p.visitante
+      );
+      if (!yaJugado) {
+        jornadaMap[k].partidos.push({ ...p, jugado: false, resultado: p.hora || '' });
+      }
+    }
+
+    jornadas = Object.values(jornadaMap).sort((a, b) => a.num - b.num);
+
+    // Detect best jornada to show
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let bestIdx = 0;
+    for (let i = 0; i < jornadas.length; i++) {
+      const f = parseFecha(jornadas[i].fecha);
+      if (f && f <= today) bestIdx = i;
+    }
+    // Advance if >3 days since last played jornada
+    const bestFecha = parseFecha(jornadas[bestIdx]?.fecha);
+    if (bestFecha) {
+      const diasDesde = (today - bestFecha) / 86400000;
+      if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
+    }
+    jornadaIdx = bestIdx;
+
+    renderClasificacion(clasificacion);
+    renderJornada();
+    _goleadoresAll = goleadores;
+    _goleadoresExpanded = false;
+    renderGoleadores(goleadores, false);
+
+    document.getElementById('panels').style.display = '';
+    document.getElementById('panel-goleadores').style.display = '';
+    lucide.createIcons();
   } catch (e) {
-    const msg = e.message.includes('Failed to fetch') ? 'Error cargando datos' : e.message;
-    showError('tab-calendario', msg);
+    showError(`No se pudieron cargar los datos.<br><small>${e.message}</small>`);
+  } finally {
+    setLoading(false);
   }
 }
 
-// ---------------------------------------------------------------------------
-// Initial load
-// ---------------------------------------------------------------------------
-loadTab('clasificacion');
+// ─── Renders ──────────────────────────────────────────────────────────────────
+function renderClasificacion(data) {
+  const body = document.getElementById('clasificacion-body');
+  if (!data?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin datos</p>'; return; }
+  body.innerHTML = `
+    <table class="tabla-clasificacion">
+      <thead><tr>
+        <th>#</th><th>Equipo</th>
+        <th title="Jugados">PJ</th><th title="Ganados">G</th>
+        <th title="Empatados">E</th><th title="Perdidos">P</th>
+        <th class="col-gf" title="Goles a favor">GF</th>
+        <th class="col-gc" title="Goles en contra">GC</th>
+        <th>Pts</th>
+      </tr></thead>
+      <tbody>${data.map(r => {
+        const esParaguas = (r.equipo || '').toLowerCase().includes('paraguas');
+        const click = esParaguas ? '' : ` onclick="showH2H('${escHtml(r.equipo)}')" title="Ver enfrentamientos vs El Paraguas"`;
+        return `<tr${esParaguas ? ' class="paraguas-clasif"' : ''}${click}>
+          <td>${r.pos}</td>
+          <td>${escHtml(r.equipo)}${esParaguas ? ' <span class="paraguas-badge">☂</span>' : ''}</td>
+          <td>${r.pj}</td><td>${r.g}</td><td>${r.e}</td><td>${r.p}</td>
+          <td class="col-gf">${r.gf}</td><td class="col-gc">${r.gc}</td>
+          <td class="pts">${r.pts}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>`;
+}
+
+function renderJornada() {
+  updateJornadaNav();
+  const j = jornadas[jornadaIdx];
+  const body = document.getElementById('partidos-body');
+  if (!j) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin partidos</p>'; return; }
+
+  body.innerHTML = j.partidos.map(p => {
+    const esLocal = (p.local || '').toUpperCase().includes('PARAGUAS');
+    const esVis   = (p.visitante || '').toUpperCase().includes('PARAGUAS');
+    const res = p.jugado ? p.resultado : (p.hora || '–');
+    return `
+    <div class="partido-wrap${esLocal || esVis ? ' partido-propio' : ''}">
+      <div class="partido">
+        <span class="equipo-local${esLocal ? ' nombre-propio' : ''}">${escHtml(p.local)}</span>
+        <span class="resultado${p.jugado ? '' : ' pendiente'}">${res}</span>
+        <span class="equipo-visitante${esVis ? ' nombre-propio' : ''}">${escHtml(p.visitante)}</span>
+      </div>
+      ${p.fecha ? `<div class="partido-detalle"><span>📅 ${formatFechaLabel(p.fecha)}</span></div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function updateJornadaNav() {
+  const j    = jornadas[jornadaIdx];
+  const prev = document.getElementById('jornada-prev');
+  const next = document.getElementById('jornada-next');
+  const lbl  = document.getElementById('jornada-label');
+  if (!j) { lbl.textContent = '—'; prev.disabled = true; next.disabled = true; return; }
+  const fechaStr = j.fecha ? ` · ${formatFechaLabel(j.fecha)}` : '';
+  lbl.textContent = `Jornada ${j.num}${fechaStr}`;
+  prev.disabled = jornadaIdx <= 0;
+  next.disabled = jornadaIdx >= jornadas.length - 1;
+}
+
+function renderGoleadores(goles, showAll = false) {
+  const body = document.getElementById('goleadores-body');
+  if (!goles?.length) { body.innerHTML = '<p style="color:var(--text-muted);padding:8px">Sin datos</p>'; return; }
+  const TOP = 10;
+  const visible = showAll ? goles : goles.slice(0, TOP);
+  const rows = visible.map((g, i) => `
+    <tr${g.paraguas ? ' class="paraguas-row"' : ''}>
+      <td>${i + 1}</td>
+      <td>${escHtml(g.jugador)}${g.paraguas ? ' <span class="paraguas-badge">☂</span>' : ''}</td>
+      <td>${escHtml(g.equipo)}</td>
+      <td>${g.partidos ?? '–'}</td>
+      <td class="goles-cell">${g.goles}</td>
+    </tr>`).join('');
+  const btn = goles.length > TOP
+    ? `<button class="btn-ver-todos" onclick="toggleGoleadores()">${showAll ? '▲ Ver menos' : `▼ Ver todos (${goles.length})`}</button>`
+    : '';
+  body.innerHTML = `
+    <table class="tabla-goleadores">
+      <thead><tr>
+        <th>#</th><th>Jugador</th><th>Equipo</th>
+        <th title="Partidos">PJ</th><th title="Goles">G</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>${btn}`;
+}
+
+function toggleGoleadores() {
+  _goleadoresExpanded = !_goleadoresExpanded;
+  renderGoleadores(_goleadoresAll, _goleadoresExpanded);
+}
+
+function skeletonPartidos() {
+  return Array(4).fill(`
+    <div class="partido-wrap"><div class="partido">
+      <span class="equipo-local"><span class="skeleton" style="width:75%"></span></span>
+      <span class="resultado"><span class="skeleton" style="width:38px;height:13px"></span></span>
+      <span class="equipo-visitante"><span class="skeleton" style="width:75%"></span></span>
+    </div></div>`).join('');
+}
+
+function setLoading(on) { document.getElementById('loading').style.display = on ? '' : 'none'; }
+function showError(html) { const el = document.getElementById('error-msg'); el.innerHTML = html; el.style.display = 'block'; }
+function hideError() { document.getElementById('error-msg').style.display = 'none'; }
+
+document.addEventListener('DOMContentLoaded', init);
