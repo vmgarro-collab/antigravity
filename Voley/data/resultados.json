@@ -301,6 +301,16 @@
       "jornada": 43655
     },
     {
+      "local": "BERNADETTE A",
+      "visitante": "CV COLLADO VILLALBA C",
+      "resultado": "15:00",
+      "jugado": false,
+      "fecha": "14/11/2026",
+      "hora": "15:00",
+      "campo": "BERNADETTE, COLEGIO",
+      "jornada": 43656
+    },
+    {
       "local": "CLUB VOLEIBOL TORRELODONES D",
       "visitante": "ANCORA GALAPAGAR",
       "resultado": "–",
@@ -323,16 +333,6 @@
     {
       "local": "CLUB VOLEIBOL TORRELODONES C",
       "visitante": "CV GUADARRAMA",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "15/11/2026",
-      "hora": "",
-      "campo": "",
-      "jornada": 43656
-    },
-    {
-      "local": "BERNADETTE A",
-      "visitante": "CV COLLADO VILLALBA C",
       "resultado": "–",
       "jugado": false,
       "fecha": "15/11/2026",
