@@ -310,13 +310,13 @@
     "jornada": 43656
   },
   {
-    "local": "CLUB VOLEIBOL TORRELODONES D",
-    "visitante": "ANCORA GALAPAGAR",
-    "resultado": "–",
+    "local": "CLUB VOLEIBOL TORRELODONES C",
+    "visitante": "CV GUADARRAMA",
+    "resultado": "17:00",
     "jugado": false,
-    "fecha": "15/11/2026",
-    "hora": "",
-    "campo": "",
+    "fecha": "14/11/2026",
+    "hora": "17:00",
+    "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
     "jornada": 43656
   },
   {
@@ -330,13 +330,13 @@
     "jornada": 43656
   },
   {
-    "local": "CLUB VOLEIBOL TORRELODONES C",
-    "visitante": "CV GUADARRAMA",
-    "resultado": "–",
+    "local": "CLUB VOLEIBOL TORRELODONES D",
+    "visitante": "ANCORA GALAPAGAR",
+    "resultado": "9:30",
     "jugado": false,
     "fecha": "15/11/2026",
-    "hora": "",
-    "campo": "",
+    "hora": "9:30",
+    "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
     "jornada": 43656
   },
   {
