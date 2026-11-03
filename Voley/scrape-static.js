@@ -56,6 +56,12 @@ async function main() {
     }
   }
 
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  write('meta.json', {
+    actualizado: `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+  });
+
   console.log('Done.');
   process.exit(0);
 }

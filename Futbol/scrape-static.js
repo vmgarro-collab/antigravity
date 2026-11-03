@@ -91,6 +91,12 @@ async function main() {
     console.log('Goleadores vacíos de la API — manteniendo datos anteriores');
   }
 
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  fs.writeFileSync(path.join(DATA_DIR, 'meta.json'), JSON.stringify({
+    actualizado: `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+  }));
+
   console.log('Done. Files written to Futbol/data/');
 }
 

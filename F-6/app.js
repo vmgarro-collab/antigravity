@@ -169,6 +169,12 @@ async function loadAll() {
   } finally {
     setLoading(false);
   }
+  fetch('data/meta.json' + bust()).then(r => r.ok ? r.json() : null).then(m => {
+    if (m && m.actualizado) {
+      const el = document.querySelector('.app-version');
+      if (el) el.textContent = 'actualizado: ' + m.actualizado;
+    }
+  }).catch(() => {});
 }
 
 // ─── Renders ──────────────────────────────────────────────────────────────────
