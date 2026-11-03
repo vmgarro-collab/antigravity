@@ -140,7 +140,7 @@ async function loadAll() {
   fetch(`data/meta.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).then(m => {
     if (m && m.actualizado) {
       const el = document.querySelector('.app-version');
-      if (el) el.textContent = 'actualizado: ' + m.actualizado;
+      if (el) el.textContent = el.textContent + ' · ' + m.actualizado;
     }
   }).catch(() => {});
 }
