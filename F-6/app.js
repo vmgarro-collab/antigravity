@@ -170,9 +170,10 @@ async function loadAll() {
     setLoading(false);
   }
   fetch('data/meta.json' + bust()).then(r => r.ok ? r.json() : null).then(m => {
-    if (m && m.actualizado) {
+    const ts = Array.isArray(m) ? m[0] : m;
+    if (ts && ts.actualizado) {
       const el = document.querySelector('.app-version');
-      if (el) el.textContent = el.textContent + ' · ' + m.actualizado;
+      if (el) el.textContent = el.textContent + ' · ' + ts.actualizado;
     }
   }).catch(() => {});
 }
