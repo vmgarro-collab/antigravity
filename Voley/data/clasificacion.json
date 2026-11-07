@@ -62,6 +62,18 @@
     },
     {
       "pos": 6,
+      "equipo": "ABV BOADILLA B B",
+      "pj": 4,
+      "pg": 2,
+      "pp": 2,
+      "sg": 6,
+      "sp": 6,
+      "pf": 258,
+      "pc": 261,
+      "pts": 6
+    },
+    {
+      "pos": 7,
       "equipo": "B. M. 2 DE MAYO",
       "pj": 4,
       "pg": 1,
@@ -70,18 +82,6 @@
       "sp": 10,
       "pf": 333,
       "pc": 367,
-      "pts": 3
-    },
-    {
-      "pos": 7,
-      "equipo": "ABV BOADILLA B B",
-      "pj": 3,
-      "pg": 1,
-      "pp": 2,
-      "sg": 3,
-      "sp": 6,
-      "pf": 183,
-      "pc": 211,
       "pts": 3
     },
     {
@@ -111,13 +111,13 @@
     {
       "pos": 10,
       "equipo": "CLUB VOLEIBOL TORRELODONES D",
-      "pj": 4,
+      "pj": 5,
       "pg": 0,
-      "pp": 4,
+      "pp": 5,
       "sg": 2,
-      "sp": 12,
-      "pf": 257,
-      "pc": 344,
+      "sp": 15,
+      "pf": 307,
+      "pc": 419,
       "pts": 0
     },
     {
