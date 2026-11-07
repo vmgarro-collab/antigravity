@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "ANCORA GALAPAGAR",
+      "pj": 5,
+      "pg": 5,
+      "pp": 0,
+      "sg": 15,
+      "sp": 3,
+      "pf": 431,
+      "pc": 325,
+      "pts": 15
+    },
+    {
+      "pos": 2,
       "equipo": "CLUB VOLEIBOL TORRELODONES C",
       "pj": 4,
       "pg": 4,
@@ -10,18 +22,6 @@
       "sp": null,
       "pf": 300,
       "pc": 189,
-      "pts": 12
-    },
-    {
-      "pos": 2,
-      "equipo": "ANCORA GALAPAGAR",
-      "pj": 4,
-      "pg": 4,
-      "pp": 0,
-      "sg": 12,
-      "sp": 2,
-      "pf": 336,
-      "pc": 234,
       "pts": 12
     },
     {
@@ -39,13 +39,13 @@
     {
       "pos": 4,
       "equipo": "CD SAN IGNACIO A",
-      "pj": 4,
+      "pj": 5,
       "pg": 3,
-      "pp": 1,
-      "sg": 10,
-      "sp": 5,
-      "pf": 340,
-      "pc": 306,
+      "pp": 2,
+      "sg": 11,
+      "sp": 8,
+      "pf": 431,
+      "pc": 401,
       "pts": 9
     },
     {
