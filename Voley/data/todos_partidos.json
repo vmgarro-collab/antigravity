@@ -282,7 +282,7 @@
   {
     "local": "CV COLLADO VILLALBA C",
     "visitante": "CLUB VOLEIBOL TORRELODONES C",
-    "resultado": "2-1",
+    "resultado": "2-3",
     "jugado": true,
     "fecha": "08/11/2026",
     "hora": "14:00",
@@ -292,8 +292,8 @@
   {
     "local": "B. M. 2 DE MAYO",
     "visitante": "CD KOLBE",
-    "resultado": "17:30",
-    "jugado": false,
+    "resultado": "0-3",
+    "jugado": true,
     "fecha": "08/11/2026",
     "hora": "17:30",
     "campo": "AMANECER, COLEGIO",

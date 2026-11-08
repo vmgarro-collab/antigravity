@@ -15,26 +15,26 @@
     {
       "pos": 2,
       "equipo": "CLUB VOLEIBOL TORRELODONES C",
-      "pj": 4,
-      "pg": 4,
+      "pj": 5,
+      "pg": 5,
       "pp": 0,
-      "sg": 12,
-      "sp": null,
-      "pf": 300,
-      "pc": 189,
-      "pts": 12
+      "sg": 15,
+      "sp": 2,
+      "pf": 404,
+      "pc": 283,
+      "pts": 14
     },
     {
       "pos": 3,
       "equipo": "CD KOLBE",
-      "pj": 4,
-      "pg": 3,
+      "pj": 5,
+      "pg": 4,
       "pp": 1,
-      "sg": 11,
+      "sg": 14,
       "sp": 4,
-      "pf": 359,
-      "pc": 263,
-      "pts": 10
+      "pf": 434,
+      "pc": 306,
+      "pts": 13
     },
     {
       "pos": 4,
@@ -87,26 +87,26 @@
     {
       "pos": 8,
       "equipo": "B. M. 2 DE MAYO",
-      "pj": 4,
+      "pj": 5,
       "pg": 1,
-      "pp": 3,
+      "pp": 4,
       "sg": 6,
-      "sp": 10,
-      "pf": 333,
-      "pc": 367,
+      "sp": 13,
+      "pf": 376,
+      "pc": 442,
       "pts": 3
     },
     {
       "pos": 9,
       "equipo": "CV COLLADO VILLALBA C",
-      "pj": 3,
+      "pj": 4,
       "pg": 0,
-      "pp": 3,
-      "sg": 2,
-      "sp": 9,
-      "pf": 198,
-      "pc": 264,
-      "pts": 0
+      "pp": 4,
+      "sg": 4,
+      "sp": 12,
+      "pf": 292,
+      "pc": 368,
+      "pts": 1
     },
     {
       "pos": 10,
