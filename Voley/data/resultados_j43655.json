@@ -33,8 +33,8 @@
     {
       "local": "CV BULLDOGS B B",
       "visitante": "BERNADETTE A",
-      "resultado": "10:00",
-      "jugado": false,
+      "resultado": "0-3",
+      "jugado": true,
       "fecha": "08/11/2026",
       "hora": "10:00",
       "campo": "UNIVERSIDAD CAMILO JOSE CELA, PABELLON",
@@ -43,8 +43,8 @@
     {
       "local": "CV COLLADO VILLALBA C",
       "visitante": "CLUB VOLEIBOL TORRELODONES C",
-      "resultado": "14:00",
-      "jugado": false,
+      "resultado": "2-1",
+      "jugado": true,
       "fecha": "08/11/2026",
       "hora": "14:00",
       "campo": "ANTONIO MACHADO, COLEGIO",

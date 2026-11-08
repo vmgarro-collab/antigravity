@@ -74,6 +74,18 @@
     },
     {
       "pos": 7,
+      "equipo": "BERNADETTE A",
+      "pj": 5,
+      "pg": 2,
+      "pp": 2,
+      "sg": 6,
+      "sp": 7,
+      "pf": 273,
+      "pc": 267,
+      "pts": 6
+    },
+    {
+      "pos": 8,
       "equipo": "B. M. 2 DE MAYO",
       "pj": 4,
       "pg": 1,
@@ -82,18 +94,6 @@
       "sp": 10,
       "pf": 333,
       "pc": 367,
-      "pts": 3
-    },
-    {
-      "pos": 8,
-      "equipo": "BERNADETTE A",
-      "pj": 4,
-      "pg": 1,
-      "pp": 2,
-      "sg": 3,
-      "sp": 7,
-      "pf": 198,
-      "pc": 224,
       "pts": 3
     },
     {
@@ -123,13 +123,13 @@
     {
       "pos": 11,
       "equipo": "CV BULLDOGS B B",
-      "pj": 3,
+      "pj": 4,
       "pg": 0,
-      "pp": 3,
+      "pp": 4,
       "sg": null,
-      "sp": 9,
-      "pf": 103,
-      "pc": 225,
+      "sp": 12,
+      "pf": 146,
+      "pc": 300,
       "pts": 0
     }
   ]
