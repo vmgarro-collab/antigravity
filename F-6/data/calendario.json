@@ -2,48 +2,6 @@
   {
     "jornada": 3,
     "fecha": "15/11/2026",
-    "hora": "00:00",
-    "local": "CHAOX F.C",
-    "visitante": "TROPICAL"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
-    "hora": "00:00",
-    "local": "EL PARAGUAS",
-    "visitante": "RAYO HUESCA"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
-    "hora": "00:00",
-    "local": "RCD CAMBADOS",
-    "visitante": "PREVISEGUR"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
-    "hora": "00:00",
-    "local": "SACONIA 2.0",
-    "visitante": "BOCA SENIOR"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
-    "hora": "00:00",
-    "local": "SPORTING SARRIA",
-    "visitante": "RAYO PILAR"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
-    "hora": "10:00",
-    "local": "RCD CAMBADOS",
-    "visitante": "PREVISEGUR"
-  },
-  {
-    "jornada": 3,
-    "fecha": "15/11/2026",
     "hora": "11:00",
     "local": "CHAOX F.C",
     "visitante": "TROPICAL"
@@ -58,9 +16,9 @@
   {
     "jornada": 3,
     "fecha": "15/11/2026",
-    "hora": "13:00",
-    "local": "SPORTING SARRIA",
-    "visitante": "RAYO PILAR"
+    "hora": "10:00",
+    "local": "RCD CAMBADOS",
+    "visitante": "PREVISEGUR"
   },
   {
     "jornada": 3,
@@ -70,53 +28,11 @@
     "visitante": "BOCA SENIOR"
   },
   {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "00:00",
-    "local": "CHAOX F.C",
-    "visitante": "BOCA SENIOR"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "00:00",
-    "local": "EL PARAGUAS",
-    "visitante": "PREVISEGUR"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "00:00",
-    "local": "RAYO HUESCA",
-    "visitante": "SPORTING SARRIA"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "00:00",
-    "local": "RAYO PILAR",
-    "visitante": "TROPICAL"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "00:00",
-    "local": "RCD CAMBADOS",
-    "visitante": "SACONIA 2.0"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "10:00",
-    "local": "RAYO PILAR",
-    "visitante": "TROPICAL"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "11:00",
-    "local": "RAYO HUESCA",
-    "visitante": "SPORTING SARRIA"
+    "jornada": 3,
+    "fecha": "15/11/2026",
+    "hora": "13:00",
+    "local": "SPORTING SARRIA",
+    "visitante": "RAYO PILAR"
   },
   {
     "jornada": 4,
@@ -131,6 +47,20 @@
     "hora": "13:00",
     "local": "EL PARAGUAS",
     "visitante": "PREVISEGUR"
+  },
+  {
+    "jornada": 4,
+    "fecha": "22/11/2026",
+    "hora": "11:00",
+    "local": "RAYO HUESCA",
+    "visitante": "SPORTING SARRIA"
+  },
+  {
+    "jornada": 4,
+    "fecha": "22/11/2026",
+    "hora": "10:00",
+    "local": "RAYO PILAR",
+    "visitante": "TROPICAL"
   },
   {
     "jornada": 4,
@@ -142,37 +72,9 @@
   {
     "jornada": 5,
     "fecha": "29/11/2026",
-    "hora": "00:00",
+    "hora": "13:00",
     "local": "CHAOX F.C",
     "visitante": "RCD CAMBADOS"
-  },
-  {
-    "jornada": 5,
-    "fecha": "29/11/2026",
-    "hora": "00:00",
-    "local": "EL PARAGUAS",
-    "visitante": "SACONIA 2.0"
-  },
-  {
-    "jornada": 5,
-    "fecha": "29/11/2026",
-    "hora": "00:00",
-    "local": "RAYO HUESCA",
-    "visitante": "PREVISEGUR"
-  },
-  {
-    "jornada": 5,
-    "fecha": "29/11/2026",
-    "hora": "00:00",
-    "local": "RAYO PILAR",
-    "visitante": "SACONIA 2.0"
-  },
-  {
-    "jornada": 5,
-    "fecha": "29/11/2026",
-    "hora": "00:00",
-    "local": "SPORTING SARRIA",
-    "visitante": "TROPICAL"
   },
   {
     "jornada": 5,
@@ -191,16 +93,16 @@
   {
     "jornada": 5,
     "fecha": "29/11/2026",
-    "hora": "12:00",
-    "local": "SPORTING SARRIA",
-    "visitante": "TROPICAL"
+    "hora": "00:00",
+    "local": "RAYO PILAR",
+    "visitante": "SACONIA 2.0"
   },
   {
     "jornada": 5,
     "fecha": "29/11/2026",
-    "hora": "13:00",
-    "local": "CHAOX F.C",
-    "visitante": "RCD CAMBADOS"
+    "hora": "12:00",
+    "local": "SPORTING SARRIA",
+    "visitante": "TROPICAL"
   },
   {
     "jornada": 5,
