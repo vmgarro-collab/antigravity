@@ -4,8 +4,8 @@
   --bg: #0a0a0f;
   --glass-bg: rgba(255,255,255,0.04);
   --glass-border: rgba(255,255,255,0.08);
-  --accent: #a78bfa;      /* 2 de Mayo — morado */
-  --team: #a78bfa;
+  --accent: #f472b6;      /* 2 de Mayo — rosa */
+  --team: #f472b6;
   --win: #4ade80;         /* victoria / líder */
   --loss: #f87171;        /* derrota */
   --text: #e8e8f0;
@@ -133,7 +133,7 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
   letter-spacing: 0.06em;
   color: var(--accent);
   padding: 8px 12px 4px;
-  border-top: 1px solid rgba(167,139,250,0.15);
+  border-top: 1px solid rgba(244,114,182,0.15);
   margin-top: 4px;
 }
 .fecha-sep:first-child { border-top: none; margin-top: 0; }
@@ -253,14 +253,14 @@ tr.h2h-loss td { color: #f87171; }
 
 /* Mayo row in clasificacion */
 .tabla-clasificacion tr.mayo-clasif td {
-  background: rgba(167,139,250,0.06);
+  background: rgba(244,114,182,0.06);
   color: var(--accent);
   font-weight: 600;
 }
 .tabla-clasificacion tr.mayo-clasif td.pts { color: var(--accent); }
 .mayo-badge {
   display: inline-block;
-  background: rgba(167,139,250,0.18);
+  background: rgba(244,114,182,0.18);
   color: var(--accent);
   font-size: 0.65rem;
   padding: 1px 5px;
@@ -294,7 +294,7 @@ tr.h2h-loss td { color: #f87171; }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-refresh:hover,
-.btn-refresh:active { color: var(--team); background: rgba(167,139,250,0.1); }
+.btn-refresh:active { color: var(--team); background: rgba(244,114,182,0.1); }
 .btn-refresh:disabled { cursor: not-allowed; opacity: 0.35; }
 .refresh-icon { width: 20px; height: 20px; }
 .btn-refresh.spinning .refresh-icon { animation: spin 0.7s linear infinite; }
@@ -321,8 +321,8 @@ body, .app { overflow-anchor: none; }
 .footer-contact:hover { opacity: 1; }
 
 /* ── Marcador button ── */
-.btn-marcador-open { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.3); }
-.btn-marcador-open:hover { background: rgba(167,139,250,0.25); }
+.btn-marcador-open { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.3); }
+.btn-marcador-open:hover { background: rgba(244,114,182,0.25); }
 
 /* ── Marcador overlay ── */
 .marcador-overlay {
@@ -365,8 +365,8 @@ body, .app { overflow-anchor: none; }
 .set-badge {
   width: 48px; height: 48px;
   border-radius: 50%;
-  background: rgba(167,139,250,0.15);
-  border: 2px solid rgba(167,139,250,0.4);
+  background: rgba(244,114,182,0.15);
+  border: 2px solid rgba(244,114,182,0.4);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.5rem; font-weight: 800; color: var(--accent);
 }
@@ -432,8 +432,8 @@ body, .app { overflow-anchor: none; }
 }
 .btn-punto svg { width: 22px; height: 22px; }
 .btn-punto:active { transform: scale(.92); }
-.btn-mas { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); }
-.btn-mas:hover { background: rgba(167,139,250,0.28); }
+.btn-mas { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.4); }
+.btn-mas:hover { background: rgba(244,114,182,0.28); }
 .btn-menos:hover { background: rgba(255,255,255,0.12); }
 
 /* Separador central */
@@ -556,7 +556,7 @@ body, .app { overflow-anchor: none; }
 }
 .btn-campo:hover { background: rgba(255,255,255,0.12); }
 .btn-campo.selected {
-  background: rgba(167,139,250,0.2);
+  background: rgba(244,114,182,0.2);
   border-color: var(--accent);
   color: var(--accent);
 }
