@@ -1,6 +1,16 @@
 {
   "partidos": [
     {
+      "local": "ANCORA GALAPAGAR",
+      "visitante": "CD KOLBE",
+      "resultado": "9:45",
+      "jugado": false,
+      "fecha": "21/11/2026",
+      "hora": "9:45",
+      "campo": "POLIDEPORTIVO MUNICIPAL DE GALAPAGAR",
+      "jornada": 43657
+    },
+    {
       "local": "CV BULLDOGS B B",
       "visitante": "CLUB VOLEIBOL TORRELODONES D",
       "resultado": "11:00",
@@ -8,16 +18,6 @@
       "fecha": "21/11/2026",
       "hora": "11:00",
       "campo": "IES SAPERE AUDE",
-      "jornada": 43657
-    },
-    {
-      "local": "CV COLLADO VILLALBA C",
-      "visitante": "ABV BOADILLA B B",
-      "resultado": "–",
-      "jugado": false,
-      "fecha": "22/11/2026",
-      "hora": "",
-      "campo": "",
       "jornada": 43657
     },
     {
@@ -51,13 +51,13 @@
       "jornada": 43657
     },
     {
-      "local": "ANCORA GALAPAGAR",
-      "visitante": "CD KOLBE",
-      "resultado": "–",
+      "local": "CV COLLADO VILLALBA C",
+      "visitante": "ABV BOADILLA B B",
+      "resultado": "10:00",
       "jugado": false,
       "fecha": "22/11/2026",
-      "hora": "",
-      "campo": "",
+      "hora": "10:00",
+      "campo": "MARIANO BENLLIURE, COLEGIO PUBLICO",
       "jornada": 43657
     }
   ],
