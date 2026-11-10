@@ -92,10 +92,9 @@ h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; 
 .tabla-clasificacion th:nth-child(n+3) { width: 30px; }
 .tabla-clasificacion td:nth-child(2) {
   text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  min-width: 100px;
 }
 .tabla-clasificacion td.pts { font-weight: 700; color: var(--win); }
 .tabla-clasificacion tbody tr:first-child td { color: var(--win); font-weight: 600; }
