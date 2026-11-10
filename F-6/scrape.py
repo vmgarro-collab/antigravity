@@ -340,7 +340,14 @@ def scrape_resultados_y_calendario():
         if fecha_dt < today:
             resultados.extend(played)
         else:
-            calendario.extend(upcoming)
+            # Deduplicar: por cada par (local, visitante) quedarse con el que tiene hora real
+            seen = {}
+            for p in upcoming:
+                key = (p["local"], p["visitante"])
+                prev = seen.get(key)
+                if not prev or (prev["hora"] == "00:00" and p["hora"] != "00:00"):
+                    seen[key] = p
+            calendario.extend(seen.values())
     print(f"  Resultados brutos: {len(resultados)}, Calendario: {len(calendario)}")
     return resultados, calendario
 
