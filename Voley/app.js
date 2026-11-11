@@ -104,10 +104,11 @@ async function loadAll() {
   setLoading(true);
   hideError();
   try {
-    const [clasif, result, todos] = await Promise.all([
+    const [clasif, result, todos, meta] = await Promise.all([
       getClasificacion(),
       getResultados(),
       getTodosPartidos(),
+      fetch(`data/meta.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null),
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
@@ -132,17 +133,15 @@ async function loadAll() {
     document.getElementById('panels').style.display = '';
     lucide.createIcons();
     await loadJornada();
+    if (meta && meta.actualizado) {
+      const el = document.querySelector('.app-version');
+      if (el) el.textContent = 'última carga: ' + meta.actualizado;
+    }
   } catch (e) {
     showError(`No se pudieron cargar los datos.<br><small>${e.message}</small>`);
   } finally {
     setLoading(false);
   }
-  fetch(`data/meta.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).then(m => {
-    if (m && m.actualizado) {
-      const el = document.querySelector('.app-version');
-      if (el) el.textContent = 'última carga: ' + m.actualizado;
-    }
-  }).catch(() => {});
 }
 
 function parseDate(str) {

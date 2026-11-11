@@ -145,13 +145,14 @@ async function loadAll() {
   setLoading(true);
   hideError();
   try {
-    const [clasif, result, goles, todosPartidos] = await Promise.all([
+    const [clasif, result, goles, todosPartidos, meta] = await Promise.all([
       getClasificacion(),
       getResultados(),
       getGoleadores(),
       LOCAL
         ? fetch(`/api/resultados?grupo=${GRUPO_ID}&competicion=${COMPETICION_ID}`).then(r => r.json()).then(d => d.partidos || [])
         : fetch(`data/todos_partidos.json?t=${Date.now()}`).then(r => r.ok ? r.json() : []),
+      fetch(`data/meta.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null),
     ]);
     renderClasificacion(clasif);
     jornadas = result.jornadas || [];
@@ -183,17 +184,15 @@ async function loadAll() {
     document.getElementById('panels').style.display = '';
     document.getElementById('panel-goleadores').style.display = '';
     lucide.createIcons();
+    if (meta && meta.actualizado) {
+      const el = document.querySelector('.app-version');
+      if (el) el.textContent = 'última carga: ' + meta.actualizado;
+    }
   } catch (e) {
     showError(`No se pudieron cargar los datos.<br><small>${e.message}</small>`);
   } finally {
     setLoading(false);
   }
-  fetch(`data/meta.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).then(m => {
-    if (m && m.actualizado) {
-      const el = document.querySelector('.app-version');
-      if (el) el.textContent = 'última carga: ' + m.actualizado;
-    }
-  }).catch(() => {});
 }
 
 async function loadJornada() {

@@ -108,11 +108,12 @@ async function loadAll() {
   setLoading(true);
   hideError();
   try {
-    const [clasificacion, resultados, calendario, goleadores] = await Promise.all([
+    const [clasificacion, resultados, calendario, goleadores, meta] = await Promise.all([
       fetch('data/clasificacion.json' + bust()).then(r => r.json()),
       fetch('data/resultados.json' + bust()).then(r => r.json()).catch(() => []),
       fetch('data/calendario.json' + bust()).then(r => r.json()).catch(() => []),
       fetch('data/goleadores.json' + bust()).then(r => r.json()).catch(() => []),
+      fetch('data/meta.json' + bust()).then(r => r.ok ? r.json() : null).catch(() => null),
     ]);
 
     // Build jornadas combining resultados + calendario
@@ -164,18 +165,16 @@ async function loadAll() {
     document.getElementById('panels').style.display = '';
     document.getElementById('panel-goleadores').style.display = '';
     lucide.createIcons();
+    const ts = Array.isArray(meta) ? meta[0] : meta;
+    if (ts && ts.actualizado) {
+      const el = document.querySelector('.app-version');
+      if (el) el.textContent = 'última carga: ' + ts.actualizado;
+    }
   } catch (e) {
     showError(`No se pudieron cargar los datos.<br><small>${e.message}</small>`);
   } finally {
     setLoading(false);
   }
-  fetch('data/meta.json' + bust()).then(r => r.ok ? r.json() : null).then(m => {
-    const ts = Array.isArray(m) ? m[0] : m;
-    if (ts && ts.actualizado) {
-      const el = document.querySelector('.app-version');
-      if (el) el.textContent = 'última carga: ' + ts.actualizado;
-    }
-  }).catch(() => {});
 }
 
 // ─── Renders ──────────────────────────────────────────────────────────────────
