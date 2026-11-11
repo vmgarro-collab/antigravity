@@ -193,7 +193,7 @@ async function loadAll() {
   fetch('data/meta.json' + bust()).then(r => r.ok ? r.json() : null).then(m => {
     if (m && m.actualizado) {
       const el = document.querySelector('.app-version');
-      if (el) el.textContent = el.textContent + ' · ' + m.actualizado;
+      if (el) el.textContent = 'última carga: ' + m.actualizado;
     }
   }).catch(() => {});
 }

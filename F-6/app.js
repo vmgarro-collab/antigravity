@@ -173,7 +173,7 @@ async function loadAll() {
     const ts = Array.isArray(m) ? m[0] : m;
     if (ts && ts.actualizado) {
       const el = document.querySelector('.app-version');
-      if (el) el.textContent = el.textContent + ' · ' + ts.actualizado;
+      if (el) el.textContent = 'última carga: ' + ts.actualizado;
     }
   }).catch(() => {});
 }
