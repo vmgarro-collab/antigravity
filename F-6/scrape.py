@@ -58,7 +58,7 @@ def get(url):
     global _page
     if _page is None:
         _init_browser()
-    response = _page.goto(url, wait_until="domcontentloaded", timeout=30000)
+    response = _page.goto(url, wait_until="networkidle", timeout=45000)
     if response and response.status >= 400:
         raise Exception(f"HTTP {response.status}")
     return _page.content()
@@ -70,7 +70,9 @@ def n(v):
 # ---------------------------------------------------------------------------
 
 def scrape_clasificacion():
-    soup = BeautifulSoup(get(URL_STANDINGS), "lxml")
+    html = get(URL_STANDINGS)
+    print(f"  HTML size: {len(html)} chars — preview: {html[:200]!r}")
+    soup = BeautifulSoup(html, "lxml")
     tables = soup.find_all("table")
     print(f"  Found {len(tables)} table(s) on standings page")
     result = []
@@ -219,16 +221,15 @@ def scrape_jugadores():
     # Goleadores generales
     print(f"  Fetching goleadores: {URL_GOLEADORES}")
     try:
-        r = _get_session().get(URL_GOLEADORES, headers={"Referer": BASE + "/"}, timeout=20)
-        print(f"    Status: {r.status_code}, size: {len(r.text)}")
-        if r.status_code == 200:
-            general = _parse_player_table(r.text)
-            print(f"    Players found: {len(general)}")
-            for p in general:
-                if p["jugador"].lower() not in seen:
-                    seen.add(p["jugador"].lower())
-                    p["paraguas"] = PARAGUAS_NAME in p.get("equipo", "").lower()
-                    players.append(p)
+        html = get(URL_GOLEADORES)
+        print(f"    HTML size: {len(html)}")
+        general = _parse_player_table(html)
+        print(f"    Players found: {len(general)}")
+        for p in general:
+            if p["jugador"].lower() not in seen:
+                seen.add(p["jugador"].lower())
+                p["paraguas"] = PARAGUAS_NAME in p.get("equipo", "").lower()
+                players.append(p)
     except Exception as e:
         print(f"    Error: {e}")
 
@@ -236,15 +237,14 @@ def scrape_jugadores():
     if players:
         print(f"  Fetching Paraguas: {URL_PARAGUAS}")
         try:
-            r2 = _get_session().get(URL_PARAGUAS, headers={"Referer": BASE + "/"}, timeout=20)
-            print(f"    Status: {r2.status_code}")
-            if r2.status_code == 200:
-                paraguas = _parse_player_table(r2.text, equipo_paraguas=True)
-                for p in paraguas:
-                    for mp in players:
-                        if mp["jugador"].lower() == p["jugador"].lower():
-                            mp["equipo"] = "EL PARAGUAS"
-                            mp["paraguas"] = True
+            html2 = get(URL_PARAGUAS)
+            print(f"    HTML size: {len(html2)}")
+            paraguas = _parse_player_table(html2, equipo_paraguas=True)
+            for p in paraguas:
+                for mp in players:
+                    if mp["jugador"].lower() == p["jugador"].lower():
+                        mp["equipo"] = "EL PARAGUAS"
+                        mp["paraguas"] = True
         except Exception as e:
             print(f"    Error: {e}")
     else:
