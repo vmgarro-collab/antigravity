@@ -19,7 +19,9 @@ jobs:
           python-version: '3.12'
 
       - name: Instalar dependencias
-        run: pip install requests beautifulsoup4 lxml
+        run: |
+          pip install playwright beautifulsoup4 lxml
+          playwright install chromium --with-deps
 
       - name: Ejecutar scraper
         run: python F-6/scrape.py

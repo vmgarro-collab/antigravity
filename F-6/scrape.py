@@ -2,20 +2,15 @@
 """
 Scraper de Liga Veteranos — ejecutado por GitHub Actions cada hora.
 Guarda los resultados en F-6/data/*.json
+Usa Playwright (Chromium headless) para evitar bloqueos por IP de GitHub Actions.
 """
 
 import json
 import os
 import re
-import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "es-ES,es;q=0.9",
-}
+from playwright.sync_api import sync_playwright
 
 BASE = "https://artificialfsala.leaguerepublic.com"
 URL_STANDINGS  = f"{BASE}/standingsForDate/747215306/2/-1/-1.html"
@@ -26,24 +21,47 @@ OUT_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 # ---------------------------------------------------------------------------
 
-_session = None
+_pw = None
+_browser = None
+_page = None
 
-def _get_session():
-    global _session
-    if _session is None:
-        _session = requests.Session()
-        _session.headers.update(HEADERS)
-        # Visit home page first to pick up any session cookies
-        try:
-            _session.get(BASE, timeout=10)
-        except Exception:
-            pass
-    return _session
+def _init_browser():
+    global _pw, _browser, _page
+    _pw = sync_playwright().start()
+    _browser = _pw.chromium.launch(
+        headless=True,
+        args=["--no-sandbox", "--disable-dev-shm-usage"],
+    )
+    ctx = _browser.new_context(
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        locale="es-ES",
+    )
+    _page = ctx.new_page()
+    # Visita home para recoger cookies de sesión
+    try:
+        _page.goto(BASE, wait_until="domcontentloaded", timeout=15000)
+    except Exception:
+        pass
+
+def _close_browser():
+    global _pw, _browser, _page
+    try:
+        if _browser:
+            _browser.close()
+        if _pw:
+            _pw.stop()
+    except Exception:
+        pass
+    _pw = _browser = _page = None
 
 def get(url):
-    r = _get_session().get(url, headers={"Referer": BASE + "/"}, timeout=20)
-    r.raise_for_status()
-    return r.text
+    global _page
+    if _page is None:
+        _init_browser()
+    response = _page.goto(url, wait_until="domcontentloaded", timeout=30000)
+    if response and response.status >= 400:
+        raise Exception(f"HTTP {response.status}")
+    return _page.content()
 
 def n(v):
     try: return int(v)
@@ -382,6 +400,7 @@ def main():
     ts = {"actualizado": datetime.now().strftime("%d/%m/%Y %H:%M")}
     save("meta", [ts])
     print("Done.")
+    _close_browser()
 
 if __name__ == "__main__":
     main()
