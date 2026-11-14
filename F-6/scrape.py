@@ -58,9 +58,14 @@ def get(url):
     global _page
     if _page is None:
         _init_browser()
-    response = _page.goto(url, wait_until="networkidle", timeout=45000)
+    response = _page.goto(url, wait_until="load", timeout=30000)
     if response and response.status >= 400:
         raise Exception(f"HTTP {response.status}")
+    # Esperar a que aparezca contenido dinámico (hasta 10s)
+    try:
+        _page.wait_for_selector("table", timeout=10000)
+    except Exception:
+        pass
     return _page.content()
 
 def n(v):
