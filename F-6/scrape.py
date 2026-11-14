@@ -58,7 +58,7 @@ def get(url):
     global _page
     if _page is None:
         _init_browser()
-    response = _page.goto(url, wait_until="load", timeout=30000)
+    response = _page.goto(url, wait_until="load", timeout=60000)
     if response and response.status >= 400:
         raise Exception(f"HTTP {response.status}")
     # Esperar a que aparezca contenido dinámico (hasta 10s)
