@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "CLUB VOLEIBOL TORRELODONES C",
+      "pj": 6,
+      "pg": 6,
+      "pp": 0,
+      "sg": 18,
+      "sp": 2,
+      "pf": 479,
+      "pc": 337,
+      "pts": 17
+    },
+    {
+      "pos": 2,
       "equipo": "ANCORA GALAPAGAR",
       "pj": 5,
       "pg": 5,
@@ -11,18 +23,6 @@
       "pf": 431,
       "pc": 325,
       "pts": 15
-    },
-    {
-      "pos": 2,
-      "equipo": "CLUB VOLEIBOL TORRELODONES C",
-      "pj": 5,
-      "pg": 5,
-      "pp": 0,
-      "sg": 15,
-      "sp": 2,
-      "pf": 404,
-      "pc": 283,
-      "pts": 14
     },
     {
       "pos": 3,
@@ -51,13 +51,13 @@
     {
       "pos": 5,
       "equipo": "CV GUADARRAMA A",
-      "pj": 4,
+      "pj": 5,
       "pg": 3,
-      "pp": 1,
+      "pp": 2,
       "sg": 10,
-      "sp": 7,
-      "pf": 389,
-      "pc": 369,
+      "sp": 10,
+      "pf": 443,
+      "pc": 444,
       "pts": 8
     },
     {
