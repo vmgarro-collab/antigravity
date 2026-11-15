@@ -38,6 +38,18 @@
     },
     {
       "pos": 4,
+      "equipo": "ABV BOADILLA B B",
+      "pj": 5,
+      "pg": 3,
+      "pp": 2,
+      "sg": 9,
+      "sp": 6,
+      "pf": 333,
+      "pc": 296,
+      "pts": 9
+    },
+    {
+      "pos": 5,
       "equipo": "CD SAN IGNACIO A",
       "pj": 6,
       "pg": 3,
@@ -49,7 +61,7 @@
       "pts": 9
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "CV GUADARRAMA A",
       "pj": 5,
       "pg": 3,
@@ -59,18 +71,6 @@
       "pf": 443,
       "pc": 444,
       "pts": 8
-    },
-    {
-      "pos": 6,
-      "equipo": "ABV BOADILLA B B",
-      "pj": 4,
-      "pg": 2,
-      "pp": 2,
-      "sg": 6,
-      "sp": 6,
-      "pf": 258,
-      "pc": 261,
-      "pts": 6
     },
     {
       "pos": 7,
@@ -123,13 +123,13 @@
     {
       "pos": 11,
       "equipo": "CV BULLDOGS B B",
-      "pj": 4,
+      "pj": 5,
       "pg": 0,
-      "pp": 4,
+      "pp": 5,
       "sg": null,
-      "sp": 12,
-      "pf": 146,
-      "pc": 300,
+      "sp": 15,
+      "pf": 181,
+      "pc": 375,
       "pts": 0
     }
   ]
