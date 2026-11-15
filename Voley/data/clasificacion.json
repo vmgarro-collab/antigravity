@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "ANCORA GALAPAGAR",
+      "pj": 6,
+      "pg": 6,
+      "pp": 0,
+      "sg": 18,
+      "sp": 3,
+      "pf": 506,
+      "pc": 361,
+      "pts": 18
+    },
+    {
+      "pos": 2,
       "equipo": "CLUB VOLEIBOL TORRELODONES C",
       "pj": 6,
       "pg": 6,
@@ -13,39 +25,27 @@
       "pts": 17
     },
     {
-      "pos": 2,
-      "equipo": "ANCORA GALAPAGAR",
-      "pj": 5,
-      "pg": 5,
-      "pp": 0,
-      "sg": 15,
-      "sp": 3,
-      "pf": 431,
-      "pc": 325,
-      "pts": 15
-    },
-    {
       "pos": 3,
       "equipo": "CD KOLBE",
-      "pj": 5,
-      "pg": 4,
+      "pj": 6,
+      "pg": 5,
       "pp": 1,
-      "sg": 14,
-      "sp": 4,
-      "pf": 434,
-      "pc": 306,
-      "pts": 13
+      "sg": 17,
+      "sp": 5,
+      "pf": 535,
+      "pc": 384,
+      "pts": 16
     },
     {
       "pos": 4,
       "equipo": "CD SAN IGNACIO A",
-      "pj": 5,
+      "pj": 6,
       "pg": 3,
-      "pp": 2,
-      "sg": 11,
-      "sp": 8,
-      "pf": 431,
-      "pc": 401,
+      "pp": 3,
+      "sg": 12,
+      "sp": 11,
+      "pf": 509,
+      "pc": 502,
       "pts": 9
     },
     {
@@ -111,13 +111,13 @@
     {
       "pos": 10,
       "equipo": "CLUB VOLEIBOL TORRELODONES D",
-      "pj": 5,
+      "pj": 6,
       "pg": 0,
-      "pp": 5,
+      "pp": 6,
       "sg": 2,
-      "sp": 15,
-      "pf": 307,
-      "pc": 419,
+      "sp": 18,
+      "pf": 343,
+      "pc": 494,
       "pts": 0
     },
     {

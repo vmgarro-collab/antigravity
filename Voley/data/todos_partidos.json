@@ -332,8 +332,8 @@
   {
     "local": "CLUB VOLEIBOL TORRELODONES D",
     "visitante": "ANCORA GALAPAGAR",
-    "resultado": "9:30",
-    "jugado": false,
+    "resultado": "0-3",
+    "jugado": true,
     "fecha": "15/11/2026",
     "hora": "9:30",
     "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
@@ -342,8 +342,8 @@
   {
     "local": "CD KOLBE",
     "visitante": "CD SAN IGNACIO A",
-    "resultado": "12:00",
-    "jugado": false,
+    "resultado": "3-1",
+    "jugado": true,
     "fecha": "15/11/2026",
     "hora": "12:00",
     "campo": "KOLBE, COLEGIO",
@@ -352,8 +352,8 @@
   {
     "local": "ABV BOADILLA B B",
     "visitante": "CV BULLDOGS B B",
-    "resultado": "16:00",
-    "jugado": false,
+    "resultado": "1-0",
+    "jugado": true,
     "fecha": "15/11/2026",
     "hora": "16:00",
     "campo": "ANGEL NIETO, BOADILLA",
