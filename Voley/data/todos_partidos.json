@@ -420,13 +420,43 @@
     "jornada": 43657
   },
   {
+    "local": "CLUB VOLEIBOL TORRELODONES C",
+    "visitante": "CD SAN IGNACIO A",
+    "resultado": "11:00",
+    "jugado": false,
+    "fecha": "28/11/2026",
+    "hora": "11:00",
+    "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
+    "jornada": 43658
+  },
+  {
+    "local": "ABV BOADILLA B B",
+    "visitante": "CV GUADARRAMA A",
+    "resultado": "15:00",
+    "jugado": false,
+    "fecha": "28/11/2026",
+    "hora": "15:00",
+    "campo": "CEIP PRINCIPE DON FELIPE",
+    "jornada": 43658
+  },
+  {
+    "local": "BERNADETTE A",
+    "visitante": "B. M. 2 DE MAYO",
+    "resultado": "15:15",
+    "jugado": false,
+    "fecha": "28/11/2026",
+    "hora": "15:15",
+    "campo": "BERNADETTE, COLEGIO",
+    "jornada": 43658
+  },
+  {
     "local": "CLUB VOLEIBOL TORRELODONES D",
     "visitante": "CD KOLBE",
-    "resultado": "–",
+    "resultado": "16:00",
     "jugado": false,
-    "fecha": "29/11/2026",
-    "hora": "",
-    "campo": "",
+    "fecha": "28/11/2026",
+    "hora": "16:00",
+    "campo": "TORRELODONES, POLIDEPORTIVO MUNICIPAL",
     "jornada": 43658
   },
   {
@@ -440,43 +470,13 @@
     "jornada": 43658
   },
   {
-    "local": "CLUB VOLEIBOL TORRELODONES C",
-    "visitante": "CD SAN IGNACIO A",
-    "resultado": "–",
-    "jugado": false,
-    "fecha": "29/11/2026",
-    "hora": "",
-    "campo": "",
-    "jornada": 43658
-  },
-  {
-    "local": "BERNADETTE A",
-    "visitante": "B. M. 2 DE MAYO",
-    "resultado": "–",
-    "jugado": false,
-    "fecha": "29/11/2026",
-    "hora": "",
-    "campo": "",
-    "jornada": 43658
-  },
-  {
-    "local": "ABV BOADILLA B B",
-    "visitante": "CV GUADARRAMA A",
-    "resultado": "–",
-    "jugado": false,
-    "fecha": "29/11/2026",
-    "hora": "",
-    "campo": "",
-    "jornada": 43658
-  },
-  {
     "local": "CV BULLDOGS B B",
     "visitante": "CV COLLADO VILLALBA C",
-    "resultado": "–",
+    "resultado": "10:00",
     "jugado": false,
     "fecha": "29/11/2026",
-    "hora": "",
-    "campo": "",
+    "hora": "10:00",
+    "campo": "UNIVERSIDAD CAMILO JOSE CELA, PABELLON",
     "jornada": 43658
   },
   {
