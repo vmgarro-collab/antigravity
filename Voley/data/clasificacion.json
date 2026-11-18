@@ -75,17 +75,29 @@
     {
       "pos": 7,
       "equipo": "BERNADETTE A",
-      "pj": 5,
+      "pj": 6,
       "pg": 2,
-      "pp": 2,
-      "sg": 6,
-      "sp": 7,
-      "pf": 273,
-      "pc": 267,
+      "pp": 3,
+      "sg": 7,
+      "sp": 10,
+      "pf": 342,
+      "pc": 364,
       "pts": 6
     },
     {
       "pos": 8,
+      "equipo": "CV COLLADO VILLALBA C",
+      "pj": 5,
+      "pg": 1,
+      "pp": 4,
+      "sg": 7,
+      "sp": 13,
+      "pf": 389,
+      "pc": 437,
+      "pts": 4
+    },
+    {
+      "pos": 9,
       "equipo": "B. M. 2 DE MAYO",
       "pj": 5,
       "pg": 1,
@@ -95,18 +107,6 @@
       "pf": 376,
       "pc": 442,
       "pts": 3
-    },
-    {
-      "pos": 9,
-      "equipo": "CV COLLADO VILLALBA C",
-      "pj": 4,
-      "pg": 0,
-      "pp": 4,
-      "sg": 4,
-      "sp": 12,
-      "pf": 292,
-      "pc": 368,
-      "pts": 1
     },
     {
       "pos": 10,
