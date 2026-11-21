@@ -363,8 +363,8 @@
     {
       "local": "ANCORA GALAPAGAR",
       "visitante": "CD KOLBE",
-      "resultado": "9:45",
-      "jugado": false,
+      "resultado": "2-1",
+      "jugado": true,
       "fecha": "21/11/2026",
       "hora": "9:45",
       "campo": "POLIDEPORTIVO MUNICIPAL DE GALAPAGAR",
@@ -373,8 +373,8 @@
     {
       "local": "CV BULLDOGS B B",
       "visitante": "CLUB VOLEIBOL TORRELODONES D",
-      "resultado": "12:15",
-      "jugado": false,
+      "resultado": "0-3",
+      "jugado": true,
       "fecha": "21/11/2026",
       "hora": "12:15",
       "campo": "IES SAPERE AUDE",

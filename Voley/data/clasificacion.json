@@ -3,14 +3,14 @@
     {
       "pos": 1,
       "equipo": "ANCORA GALAPAGAR",
-      "pj": 6,
-      "pg": 6,
+      "pj": 7,
+      "pg": 7,
       "pp": 0,
-      "sg": 18,
-      "sp": 3,
-      "pf": 506,
-      "pc": 361,
-      "pts": 18
+      "sg": 20,
+      "sp": 4,
+      "pf": 576,
+      "pc": 424,
+      "pts": 20
     },
     {
       "pos": 2,
@@ -27,14 +27,14 @@
     {
       "pos": 3,
       "equipo": "CD KOLBE",
-      "pj": 6,
+      "pj": 7,
       "pg": 5,
-      "pp": 1,
-      "sg": 17,
-      "sp": 5,
-      "pf": 535,
-      "pc": 384,
-      "pts": 16
+      "pp": 2,
+      "sg": 18,
+      "sp": 7,
+      "pf": 598,
+      "pc": 454,
+      "pts": 17
     },
     {
       "pos": 4,
@@ -111,25 +111,25 @@
     {
       "pos": 10,
       "equipo": "CLUB VOLEIBOL TORRELODONES D",
-      "pj": 6,
-      "pg": 0,
+      "pj": 7,
+      "pg": 1,
       "pp": 6,
-      "sg": 2,
+      "sg": 5,
       "sp": 18,
-      "pf": 343,
-      "pc": 494,
-      "pts": 0
+      "pf": 418,
+      "pc": 535,
+      "pts": 3
     },
     {
       "pos": 11,
       "equipo": "CV BULLDOGS B B",
-      "pj": 5,
+      "pj": 6,
       "pg": 0,
-      "pp": 5,
+      "pp": 6,
       "sg": null,
-      "sp": 15,
-      "pf": 181,
-      "pc": 375,
+      "sp": 18,
+      "pf": 222,
+      "pc": 450,
       "pts": 0
     }
   ]
