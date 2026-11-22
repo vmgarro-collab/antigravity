@@ -36,9 +36,17 @@ async function main() {
   const result = await retry(() => getResultados(GRUPO_ID, COMPETICION_ID), 'resultados');
   const jornadaActual = parseInt(result.jornada_actual) || 0;
 
+  // La RFFM a veces devuelve la página de resultados vacía: no sobrescribir datos buenos
+  const resultadosValidos = !!result.competicion && jornadaActual > 0;
+  if (!resultadosValidos) {
+    console.warn('Resultados vacíos de la RFFM (sin competicion/jornada_actual) — manteniendo resultados anteriores');
+  }
+
   // calendario: todas las jornadas con partidos desde /competicion/calendario
   console.log('Fetching calendario (todas las jornadas)...');
-  const calendario = await retry(() => getCalendario(GRUPO_ID, COMPETICION_ID), 'calendario');
+  const calendario = resultadosValidos
+    ? await retry(() => getCalendario(GRUPO_ID, COMPETICION_ID), 'calendario')
+    : [];
 
   const jornadasConFecha = calendario.map(j => ({ num: j.num, label: j.label, fecha: j.fecha }));
   const resultadosBase = {
@@ -48,7 +56,7 @@ async function main() {
     jornadas:       jornadasConFecha,
     partidos:       [],
   };
-  fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(resultadosBase));
+  if (resultadosValidos) fs.writeFileSync(path.join(DATA_DIR, 'resultados.json'), JSON.stringify(resultadosBase));
 
   const todosPartidos = [];
   for (const j of calendario) {
@@ -81,7 +89,7 @@ async function main() {
     fs.writeFileSync(path.join(DATA_DIR, `resultados_j${j.num}.json`), JSON.stringify(jResult));
     todosPartidos.push(...partidos);
   }
-  fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
+  if (resultadosValidos && todosPartidos.length > 0) fs.writeFileSync(path.join(DATA_DIR, 'todos_partidos.json'), JSON.stringify(todosPartidos));
 
   console.log('Fetching goleadores...');
   const goles = await retry(() => getGoleadores(GRUPO_ID, COMPETICION_ID), 'goleadores');

@@ -173,8 +173,10 @@ async function loadAll() {
         const diasDesde = (today - bestFecha) / 86400000;
         if (diasDesde > 3 && bestIdx < jornadas.length - 1) bestIdx++;
       }
-    } else if (result.jornada_actual) {
-      const idx = jornadas.findIndex(j => String(j.num) === String(result.jornada_actual));
+    } else {
+      // Sin fechas: jornada_actual de resultados, o la jornada de la clasificación
+      const ref = result.jornada_actual || (clasif && clasif.jornada);
+      const idx = ref ? jornadas.findIndex(j => String(j.num) === String(ref)) : -1;
       if (idx >= 0) bestIdx = idx;
     }
     jornadaIdx = bestIdx;
