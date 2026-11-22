@@ -2,6 +2,18 @@
   "tabla": [
     {
       "pos": 1,
+      "equipo": "CLUB VOLEIBOL TORRELODONES C",
+      "pj": 7,
+      "pg": 7,
+      "pp": 0,
+      "sg": 21,
+      "sp": 2,
+      "pf": 554,
+      "pc": 382,
+      "pts": 20
+    },
+    {
+      "pos": 2,
       "equipo": "ANCORA GALAPAGAR",
       "pj": 7,
       "pg": 7,
@@ -11,18 +23,6 @@
       "pf": 576,
       "pc": 424,
       "pts": 20
-    },
-    {
-      "pos": 2,
-      "equipo": "CLUB VOLEIBOL TORRELODONES C",
-      "pj": 6,
-      "pg": 6,
-      "pp": 0,
-      "sg": 18,
-      "sp": 2,
-      "pf": 479,
-      "pc": 337,
-      "pts": 17
     },
     {
       "pos": 3,
@@ -38,18 +38,30 @@
     },
     {
       "pos": 4,
-      "equipo": "ABV BOADILLA B B",
-      "pj": 5,
-      "pg": 3,
+      "equipo": "CV GUADARRAMA A",
+      "pj": 6,
+      "pg": 4,
       "pp": 2,
-      "sg": 9,
-      "sp": 6,
-      "pf": 333,
-      "pc": 296,
-      "pts": 9
+      "sg": 13,
+      "sp": 10,
+      "pf": 522,
+      "pc": 505,
+      "pts": 11
     },
     {
       "pos": 5,
+      "equipo": "ABV BOADILLA B B",
+      "pj": 6,
+      "pg": 3,
+      "pp": 3,
+      "sg": 11,
+      "sp": 9,
+      "pf": 436,
+      "pc": 395,
+      "pts": 10
+    },
+    {
+      "pos": 6,
       "equipo": "CD SAN IGNACIO A",
       "pj": 6,
       "pg": 3,
@@ -61,51 +73,39 @@
       "pts": 9
     },
     {
-      "pos": 6,
-      "equipo": "CV GUADARRAMA A",
-      "pj": 5,
-      "pg": 3,
-      "pp": 2,
-      "sg": 10,
-      "sp": 10,
-      "pf": 443,
-      "pc": 444,
-      "pts": 8
-    },
-    {
       "pos": 7,
-      "equipo": "BERNADETTE A",
+      "equipo": "CV COLLADO VILLALBA C",
       "pj": 6,
       "pg": 2,
-      "pp": 3,
-      "sg": 7,
-      "sp": 10,
-      "pf": 342,
-      "pc": 364,
+      "pp": 4,
+      "sg": 10,
+      "sp": 15,
+      "pf": 488,
+      "pc": 540,
       "pts": 6
     },
     {
       "pos": 8,
-      "equipo": "CV COLLADO VILLALBA C",
-      "pj": 5,
-      "pg": 1,
+      "equipo": "BERNADETTE A",
+      "pj": 7,
+      "pg": 2,
       "pp": 4,
       "sg": 7,
       "sp": 13,
-      "pf": 389,
-      "pc": 437,
-      "pts": 4
+      "pf": 403,
+      "pc": 443,
+      "pts": 6
     },
     {
       "pos": 9,
       "equipo": "B. M. 2 DE MAYO",
-      "pj": 5,
+      "pj": 6,
       "pg": 1,
-      "pp": 4,
+      "pp": 5,
       "sg": 6,
-      "sp": 13,
-      "pf": 376,
-      "pc": 442,
+      "sp": 16,
+      "pf": 421,
+      "pc": 517,
       "pts": 3
     },
     {
