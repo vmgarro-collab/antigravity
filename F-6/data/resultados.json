@@ -178,50 +178,5 @@
     "golesLocal": 4,
     "golesVisitante": 6,
     "visitante": "BOCA SENIOR"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "10:00",
-    "local": "RAYO PILAR",
-    "golesLocal": 4,
-    "golesVisitante": 5,
-    "visitante": "TROPICAL"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "11:00",
-    "local": "RAYO HUESCA",
-    "golesLocal": 0,
-    "golesVisitante": 6,
-    "visitante": "SPORTING SARRIA"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "12:00",
-    "local": "CHAOX F.C",
-    "golesLocal": 3,
-    "golesVisitante": 6,
-    "visitante": "BOCA SENIOR"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "13:00",
-    "local": "EL PARAGUAS",
-    "golesLocal": 3,
-    "golesVisitante": 7,
-    "visitante": "PREVISEGUR"
-  },
-  {
-    "jornada": 4,
-    "fecha": "22/11/2026",
-    "hora": "14:00",
-    "local": "RCD CAMBADOS",
-    "golesLocal": 7,
-    "golesVisitante": 4,
-    "visitante": "SACONIA 2.0"
   }
 ]
