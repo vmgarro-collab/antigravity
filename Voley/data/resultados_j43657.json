@@ -59,6 +59,16 @@
       "hora": "13:30",
       "campo": "VILLALKOR, CENTRO DEPORTIVO",
       "jornada": 43657
+    },
+    {
+      "local": "ANCORA GALAPAGAR",
+      "visitante": "CD KOLBE",
+      "resultado": "–",
+      "jugado": false,
+      "fecha": "20/12/2026",
+      "hora": "",
+      "campo": "POLIDEPORTIVO MUNICIPAL DE GALAPAGAR",
+      "jornada": 43657
     }
   ],
   "jornadas": [
